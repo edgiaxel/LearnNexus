@@ -6,7 +6,7 @@ LearnNexus is a browser-based virtual campus platform developed by **SibukTA** f
 
 The platform combines a welcoming, pastel-colored productivity application with a navigable 2D pixel-art virtual campus. Rather than functioning as a generic meeting tool or Gather Town clone, LearnNexus connects academic course contexts (syllabus, announcements, learning materials) directly to persistent team workspaces where student groups manage their project overviews, task sprint boards, and resource libraries across sessions.
 
-> **Project status:** M0 complete — shared contracts locked on `main`; next: **M1 (Foundation & Sharp Canvas Engine)**. Track tasks on the [LearnNexus Kanban](https://github.com/users/edgiaxel/projects/5).
+> **Project status:** M1 complete & verified (`8/8` Playwright specs passing) — sharp Config A Phaser 3 studio integrated; next: **M2 (Core Workflow & Cozy Academic Space)**. Track tasks on the [LearnNexus Kanban](https://github.com/users/edgiaxel/projects/5).
 
 ## Team
 
@@ -60,14 +60,14 @@ Do not infer package versions or install commands from this README. The actual p
 
 ## Prerequisites
 
-M0 verified prerequisites & pending M1 scaffold:
+M1 verified prerequisites & scripts:
 
-- [x] Supported runtime: Node.js `v24.22.1` (`v20.19+` compatible)
-- [x] Package manager: `npm` `9.2.0` (lockfile pending M1 scaffold)
-- [x] Required environment variables: `.env.example` verified
-- [x] Database/backend project access (Supabase) verified (`/auth/v1/health` `200`, `anon` JWT)
-- [ ] Local development commands: `npm run dev` (pending M1 scaffold)
-- [ ] Test, lint, type-check, and build commands: `npm run typecheck`, `npm run test:e2e`, `npm run build` (pending M1 scaffold)
+- [x] Supported runtime: Node.js `v24.15.0` (`v20.19+` compatible)
+- [x] Package manager: `npm` `11.12.1` (`package-lock.json` committed)
+- [x] Required environment variables: `.env.example` verified (`VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`)
+- [x] Database/backend project access (Supabase) verified (`/auth/v1/health` `200`, `anon` key, clean-slate DB ready for M2)
+- [x] Local development command: `npm run dev` (Vite on port `5173`)
+- [x] Test, type-check, and build commands verified: `npm run typecheck`, `npm run test:e2e`, `npm run build`
 
 ## Getting Started
 

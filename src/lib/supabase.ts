@@ -24,7 +24,7 @@ export async function checkSupabaseHealth(): Promise<SupabaseHealthResult> {
   }
 
   const controller = new AbortController();
-  const timeoutId = window.setTimeout(() => controller.abort(), 8000);
+  const timeoutId = window.setTimeout(() => controller.abort(), 12000);
   const startedAt = performance.now();
 
   try {
@@ -52,7 +52,7 @@ export async function checkSupabaseHealth(): Promise<SupabaseHealthResult> {
     };
   } catch (err) {
     if (err instanceof DOMException && err.name === 'AbortError') {
-      return { ok: false, message: 'Supabase health check timed out after 8s.' };
+      return { ok: false, message: 'Supabase health check timed out after 12s.' };
     }
     const detail = err instanceof Error ? err.message : 'Network request failed.';
     return { ok: false, message: detail };

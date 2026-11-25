@@ -75,7 +75,7 @@ test.describe('Phaser M1 Studio lifecycle and ADR-012 rendering', () => {
 
     const supabaseBadge = page.locator('header [role="status"]');
     await expect(supabaseBadge).toHaveText('Supabase connected', {
-      timeout: 10000,
+      timeout: 15000,
     });
     await expect(supabaseBadge).toBeVisible();
 

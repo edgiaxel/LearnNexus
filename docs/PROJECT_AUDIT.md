@@ -11,14 +11,14 @@
 |---|---|---|
 | Repository | `edgiaxel/LearnNexus`, public | Verified |
 | Default branch | `main` | Verified |
-| Current local branch | `main` (M0 completed baseline; 0 stale worktrees/branches) | Verified |
-| M0 Contracts & Tokens | `UI_CONTRACT.md`, `HANDOFF_TEMPLATE.md`, `src/styles/index.css`, `src/types/contracts.ts`, `src/types/database.ts`, `src/app/routerContract.ts`, `.env.example`, `.gitignore` present & locked | Verified |
-| Supabase project | `.env` gitignored; `zftymjkcrdkhtshazzmw.supabase.co` `/auth/v1/health` returns `200`; `VITE_SUPABASE_ANON_KEY` verified `role: anon` JWT (`supabase` CLI present; `supabase_mcp` unsigned) | Verified |
-| Runtime & Tooling | Node `v24.22.1`, npm `9.2.0`, Playwright `1.65.1`, `gh` CLI authenticated (`edgiaxel`, open issues `#3`–`#7`) | Verified |
+| Current local branch | `main` (M1 completed baseline; 0 stale worktrees/branches) | Verified |
+| M0 Contracts & Tokens | `UI_CONTRACT.md`, `HANDOFF_TEMPLATE.md`, `src/styles/index.css`, `src/types/contracts.ts`, `src/types/database.ts`, `src/types/gameDebug.ts`, `src/app/routerContract.ts`, `.env.example`, `.gitignore` present & locked | Verified |
+| Supabase project | `.env` gitignored; `zftymjkcrdkhtshazzmw.supabase.co` purged clean (`0` `public` tables, empty `schema_migrations`); `/auth/v1/health` returns `200` (`anon` key) | Verified |
+| Runtime & Tooling | Node `v24.15.0`, npm `11.12.1`, Playwright `@playwright/test` `1.51.1`, `supabase` CLI `3.4.0` | Verified |
 | WCAG Contrast Audit | `docs/DESIGN.md` synced to passing tokens (`#5C665C` `5.98:1`, `#4A6B46` `6.03:1`, `#3B5638` `8.16:1`, `#757E74` control border `4.21:1` / `3.83:1`) | Verified |
-| Application source | Shared contracts only (`src/types/*`, `src/app/routerContract.ts`, `src/styles/index.css`); app scaffold pending M1 | Verified |
-| Package manifest / lockfile | None (`package.json`, `package-lock.json` pending M1) | Verified |
-| Tests | None (`tests/` pending M1) | Verified |
+| Application source | M1 complete: `App.tsx`, `PhaserHost.tsx`, `createGame.ts`, `CampusScene.ts`, `eventBridge.ts`, `campusStudioMap.json`, `supabase.ts`, `public/assets/**` | Verified |
+| Package manifest / lockfile | `package.json`, `package-lock.json`, `tsconfig.json`, `vite.config.ts`, `playwright.config.ts` committed | Verified |
+| Tests | `tests/e2e/phaser-lifecycle.spec.ts` & `tests/e2e/workstation-bridge.spec.ts` (`8/8` Playwright tests passing) | Verified |
 | CI workflows | None committed yet | Verified |
 | GitHub Issues | Clean slate — ready for M0+ issue tracking | Reported |
 | GitHub Milestones | M0 starting; M1–M5 planned | Verified |
@@ -158,8 +158,8 @@ Inspection of `src/game/createGame.ts` and `src/game/scenes/CampusScene.ts` iden
 ### 8.3 Implementation status verification
 
 - M0 (Audit, Preparation & Shared Contract): **Completed** (`UI_CONTRACT.md`, `src/styles/index.css`, `src/types/*`, `src/app/routerContract.ts` locked on `main`).
-- M1 (Foundation & Sharp Canvas Engine): Ready / Next.
-- M2 (Core Workflow & Cozy Academic Space): Planned.
+- M1 (Foundation & Sharp Canvas Engine): **Completed** (`package.json`, `App.tsx`, `PhaserHost.tsx`, `createGame.ts`, `CampusScene.ts`, `eventBridge.ts`, `public/assets/`, `tests/e2e/` verified `8/8` Playwright tests passing).
+- M2 (Core Workflow & Cozy Academic Space): Ready / Next.
 - M2.5 (Design Alignment & Canvas Sharpness): Planned (specifications documented in `DESIGN.md` and `ARCHITECTURE.md`).
 - M3 (Persistent Student Workspace): Planned.
 - M4 (Quality & Integration): Planned.

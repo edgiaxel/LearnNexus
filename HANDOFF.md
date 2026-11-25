@@ -1,45 +1,43 @@
-# Handoff — M0: Audit, Preparation & Shared Contract
+# Handoff — M1: Foundation & Sharp Canvas Engine
 
-- **Branch / Worktree:** `main` (single clean worktree; 0 stale branches/worktrees)
-- **Owner:** Main Orchestrator
-- **Linked Contract:** `UI_CONTRACT.md` (Locked M0 Contract on `main`)
-- **Date:** 25 November 2026
+- **Branch / Worktree:** `main` (single clean worktree; merged `feature/m1-game-engine` and `feature/e2e-verification` and removed temporary branches/worktrees)
+- **Owner:** Main Orchestrator (with isolated M1 Game Engine and M1 E2E Verification worktrees)
+- **Linked Contract:** `UI_CONTRACT.md` (Locked M0 Contract preserved; zero unauthorized edits)
+- **Date:** 26 November 2026
 
 ## Completed Scope & Exit Criteria
 
-- Inspected `edgiaxel/LearnNexus` (`main`), open GitHub issues (`#3`–`#7`), runtime (`Node v24.22.1`, `npm 9.2.0`, `supabase` CLI, `playwright 1.65.1`).
-- Verified `.env` is gitignored, `VITE_SUPABASE_URL` (`zftymjkcrdkhtshazzmw.supabase.co`) returns HTTP `200` on `/auth/v1/health`, and `VITE_SUPABASE_ANON_KEY` is an `anon` role JWT (zero `service_role` keys in repo).
-- Resolved WCAG AA contrast conflicts in `docs/DESIGN.md` and extended `src/styles/index.css` with `--color-border-control: #757E74` (WCAG 1.4.11 >= 3:1), `--color-accent-sage-strong-hover: #3B5638` (`8.16:1`), and shared Cozy component classes.
-- Locked shared TypeScript domain, bridge, database row, repository, and central router contracts on `main`.
-- Locked multi-agent worktree isolation matrix in `UI_CONTRACT.md` Section 7 and Antislop Gate checklist in `HANDOFF_TEMPLATE.md`.
+- **Supabase Clean Slate (`zftymjkcrdkhtshazzmw`, `ap-southeast-1`):** Purged all existing `public` tables/views/functions/types and truncated `supabase_migrations.schema_migrations` (`rows: []` verified). Populated local gitignored `.env` via Supabase CLI (`VITE_SUPABASE_URL` + `anon` key; zero secrets committed) and verified `/auth/v1/health` HTTP `200`.
+- **Root App Shell & Contracts (`main`):** Scaffolded `package.json` (`react` 19, `phaser` `3.88.2`, `@supabase/supabase-js` v2, `vite` 6, `tailwindcss` 4, `typescript` 5.8, `@playwright/test`), `tsconfig.json`, `vite.config.ts`, `playwright.config.ts`, `index.html`, `src/main.tsx`, `src/app/App.tsx`, `src/lib/supabase.ts`, and `src/types/gameDebug.ts`.
+- **Sharp Canvas Engine (`src/game/**`, `public/assets/**`):**
+  - Ported `campusStudioMap.json` (`src/game/maps/campusStudioMap.json`), `createGame.ts` (`pixelArt: true`, `antialias: false`, `roundPixels: true`, `Phaser.Scale.RESIZE`, `#F7F4EC`), and `CampusScene.ts` (Config A: `16px` tiles, integer zoom `3` on width >= `640px` and `2` on `< 640px`, `Phaser.Textures.FilterMode.NEAREST` on all 5 loaded textures, Adam 4-directional walking & idle animations).
+  - Mapped spike interactables to locked `WorkstationId` values (`workstation-overview` -> `overview`, `meeting-table` -> `tasks`, `resource-shelf` -> `resources`) using `WORKSTATION_META` titles.
+  - Built StrictMode-safe `PhaserHost.tsx` (1 `<canvas>` mounted, 0 unmounted, `ResizeObserver` resizing, `panel:closed` focus return) and typed `eventBridge.ts`.
+  - Exposed read/test inspection handle `window.__LEARNNEXUS_GAME__` (`src/types/gameDebug.ts`).
+- **Cozy Digital Campus Shell (`src/app/App.tsx`):** Single `<header>` top bar with live Supabase health check (`Checking Supabase...` / `Supabase connected` / `Supabase offline` + `Retry`), `Leave Studio` / `Enter Studio` route transition, accessible right drawer (`role="dialog"`, `Tab` trap, `Escape` close restoring canvas focus), and honest M1 empty states.
+- **Playwright Verification (`tests/e2e/**`):** 8/8 E2E tests pass against localhost (`phaser-lifecycle.spec.ts` + `workstation-bridge.spec.ts`) covering Cozy shell tokens, zero em dashes, live Supabase health, standard + `2x` HiDPI ADR-012 sharpness, unmount/remount lifecycle, `1280x720` / `1024x700` / `390x844` responsiveness, keyboard walking, all 3 workstation `[E]` / click / `Escape` / `Tab`-trap flows, and 0 console/page errors.
 
 ## Files Touched
 
-- `UI_CONTRACT.md` — locked M0 contract, synced tokens/contrast ratios, added dials (`ENERGY 1 / RHYTHM 2 / MOTION 1`), added Section 7 worktree ownership matrix.
-- `HANDOFF_TEMPLATE.md` — added Contract & Antislop Gate Checklist.
-- `src/styles/index.css` — added `--color-accent-sage-strong-hover`, `--color-border-control`, and shared `.btn-primary`, `.btn-secondary`, `.btn-ghost`, `.control-input`, `.surface-card`, `.status-badge` primitives.
-- `src/types/contracts.ts` — locked `AppRoute`, `WorkstationId`, `TaskStatus`, `ResourceCategory`, `StudentProfile`, `AcademicSpace`, `TeamWorkspace`, `ProjectOverview`, `SprintTask`, `ResourceItem`, `WorkspaceLayoutConfig`, `AsyncState<T>`, `AppError`, `BridgeEvents`.
-- `src/types/database.ts` — locked Postgres row schemas (`ProfileRow`, `ClassRow`, `ClassMemberRow`, `TeamRow`, `TeamMemberRow`, `ProjectRow`, `TaskRow`, `ResourceRow`, `WorkspaceLayoutRow`) and `AcademicRepository` interface.
-- `src/app/routerContract.ts` — locked `APP_ROUTES`, `ALLOWED_ROUTE_TRANSITIONS`, `canTransitionRoute`, `ShellHeaderState`, `WorkspaceDrawerState`, `WORKSTATION_META`.
-- `docs/DESIGN.md` — synced Section 2.1 tokens/contrast table, Section 2.3 focus/border notes, and Section 7.1 button classes to WCAG AA passing values.
-- `docs/MILESTONES.md`, `docs/PROJECT_AUDIT.md`, `docs/CHANGELOG.md`, `README.md` — updated M0 completion status and M1 readiness.
-- `HANDOFF.md` — M0 milestone handoff.
+- Root config & shell: `package.json`, `package-lock.json`, `tsconfig.json`, `vite.config.ts`, `playwright.config.ts`, `index.html`, `src/main.tsx`, `src/app/App.tsx`, `src/styles/index.css`, `src/lib/supabase.ts`, `src/types/gameDebug.ts`
+- Game engine & assets: `src/game/PhaserHost.tsx`, `src/game/createGame.ts`, `src/game/bridge/eventBridge.ts`, `src/game/scenes/CampusScene.ts`, `src/game/maps/campusStudioMap.json`, `public/assets/{atlases,tilesets,characters}/*`
+- Tests & docs: `tests/e2e/phaser-lifecycle.spec.ts`, `tests/e2e/workstation-bridge.spec.ts`, `HANDOFF.md`, `README.md`, `docs/MILESTONES.md`, `docs/CHANGELOG.md`, `docs/PROJECT_AUDIT.md`
 
-## Exported Contracts (Locked for M1–M3)
+## Verified Commands & Results
 
-- `src/types/contracts.ts`: domain models, `AsyncState<T>`, `AppError`, `BridgeEvents`, `BridgeHandler`.
-- `src/types/database.ts`: Postgres row types, `RepositoryResult<T>`, `AcademicRepository`.
-- `src/app/routerContract.ts`: `APP_ROUTES`, `ALLOWED_ROUTE_TRANSITIONS`, `canTransitionRoute`, `WORKSTATION_META`.
-- `src/styles/index.css`: Cozy Digital Campus CSS variables and base classes.
+- `npm run typecheck` (`tsc --noEmit`): **PASS** (exit `0`)
+- `npm run build` (`tsc --noEmit && vite build`): **PASS** (exit `0`, 82 modules transformed)
+- `npm run test:e2e` (`playwright test`): **PASS** (`8 passed (46.1s)`, 0 console/page errors)
+- WCAG Contrast check (`contrast-check.py`): All UI text pairings pass AA (`4.5:1+`; e.g., `#30343B`/`#F7F4EC` `11.37:1`, `#30343B`/`#FFFFFF` `12.50:1`, `#FFFFFF`/`#4A6B46` `6.03:1`); control border `#757E74` meets WCAG 1.4.11 (`4.21:1` on `#FFFFFF`, `3.83:1` on `#F7F4EC`).
 
 ## Database & Environment State
 
-- Migrations: None in M0 (`supabase/migrations/` deferred to M2).
-- Env vars: `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` verified present in `.env` (gitignored) and documented in `.env.example`.
-- Note: `supabase_mcp` is not signed in on this host; local `supabase` CLI and REST/Auth HTTP checks were used.
+- Remote project: `zftymjkcrdkhtshazzmw` (`ap-southeast-1`) is clean-slated (`0` tables/views/functions/types in `public`; `supabase_migrations.schema_migrations` empty).
+- Local `.env`: gitignored, configured with `VITE_SUPABASE_URL` and `anon` key.
+- Migrations: None yet (scoped to M2 `feature/m2-supabase-data`).
 
-## Caveats & Next Steps (M1 Readiness)
+## Caveats & Next Steps (M2 Readiness)
 
-- **Caveat:** M0 is contract-only; `package.json`, Vite/React/Phaser/Playwright dependencies, and build/E2E scripts do not exist yet (scoped to M1).
-- **Caveat:** Changes are currently in the working tree on `main` awaiting review/commit.
-- **Next step (M1 on `main`):** Scaffold React 19 + TypeScript + Vite + Tailwind + Phaser 3 (`v3.88.2`) + Playwright, wire `src/lib/supabase.ts` and `src/app/App.tsx` shell, then branch M1/M2 worktrees per `UI_CONTRACT.md` Section 7.
+- **Caveat (M1 Scope):** `Academic Spaces` and the three workstation drawers currently render honest M1 empty states backed only by live `/auth/v1/health` checks; Postgres tables, seed rows, RLS policies, and `AcademicRepository` CRUD are scoped to M2.
+- **Caveat (Bundle size):** Production Vite build warns on chunk size (`~1.97 MB` JS due to Phaser); acceptable for semifinal M1, optional code-splitting in M4.
+- **Next step (M2 worktrees per `UI_CONTRACT.md` Section 7):** Branch `feature/m2-supabase-data` (`supabase/**`, `src/services/**`), `feature/m2-entry-spaces` (`src/components/entry/**`, `src/components/campus/**`), and `feature/m2-workstation-panels` (`src/components/workstation/**`) from `main`.

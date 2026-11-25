@@ -1,11 +1,15 @@
-> **Current milestone:** M1 — Foundation & Sharp Canvas Engine  
-> **Overall status:** M0 complete — shared contracts locked on `main`; ready for M1 scaffold  
+> **Current milestone:** M2 — Core Workflow & Cozy Academic Space  
+> **Overall status:** M1 complete & E2E verified on `main`; ready for M2 parallel worktrees  
 > **Deadline:** 30 November 2026, 23:59 WIB  
-> **Last updated:** 25 November 2026  
+> **Last updated:** 26 November 2026  
 > **Repository:** [edgiaxel/LearnNexus](https://github.com/edgiaxel/LearnNexus)
 
 ---
 **Important:** Dont replace these, this is my template prompt.
+
+$antislop $antislop-ui $antislop-code $antislop-human 
+
+$caveman $ultracave 
 
 [antislop](slashCommand;antislop) [antislop-ui](slashCommand;antislop-ui) [antislop-code](slashCommand;antislop-code) [antislop-human](slashCommand;antislop-human)
 
@@ -40,8 +44,8 @@ Remember check again to make sure theres a shared contract before doing the exec
 
 - **Goal:** Demonstrate a persistent, spatial academic workspace that connects academic spaces with collaborative project workspaces for university students.
 - **MVP outcome:** A student enters the application, selects an assigned academic space, navigates a 2D environment to a team workspace, interacts with workstations, accesses project/task/resource panels, updates task status, and can leave and return with saved project information retained.
-- **Current state:** M0 complete on `main` — `UI_CONTRACT.md`, `HANDOFF_TEMPLATE.md`, `src/styles/index.css`, `src/types/contracts.ts`, `src/types/database.ts`, `src/app/routerContract.ts`, `HANDOFF.md`, and synced `docs/` are locked; `.env` / Supabase reachability verified; no `package.json` or M1 app scaffold exists yet.
-- **Next action:** Execute **M1 — Foundation & Sharp Canvas Engine**: scaffold React 19 + TypeScript + Vite + Tailwind + Phaser 3 (`v3.88.2`) + Playwright on `main`, then fan out M2 feature worktrees.
+- **Current state:** M1 complete & verified on `main` — React 19 + TypeScript + Vite + Tailwind + Phaser 3 (`v3.88.2`) + Playwright scaffolded, ADR-012 Config A (`16px` tiles, `3x` desktop / `2x` mobile zoom, `NEAREST` filtering) integrated with typed `eventBridge` and Cozy app shell (`8/8` Playwright E2E tests passing), and remote Supabase (`zftymjkcrdkhtshazzmw`) clean-slated for M2.
+- **Next action:** Execute **M2 — Core Workflow & Cozy Academic Space** across isolated worktrees (`feature/m2-supabase-data`, `feature/m2-entry-spaces`, `feature/m2-workstation-panels`) per `UI_CONTRACT.md` Section 7.
 - **Links:** `PRD.md` / `DESIGN.md` / `ARCHITECTURE.md` / GitHub repository.
 - **Planning note:** The schedule is intentionally aggressive because the semifinal submission is due on 30 November 2026. Deliverable is an honest, high-trust single-user demonstrator with real persistence.
 
@@ -50,7 +54,7 @@ Remember check again to make sure theres a shared contract before doing the exec
 | ID | Milestone | Outcome | Status | Exit criteria | Issues |
 |---|---|---|---|---|---|
 | M0 | Audit, Preparation & Shared Contract | Trustworthy starting point, locked `UI_CONTRACT.md`, Cozy design tokens, and runnable baseline | Completed | Local repo clean; shared contract locked on `main`; Tailwind tokens verified; subagent isolation ready | — |
-| M1 | Foundation & Sharp Canvas Engine | App boots, single Phaser host, ADR-012 sharp pixel-art rendering, and typed event bridge | Ready / Next | App builds; Phaser mounts once with `pixelArt: true`, `antialias: false`, integer zoom; static pixel assets loaded | — |
+| M1 | Foundation & Sharp Canvas Engine | App boots, single Phaser host, ADR-012 sharp pixel-art rendering, and typed event bridge | Completed | App builds; Phaser mounts once with `pixelArt: true`, `antialias: false`, integer zoom; `8/8` Playwright specs pass | — |
 | M2 | Core Workflow & Cozy Academic Space | Student navigates distinct 2D pixel-art studio and accesses live Supabase workstation panels | Planned | Distinct 2D pixel-art environment (`Interiors_free` / `Characters_free`); avatar controller; live Supabase panels; E2E verified | — |
 | M2.5 | Design & Rendering Alignment | Cozy Digital Campus (pastel tokens, master design system, sharp canvas rendering rules) | Planned | DESIGN.md approved, tokens locked, rendering rules applied, sharp pixel-art config verified | — |
 | M3 | Persistent Student Workspace | Project, tasks and resources are loaded from durable Supabase Postgres data; task status updates persist | Planned | Refresh/re-entry preserves project/task data; failure states visible; E2E verified | — |
@@ -81,16 +85,16 @@ Remember check again to make sure theres a shared contract before doing the exec
 **Target window:** 25–26 November  
 **Outcome:** A working browser application with crisp pixel-art rendering (ADR-012), single canvas lifecycle, and typed event bridge.
 
-- [ ] React + TypeScript + Vite app shell rendering the Cozy Digital Campus master layout.
-- [ ] Configure Phaser 3 in `src/game/createGame.ts` with ADR-012 sharpness parameters: `pixelArt: true`, `antialias: false`, `roundPixels: true`, nearest-neighbor filtering (`Phaser.Textures.FilterMode.NEAREST`), and integer zoom.
-- [ ] Map static pixel-art assets in `public/assets/` from `assets/Interiors_free` and `assets/Characters_free`.
-- [ ] Phaser host (`PhaserHost.tsx`) mounts exactly one canvas, handles resizing cleanly, and disposes resources on unmount without duplicate canvases or leaks.
-- [ ] Typed event bridge (`src/game/bridge/eventBridge.ts`) connects Phaser workstation events with React drawer panels.
-- [ ] Build and typecheck pass cleanly (`npm run typecheck && npm run build`).
+- [x] React + TypeScript + Vite app shell rendering the Cozy Digital Campus master layout.
+- [x] Configure Phaser 3 in `src/game/createGame.ts` with ADR-012 sharpness parameters: `pixelArt: true`, `antialias: false`, `roundPixels: true`, nearest-neighbor filtering (`Phaser.Textures.FilterMode.NEAREST`), and integer zoom.
+- [x] Map static pixel-art assets in `public/assets/` from `assets/Interiors_free` and `assets/Characters_free` (`processed-assets/phaser/{atlases,tilesets,characters}`).
+- [x] Phaser host (`PhaserHost.tsx`) mounts exactly one canvas, handles resizing cleanly, and disposes resources on unmount without duplicate canvases or leaks.
+- [x] Typed event bridge (`src/game/bridge/eventBridge.ts`) connects Phaser workstation events (`overview`, `tasks`, `resources`) with React drawer panels.
+- [x] Build and typecheck pass cleanly (`npm run typecheck && npm run build`) and Playwright E2E suite (`npm run test:e2e`) passes `8/8`.
 
 | Slice ID | Vertical slice | Feature IDs | GitHub issues | Status | Demo outcome |
 |---|---|---|---|---|---|
-| VS-01 | Sharp Canvas Host + Cozy Layout Shell | F-003, F-005 | — | Planned | Single crisp pixel-art canvas mounts cleanly inside Cozy Digital Campus shell |
+| VS-01 | Sharp Canvas Host + Cozy Layout Shell | F-003, F-005 | — | Completed | Single crisp pixel-art canvas mounts cleanly inside Cozy Digital Campus shell |
 
 **Exit criteria:** App builds, Phaser mounts with zero blur on high-DPI/standard displays, single canvas verified in Playwright tests.
 
@@ -205,18 +209,18 @@ Remember check again to make sure theres a shared contract before doing the exec
 
 ## 4. Current Focus
 
-- **Current focus:** **M1 — Foundation & Sharp Canvas Engine**
-- **Why this is next:** M0 contracts (`UI_CONTRACT.md`, `src/styles/index.css`, `src/types/*`, `src/app/routerContract.ts`) are locked on `main`; M1 establishes the React 19 + TypeScript + Vite + Phaser 3 (`v3.88.2`) + Playwright baseline before M2 parallel worktrees branch out.
-- **Dependencies:** Locked M0 contracts on `main`, Node `v24.22.1`, npm `9.2.0`, and `assets/` spritesheets.
-- **Expected result:** Runnable app shell with single Phaser host, ADR-012 sharp pixel-art rendering, and typed event bridge.
-- **Verification:** `npm run typecheck`, `npm run build`, and Playwright single-canvas lifecycle smoke test.
-- **Blockers:** None. Ready to execute M1.
+- **Current focus:** **M2 — Core Workflow & Cozy Academic Space**
+- **Why this is next:** M1 foundation, sharp Config A Phaser engine (`src/game/**`), Cozy app shell (`src/app/App.tsx`), and live Supabase health client (`src/lib/supabase.ts`) are verified on `main` (`8/8` Playwright tests passing), and remote Supabase (`zftymjkcrdkhtshazzmw`) is clean-slated for M2 schema migrations and UI panels.
+- **Dependencies:** Locked M0/M1 contracts on `main`, remote Supabase project `zftymjkcrdkhtshazzmw`, Node `v24.15.0`, npm `11.12.1`, and `public/assets/`.
+- **Expected result:** SQL schema + RLS + seed data in Supabase Postgres, `AcademicRepository` service, `EntryGateway`, `AcademicSpacesSelector`, and live data-backed Workstation Panels (`ProjectOverviewPanel`, `TasksSprintBoardPanel`, `ResourceLibraryPanel`).
+- **Verification:** `npm run typecheck`, `npm run build`, and Playwright end-to-end persistence specs.
+- **Blockers:** None. Ready to execute M2.
 
 ## 5. Next Actions
 
-1. Initialize M1 scaffold (`package.json`, React 19, TypeScript, Vite, Tailwind, Phaser `v3.88.2`, Playwright) on `main`.
-2. Implement `PhaserHost.tsx`, `createGame.ts` (ADR-012), `eventBridge.ts`, and `App.tsx` shell on `main`.
-3. Fan out M2 feature worktrees (`feature/m2-supabase-data`, `feature/m2-entry-spaces`, `feature/m2-workstation-panels`) per `UI_CONTRACT.md` Section 7.
+1. Fan out M2 isolated worktrees (`feature/m2-supabase-data`, `feature/m2-entry-spaces`, `feature/m2-workstation-panels`) per `UI_CONTRACT.md` Section 7.
+2. Apply Supabase SQL migrations, RLS policies, and fictional Team SibukTA seed data to `zftymjkcrdkhtshazzmw`.
+3. Wire live `AcademicRepository` reads/mutations into `EntryGateway`, `AcademicSpacesSelector`, and Workstation Panels, then run full Playwright verification.
 
 ## 6. Risks and Blockers
 
@@ -234,3 +238,4 @@ Remember check again to make sure theres a shared contract before doing the exec
 |---|---|
 | 25 Nov 2026 | Clean slate reset: reverted project progress to M0 starting point; synced canonical docs and prepared M0 baseline. |
 | 25 Nov 2026 | Completed M0: verified repo/runtime/Supabase access, resolved `DESIGN.md` WCAG contrast conflicts, locked `UI_CONTRACT.md`, `src/styles/index.css`, `src/types/*`, `src/app/routerContract.ts`, and wrote M0 `HANDOFF.md`. |
+| 26 Nov 2026 | Completed M1: clean-slated Supabase project `zftymjkcrdkhtshazzmw`, scaffolded React 19/Vite/TS/Tailwind/Phaser `3.88.2`/Playwright shell, ported Config A sharp studio scene + assets + typed `eventBridge`, passed `typecheck`, `build`, and `8/8` Playwright E2E specs, and wrote M1 `HANDOFF.md`. |
