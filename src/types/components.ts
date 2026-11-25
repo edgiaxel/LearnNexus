@@ -15,6 +15,7 @@ export interface EntryGatewayProps {
   authRepository: AuthRepository;
   supabaseReady: boolean;
   supabaseError: string | null;
+  sessionNotice?: string | null;
   onRetryHealth: () => void;
   onAuthenticated: (profile: StudentProfile) => void;
 }
@@ -24,12 +25,15 @@ export interface AcademicSpacesSelectorProps {
   repository: AcademicRepository;
   onSelectSpace: (space: AcademicSpace, workspace: TeamWorkspace) => void;
   onSwitchProfile: () => void;
+  onSessionExpired?: () => void;
 }
 
 export interface WorkstationPanelProps {
   workstationId: WorkstationId;
   workspace: TeamWorkspace;
   repository: AcademicRepository;
+  isDemoSession?: boolean;
+  onSessionExpired?: () => void;
   onClose: () => void;
 }
 
@@ -37,16 +41,22 @@ export interface ProjectOverviewPanelProps {
   teamId: string;
   workspace: TeamWorkspace;
   repository: AcademicRepository;
+  isDemoSession?: boolean;
+  onSessionExpired?: () => void;
 }
 
 export interface TasksSprintBoardPanelProps {
   projectId: string | null;
   workspace: TeamWorkspace;
   repository: AcademicRepository;
+  isDemoSession?: boolean;
+  onSessionExpired?: () => void;
 }
 
 export interface ResourceLibraryPanelProps {
   projectId: string | null;
   workspace: TeamWorkspace;
   repository: AcademicRepository;
+  isDemoSession?: boolean;
+  onSessionExpired?: () => void;
 }

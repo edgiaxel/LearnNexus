@@ -96,6 +96,11 @@ export type RepositoryResult<T> =
   | { ok: true; data: T }
   | { ok: false; error: AppError };
 
+export type AuthStateChangeEvent =
+  | 'SIGNED_IN'
+  | 'SIGNED_OUT'
+  | 'TOKEN_REFRESHED';
+
 export interface AuthRepository {
   getCurrentProfile(): Promise<RepositoryResult<StudentProfile | null>>;
   signInWithPassword(
@@ -106,6 +111,9 @@ export interface AuthRepository {
     demoKey: DemoProfileKey,
   ): Promise<RepositoryResult<StudentProfile>>;
   signOut(): Promise<RepositoryResult<void>>;
+  onAuthStateChange?(
+    handler: (event: AuthStateChangeEvent, hasSession: boolean) => void,
+  ): () => void;
 }
 
 export interface AcademicRepository {
