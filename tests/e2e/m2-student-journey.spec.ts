@@ -7,13 +7,22 @@ import {
 const PERSISTENCE_TASK_ID = '55555555-5555-4555-8555-555555555503';
 const REPO_RESOURCE_ID = '66666666-6666-4666-8666-666666666601';
 
-function trackRuntimeIssues(page: Page): () => void {
+function trackRuntimeIssues(
+  page: Page,
+  allowedConsoleSubstrings: readonly string[] = [],
+): () => void {
   const consoleErrors: string[] = [];
   const pageErrors: string[] = [];
 
   page.on('console', (msg) => {
     if (msg.type() === 'error') {
-      consoleErrors.push(msg.text());
+      const text = msg.text();
+      const isAllowed = allowedConsoleSubstrings.some((allowed) =>
+        text.includes(allowed),
+      );
+      if (!isAllowed) {
+        consoleErrors.push(text);
+      }
     }
   });
 
@@ -53,7 +62,9 @@ test.describe('M2 & M2.5 Complete Student Journey and Live Supabase Persistence'
   test('UI-01 shows invalid credentials feedback, labels Demo Mode honestly, and signs in Nadia via Supabase Auth', async ({
     page,
   }) => {
-    const assertNoErrors = trackRuntimeIssues(page);
+    const assertNoErrors = trackRuntimeIssues(page, [
+      'Failed to load resource: the server responded with a status of 400',
+    ]);
     await page.setViewportSize({ width: 1280, height: 720 });
     await page.goto('/');
 
@@ -95,8 +106,7 @@ test.describe('M2 & M2.5 Complete Student Journey and Live Supabase Persistence'
     const bodyText = await page.evaluate(() => document.body.innerText);
     expect(bodyText).not.toContain('\u2014');
 
-    // Note: Supabase returning 400 on invalid credentials triggers a browser console error for the HTTP 400 response, so assert zero uncaught page errors only here.
-    void assertNoErrors;
+    assertNoErrors();
   });
 
   test('UI-02 loads live enrolled courses for Nadia and isolates empty unassigned spaces for Rani', async ({
