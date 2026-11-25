@@ -7,17 +7,18 @@ This file records completed work only. Planned features and unfinished tasks bel
 ## [Unreleased]
 
 ### Added
-- Completed **M0 — Audit, Preparation & Shared Contract** on clean `main`:
-  - Locked `UI_CONTRACT.md` with WCAG AA-verified Cozy Digital Campus tokens, router skeleton, shared TypeScript contracts, ADR-012 rendering rules, and zero-mock persistence contract.
-  - Configured `src/styles/index.css` with warm cream background (`#F7F4EC`), Cozy palette CSS variables, accessible focus/cursor rules, and crisp pixel-art canvas rules.
-  - Added `HANDOFF_TEMPLATE.md`, `.gitignore`, and `.env.example`, and linked local `.env` to Supabase project `LearnNexus` (`zftymjkcrdkhtshazzmw`) in `edgiaxel` org.
-  - Canonical project documentation in `docs/` (`PRD.md`, `DESIGN.md`, `ARCHITECTURE.md`, `MILESTONES.md`, `PROJECT_AUDIT.md`, `CHANGELOG.md`), `AGENTS.md`, `README.md`, `screens/`, and `assets/`.
+- Locked shared TypeScript domain, bridge, and repository contracts in `src/types/contracts.ts` and `src/types/database.ts`.
+- Locked central route table, transitions, shell header contract, and workstation metadata in `src/app/routerContract.ts`.
+- Added M1–M3 worktree isolation matrix in `UI_CONTRACT.md` Section 7 and Antislop Gate checklist in `HANDOFF_TEMPLATE.md`.
+- Added M0 milestone handoff in `HANDOFF.md`.
 
 ### Changed
-- Reset repository to a clean slate for **M0 — Audit, Preparation & Shared Contract** aligned with the **Cozy Digital Campus** visual direction and **ADR-012 Sharp Pixel Art** rendering.
+- Locked `UI_CONTRACT.md` on `main` with Antislop dials (`ENERGY 1 / RHYTHM 2 / MOTION 1`) and verified contrast ratios.
+- Extended `src/styles/index.css` with `--color-border-control` (`#757E74`), `--color-accent-sage-strong-hover` (`#3B5638`), and shared Cozy button/input/card/badge primitives.
+- Updated `docs/MILESTONES.md`, `docs/PROJECT_AUDIT.md`, and `README.md` to reflect M0 completion and M1 readiness.
 
 ### Fixed
--
+- Resolved WCAG AA contrast conflicts in `docs/DESIGN.md` by syncing secondary text (`#5C665C`), muted text (`#636B63`), primary CTA (`#4A6B46` / `#3B5638`), focus ring (`#4A6B46`), and control border (`#757E74`) tokens.
 
 ### Removed
 -

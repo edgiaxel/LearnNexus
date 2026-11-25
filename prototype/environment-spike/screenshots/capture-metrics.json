@@ -1,0 +1,146 @@
+{
+  "configs": {
+    "configA_full": {
+      "modeId": "config-a-16px",
+      "viewMode": "full",
+      "tileSize": 16,
+      "cameraZoom": 3,
+      "characterScale": 1,
+      "playerX": 56,
+      "playerY": 189,
+      "playerTileX": 3.5,
+      "playerTileY": 11.81,
+      "facing": "down",
+      "activeAnim": "adam_idle_anim_down",
+      "fps": 48,
+      "debugEnabled": false,
+      "nearbyObjectId": null,
+      "panelOpen": false,
+      "canvasWidth": 1152,
+      "canvasHeight": 768
+    },
+    "configB_full": {
+      "modeId": "config-b-48px",
+      "viewMode": "full",
+      "tileSize": 48,
+      "cameraZoom": 1,
+      "characterScale": 3,
+      "playerX": 168,
+      "playerY": 566,
+      "playerTileX": 3.5,
+      "playerTileY": 11.79,
+      "facing": "down",
+      "activeAnim": "adam_idle_anim_down",
+      "fps": 50,
+      "debugEnabled": false,
+      "nearbyObjectId": null,
+      "panelOpen": false,
+      "canvasWidth": 1152,
+      "canvasHeight": 768
+    },
+    "configA_follow": {
+      "modeId": "config-a-16px",
+      "viewMode": "follow",
+      "tileSize": 16,
+      "cameraZoom": 3,
+      "characterScale": 1,
+      "playerX": 176,
+      "playerY": 147,
+      "playerTileX": 11,
+      "playerTileY": 9.19,
+      "facing": "up",
+      "activeAnim": "adam_idle_anim_up",
+      "fps": 53,
+      "debugEnabled": false,
+      "nearbyObjectId": "meeting-table",
+      "panelOpen": false,
+      "canvasWidth": 960,
+      "canvasHeight": 576
+    },
+    "configB_follow": {
+      "modeId": "config-b-48px",
+      "viewMode": "follow",
+      "tileSize": 48,
+      "cameraZoom": 1,
+      "characterScale": 3,
+      "playerX": 528,
+      "playerY": 442,
+      "playerTileX": 11,
+      "playerTileY": 9.21,
+      "facing": "up",
+      "activeAnim": "adam_idle_anim_up",
+      "fps": 50,
+      "debugEnabled": false,
+      "nearbyObjectId": "meeting-table",
+      "panelOpen": false,
+      "canvasWidth": 960,
+      "canvasHeight": 576
+    }
+  },
+  "movementTests": {
+    "down": {
+      "before": {
+        "x": 168,
+        "y": 168
+      },
+      "after": {
+        "x": 168,
+        "y": 176
+      },
+      "facing": "down",
+      "anim": "adam_run_down"
+    },
+    "right": {
+      "before": {
+        "x": 168,
+        "y": 168
+      },
+      "after": {
+        "x": 177,
+        "y": 168
+      },
+      "facing": "right",
+      "anim": "adam_run_right"
+    },
+    "up": {
+      "before": {
+        "x": 169,
+        "y": 168
+      },
+      "after": {
+        "x": 169,
+        "y": 158
+      },
+      "facing": "up",
+      "anim": "adam_run_up"
+    },
+    "left": {
+      "before": {
+        "x": 168,
+        "y": 167
+      },
+      "after": {
+        "x": 159,
+        "y": 167
+      },
+      "facing": "left",
+      "anim": "adam_run_left"
+    }
+  },
+  "collisionTests": {
+    "westWall": {
+      "stoppedAtTileX": 1.31,
+      "blockedAboveTile1": true
+    }
+  },
+  "interactionTests": {
+    "workstationNearby": "workstation-overview",
+    "workstationPanelOpened": true,
+    "meetingTableNearby": "meeting-table",
+    "entranceDoorNearby": "entrance-door"
+  },
+  "consoleErrorCount": 0,
+  "pageErrorCount": 0,
+  "consoleErrors": [],
+  "pageErrors": []
+}

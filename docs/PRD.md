@@ -33,11 +33,11 @@
     campus, navigate to an assigned academic space, enter their team workspace,
     interact with workstations, access and update project information, tasks,
     or resources, and return later to find all changes preserved.
--   **Current project status:** Updated product direction approved following
-    product research and hands-on Gather Town 2.0 exploration; M0, M1, and M2
-    completed; M2.5 design alignment documented; M3 persistence in progress.
--   **Next action:** Execute M3 persistence and canvas rendering quality
-    alignment without unapproved engine swaps or scope creep.
+-   **Current project status:** Clean slate — starting **M0 (Audit,
+    Preparation & Shared Contract)**; product requirements and Cozy Digital
+    Campus direction approved.
+-   **Next action:** Execute **M0 (Audit, Preparation & Shared Contract)**
+    before M1 application scaffold.
 
 ### Important scope distinction
 

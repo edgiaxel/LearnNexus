@@ -1,0 +1,83 @@
+{
+  "manifestVersion": "0.1.0",
+  "purpose": "M0 Environment & Character Prototype Spike",
+  "tilesets": [
+    {
+      "assetId": "room_builder_free",
+      "sourceOriginal16": "assets/Interiors_free/16x16/Room_Builder_free_16x16.png",
+      "sourceOriginal48": "assets/Interiors_free/48x48/Room_Builder_free_48x48.png",
+      "processed16": "/processed-assets/phaser/tilesets/Room_Builder_free_16x16.png",
+      "processed48": "/processed-assets/phaser/tilesets/Room_Builder_free_48x48.png",
+      "grid": { "columns": 17, "rows": 23 },
+      "excludedAnnotationIndices": [0, 1, 2, 3, 4, 17, 18, 19, 20, 21, 34, 35, 36, 37, 38, 51, 52, 53, 54, 55],
+      "selectedTiles": {
+        "floors_cream_tile": [131, 148],
+        "floors_herringbone_wood": [233, 250],
+        "floors_stone_concrete": [199, 216],
+        "floors_terracotta_tile": [114],
+        "walls_warm_wood_light": [188, 205],
+        "walls_warm_beige": [324, 341],
+        "walls_mint_cream": [154, 171],
+        "room_borders_and_ceiling": [12, 24, 25, 28, 30, 41, 42, 45, 47, 62, 63, 64]
+      },
+      "intendedUsage": "Room floors, interior walls, ceiling caps, and outer room borders"
+    }
+  ],
+  "sprites": [
+    { "spriteNum": "0018", "id16": "int16_obj_0018", "id48": "int48_obj_0018", "dim16": "16x22", "dim48": "48x66", "category": "electronics", "intendedUsage": "Desktop monitor on desk stand" },
+    { "spriteNum": "0019", "id16": "int16_obj_0019", "id48": "int48_obj_0019", "dim16": "14x21", "dim48": "42x63", "category": "doors", "intendedUsage": "Interactive entrance door" },
+    { "spriteNum": "0036", "id16": "int16_obj_0036", "id48": "int48_obj_0036", "dim16": "38x21", "dim48": "114x63", "category": "sofas", "intendedUsage": "Warm brown lounge bench" },
+    { "spriteNum": "0044", "id16": "int16_obj_0044", "id48": "int48_obj_0044", "dim16": "60x40", "dim48": "180x120", "category": "decorations", "intendedUsage": "Red/gold accent rug" },
+    { "spriteNum": "0050", "id16": "int16_obj_0050", "id48": "int48_obj_0050", "dim16": "48x26", "dim48": "144x78", "category": "sofas", "intendedUsage": "Cushioned lounge daybed" },
+    { "spriteNum": "0051", "id16": "int16_obj_0051", "id48": "int48_obj_0051", "dim16": "64x32", "dim48": "192x96", "category": "shelves", "intendedUsage": "Interactive resource library bookcase" },
+    { "spriteNum": "0052", "id16": "int16_obj_0052", "id48": "int48_obj_0052", "dim16": "21x31", "dim48": "63x93", "category": "shelves", "intendedUsage": "Narrow study shelf" },
+    { "spriteNum": "0058", "id16": "int16_obj_0058", "id48": "int48_obj_0058", "dim16": "48x26", "dim48": "144x78", "category": "furniture", "intendedUsage": "Lounge chairs and coffee table set" },
+    { "spriteNum": "0069", "id16": "int16_obj_0069", "id48": "int48_obj_0069", "dim16": "25x20", "dim48": "75x60", "category": "windows", "intendedUsage": "Double wooden window" },
+    { "spriteNum": "0081", "id16": "int16_obj_0081", "id48": "int48_obj_0081", "dim16": "64x25", "dim48": "192x75", "category": "windows", "intendedUsage": "Wide modern glass window" },
+    { "spriteNum": "0085", "id16": "int16_obj_0085", "id48": "int48_obj_0085", "dim16": "14x14", "dim48": "42x42", "category": "chairs", "intendedUsage": "Wooden stool" },
+    { "spriteNum": "0089", "id16": "int16_obj_0089", "id48": "int48_obj_0089", "dim16": "13x21", "dim48": "39x63", "category": "chairs", "intendedUsage": "Chair facing right" },
+    { "spriteNum": "0092", "id16": "int16_obj_0092", "id48": "int48_obj_0092", "dim16": "13x21", "dim48": "39x63", "category": "chairs", "intendedUsage": "Chair facing left" },
+    { "spriteNum": "0113", "id16": "int16_obj_0113", "id48": "int48_obj_0113", "dim16": "64x23", "dim48": "192x69", "category": "desks", "intendedUsage": "Interactive collaborative student meeting table" },
+    { "spriteNum": "0114", "id16": "int16_obj_0114", "id48": "int48_obj_0114", "dim16": "13x21", "dim48": "39x63", "category": "decorations", "intendedUsage": "Academic desk globe" },
+    { "spriteNum": "0116", "id16": "int16_obj_0116", "id48": "int48_obj_0116", "dim16": "28x25", "dim48": "84x75", "category": "desks", "intendedUsage": "Study desk with open book" },
+    { "spriteNum": "0117", "id16": "int16_obj_0117", "id48": "int48_obj_0117", "dim16": "13x22", "dim48": "39x66", "category": "chairs", "intendedUsage": "Desk chair facing up" },
+    { "spriteNum": "0119", "id16": "int16_obj_0119", "id48": "int48_obj_0119", "dim16": "13x22", "dim48": "39x66", "category": "chairs", "intendedUsage": "Desk chair facing down" },
+    { "spriteNum": "0124", "id16": "int16_obj_0124", "id48": "int48_obj_0124", "dim16": "28x22", "dim48": "84x66", "category": "desks", "intendedUsage": "Green study desk with open book" },
+    { "spriteNum": "0125", "id16": "int16_obj_0125", "id48": "int48_obj_0125", "dim16": "47x54", "dim48": "141x162", "category": "desks", "intendedUsage": "Interactive Project Overview workstation cluster" },
+    { "spriteNum": "0134", "id16": "int16_obj_0134", "id48": "int48_obj_0134", "dim16": "28x23", "dim48": "84x69", "category": "decorations", "intendedUsage": "Wall chalkboard / sprint display" },
+    { "spriteNum": "0135", "id16": "int16_obj_0135", "id48": "int48_obj_0135", "dim16": "26x13", "dim48": "78x39", "category": "decorations", "intendedUsage": "Wall bulletin board" },
+    { "spriteNum": "0136", "id16": "int16_obj_0136", "id48": "int48_obj_0136", "dim16": "43x28", "dim48": "129x84", "category": "decorations", "intendedUsage": "Sage-green collaborative zone rug" },
+    { "spriteNum": "0137", "id16": "int16_obj_0137", "id48": "int48_obj_0137", "dim16": "48x28", "dim48": "144x84", "category": "decorations", "intendedUsage": "Warm tan lounge rug" },
+    { "spriteNum": "0139", "id16": "int16_obj_0139", "id48": "int48_obj_0139", "dim16": "23x31", "dim48": "69x93", "category": "plants", "intendedUsage": "Potted palm plant" },
+    { "spriteNum": "0141", "id16": "int16_obj_0141", "id48": "int48_obj_0141", "dim16": "18x31", "dim48": "54x93", "category": "plants", "intendedUsage": "Potted leafy tree" },
+    { "spriteNum": "0143", "id16": "int16_obj_0143", "id48": "int48_obj_0143", "dim16": "14x23", "dim48": "42x69", "category": "plants", "intendedUsage": "Small potted plant" },
+    { "spriteNum": "0149", "id16": "int16_obj_0149", "id48": "int48_obj_0149", "dim16": "27x10", "dim48": "81x30", "category": "decorations", "intendedUsage": "Cozy wall string lights" },
+    { "spriteNum": "0151", "id16": "int16_obj_0151", "id48": "int48_obj_0151", "dim16": "27x32", "dim48": "81x96", "category": "cabinets", "intendedUsage": "Wooden storage cabinet" }
+  ],
+  "character": {
+    "characterId": "adam",
+    "sourceFiles": {
+      "idle": "assets/Characters_free/Adam_idle_16x16.png",
+      "idleAnim": "assets/Characters_free/Adam_idle_anim_16x16.png",
+      "run": "assets/Characters_free/Adam_run_16x16.png"
+    },
+    "processedFiles": {
+      "idle": "/processed-assets/phaser/characters/Adam_idle_16x16.png",
+      "idleAnim": "/processed-assets/phaser/characters/Adam_idle_anim_16x16.png",
+      "run": "/processed-assets/phaser/characters/Adam_run_16x16.png"
+    },
+    "nativeFrameDimensions": "16x32",
+    "directionOrder": ["right", "up", "left", "down"],
+    "framesPerDirection": 6
+  },
+  "excludedAmbiguousSamples": [
+    {
+      "id": "int48_obj_0237",
+      "reason": "Touching modular sofa + bookshelf cluster (15x5 tiles); left unreviewed per spike rules"
+    },
+    {
+      "id": "int48_obj_0230",
+      "reason": "Touching 3-section bookcase cluster (6x3 tiles); left unreviewed per spike rules"
+    }
+  ]
+}

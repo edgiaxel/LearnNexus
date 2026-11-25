@@ -13,6 +13,7 @@
   --color-accent-sage-soft: #C9D7BA;
   --color-accent-sage: #A4B99C;
   --color-accent-sage-strong: #4A6B46;
+  --color-accent-sage-strong-hover: #3B5638;
   --color-accent-lavender: #DAD2E9;
   --color-accent-blue: #C9DFE8;
   --color-accent-peach: #F1D2BC;
@@ -27,6 +28,7 @@
 
   /* Borders and Dividers */
   --color-border-subtle: #E3E5DC;
+  --color-border-control: #757E74;
   --color-border-focus: #4A6B46;
 
   /* Functional Status Colors */
@@ -112,4 +114,128 @@ canvas {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* Shared Cozy Digital Campus component primitives */
+.btn-primary,
+.btn-secondary,
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 10px 16px;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.25;
+  text-decoration: none;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.btn-primary {
+  background-color: var(--color-accent-sage-strong);
+  color: var(--color-text-inverse);
+  border: 1px solid var(--color-accent-sage-strong);
+}
+
+.btn-primary:hover:not(:disabled) {
+  background-color: var(--color-accent-sage-strong-hover);
+  border-color: var(--color-accent-sage-strong-hover);
+}
+
+.btn-primary:active:not(:disabled) {
+  background-color: var(--color-accent-sage-strong-hover);
+  transform: translateY(1px);
+}
+
+.btn-secondary {
+  background-color: var(--color-surface-secondary);
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-border-control);
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background-color: var(--color-surface-tertiary);
+}
+
+.btn-secondary:active:not(:disabled) {
+  border-color: var(--color-text-primary);
+}
+
+.btn-ghost {
+  background-color: transparent;
+  color: var(--color-text-secondary);
+  border: 1px solid transparent;
+}
+
+.btn-ghost:hover:not(:disabled) {
+  background-color: var(--color-surface-secondary);
+  color: var(--color-text-primary);
+}
+
+.btn-ghost:active:not(:disabled) {
+  border-color: var(--color-border-control);
+}
+
+.btn-primary:disabled,
+.btn-secondary:disabled,
+.btn-ghost:disabled {
+  opacity: 0.55;
+}
+
+.control-input {
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 12px;
+  background-color: var(--color-surface-primary);
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-border-control);
+  border-radius: var(--radius-md);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.surface-card {
+  background-color: var(--color-surface-primary);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-subtle);
+}
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 10px;
+  border-radius: var(--radius-pill);
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.status-badge--todo {
+  background-color: var(--color-status-todo-bg);
+  color: var(--color-status-todo-text);
+  border: 1px solid var(--color-accent-yellow);
+}
+
+.status-badge--in-progress {
+  background-color: var(--color-status-inprogress-bg);
+  color: var(--color-status-inprogress-text);
+  border: 1px solid var(--color-accent-peach);
+}
+
+.status-badge--done {
+  background-color: var(--color-status-done-bg);
+  color: var(--color-status-done-text);
+  border: 1px solid var(--color-accent-sage);
+}
+
+.status-badge--error {
+  background-color: var(--color-status-error-bg);
+  color: var(--color-status-error-text);
+  border: 1px solid var(--color-status-error-text);
 }

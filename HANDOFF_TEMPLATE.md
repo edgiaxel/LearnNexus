@@ -23,6 +23,12 @@ Every subagent or worktree task must produce a brief `HANDOFF.md` (or section in
 - Confirm real Supabase reads/writes (no silent mock fallbacks)
 - Commands run and exact pass/fail output (`npm run typecheck`, `npm run build`, Playwright tests)
 
+## Contract & Antislop Gate Checklist
+- [ ] Zero edits to locked central files (`UI_CONTRACT.md`, `src/styles/index.css`, `src/types/*`, `src/app/*`, `package.json`)
+- [ ] No duplicate navbars, global layouts, or custom theme overrides
+- [ ] WCAG AA contrast, keyboard navigation (`Tab`/`Enter`/`Escape`), and visible `:focus-visible` verified
+- [ ] Zero em dashes (`—`) in UI copy; loading, empty (cause + next action), and error (cause + retry) states implemented
+
 ## Caveats & Next Steps
 - Known limitations, edge cases, or follow-ups for integration
 ```

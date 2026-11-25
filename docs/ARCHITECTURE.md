@@ -13,8 +13,8 @@
 - **Selected stack:** React 19 + TypeScript + Vite; Phaser 3 (retained; PixiJS deferred); Supabase Postgres with `@supabase/supabase-js` v2 and RLS; Tailwind CSS implementing Cozy Digital Campus design tokens (`DESIGN.md`); Playwright for browser end-to-end testing.
 - **Main components:** React application shell; Phaser 2D environment; typed interaction bridge (`eventBridge.ts`); typed data-access layer (`academicService.ts`); Supabase Auth / Demo Mode; Supabase Postgres with RLS.
 - **Current technical risk:** Ensuring crisp, sharp canvas rendering for 2D pixel-art assets without blur; maintaining strict isolation between React UI and Phaser scene lifecycle; completing durable persistence for the M3 milestone.
-- **Current implementation status:** M0, M1, and M2 completed and verified with Playwright tests on `localhost` (single-mount Phaser canvas, workstation event bridge, live demo entry, and initial Supabase schema). M2.5 design alignment documented; M3 persistence in progress.
-- **Next technical action:** Execute M3 persistence and apply the Phaser canvas rendering configuration audit (ADR-012) to ensure sharp pixel-art display and Cozy Digital Campus visual consistency.
+- **Current implementation status:** Clean slate — starting **M0 (Audit, Preparation & Shared Contract)**. No application scaffold, package manifest, or test suite is present yet; baseline design tokens (`src/styles/index.css`) and shared contract (`UI_CONTRACT.md`) are staged for M0 verification.
+- **Next technical action:** Complete M0 audit and contract lock, then scaffold the React 19 + TypeScript + Vite + Phaser 3 foundation in M1 with ADR-012 sharp pixel-art rendering.
 
 ### Evidence and confidence labels
 
@@ -29,13 +29,13 @@
 
 | Item | Status | Evidence |
 |---|---|---|
-| Application source | Implemented | React 19 + TypeScript + Vite + Tailwind CSS + Phaser 3 in `src/` |
-| Package manifest | Pinned | `package.json` and `package-lock.json` committed |
-| 2D Game Lifecycle | Implemented | `PhaserHost.tsx`, `createGame.ts`, `CampusScene.ts` |
-| Interaction Bridge | Implemented | `eventBridge.ts` with typed workstation and panel events |
-| Database & Schema | Connected | Live Supabase project (`zftymjkcrdkhtshazzmw`) in `ap-southeast-1` with M2 schema & seed data |
-| Automated Tests | Passing | 9-test Playwright E2E suite (`tests/e2e/entry-flow.spec.ts`) |
-| Visual Prototype | Active Alignment | Aligning UI to Cozy Digital Campus (`#F7F4EC` warm cream, soft sage, muted green, lavender) |
+| Application source | Not yet scaffolded | Only `src/styles/index.css` baseline tokens present; app scaffold planned for M1 |
+| Package manifest | Not yet created | `package.json` and `package-lock.json` pending M1 scaffold |
+| 2D Game Lifecycle | Planned | `PhaserHost.tsx`, `createGame.ts`, `CampusScene.ts` planned for M1/M2 |
+| Interaction Bridge | Planned | `eventBridge.ts` contract defined in `UI_CONTRACT.md`; implementation planned for M1 |
+| Database & Schema | Pending M0/M2 | `.env.example` present; Supabase schema & seed data planned for M2/M3 |
+| Automated Tests | Not yet configured | Playwright E2E suite planned for M1–M4 |
+| Visual Prototype | Planned | Cozy Digital Campus (`#F7F4EC` warm cream, soft sage, muted green, lavender) tokens staged in `src/styles/index.css` |
 
 ### 2.2 Technical constraints
 
@@ -661,24 +661,24 @@ Do not automatically create cloud resources, connect a Supabase project, or depl
 
 | Risk/unknown | Impact | Smallest validation | Result/status |
 |---|---|---|---|
-| Empty repository; no scaffold | All implementation work is still ahead | Create app scaffold and verify dev/build/type check | **Resolved (M1)** |
-| Phaser + React lifecycle | Duplicate game instances, memory leaks, lost scene context | PoC: mount, interact, open/close panel, unmount/remount; verify one canvas and cleanup | **Resolved (M1/M2 passing)** |
-| Phaser 3 version compatibility | Integration/API mismatch | Pin a 3.x release and verify minimal scene build against its docs | **Resolved (Phaser v3.88.2)** |
-| Supabase access/RLS design | Data leakage or blocked workflow | Create one class/team fixture and test member vs non-member reads/writes | **Resolved (M2 schema active)** |
-| Auth vs demo-entry decision | Entry implementation may be reworked | Decide one flow before F-001; test a single seeded student | **Resolved (Dual-mode approved)** |
-| Persistent task update | Demo may show fake persistence | Save one task status, refresh, fetch from database | **Active (M3 in progress)** |
+| Empty repository; no scaffold | All implementation work is still ahead | Create app scaffold and verify dev/build/type check | **Open (Planned M1)** |
+| Phaser + React lifecycle | Duplicate game instances, memory leaks, lost scene context | PoC: mount, interact, open/close panel, unmount/remount; verify one canvas and cleanup | **Open (Planned M1)** |
+| Phaser 3 version compatibility | Integration/API mismatch | Pin a 3.x release and verify minimal scene build against its docs | **Planned (`v3.88.2` target)** |
+| Supabase access/RLS design | Data leakage or blocked workflow | Create one class/team fixture and test member vs non-member reads/writes | **Open (Planned M2/M3)** |
+| Auth vs demo-entry decision | Entry implementation may be reworked | Decide one flow before F-001; test a single seeded student | **Approved (Dual-mode)** |
+| Persistent task update | Demo may show fake persistence | Save one task status, refresh, fetch from database | **Open (Planned M3)** |
 | Realtime multiplayer | Large schedule and synchronization risk | Do not spike unless P0 is stable and time remains | **Deferred (Post-P0)** |
-| Asset availability & sharpness | Visual environment soft or blurry | Apply nearest-neighbor filtering and integer zoom configuration | **Active (ADR-012 alignment)** |
+| Asset availability & sharpness | Visual environment soft or blurry | Apply nearest-neighbor filtering and integer zoom configuration | **Planned (ADR-012)** |
 | External plan quotas/cost | Service limits may interrupt demo | Check current Supabase/Vercel plan quotas before deployment | Pending verification |
 | Team integration conflicts | Last-minute broken main branch | Small PRs, daily integration and one owner per shared subsystem | Active practice |
 
 ### 15.1 Required technical spikes
 
 **SPIKE-01 — Phaser host lifecycle**  
-*Result:* **Completed in M1 / Verified in M2.** Playwright E2E tests confirm single canvas mount, typed event bridge emission, contextual drawer opening, and clean destruction on unmount without duplicate canvases or memory leaks.
+*Status:* **Planned (M1).** Prove single canvas mount, typed event bridge emission, contextual drawer opening, and clean destruction on unmount without duplicate canvases or memory leaks.
 
 **SPIKE-02 — Supabase persistence and access**  
-*Result:* **Completed in M2 / Active in M3.** Core schema migrated to Supabase Postgres, seed data verified for Team SibukTA, and live task status mutations confirmed via `academicService.ts`. Full refresh persistence verification active in M3.
+*Status:* **Planned (M2/M3).** Migrate core schema to Supabase Postgres, verify seed data for Team SibukTA, and confirm live task status mutations and refresh persistence via `academicService.ts`.
 
 Do not start realtime or file upload spikes before these pass.
 

@@ -1,0 +1,54 @@
+{
+  "schema_version": "1.0.0",
+  "status": "provisional_awaiting_visual_review",
+  "notes": "Assign reviewed atlas frame IDs from contact sheets before M2 CampusScene wiring. Do not guess frame bindings without visual confirmation.",
+  "available_atlases": {
+    "48x48": "interiors_48x48",
+    "16x16": "interiors_16x16"
+  },
+  "workstation_slots": [
+    {
+      "workstationId": "project-overview",
+      "displayLabel": "Project Overview Desk",
+      "preferredCategories": [
+        "desks",
+        "electronics"
+      ],
+      "atlasKey": null,
+      "frameId": null,
+      "collidable": true,
+      "interactable": true,
+      "interactionRadiusTiles": 1.5,
+      "reviewStatus": "pending_frame_selection"
+    },
+    {
+      "workstationId": "tasks-sprint",
+      "displayLabel": "Tasks Sprint Board",
+      "preferredCategories": [
+        "decorations",
+        "cabinets",
+        "desks"
+      ],
+      "atlasKey": null,
+      "frameId": null,
+      "collidable": true,
+      "interactable": true,
+      "interactionRadiusTiles": 1.5,
+      "reviewStatus": "pending_frame_selection"
+    },
+    {
+      "workstationId": "resource-library",
+      "displayLabel": "Resource Library Shelves",
+      "preferredCategories": [
+        "shelves",
+        "cabinets"
+      ],
+      "atlasKey": null,
+      "frameId": null,
+      "collidable": true,
+      "interactable": true,
+      "interactionRadiusTiles": 1.5,
+      "reviewStatus": "pending_frame_selection"
+    }
+  ]
+}

@@ -1,0 +1,3177 @@
+{
+  "generated_at_utc": "2026-11-25T09:40:33.386656+00:00",
+  "assets_root": "assets",
+  "total_files": 72,
+  "total_images": 71,
+  "production_eligible_files": 63,
+  "reference_only_files": 8,
+  "legacy_archive_files": 24,
+  "category_counts": {
+    "ui_design_reference": 7,
+    "characters_composite_sheet": 4,
+    "characters_animation_strip": 28,
+    "characters_rpgmaker_mv": 1,
+    "sprite_sheet_interiors": 3,
+    "tileset_room_builder": 3,
+    "license_document": 1,
+    "legacy_tileset": 15,
+    "legacy_character_sheet": 9,
+    "asset_overview_reference": 1
+  },
+  "exact_byte_duplicates": [],
+  "resolution_variant_equivalence": {
+    "Interiors_free": {
+      "base_16x16": "Interiors_free/16x16/Interiors_free_16x16.png",
+      "variants": {
+        "32x32": {
+          "path": "Interiors_free/32x32/Interiors_free_32x32.png",
+          "scale_factor": 2,
+          "raw_rgba_exact": true,
+          "visible_pixel_exact": true,
+          "visible_diff_pixels": 0
+        },
+        "48x48": {
+          "path": "Interiors_free/48x48/Interiors_free_48x48.png",
+          "scale_factor": 3,
+          "raw_rgba_exact": true,
+          "visible_pixel_exact": true,
+          "visible_diff_pixels": 0
+        }
+      }
+    },
+    "Room_Builder_free": {
+      "base_16x16": "Interiors_free/16x16/Room_Builder_free_16x16.png",
+      "variants": {
+        "32x32": {
+          "path": "Interiors_free/32x32/Room_Builder_free_32x32.png",
+          "scale_factor": 2,
+          "raw_rgba_exact": true,
+          "visible_pixel_exact": true,
+          "visible_diff_pixels": 0
+        },
+        "48x48": {
+          "path": "Interiors_free/48x48/Room_Builder_free_48x48.png",
+          "scale_factor": 3,
+          "raw_rgba_exact": true,
+          "visible_pixel_exact": true,
+          "visible_diff_pixels": 0
+        }
+      }
+    },
+    "Old_Tileset_1": {
+      "base_16x16": "Old/Tileset_16x16_1.png",
+      "variants": {
+        "32x32": {
+          "path": "Old/Tileset_32x32_1.png",
+          "scale_factor": 2,
+          "raw_rgba_exact": false,
+          "visible_pixel_exact": true,
+          "visible_diff_pixels": 0
+        },
+        "48x48": {
+          "path": "Old/Tileset_48x48_1.png",
+          "scale_factor": 3,
+          "raw_rgba_exact": false,
+          "visible_pixel_exact": true,
+          "visible_diff_pixels": 0
+        }
+      }
+    },
+    "Old_Tileset_2": {
+      "base_16x16": "Old/Tileset_16x16_2.png",
+      "variants": {
+        "32x32": {
+          "path": "Old/Tileset_32x32_2.png",
+          "scale_factor": 2,
+          "raw_rgba_exact": false,
+          "visible_pixel_exact": true,
+          "visible_diff_pixels": 0
+        },
+        "48x48": {
+          "path": "Old/Tileset_48x48_2.png",
+          "scale_factor": 3,
+          "raw_rgba_exact": false,
+          "visible_pixel_exact": true,
+          "visible_diff_pixels": 0
+        }
+      }
+    },
+    "Old_Tileset_3": {
+      "base_16x16": "Old/Tileset_16x16_3.png",
+      "variants": {
+        "32x32": {
+          "path": "Old/Tileset_32x32_3.png",
+          "scale_factor": 2,
+          "raw_rgba_exact": true,
+          "visible_pixel_exact": true,
+          "visible_diff_pixels": 0
+        },
+        "48x48": {
+          "path": "Old/Tileset_48x48_3.png",
+          "scale_factor": 3,
+          "raw_rgba_exact": true,
+          "visible_pixel_exact": true,
+          "visible_diff_pixels": 0
+        }
+      }
+    },
+    "Old_Tileset_9": {
+      "base_16x16": "Old/Tileset_16x16_9.png",
+      "variants": {
+        "32x32": {
+          "path": "Old/Tileset_32x32_9.png",
+          "scale_factor": 2,
+          "raw_rgba_exact": true,
+          "visible_pixel_exact": true,
+          "visible_diff_pixels": 0
+        },
+        "48x48": {
+          "path": "Old/Tileset_48x48_9.png",
+          "scale_factor": 3,
+          "raw_rgba_exact": true,
+          "visible_pixel_exact": true,
+          "visible_diff_pixels": 0
+        }
+      }
+    },
+    "Old_Tileset_16": {
+      "base_16x16": "Old/Tileset_16x16_16.png",
+      "variants": {
+        "32x32": {
+          "path": "Old/Tileset_32x32_16.png",
+          "scale_factor": 2,
+          "raw_rgba_exact": true,
+          "visible_pixel_exact": true,
+          "visible_diff_pixels": 0
+        },
+        "48x48": {
+          "path": "Old/Tileset_48x48_16.png",
+          "scale_factor": 3,
+          "raw_rgba_exact": true,
+          "visible_pixel_exact": true,
+          "visible_diff_pixels": 0
+        }
+      }
+    },
+    "Old_idle_2": {
+      "base_16x16": "Old/idle_16x16_2.png",
+      "variants": {
+        "32x32": {
+          "path": "Old/idle_32x32_2.png",
+          "scale_factor": 2,
+          "raw_rgba_exact": false,
+          "visible_pixel_exact": true,
+          "visible_diff_pixels": 0
+        },
+        "48x48": {
+          "path": "Old/idle_48x48_2.png",
+          "scale_factor": 3,
+          "raw_rgba_exact": false,
+          "visible_pixel_exact": true,
+          "visible_diff_pixels": 0
+        }
+      }
+    },
+    "Old_run_horizontal_2": {
+      "base_16x16": "Old/run_horizontal_16x16_2.png",
+      "variants": {
+        "32x32": {
+          "path": "Old/run_horizontal_32x32_2.png",
+          "scale_factor": 2,
+          "raw_rgba_exact": false,
+          "visible_pixel_exact": true,
+          "visible_diff_pixels": 0
+        },
+        "48x48": {
+          "path": "Old/run_horizontal_48x48_2.png",
+          "scale_factor": 3,
+          "raw_rgba_exact": false,
+          "visible_pixel_exact": true,
+          "visible_diff_pixels": 0
+        }
+      }
+    },
+    "Old_Character_2_RPGMAKER": {
+      "base_16x16": "Old/mv/Character_2_16x16_RPGMAKER.png",
+      "variants": {
+        "32x32": {
+          "path": "Old/mv/Character_2_32x32_RPGMAKER.png",
+          "scale_factor": 2,
+          "raw_rgba_exact": false,
+          "visible_pixel_exact": true,
+          "visible_diff_pixels": 0
+        },
+        "48x48": {
+          "path": "Old/mv/Character_2_48x48_RPGMAKER.png",
+          "scale_factor": 3,
+          "raw_rgba_exact": false,
+          "visible_pixel_exact": true,
+          "visible_diff_pixels": 0
+        }
+      }
+    }
+  },
+  "character_composite_equivalence": {
+    "Adam": {
+      "master_file": "Characters_free/Adam_16x16.png",
+      "rows": {
+        "idle": {
+          "strip_file": "Characters_free/Adam_idle_16x16.png",
+          "row_index": 0,
+          "visible_pixel_exact": true,
+          "visible_diff_pixels": 0
+        },
+        "idle_anim": {
+          "strip_file": "Characters_free/Adam_idle_anim_16x16.png",
+          "row_index": 1,
+          "visible_pixel_exact": true,
+          "visible_diff_pixels": 0
+        },
+        "run": {
+          "strip_file": "Characters_free/Adam_run_16x16.png",
+          "row_index": 2,
+          "visible_pixel_exact": true,
+          "visible_diff_pixels": 0
+        },
+        "sit": {
+          "strip_file": "Characters_free/Adam_sit_16x16.png",
+          "row_index": 3,
+          "visible_pixel_exact": true,
+          "visible_diff_pixels": 0
+        },
+        "sit2": {
+          "strip_file": "Characters_free/Adam_sit2_16x16.png",
+          "row_index": 4,
+          "visible_pixel_exact": true,
+          "visible_diff_pixels": 0
+        },
+        "sit3": {
+          "strip_file": "Characters_free/Adam_sit3_16x16.png",
+          "row_index": 5,
+          "visible_pixel_exact": true,
+          "visible_diff_pixels": 0
+        },
+        "phone": {
+          "strip_file": "Characters_free/Adam_phone_16x16.png",
+          "row_index": 6,
+          "visible_pixel_exact": true,
+          "visible_diff_pixels": 0
+        }
+      }
+    },
+    "Alex": {
+      "master_file": "Characters_free/Alex_16x16.png",
+      "rows": {
+        "idle": {
+          "strip_file": "Characters_free/Alex_idle_16x16.png",
+          "row_index": 0,
+          "visible_pixel_exact": true,
+          "visible_diff_pixels": 0
+        },
+        "idle_anim": {
+          "strip_file": "Characters_free/Alex_idle_anim_16x16.png",
+          "row_index": 1,
+          "visible_pixel_exact": true,
+          "visible_diff_pixels": 0
+        },
+        "run": {
+          "strip_file": "Characters_free/Alex_run_16x16.png",
+          "row_index": 2,
+          "visible_pixel_exact": true,
+          "visible_diff_pixels": 0
+        },
+        "sit": {
+          "strip_file": "Characters_free/Alex_sit_16x16.png",
+          "row_index": 3,
+          "visible_pixel_exact": true,
+          "visible_diff_pixels": 0
+        },
+        "sit2": {
+          "strip_file": "Characters_free/Alex_sit2_16x16.png",
+          "row_index": 4,
+          "visible_pixel_exact": true,
+          "visible_diff_pixels": 0
+        },
+        "sit3": {
+          "strip_file": "Characters_free/Alex_sit3_16x16.png",
+          "row_index": 5,
+          "visible_pixel_exact": true,
+          "visible_diff_pixels": 0
+        },
+        "phone": {
+          "strip_file": "Characters_free/Alex_phone_16x16.png",
+          "row_index": 6,
+          "visible_pixel_exact": true,
+          "visible_diff_pixels": 0
+        }
+      }
+    },
+    "Amelia": {
+      "master_file": "Characters_free/Amelia_16x16.png",
+      "rows": {
+        "idle": {
+          "strip_file": "Characters_free/Amelia_idle_16x16.png",
+          "row_index": 0,
+          "visible_pixel_exact": true,
+          "visible_diff_pixels": 0
+        },
+        "idle_anim": {
+          "strip_file": "Characters_free/Amelia_idle_anim_16x16.png",
+          "row_index": 1,
+          "visible_pixel_exact": true,
+          "visible_diff_pixels": 0
+        },
+        "run": {
+          "strip_file": "Characters_free/Amelia_run_16x16.png",
+          "row_index": 2,
+          "visible_pixel_exact": true,
+          "visible_diff_pixels": 0
+        },
+        "sit": {
+          "strip_file": "Characters_free/Amelia_sit_16x16.png",
+          "row_index": 3,
+          "visible_pixel_exact": true,
+          "visible_diff_pixels": 0
+        },
+        "sit2": {
+          "strip_file": "Characters_free/Amelia_sit2_16x16.png",
+          "row_index": 4,
+          "visible_pixel_exact": true,
+          "visible_diff_pixels": 0
+        },
+        "sit3": {
+          "strip_file": "Characters_free/Amelia_sit3_16x16.png",
+          "row_index": 5,
+          "visible_pixel_exact": true,
+          "visible_diff_pixels": 0
+        },
+        "phone": {
+          "strip_file": "Characters_free/Amelia_phone_16x16.png",
+          "row_index": 6,
+          "visible_pixel_exact": true,
+          "visible_diff_pixels": 0
+        }
+      }
+    },
+    "Bob": {
+      "master_file": "Characters_free/Bob_16x16.png",
+      "rows": {
+        "idle": {
+          "strip_file": "Characters_free/Bob_idle_16x16.png",
+          "row_index": 0,
+          "visible_pixel_exact": true,
+          "visible_diff_pixels": 0
+        },
+        "idle_anim": {
+          "strip_file": "Characters_free/Bob_idle_anim_16x16.png",
+          "row_index": 1,
+          "visible_pixel_exact": true,
+          "visible_diff_pixels": 0
+        },
+        "run": {
+          "strip_file": "Characters_free/Bob_run_16x16.png",
+          "row_index": 2,
+          "visible_pixel_exact": true,
+          "visible_diff_pixels": 0
+        },
+        "sit": {
+          "strip_file": "Characters_free/Bob_sit_16x16.png",
+          "row_index": 3,
+          "visible_pixel_exact": true,
+          "visible_diff_pixels": 0
+        },
+        "sit2": {
+          "strip_file": "Characters_free/Bob_sit2_16x16.png",
+          "row_index": 4,
+          "visible_pixel_exact": true,
+          "visible_diff_pixels": 0
+        },
+        "sit3": {
+          "strip_file": "Characters_free/Bob_sit3_16x16.png",
+          "row_index": 5,
+          "visible_pixel_exact": true,
+          "visible_diff_pixels": 0
+        },
+        "phone": {
+          "strip_file": "Characters_free/Bob_phone_16x16.png",
+          "row_index": 6,
+          "visible_pixel_exact": true,
+          "visible_diff_pixels": 0
+        }
+      }
+    }
+  },
+  "license_audit": {
+    "exists": true,
+    "path": "assets/LICENSE.txt",
+    "raw_text": "FREE VERSION LICENSE:\n\nCAN:\nYOU CAN USE THE ASSET IN NON COMMERCIAL PROJECTS\nYOU CAN EDIT THE SPRITES AND USE THEM IN NON COMMERCIAL PROJECTS\n\nCAN'T:\nYOU CAN'T USE THE ASSET IN COMMERCIAL PROJECTS\nYOU CAN'T EDIT THE SPRITES AND USE THEM IN COMMERCIAL PROJECTS\nYOU CAN'T EDIT AND RESELL THE SPRITES",
+    "can": [
+      "YOU CAN USE THE ASSET IN NON COMMERCIAL PROJECTS",
+      "YOU CAN EDIT THE SPRITES AND USE THEM IN NON COMMERCIAL PROJECTS"
+    ],
+    "cant": [
+      "YOU CAN'T USE THE ASSET IN COMMERCIAL PROJECTS",
+      "YOU CAN'T EDIT THE SPRITES AND USE THEM IN COMMERCIAL PROJECTS",
+      "YOU CAN'T EDIT AND RESELL THE SPRITES"
+    ],
+    "commercial_use_allowed": false,
+    "non_commercial_use_allowed": true,
+    "attribution_clause_present": false,
+    "author_named_in_license": false,
+    "notes": [
+      "Permits non-commercial use and editing for non-commercial projects (fits STACK 2026 academic/student prototype).",
+      "Strictly prohibits commercial use, commercial derivative edits, and reselling.",
+      "Does not specify an author name or attribution format; verify original pack page (appears to be LimeZu Modern Interiors Free) before public release.",
+      "Does NOT cover Gather Town reference screenshots (1.png through 7.png), which are third-party product screenshots."
+    ]
+  },
+  "license_references": {
+    "free_pack_non_commercial": {
+      "id": "free_pack_non_commercial",
+      "source_file": "assets/LICENSE.txt",
+      "commercial_use": false,
+      "non_commercial_use": true,
+      "editable_non_commercial": true,
+      "resell_allowed": false,
+      "attribution_specified_in_file": false,
+      "summary": "Non-commercial use and non-commercial sprite editing permitted; commercial use, commercial editing, and reselling prohibited. No explicit attribution string or author name is included in LICENSE.txt."
+    },
+    "third_party_ui_reference_unlicensed": {
+      "id": "third_party_ui_reference_unlicensed",
+      "source_file": null,
+      "commercial_use": false,
+      "non_commercial_use": false,
+      "editable_non_commercial": false,
+      "resell_allowed": false,
+      "attribution_specified_in_file": false,
+      "summary": "Third-party Gather Town UI screenshots retained strictly as design reference. Not covered by assets/LICENSE.txt; must never be redistributed or used as game assets."
+    },
+    "unverified_legacy_provenance": {
+      "id": "unverified_legacy_provenance",
+      "source_file": "assets/LICENSE.txt (assumed parent pack, unverified)",
+      "commercial_use": false,
+      "non_commercial_use": true,
+      "editable_non_commercial": true,
+      "resell_allowed": false,
+      "attribution_specified_in_file": false,
+      "summary": "Stored alongside LICENSE.txt under assets/Old/ and likely an earlier version of the same free pack, but lacks a folder-level license confirmation."
+    }
+  },
+  "unresolved_classification_questions": [
+    {
+      "id": "Q-01",
+      "topic": "Canonical game tile resolution (16x16 vs 48x48)",
+      "question": "Characters_free named sheets (Adam, Alex, Amelia, Bob) exist only at 16x16 native scale (16x32 / 32x32 frames), while Interiors_free and Room_Builder_free provide 16x16, 32x32, and 48x48 (pixel-exact 1x, 2x, 3x upscales) and Characters_MV.png is 48x96. Should LearnNexus standardize Phaser runtime assets on 16x16 with integer 3x camera zoom (matching all 7 character animations), or 48x48 with 1x zoom (requiring 3x nearest-neighbor upscale of Characters_free)?",
+      "affected_assets": [
+        "Interiors_free/*",
+        "Characters_free/*"
+      ]
+    },
+    {
+      "id": "Q-02",
+      "topic": "Exact attribution and author metadata for LICENSE.txt",
+      "question": "assets/LICENSE.txt allows non-commercial use and editing but omits author name, pack URL, and attribution wording. Confirm original pack provenance (appears to be LimeZu 'Modern Interiors Free') and whether attribution credits should be added to README/about screen.",
+      "affected_assets": [
+        "assets/LICENSE.txt",
+        "Interiors_free/*",
+        "Characters_free/*"
+      ]
+    },
+    {
+      "id": "Q-03",
+      "topic": "Retention vs archival of assets/Old/",
+      "question": "assets/Old/ contains 24 older tileset and character files (Tileset_*_1/2/3/9/16 and Character 2 in 16/32/48 resolutions) whose styles overlap with Room_Builder_free. Should Old/ assets remain archived or be imported into Phaser tilesets?",
+      "affected_assets": [
+        "Old/*"
+      ]
+    },
+    {
+      "id": "Q-04",
+      "topic": "Ambiguous touching and multi-part sprites in Interiors_free",
+      "question": "Interiors_free contains touching furniture groups (e.g., wide modular counter/sofa/bookshelf blocks spanning up to 15x5 tiles) and tiny disconnected decorative pieces (7 components <= 4px side in 16x16). Review the ambiguous contact sheet to decide which blobs should be split into individual furniture items and which tiny pieces belong to adjacent objects.",
+      "affected_assets": [
+        "Interiors_free/16x16/Interiors_free_16x16.png",
+        "Interiors_free/48x48/Interiors_free_48x48.png"
+      ]
+    },
+    {
+      "id": "Q-05",
+      "topic": "Semantic naming of extracted Interiors_free props",
+      "question": "Interiors_free contains ~269 connected components spanning desks, chairs, sofas, rugs, beds, kitchen/study props, cabinets, plants, windows, doors, and decor. Review contact sheets to assign final semantic IDs and mark which objects are interactive workstations vs static decor.",
+      "affected_assets": [
+        "Interiors_free/48x48/Interiors_free_48x48.png"
+      ]
+    },
+    {
+      "id": "Q-06",
+      "topic": "Semi-transparent glass/shadow pixels in Interiors_free",
+      "question": "Component 100 in Interiors_free (y=1584..1665 in 48x48; y=528..555 in 16x16) contains semi-transparent alpha values (161, 220, 242). Confirm whether these should be kept as translucent overlays in Phaser.",
+      "affected_assets": [
+        "Interiors_free/*/Interiors_free_*.png"
+      ]
+    }
+  ],
+  "files": [
+    {
+      "filename": "1.png",
+      "relative_path": "1.png",
+      "full_relative_path": "assets/1.png",
+      "file_size_bytes": 554754,
+      "sha256": "c632b702a6246b16f83e4811fa3b6c7cf3287c4f06891591b2f9048b62aef596",
+      "is_image": true,
+      "format": "PNG",
+      "color_mode": "RGBA",
+      "dimensions": {
+        "width": 1024,
+        "height": 576
+      },
+      "has_alpha_channel": true,
+      "transparency_used": false,
+      "pixel_alpha_stats": {
+        "transparent": 0,
+        "semi_transparent": 0,
+        "opaque": 589824
+      },
+      "divisible_by_tile_sizes": [
+        16,
+        32
+      ],
+      "estimated_tile_dimensions": null,
+      "category": "ui_design_reference",
+      "role": "reference_only",
+      "content_type": "gather_screenshot",
+      "production_eligible": false,
+      "extraction_strategy": "exclude",
+      "license_ref": "third_party_ui_reference_unlicensed",
+      "duplicate_or_variant": null
+    },
+    {
+      "filename": "2.jpg",
+      "relative_path": "2.jpg",
+      "full_relative_path": "assets/2.jpg",
+      "file_size_bytes": 84245,
+      "sha256": "55a4cb3f97561993820747d0f91ea2a543405473a4482cf9e01466bd0490b736",
+      "is_image": true,
+      "format": "JPEG",
+      "color_mode": "RGB",
+      "dimensions": {
+        "width": 662,
+        "height": 532
+      },
+      "has_alpha_channel": false,
+      "transparency_used": false,
+      "pixel_alpha_stats": {
+        "transparent": 0,
+        "semi_transparent": 0,
+        "opaque": 352184
+      },
+      "divisible_by_tile_sizes": [],
+      "estimated_tile_dimensions": null,
+      "category": "ui_design_reference",
+      "role": "reference_only",
+      "content_type": "gather_screenshot",
+      "production_eligible": false,
+      "extraction_strategy": "exclude",
+      "license_ref": "third_party_ui_reference_unlicensed",
+      "duplicate_or_variant": null
+    },
+    {
+      "filename": "3.png",
+      "relative_path": "3.png",
+      "full_relative_path": "assets/3.png",
+      "file_size_bytes": 545072,
+      "sha256": "7f96215caf17ad06e75eddb2f8d31d3d33bb545640837c5729c777742fb5b1c3",
+      "is_image": true,
+      "format": "PNG",
+      "color_mode": "RGBA",
+      "dimensions": {
+        "width": 2048,
+        "height": 1180
+      },
+      "has_alpha_channel": true,
+      "transparency_used": false,
+      "pixel_alpha_stats": {
+        "transparent": 0,
+        "semi_transparent": 0,
+        "opaque": 2416640
+      },
+      "divisible_by_tile_sizes": [],
+      "estimated_tile_dimensions": null,
+      "category": "ui_design_reference",
+      "role": "reference_only",
+      "content_type": "gather_screenshot",
+      "production_eligible": false,
+      "extraction_strategy": "exclude",
+      "license_ref": "third_party_ui_reference_unlicensed",
+      "duplicate_or_variant": null
+    },
+    {
+      "filename": "4.png",
+      "relative_path": "4.png",
+      "full_relative_path": "assets/4.png",
+      "file_size_bytes": 519182,
+      "sha256": "f1088a2fe24bcc3b6d934dcc596c512e9e307d65452887f2607cc6b6fab65f7d",
+      "is_image": true,
+      "format": "PNG",
+      "color_mode": "RGBA",
+      "dimensions": {
+        "width": 1916,
+        "height": 1016
+      },
+      "has_alpha_channel": true,
+      "transparency_used": false,
+      "pixel_alpha_stats": {
+        "transparent": 0,
+        "semi_transparent": 0,
+        "opaque": 1946656
+      },
+      "divisible_by_tile_sizes": [],
+      "estimated_tile_dimensions": null,
+      "category": "ui_design_reference",
+      "role": "reference_only",
+      "content_type": "gather_screenshot",
+      "production_eligible": false,
+      "extraction_strategy": "exclude",
+      "license_ref": "third_party_ui_reference_unlicensed",
+      "duplicate_or_variant": null
+    },
+    {
+      "filename": "5.png",
+      "relative_path": "5.png",
+      "full_relative_path": "assets/5.png",
+      "file_size_bytes": 245714,
+      "sha256": "2a2abed1d9ba459c85b391a109dd4e10eda1908cce12cffce3026abc3a723634",
+      "is_image": true,
+      "format": "PNG",
+      "color_mode": "RGBA",
+      "dimensions": {
+        "width": 1916,
+        "height": 1016
+      },
+      "has_alpha_channel": true,
+      "transparency_used": false,
+      "pixel_alpha_stats": {
+        "transparent": 0,
+        "semi_transparent": 0,
+        "opaque": 1946656
+      },
+      "divisible_by_tile_sizes": [],
+      "estimated_tile_dimensions": null,
+      "category": "ui_design_reference",
+      "role": "reference_only",
+      "content_type": "gather_screenshot",
+      "production_eligible": false,
+      "extraction_strategy": "exclude",
+      "license_ref": "third_party_ui_reference_unlicensed",
+      "duplicate_or_variant": null
+    },
+    {
+      "filename": "6.png",
+      "relative_path": "6.png",
+      "full_relative_path": "assets/6.png",
+      "file_size_bytes": 236887,
+      "sha256": "db48faa08d8ce53a19fdb6a05585962470cc57731b96e6bb09e98d01ac8fe4a3",
+      "is_image": true,
+      "format": "PNG",
+      "color_mode": "RGBA",
+      "dimensions": {
+        "width": 1916,
+        "height": 1016
+      },
+      "has_alpha_channel": true,
+      "transparency_used": false,
+      "pixel_alpha_stats": {
+        "transparent": 0,
+        "semi_transparent": 0,
+        "opaque": 1946656
+      },
+      "divisible_by_tile_sizes": [],
+      "estimated_tile_dimensions": null,
+      "category": "ui_design_reference",
+      "role": "reference_only",
+      "content_type": "gather_screenshot",
+      "production_eligible": false,
+      "extraction_strategy": "exclude",
+      "license_ref": "third_party_ui_reference_unlicensed",
+      "duplicate_or_variant": null
+    },
+    {
+      "filename": "7.png",
+      "relative_path": "7.png",
+      "full_relative_path": "assets/7.png",
+      "file_size_bytes": 408285,
+      "sha256": "f14d9947a0d1437ddf2b1384e035fbbd06b97dfc4efa550d86a38bb40a05541d",
+      "is_image": true,
+      "format": "PNG",
+      "color_mode": "RGBA",
+      "dimensions": {
+        "width": 1916,
+        "height": 1016
+      },
+      "has_alpha_channel": true,
+      "transparency_used": false,
+      "pixel_alpha_stats": {
+        "transparent": 0,
+        "semi_transparent": 0,
+        "opaque": 1946656
+      },
+      "divisible_by_tile_sizes": [],
+      "estimated_tile_dimensions": null,
+      "category": "ui_design_reference",
+      "role": "reference_only",
+      "content_type": "gather_screenshot",
+      "production_eligible": false,
+      "extraction_strategy": "exclude",
+      "license_ref": "third_party_ui_reference_unlicensed",
+      "duplicate_or_variant": null
+    },
+    {
+      "filename": "Adam_16x16.png",
+      "relative_path": "Characters_free/Adam_16x16.png",
+      "full_relative_path": "assets/Characters_free/Adam_16x16.png",
+      "file_size_bytes": 16831,
+      "sha256": "8d1ccf23d03481bd31d5d861b110ecbcc249e5a8c5fe87c98acc485c63598bab",
+      "is_image": true,
+      "format": "PNG",
+      "color_mode": "RGBA",
+      "dimensions": {
+        "width": 384,
+        "height": 224
+      },
+      "has_alpha_channel": true,
+      "transparency_used": true,
+      "pixel_alpha_stats": {
+        "transparent": 60197,
+        "semi_transparent": 0,
+        "opaque": 25819
+      },
+      "divisible_by_tile_sizes": [
+        16,
+        32
+      ],
+      "estimated_tile_dimensions": "16x32 (rows 0-2,5-6) / 32x32 (rows 3-4)",
+      "category": "characters_composite_sheet",
+      "role": "production_asset",
+      "content_type": "multi_animation_sheet",
+      "production_eligible": true,
+      "extraction_strategy": "character_metadata",
+      "license_ref": "free_pack_non_commercial",
+      "duplicate_or_variant": {
+        "type": "composite_master_sheet",
+        "contains_individual_strips": true
+      }
+    },
+    {
+      "filename": "Adam_idle_16x16.png",
+      "relative_path": "Characters_free/Adam_idle_16x16.png",
+      "full_relative_path": "assets/Characters_free/Adam_idle_16x16.png",
+      "file_size_bytes": 1993,
+      "sha256": "5c0056274a0adfc836b03299b448a019a9b2f6021d29b09030f3e454729cf74b",
+      "is_image": true,
+      "format": "PNG",
+      "color_mode": "RGBA",
+      "dimensions": {
+        "width": 64,
+        "height": 32
+      },
+      "has_alpha_channel": true,
+      "transparency_used": true,
+      "pixel_alpha_stats": {
+        "transparent": 970,
+        "semi_transparent": 0,
+        "opaque": 1078
+      },
+      "divisible_by_tile_sizes": [
+        16,
+        32
+      ],
+      "estimated_tile_dimensions": "16x32",
+      "category": "characters_animation_strip",
+      "role": "production_asset",
+      "content_type": "animation_strip",
+      "production_eligible": true,
+      "extraction_strategy": "character_metadata",
+      "license_ref": "free_pack_non_commercial",
+      "duplicate_or_variant": {
+        "type": "subset_of_composite_sheet",
+        "composite_master": "Characters_free/Adam_16x16.png",
+        "pixel_exact_visible_match": true
+      }
+    },
+    {
+      "filename": "Adam_idle_anim_16x16.png",
+      "relative_path": "Characters_free/Adam_idle_anim_16x16.png",
+      "full_relative_path": "assets/Characters_free/Adam_idle_anim_16x16.png",
+      "file_size_bytes": 4076,
+      "sha256": "486089994cfec9b927fac08e6e3f1af38c6b581d029c63509badfaa24e0a13fc",
+      "is_image": true,
+      "format": "PNG",
+      "color_mode": "RGBA",
+      "dimensions": {
+        "width": 384,
+        "height": 32
+      },
+      "has_alpha_channel": true,
+      "transparency_used": true,
+      "pixel_alpha_stats": {
+        "transparent": 5740,
+        "semi_transparent": 0,
+        "opaque": 6548
+      },
+      "divisible_by_tile_sizes": [
+        16,
+        32
+      ],
+      "estimated_tile_dimensions": "16x32",
+      "category": "characters_animation_strip",
+      "role": "production_asset",
+      "content_type": "animation_strip",
+      "production_eligible": true,
+      "extraction_strategy": "character_metadata",
+      "license_ref": "free_pack_non_commercial",
+      "duplicate_or_variant": {
+        "type": "subset_of_composite_sheet",
+        "composite_master": "Characters_free/Adam_16x16.png",
+        "pixel_exact_visible_match": true
+      }
+    },
+    {
+      "filename": "Adam_phone_16x16.png",
+      "relative_path": "Characters_free/Adam_phone_16x16.png",
+      "full_relative_path": "assets/Characters_free/Adam_phone_16x16.png",
+      "file_size_bytes": 1798,
+      "sha256": "4afc34e2a0edbaaa58349c7682e5390c06d6926323a8d38e0e04166f3049cfc5",
+      "is_image": true,
+      "format": "PNG",
+      "color_mode": "RGBA",
+      "dimensions": {
+        "width": 144,
+        "height": 32
+      },
+      "has_alpha_channel": true,
+      "transparency_used": true,
+      "pixel_alpha_stats": {
+        "transparent": 1957,
+        "semi_transparent": 0,
+        "opaque": 2651
+      },
+      "divisible_by_tile_sizes": [
+        16
+      ],
+      "estimated_tile_dimensions": "16x32",
+      "category": "characters_animation_strip",
+      "role": "production_asset",
+      "content_type": "animation_strip",
+      "production_eligible": true,
+      "extraction_strategy": "character_metadata",
+      "license_ref": "free_pack_non_commercial",
+      "duplicate_or_variant": {
+        "type": "subset_of_composite_sheet",
+        "composite_master": "Characters_free/Adam_16x16.png",
+        "pixel_exact_visible_match": true
+      }
+    },
+    {
+      "filename": "Adam_run_16x16.png",
+      "relative_path": "Characters_free/Adam_run_16x16.png",
+      "full_relative_path": "assets/Characters_free/Adam_run_16x16.png",
+      "file_size_bytes": 5765,
+      "sha256": "11b20f6be9df55e16956750817f9fd3ac19d159b93080cbf4d6a87b640ff16c0",
+      "is_image": true,
+      "format": "PNG",
+      "color_mode": "RGBA",
+      "dimensions": {
+        "width": 384,
+        "height": 32
+      },
+      "has_alpha_channel": true,
+      "transparency_used": true,
+      "pixel_alpha_stats": {
+        "transparent": 5802,
+        "semi_transparent": 0,
+        "opaque": 6486
+      },
+      "divisible_by_tile_sizes": [
+        16,
+        32
+      ],
+      "estimated_tile_dimensions": "16x32",
+      "category": "characters_animation_strip",
+      "role": "production_asset",
+      "content_type": "animation_strip",
+      "production_eligible": true,
+      "extraction_strategy": "character_metadata",
+      "license_ref": "free_pack_non_commercial",
+      "duplicate_or_variant": {
+        "type": "subset_of_composite_sheet",
+        "composite_master": "Characters_free/Adam_16x16.png",
+        "pixel_exact_visible_match": true
+      }
+    },
+    {
+      "filename": "Adam_sit2_16x16.png",
+      "relative_path": "Characters_free/Adam_sit2_16x16.png",
+      "full_relative_path": "assets/Characters_free/Adam_sit2_16x16.png",
+      "file_size_bytes": 2456,
+      "sha256": "d8a3a90afa5627b6ec94a996c1fa56ee9ad0cdfe58e79584faca7669301cd310",
+      "is_image": true,
+      "format": "PNG",
+      "color_mode": "RGBA",
+      "dimensions": {
+        "width": 384,
+        "height": 32
+      },
+      "has_alpha_channel": true,
+      "transparency_used": true,
+      "pixel_alpha_stats": {
+        "transparent": 9180,
+        "semi_transparent": 0,
+        "opaque": 3108
+      },
+      "divisible_by_tile_sizes": [
+        16,
+        32
+      ],
+      "estimated_tile_dimensions": "32x32",
+      "category": "characters_animation_strip",
+      "role": "production_asset",
+      "content_type": "animation_strip",
+      "production_eligible": true,
+      "extraction_strategy": "character_metadata",
+      "license_ref": "free_pack_non_commercial",
+      "duplicate_or_variant": {
+        "type": "subset_of_composite_sheet",
+        "composite_master": "Characters_free/Adam_16x16.png",
+        "pixel_exact_visible_match": true
+      }
+    },
+    {
+      "filename": "Adam_sit3_16x16.png",
+      "relative_path": "Characters_free/Adam_sit3_16x16.png",
+      "full_relative_path": "assets/Characters_free/Adam_sit3_16x16.png",
+      "file_size_bytes": 2224,
+      "sha256": "57040f8c1a17af8d2450b23e44d76ec9860408422e79f283ef3436993f8b3c15",
+      "is_image": true,
+      "format": "PNG",
+      "color_mode": "RGBA",
+      "dimensions": {
+        "width": 192,
+        "height": 32
+      },
+      "has_alpha_channel": true,
+      "transparency_used": true,
+      "pixel_alpha_stats": {
+        "transparent": 3068,
+        "semi_transparent": 0,
+        "opaque": 3076
+      },
+      "divisible_by_tile_sizes": [
+        16,
+        32
+      ],
+      "estimated_tile_dimensions": "16x32",
+      "category": "characters_animation_strip",
+      "role": "production_asset",
+      "content_type": "animation_strip",
+      "production_eligible": true,
+      "extraction_strategy": "character_metadata",
+      "license_ref": "free_pack_non_commercial",
+      "duplicate_or_variant": {
+        "type": "subset_of_composite_sheet",
+        "composite_master": "Characters_free/Adam_16x16.png",
+        "pixel_exact_visible_match": true
+      }
+    },
+    {
+      "filename": "Adam_sit_16x16.png",
+      "relative_path": "Characters_free/Adam_sit_16x16.png",
+      "full_relative_path": "assets/Characters_free/Adam_sit_16x16.png",
+      "file_size_bytes": 2420,
+      "sha256": "eac1744a9203f73544c0096dc1db7f335ae4efc23ca5f11d3be31db51a5f3e0c",
+      "is_image": true,
+      "format": "PNG",
+      "color_mode": "RGBA",
+      "dimensions": {
+        "width": 384,
+        "height": 32
+      },
+      "has_alpha_channel": true,
+      "transparency_used": true,
+      "pixel_alpha_stats": {
+        "transparent": 9416,
+        "semi_transparent": 0,
+        "opaque": 2872
+      },
+      "divisible_by_tile_sizes": [
+        16,
+        32
+      ],
+      "estimated_tile_dimensions": "32x32",
+      "category": "characters_animation_strip",
+      "role": "production_asset",
+      "content_type": "animation_strip",
+      "production_eligible": true,
+      "extraction_strategy": "character_metadata",
+      "license_ref": "free_pack_non_commercial",
+      "duplicate_or_variant": {
+        "type": "subset_of_composite_sheet",
+        "composite_master": "Characters_free/Adam_16x16.png",
+        "pixel_exact_visible_match": true
+      }
+    },
+    {
+      "filename": "Alex_16x16.png",
+      "relative_path": "Characters_free/Alex_16x16.png",
+      "full_relative_path": "assets/Characters_free/Alex_16x16.png",
+      "file_size_bytes": 18938,
+      "sha256": "3db9c01ac6db47abfefe381d33f1c0a9bf22930b9b25187fc213a723333f0212",
+      "is_image": true,
+      "format": "PNG",
+      "color_mode": "RGBA",
+      "dimensions": {
+        "width": 384,
+        "height": 224
+      },
+      "has_alpha_channel": true,
+      "transparency_used": true,
+      "pixel_alpha_stats": {
+        "transparent": 62477,
+        "semi_transparent": 0,
+        "opaque": 23539
+      },
+      "divisible_by_tile_sizes": [
+        16,
+        32
+      ],
+      "estimated_tile_dimensions": "16x32 (rows 0-2,5-6) / 32x32 (rows 3-4)",
+      "category": "characters_composite_sheet",
+      "role": "production_asset",
+      "content_type": "multi_animation_sheet",
+      "production_eligible": true,
+      "extraction_strategy": "character_metadata",
+      "license_ref": "free_pack_non_commercial",
+      "duplicate_or_variant": {
+        "type": "composite_master_sheet",
+        "contains_individual_strips": true
+      }
+    },
+    {
+      "filename": "Alex_idle_16x16.png",
+      "relative_path": "Characters_free/Alex_idle_16x16.png",
+      "full_relative_path": "assets/Characters_free/Alex_idle_16x16.png",
+      "file_size_bytes": 1812,
+      "sha256": "e12c14572e498a0bb30db6416cffa421fb6b57a361c8fed0448b4f04bcee6523",
+      "is_image": true,
+      "format": "PNG",
+      "color_mode": "RGBA",
+      "dimensions": {
+        "width": 64,
+        "height": 32
+      },
+      "has_alpha_channel": true,
+      "transparency_used": true,
+      "pixel_alpha_stats": {
+        "transparent": 1066,
+        "semi_transparent": 0,
+        "opaque": 982
+      },
+      "divisible_by_tile_sizes": [
+        16,
+        32
+      ],
+      "estimated_tile_dimensions": "16x32",
+      "category": "characters_animation_strip",
+      "role": "production_asset",
+      "content_type": "animation_strip",
+      "production_eligible": true,
+      "extraction_strategy": "character_metadata",
+      "license_ref": "free_pack_non_commercial",
+      "duplicate_or_variant": {
+        "type": "subset_of_composite_sheet",
+        "composite_master": "Characters_free/Alex_16x16.png",
+        "pixel_exact_visible_match": true
+      }
+    },
+    {
+      "filename": "Alex_idle_anim_16x16.png",
+      "relative_path": "Characters_free/Alex_idle_anim_16x16.png",
+      "full_relative_path": "assets/Characters_free/Alex_idle_anim_16x16.png",
+      "file_size_bytes": 3537,
+      "sha256": "78a0031a37b3d518eee542923ee3d89cf668381e7fceead71206565e6b93e7e7",
+      "is_image": true,
+      "format": "PNG",
+      "color_mode": "RGBA",
+      "dimensions": {
+        "width": 384,
+        "height": 32
+      },
+      "has_alpha_channel": true,
+      "transparency_used": true,
+      "pixel_alpha_stats": {
+        "transparent": 6316,
+        "semi_transparent": 0,
+        "opaque": 5972
+      },
+      "divisible_by_tile_sizes": [
+        16,
+        32
+      ],
+      "estimated_tile_dimensions": "16x32",
+      "category": "characters_animation_strip",
+      "role": "production_asset",
+      "content_type": "animation_strip",
+      "production_eligible": true,
+      "extraction_strategy": "character_metadata",
+      "license_ref": "free_pack_non_commercial",
+      "duplicate_or_variant": {
+        "type": "subset_of_composite_sheet",
+        "composite_master": "Characters_free/Alex_16x16.png",
+        "pixel_exact_visible_match": true
+      }
+    },
+    {
+      "filename": "Alex_phone_16x16.png",
+      "relative_path": "Characters_free/Alex_phone_16x16.png",
+      "full_relative_path": "assets/Characters_free/Alex_phone_16x16.png",
+      "file_size_bytes": 1390,
+      "sha256": "feff00c8cf84b989ad1f64330586ef2a789ab7352f08d2a87713f474bcdea910",
+      "is_image": true,
+      "format": "PNG",
+      "color_mode": "RGBA",
+      "dimensions": {
+        "width": 144,
+        "height": 32
+      },
+      "has_alpha_channel": true,
+      "transparency_used": true,
+      "pixel_alpha_stats": {
+        "transparent": 2180,
+        "semi_transparent": 0,
+        "opaque": 2428
+      },
+      "divisible_by_tile_sizes": [
+        16
+      ],
+      "estimated_tile_dimensions": "16x32",
+      "category": "characters_animation_strip",
+      "role": "production_asset",
+      "content_type": "animation_strip",
+      "production_eligible": true,
+      "extraction_strategy": "character_metadata",
+      "license_ref": "free_pack_non_commercial",
+      "duplicate_or_variant": {
+        "type": "subset_of_composite_sheet",
+        "composite_master": "Characters_free/Alex_16x16.png",
+        "pixel_exact_visible_match": true
+      }
+    },
+    {
+      "filename": "Alex_run_16x16.png",
+      "relative_path": "Characters_free/Alex_run_16x16.png",
+      "full_relative_path": "assets/Characters_free/Alex_run_16x16.png",
+      "file_size_bytes": 5392,
+      "sha256": "009f3c614856c8b7982022775824fac9234f3d49cf533b4b5d449b9edc69df21",
+      "is_image": true,
+      "format": "PNG",
+      "color_mode": "RGBA",
+      "dimensions": {
+        "width": 384,
+        "height": 32
+      },
+      "has_alpha_channel": true,
+      "transparency_used": true,
+      "pixel_alpha_stats": {
+        "transparent": 6387,
+        "semi_transparent": 0,
+        "opaque": 5901
+      },
+      "divisible_by_tile_sizes": [
+        16,
+        32
+      ],
+      "estimated_tile_dimensions": "16x32",
+      "category": "characters_animation_strip",
+      "role": "production_asset",
+      "content_type": "animation_strip",
+      "production_eligible": true,
+      "extraction_strategy": "character_metadata",
+      "license_ref": "free_pack_non_commercial",
+      "duplicate_or_variant": {
+        "type": "subset_of_composite_sheet",
+        "composite_master": "Characters_free/Alex_16x16.png",
+        "pixel_exact_visible_match": true
+      }
+    },
+    {
+      "filename": "Alex_sit2_16x16.png",
+      "relative_path": "Characters_free/Alex_sit2_16x16.png",
+      "full_relative_path": "assets/Characters_free/Alex_sit2_16x16.png",
+      "file_size_bytes": 2375,
+      "sha256": "f161f8895506daa9cdb54a17f716b1da68729b82f4d995c02fb35f7e7bcd87ac",
+      "is_image": true,
+      "format": "PNG",
+      "color_mode": "RGBA",
+      "dimensions": {
+        "width": 384,
+        "height": 32
+      },
+      "has_alpha_channel": true,
+      "transparency_used": true,
+      "pixel_alpha_stats": {
+        "transparent": 9468,
+        "semi_transparent": 0,
+        "opaque": 2820
+      },
+      "divisible_by_tile_sizes": [
+        16,
+        32
+      ],
+      "estimated_tile_dimensions": "32x32",
+      "category": "characters_animation_strip",
+      "role": "production_asset",
+      "content_type": "animation_strip",
+      "production_eligible": true,
+      "extraction_strategy": "character_metadata",
+      "license_ref": "free_pack_non_commercial",
+      "duplicate_or_variant": {
+        "type": "subset_of_composite_sheet",
+        "composite_master": "Characters_free/Alex_16x16.png",
+        "pixel_exact_visible_match": true
+      }
+    },
+    {
+      "filename": "Alex_sit3_16x16.png",
+      "relative_path": "Characters_free/Alex_sit3_16x16.png",
+      "full_relative_path": "assets/Characters_free/Alex_sit3_16x16.png",
+      "file_size_bytes": 2080,
+      "sha256": "cf9fc90b4e66749f7b7fb4899a8c1c56aae2a46687f8b6f45c8511fe7ca39b6f",
+      "is_image": true,
+      "format": "PNG",
+      "color_mode": "RGBA",
+      "dimensions": {
+        "width": 192,
+        "height": 32
+      },
+      "has_alpha_channel": true,
+      "transparency_used": true,
+      "pixel_alpha_stats": {
+        "transparent": 3292,
+        "semi_transparent": 0,
+        "opaque": 2852
+      },
+      "divisible_by_tile_sizes": [
+        16,
+        32
+      ],
+      "estimated_tile_dimensions": "16x32",
+      "category": "characters_animation_strip",
+      "role": "production_asset",
+      "content_type": "animation_strip",
+      "production_eligible": true,
+      "extraction_strategy": "character_metadata",
+      "license_ref": "free_pack_non_commercial",
+      "duplicate_or_variant": {
+        "type": "subset_of_composite_sheet",
+        "composite_master": "Characters_free/Alex_16x16.png",
+        "pixel_exact_visible_match": true
+      }
+    },
+    {
+      "filename": "Alex_sit_16x16.png",
+      "relative_path": "Characters_free/Alex_sit_16x16.png",
+      "full_relative_path": "assets/Characters_free/Alex_sit_16x16.png",
+      "file_size_bytes": 1863,
+      "sha256": "b3fe12b70fbb3246ab677aee1b84593b4affb04d0d958518b42b15a6dc7a8ccd",
+      "is_image": true,
+      "format": "PNG",
+      "color_mode": "RGBA",
+      "dimensions": {
+        "width": 384,
+        "height": 32
+      },
+      "has_alpha_channel": true,
+      "transparency_used": true,
+      "pixel_alpha_stats": {
+        "transparent": 9704,
+        "semi_transparent": 0,
+        "opaque": 2584
+      },
+      "divisible_by_tile_sizes": [
+        16,
+        32
+      ],
+      "estimated_tile_dimensions": "32x32",
+      "category": "characters_animation_strip",
+      "role": "production_asset",
+      "content_type": "animation_strip",
+      "production_eligible": true,
+      "extraction_strategy": "character_metadata",
+      "license_ref": "free_pack_non_commercial",
+      "duplicate_or_variant": {
+        "type": "subset_of_composite_sheet",
+        "composite_master": "Characters_free/Alex_16x16.png",
+        "pixel_exact_visible_match": true
+      }
+    },
+    {
+      "filename": "Amelia_16x16.png",
+      "relative_path": "Characters_free/Amelia_16x16.png",
+      "full_relative_path": "assets/Characters_free/Amelia_16x16.png",
+      "file_size_bytes": 15282,
+      "sha256": "f4249d27d3853d7dc5e1027b0316e554dc97e1d0d31940f5cf61fe1d0ab14b8f",
+      "is_image": true,
+      "format": "PNG",
+      "color_mode": "RGBA",
+      "dimensions": {
+        "width": 384,
+        "height": 224
+      },
+      "has_alpha_channel": true,
+      "transparency_used": true,
+      "pixel_alpha_stats": {
+        "transparent": 61410,
+        "semi_transparent": 0,
+        "opaque": 24606
+      },
+      "divisible_by_tile_sizes": [
+        16,
+        32
+      ],
+      "estimated_tile_dimensions": "16x32 (rows 0-2,5-6) / 32x32 (rows 3-4)",
+      "category": "characters_composite_sheet",
+      "role": "production_asset",
+      "content_type": "multi_animation_sheet",
+      "production_eligible": true,
+      "extraction_strategy": "character_metadata",
+      "license_ref": "free_pack_non_commercial",
+      "duplicate_or_variant": {
+        "type": "composite_master_sheet",
+        "contains_individual_strips": true
+      }
+    },
+    {
+      "filename": "Amelia_idle_16x16.png",
+      "relative_path": "Characters_free/Amelia_idle_16x16.png",
+      "full_relative_path": "assets/Characters_free/Amelia_idle_16x16.png",
+      "file_size_bytes": 1871,
+      "sha256": "8a61bd3f607ab7fb61e692458d2b7982d32bb417c844a5c18156260bddfe581b",
+      "is_image": true,
+      "format": "PNG",
+      "color_mode": "RGBA",
+      "dimensions": {
+        "width": 64,
+        "height": 32
+      },
+      "has_alpha_channel": true,
+      "transparency_used": true,
+      "pixel_alpha_stats": {
+        "transparent": 1018,
+        "semi_transparent": 0,
+        "opaque": 1030
+      },
+      "divisible_by_tile_sizes": [
+        16,
+        32
+      ],
+      "estimated_tile_dimensions": "16x32",
+      "category": "characters_animation_strip",
+      "role": "production_asset",
+      "content_type": "animation_strip",
+      "production_eligible": true,
+      "extraction_strategy": "character_metadata",
+      "license_ref": "free_pack_non_commercial",
+      "duplicate_or_variant": {
+        "type": "subset_of_composite_sheet",
+        "composite_master": "Characters_free/Amelia_16x16.png",
+        "pixel_exact_visible_match": true
+      }
+    },
+    {
+      "filename": "Amelia_idle_anim_16x16.png",
+      "relative_path": "Characters_free/Amelia_idle_anim_16x16.png",
+      "full_relative_path": "assets/Characters_free/Amelia_idle_anim_16x16.png",
+      "file_size_bytes": 3764,
+      "sha256": "fc72fda0247dba8d71a54e0018a79cc4ff831c164402d922c8e137d93c450bc5",
+      "is_image": true,
+      "format": "PNG",
+      "color_mode": "RGBA",
+      "dimensions": {
+        "width": 384,
+        "height": 32
+      },
+      "has_alpha_channel": true,
+      "transparency_used": true,
+      "pixel_alpha_stats": {
+        "transparent": 6028,
+        "semi_transparent": 0,
+        "opaque": 6260
+      },
+      "divisible_by_tile_sizes": [
+        16,
+        32
+      ],
+      "estimated_tile_dimensions": "16x32",
+      "category": "characters_animation_strip",
+      "role": "production_asset",
+      "content_type": "animation_strip",
+      "production_eligible": true,
+      "extraction_strategy": "character_metadata",
+      "license_ref": "free_pack_non_commercial",
+      "duplicate_or_variant": {
+        "type": "subset_of_composite_sheet",
+        "composite_master": "Characters_free/Amelia_16x16.png",
+        "pixel_exact_visible_match": true
+      }
+    },
+    {
+      "filename": "Amelia_phone_16x16.png",
+      "relative_path": "Characters_free/Amelia_phone_16x16.png",
+      "full_relative_path": "assets/Characters_free/Amelia_phone_16x16.png",
+      "file_size_bytes": 1610,
+      "sha256": "83fb6ac1b033f54a669b820fcdb52bd9a2dfd3b6473fe7c2603c655fbd8c2b14",
+      "is_image": true,
+      "format": "PNG",
+      "color_mode": "RGBA",
+      "dimensions": {
+        "width": 144,
+        "height": 32
+      },
+      "has_alpha_channel": true,
+      "transparency_used": true,
+      "pixel_alpha_stats": {
+        "transparent": 2030,
+        "semi_transparent": 0,
+        "opaque": 2578
+      },
+      "divisible_by_tile_sizes": [
+        16
+      ],
+      "estimated_tile_dimensions": "16x32",
+      "category": "characters_animation_strip",
+      "role": "production_asset",
+      "content_type": "animation_strip",
+      "production_eligible": true,
+      "extraction_strategy": "character_metadata",
+      "license_ref": "free_pack_non_commercial",
+      "duplicate_or_variant": {
+        "type": "subset_of_composite_sheet",
+        "composite_master": "Characters_free/Amelia_16x16.png",
+        "pixel_exact_visible_match": true
+      }
+    },
+    {
+      "filename": "Amelia_run_16x16.png",
+      "relative_path": "Characters_free/Amelia_run_16x16.png",
+      "full_relative_path": "assets/Characters_free/Amelia_run_16x16.png",
+      "file_size_bytes": 5356,
+      "sha256": "95211e599b42c04367e42d026f345b8bc5e438a72d9964da54b4e4a9bf8ee902",
+      "is_image": true,
+      "format": "PNG",
+      "color_mode": "RGBA",
+      "dimensions": {
+        "width": 384,
+        "height": 32
+      },
+      "has_alpha_channel": true,
+      "transparency_used": true,
+      "pixel_alpha_stats": {
+        "transparent": 6106,
+        "semi_transparent": 0,
+        "opaque": 6182
+      },
+      "divisible_by_tile_sizes": [
+        16,
+        32
+      ],
+      "estimated_tile_dimensions": "16x32",
+      "category": "characters_animation_strip",
+      "role": "production_asset",
+      "content_type": "animation_strip",
+      "production_eligible": true,
+      "extraction_strategy": "character_metadata",
+      "license_ref": "free_pack_non_commercial",
+      "duplicate_or_variant": {
+        "type": "subset_of_composite_sheet",
+        "composite_master": "Characters_free/Amelia_16x16.png",
+        "pixel_exact_visible_match": true
+      }
+    },
+    {
+      "filename": "Amelia_sit2_16x16.png",
+      "relative_path": "Characters_free/Amelia_sit2_16x16.png",
+      "full_relative_path": "assets/Characters_free/Amelia_sit2_16x16.png",
+      "file_size_bytes": 2206,
+      "sha256": "301b9263e7f77c0062f8502f1b99688d0118cdd32f82331da7173f014a93ac40",
+      "is_image": true,
+      "format": "PNG",
+      "color_mode": "RGBA",
+      "dimensions": {
+        "width": 384,
+        "height": 32
+      },
+      "has_alpha_channel": true,
+      "transparency_used": true,
+      "pixel_alpha_stats": {
+        "transparent": 9348,
+        "semi_transparent": 0,
+        "opaque": 2940
+      },
+      "divisible_by_tile_sizes": [
+        16,
+        32
+      ],
+      "estimated_tile_dimensions": "32x32",
+      "category": "characters_animation_strip",
+      "role": "production_asset",
+      "content_type": "animation_strip",
+      "production_eligible": true,
+      "extraction_strategy": "character_metadata",
+      "license_ref": "free_pack_non_commercial",
+      "duplicate_or_variant": {
+        "type": "subset_of_composite_sheet",
+        "composite_master": "Characters_free/Amelia_16x16.png",
+        "pixel_exact_visible_match": true
+      }
+    },
+    {
+      "filename": "Amelia_sit3_16x16.png",
+      "relative_path": "Characters_free/Amelia_sit3_16x16.png",
+      "full_relative_path": "assets/Characters_free/Amelia_sit3_16x16.png",
+      "file_size_bytes": 2130,
+      "sha256": "969adbe5a546f2d46f28973971e53bcc1272a18d2546cef4ef73d5b186ba4ada",
+      "is_image": true,
+      "format": "PNG",
+      "color_mode": "RGBA",
+      "dimensions": {
+        "width": 192,
+        "height": 32
+      },
+      "has_alpha_channel": true,
+      "transparency_used": true,
+      "pixel_alpha_stats": {
+        "transparent": 3208,
+        "semi_transparent": 0,
+        "opaque": 2936
+      },
+      "divisible_by_tile_sizes": [
+        16,
+        32
+      ],
+      "estimated_tile_dimensions": "16x32",
+      "category": "characters_animation_strip",
+      "role": "production_asset",
+      "content_type": "animation_strip",
+      "production_eligible": true,
+      "extraction_strategy": "character_metadata",
+      "license_ref": "free_pack_non_commercial",
+      "duplicate_or_variant": {
+        "type": "subset_of_composite_sheet",
+        "composite_master": "Characters_free/Amelia_16x16.png",
+        "pixel_exact_visible_match": true
+      }
+    },
+    {
+      "filename": "Amelia_sit_16x16.png",
+      "relative_path": "Characters_free/Amelia_sit_16x16.png",
+      "full_relative_path": "assets/Characters_free/Amelia_sit_16x16.png",
+      "file_size_bytes": 2103,
+      "sha256": "63c1f9f983a6d7855d52ebbed658fdf78b1feda9f55ed908aed21fe602d93f2f",
+      "is_image": true,
+      "format": "PNG",
+      "color_mode": "RGBA",
+      "dimensions": {
+        "width": 384,
+        "height": 32
+      },
+      "has_alpha_channel": true,
+      "transparency_used": true,
+      "pixel_alpha_stats": {
+        "transparent": 9608,
+        "semi_transparent": 0,
+        "opaque": 2680
+      },
+      "divisible_by_tile_sizes": [
+        16,
+        32
+      ],
+      "estimated_tile_dimensions": "32x32",
+      "category": "characters_animation_strip",
+      "role": "production_asset",
+      "content_type": "animation_strip",
+      "production_eligible": true,
+      "extraction_strategy": "character_metadata",
+      "license_ref": "free_pack_non_commercial",
+      "duplicate_or_variant": {
+        "type": "subset_of_composite_sheet",
+        "composite_master": "Characters_free/Amelia_16x16.png",
+        "pixel_exact_visible_match": true
+      }
+    },
+    {
+      "filename": "Bob_16x16.png",
+      "relative_path": "Characters_free/Bob_16x16.png",
+      "full_relative_path": "assets/Characters_free/Bob_16x16.png",
+      "file_size_bytes": 17760,
+      "sha256": "772510a978b4800492d4dd7d34bc4c448243a428f0d4c8f55de07db33d8302b6",
+      "is_image": true,
+      "format": "PNG",
+      "color_mode": "RGBA",
+      "dimensions": {
+        "width": 384,
+        "height": 224
+      },
+      "has_alpha_channel": true,
+      "transparency_used": true,
+      "pixel_alpha_stats": {
+        "transparent": 63123,
+        "semi_transparent": 0,
+        "opaque": 22893
+      },
+      "divisible_by_tile_sizes": [
+        16,
+        32
+      ],
+      "estimated_tile_dimensions": "16x32 (rows 0-2,5-6) / 32x32 (rows 3-4)",
+      "category": "characters_composite_sheet",
+      "role": "production_asset",
+      "content_type": "multi_animation_sheet",
+      "production_eligible": true,
+      "extraction_strategy": "character_metadata",
+      "license_ref": "free_pack_non_commercial",
+      "duplicate_or_variant": {
+        "type": "composite_master_sheet",
+        "contains_individual_strips": true
+      }
+    },
+    {
+      "filename": "Bob_idle_16x16.png",
+      "relative_path": "Characters_free/Bob_idle_16x16.png",
+      "full_relative_path": "assets/Characters_free/Bob_idle_16x16.png",
+      "file_size_bytes": 1700,
+      "sha256": "a7b3d6f61042f47871557700fcb963979de6a602f5f778d78eb109316c1411b4",
+      "is_image": true,
+      "format": "PNG",
+      "color_mode": "RGBA",
+      "dimensions": {
+        "width": 64,
+        "height": 32
+      },
+      "has_alpha_channel": true,
+      "transparency_used": true,
+      "pixel_alpha_stats": {
+        "transparent": 1092,
+        "semi_transparent": 0,
+        "opaque": 956
+      },
+      "divisible_by_tile_sizes": [
+        16,
+        32
+      ],
+      "estimated_tile_dimensions": "16x32",
+      "category": "characters_animation_strip",
+      "role": "production_asset",
+      "content_type": "animation_strip",
+      "production_eligible": true,
+      "extraction_strategy": "character_metadata",
+      "license_ref": "free_pack_non_commercial",
+      "duplicate_or_variant": {
+        "type": "subset_of_composite_sheet",
+        "composite_master": "Characters_free/Bob_16x16.png",
+        "pixel_exact_visible_match": true
+      }
+    },
+    {
+      "filename": "Bob_idle_anim_16x16.png",
+      "relative_path": "Characters_free/Bob_idle_anim_16x16.png",
+      "full_relative_path": "assets/Characters_free/Bob_idle_anim_16x16.png",
+      "file_size_bytes": 3327,
+      "sha256": "7a339499a5c5f3cdce8a65f926fa0c30d1e27d451ffc4f99693cbfc0a84e0c50",
+      "is_image": true,
+      "format": "PNG",
+      "color_mode": "RGBA",
+      "dimensions": {
+        "width": 384,
+        "height": 32
+      },
+      "has_alpha_channel": true,
+      "transparency_used": true,
+      "pixel_alpha_stats": {
+        "transparent": 6472,
+        "semi_transparent": 0,
+        "opaque": 5816
+      },
+      "divisible_by_tile_sizes": [
+        16,
+        32
+      ],
+      "estimated_tile_dimensions": "16x32",
+      "category": "characters_animation_strip",
+      "role": "production_asset",
+      "content_type": "animation_strip",
+      "production_eligible": true,
+      "extraction_strategy": "character_metadata",
+      "license_ref": "free_pack_non_commercial",
+      "duplicate_or_variant": {
+        "type": "subset_of_composite_sheet",
+        "composite_master": "Characters_free/Bob_16x16.png",
+        "pixel_exact_visible_match": true
+      }
+    },
+    {
+      "filename": "Bob_phone_16x16.png",
+      "relative_path": "Characters_free/Bob_phone_16x16.png",
+      "full_relative_path": "assets/Characters_free/Bob_phone_16x16.png",
+      "file_size_bytes": 1504,
+      "sha256": "30388da16c042ea2bb4472fbcb344e548f977313ff7bddf2550b5111c724307a",
+      "is_image": true,
+      "format": "PNG",
+      "color_mode": "RGBA",
+      "dimensions": {
+        "width": 144,
+        "height": 32
+      },
+      "has_alpha_channel": true,
+      "transparency_used": true,
+      "pixel_alpha_stats": {
+        "transparent": 2197,
+        "semi_transparent": 0,
+        "opaque": 2411
+      },
+      "divisible_by_tile_sizes": [
+        16
+      ],
+      "estimated_tile_dimensions": "16x32",
+      "category": "characters_animation_strip",
+      "role": "production_asset",
+      "content_type": "animation_strip",
+      "production_eligible": true,
+      "extraction_strategy": "character_metadata",
+      "license_ref": "free_pack_non_commercial",
+      "duplicate_or_variant": {
+        "type": "subset_of_composite_sheet",
+        "composite_master": "Characters_free/Bob_16x16.png",
+        "pixel_exact_visible_match": true
+      }
+    },
+    {
+      "filename": "Bob_run_16x16.png",
+      "relative_path": "Characters_free/Bob_run_16x16.png",
+      "full_relative_path": "assets/Characters_free/Bob_run_16x16.png",
+      "file_size_bytes": 5070,
+      "sha256": "43cadb17d009be9224e381cdea4923fb88e4df9d243ba2320eff23dfcfb88f97",
+      "is_image": true,
+      "format": "PNG",
+      "color_mode": "RGBA",
+      "dimensions": {
+        "width": 384,
+        "height": 32
+      },
+      "has_alpha_channel": true,
+      "transparency_used": true,
+      "pixel_alpha_stats": {
+        "transparent": 6522,
+        "semi_transparent": 0,
+        "opaque": 5766
+      },
+      "divisible_by_tile_sizes": [
+        16,
+        32
+      ],
+      "estimated_tile_dimensions": "16x32",
+      "category": "characters_animation_strip",
+      "role": "production_asset",
+      "content_type": "animation_strip",
+      "production_eligible": true,
+      "extraction_strategy": "character_metadata",
+      "license_ref": "free_pack_non_commercial",
+      "duplicate_or_variant": {
+        "type": "subset_of_composite_sheet",
+        "composite_master": "Characters_free/Bob_16x16.png",
+        "pixel_exact_visible_match": true
+      }
+    },
+    {
+      "filename": "Bob_sit2_16x16.png",
+      "relative_path": "Characters_free/Bob_sit2_16x16.png",
+      "full_relative_path": "assets/Characters_free/Bob_sit2_16x16.png",
+      "file_size_bytes": 2153,
+      "sha256": "8c852792ae76bf032d111ea37193ff37313bd35df96a9a7a6c27c2fae7d22b65",
+      "is_image": true,
+      "format": "PNG",
+      "color_mode": "RGBA",
+      "dimensions": {
+        "width": 384,
+        "height": 32
+      },
+      "has_alpha_channel": true,
+      "transparency_used": true,
+      "pixel_alpha_stats": {
+        "transparent": 9564,
+        "semi_transparent": 0,
+        "opaque": 2724
+      },
+      "divisible_by_tile_sizes": [
+        16,
+        32
+      ],
+      "estimated_tile_dimensions": "32x32",
+      "category": "characters_animation_strip",
+      "role": "production_asset",
+      "content_type": "animation_strip",
+      "production_eligible": true,
+      "extraction_strategy": "character_metadata",
+      "license_ref": "free_pack_non_commercial",
+      "duplicate_or_variant": {
+        "type": "subset_of_composite_sheet",
+        "composite_master": "Characters_free/Bob_16x16.png",
+        "pixel_exact_visible_match": true
+      }
+    },
+    {
+      "filename": "Bob_sit3_16x16.png",
+      "relative_path": "Characters_free/Bob_sit3_16x16.png",
+      "full_relative_path": "assets/Characters_free/Bob_sit3_16x16.png",
+      "file_size_bytes": 1877,
+      "sha256": "2ee54a3c15ad85abcd72774611cc92dddef56bad9c55b0ffe7c638a0072b70ce",
+      "is_image": true,
+      "format": "PNG",
+      "color_mode": "RGBA",
+      "dimensions": {
+        "width": 192,
+        "height": 32
+      },
+      "has_alpha_channel": true,
+      "transparency_used": true,
+      "pixel_alpha_stats": {
+        "transparent": 3400,
+        "semi_transparent": 0,
+        "opaque": 2744
+      },
+      "divisible_by_tile_sizes": [
+        16,
+        32
+      ],
+      "estimated_tile_dimensions": "16x32",
+      "category": "characters_animation_strip",
+      "role": "production_asset",
+      "content_type": "animation_strip",
+      "production_eligible": true,
+      "extraction_strategy": "character_metadata",
+      "license_ref": "free_pack_non_commercial",
+      "duplicate_or_variant": {
+        "type": "subset_of_composite_sheet",
+        "composite_master": "Characters_free/Bob_16x16.png",
+        "pixel_exact_visible_match": true
+      }
+    },
+    {
+      "filename": "Bob_sit_16x16.png",
+      "relative_path": "Characters_free/Bob_sit_16x16.png",
+      "full_relative_path": "assets/Characters_free/Bob_sit_16x16.png",
+      "file_size_bytes": 2205,
+      "sha256": "d62d508e4f84792cdacf477305b261799e54bdb3473287bb0373d656891615cc",
+      "is_image": true,
+      "format": "PNG",
+      "color_mode": "RGBA",
+      "dimensions": {
+        "width": 384,
+        "height": 32
+      },
+      "has_alpha_channel": true,
+      "transparency_used": true,
+      "pixel_alpha_stats": {
+        "transparent": 9812,
+        "semi_transparent": 0,
+        "opaque": 2476
+      },
+      "divisible_by_tile_sizes": [
+        16,
+        32
+      ],
+      "estimated_tile_dimensions": "32x32",
+      "category": "characters_animation_strip",
+      "role": "production_asset",
+      "content_type": "animation_strip",
+      "production_eligible": true,
+      "extraction_strategy": "character_metadata",
+      "license_ref": "free_pack_non_commercial",
+      "duplicate_or_variant": {
+        "type": "subset_of_composite_sheet",
+        "composite_master": "Characters_free/Bob_16x16.png",
+        "pixel_exact_visible_match": true
+      }
+    },
+    {
+      "filename": "Characters_MV.png",
+      "relative_path": "Characters_free/RPGMAKERMV/Characters_MV.png",
+      "full_relative_path": "assets/Characters_free/RPGMAKERMV/Characters_MV.png",
+      "file_size_bytes": 21818,
+      "sha256": "2883f284ac66f969f81dd18a33448780655016e810a78a63e0982412d681d851",
+      "is_image": true,
+      "format": "PNG",
+      "color_mode": "RGBA",
+      "dimensions": {
+        "width": 576,
+        "height": 768
+      },
+      "has_alpha_channel": true,
+      "transparency_used": true,
+      "pixel_alpha_stats": {
+        "transparent": 332568,
+        "semi_transparent": 0,
+        "opaque": 109800
+      },
+      "divisible_by_tile_sizes": [
+        16,
+        24,
+        32,
+        48
+      ],
+      "estimated_tile_dimensions": "48x96",
+      "category": "characters_rpgmaker_mv",
+      "role": "production_asset",
+      "content_type": "character_animation_grid",
+      "production_eligible": true,
+      "extraction_strategy": "character_metadata",
+      "license_ref": "free_pack_non_commercial",
+      "duplicate_or_variant": null
+    },
+    {
+      "filename": "Interiors_free_16x16.png",
+      "relative_path": "Interiors_free/16x16/Interiors_free_16x16.png",
+      "full_relative_path": "assets/Interiors_free/16x16/Interiors_free_16x16.png",
+      "file_size_bytes": 134462,
+      "sha256": "01a890f9e34d8dc8d7e275489143b837569127d5f928419e6b6edc54b9b5ff33",
+      "is_image": true,
+      "format": "PNG",
+      "color_mode": "RGBA",
+      "dimensions": {
+        "width": 256,
+        "height": 1424
+      },
+      "has_alpha_channel": true,
+      "transparency_used": true,
+      "pixel_alpha_stats": {
+        "transparent": 206068,
+        "semi_transparent": 180,
+        "opaque": 158296
+      },
+      "divisible_by_tile_sizes": [
+        16
+      ],
+      "estimated_tile_dimensions": "16x16",
+      "category": "sprite_sheet_interiors",
+      "role": "production_asset",
+      "content_type": "mixed_tileset_and_objects",
+      "production_eligible": true,
+      "extraction_strategy": "alpha_segment_and_grid",
+      "license_ref": "free_pack_non_commercial",
+      "duplicate_or_variant": {
+        "type": "resolution_variant",
+        "group": "Interiors_free",
+        "scale": "16x16",
+        "is_canonical_1x": true,
+        "pixel_exact_visible_scale": true
+      }
+    },
+    {
+      "filename": "Room_Builder_free_16x16.png",
+      "relative_path": "Interiors_free/16x16/Room_Builder_free_16x16.png",
+      "full_relative_path": "assets/Interiors_free/16x16/Room_Builder_free_16x16.png",
+      "file_size_bytes": 11307,
+      "sha256": "6a7cf46b2883503d1be61c603b81a6f3844c02da8c7c7782b29d46cc55c367d0",
+      "is_image": true,
+      "format": "PNG",
+      "color_mode": "RGBA",
+      "dimensions": {
+        "width": 272,
+        "height": 368
+      },
+      "has_alpha_channel": true,
+      "transparency_used": true,
+      "pixel_alpha_stats": {
+        "transparent": 44105,
+        "semi_transparent": 0,
+        "opaque": 55991
+      },
+      "divisible_by_tile_sizes": [
+        16
+      ],
+      "estimated_tile_dimensions": "16x16",
+      "category": "tileset_room_builder",
+      "role": "production_asset",
+      "content_type": "regular_tileset",
+      "production_eligible": true,
+      "extraction_strategy": "grid_slice",
+      "license_ref": "free_pack_non_commercial",
+      "duplicate_or_variant": {
+        "type": "resolution_variant",
+        "group": "Room_Builder_free",
+        "scale": "16x16",
+        "is_canonical_1x": true,
+        "pixel_exact_visible_scale": true
+      }
+    },
+    {
+      "filename": "Interiors_free_32x32.png",
+      "relative_path": "Interiors_free/32x32/Interiors_free_32x32.png",
+      "full_relative_path": "assets/Interiors_free/32x32/Interiors_free_32x32.png",
+      "file_size_bytes": 178783,
+      "sha256": "4799775495ef030683ec49266e36ffbe570471fd18aa5698a5a1fd19908cb976",
+      "is_image": true,
+      "format": "PNG",
+      "color_mode": "RGBA",
+      "dimensions": {
+        "width": 512,
+        "height": 2848
+      },
+      "has_alpha_channel": true,
+      "transparency_used": true,
+      "pixel_alpha_stats": {
+        "transparent": 824272,
+        "semi_transparent": 720,
+        "opaque": 633184
+      },
+      "divisible_by_tile_sizes": [
+        16,
+        32
+      ],
+      "estimated_tile_dimensions": "32x32",
+      "category": "sprite_sheet_interiors",
+      "role": "production_asset",
+      "content_type": "mixed_tileset_and_objects",
+      "production_eligible": true,
+      "extraction_strategy": "alpha_segment_and_grid",
+      "license_ref": "free_pack_non_commercial",
+      "duplicate_or_variant": {
+        "type": "resolution_variant",
+        "group": "Interiors_free",
+        "scale": "32x32",
+        "is_canonical_1x": false,
+        "pixel_exact_visible_scale": true
+      }
+    },
+    {
+      "filename": "Room_Builder_free_32x32.png",
+      "relative_path": "Interiors_free/32x32/Room_Builder_free_32x32.png",
+      "full_relative_path": "assets/Interiors_free/32x32/Room_Builder_free_32x32.png",
+      "file_size_bytes": 16544,
+      "sha256": "420f22202a4576a38324912dfeb4da6537ca6cad8f007c8489da5fc81122c72d",
+      "is_image": true,
+      "format": "PNG",
+      "color_mode": "RGBA",
+      "dimensions": {
+        "width": 544,
+        "height": 736
+      },
+      "has_alpha_channel": true,
+      "transparency_used": true,
+      "pixel_alpha_stats": {
+        "transparent": 176420,
+        "semi_transparent": 0,
+        "opaque": 223964
+      },
+      "divisible_by_tile_sizes": [
+        16,
+        32
+      ],
+      "estimated_tile_dimensions": "32x32",
+      "category": "tileset_room_builder",
+      "role": "production_asset",
+      "content_type": "regular_tileset",
+      "production_eligible": true,
+      "extraction_strategy": "grid_slice",
+      "license_ref": "free_pack_non_commercial",
+      "duplicate_or_variant": {
+        "type": "resolution_variant",
+        "group": "Room_Builder_free",
+        "scale": "32x32",
+        "is_canonical_1x": false,
+        "pixel_exact_visible_scale": true
+      }
+    },
+    {
+      "filename": "Interiors_free_48x48.png",
+      "relative_path": "Interiors_free/48x48/Interiors_free_48x48.png",
+      "full_relative_path": "assets/Interiors_free/48x48/Interiors_free_48x48.png",
+      "file_size_bytes": 207991,
+      "sha256": "294e248887a8439737edf44d1fd57e69b3c6234501484ed1809973c0a6c08e9b",
+      "is_image": true,
+      "format": "PNG",
+      "color_mode": "RGBA",
+      "dimensions": {
+        "width": 768,
+        "height": 4272
+      },
+      "has_alpha_channel": true,
+      "transparency_used": true,
+      "pixel_alpha_stats": {
+        "transparent": 1854612,
+        "semi_transparent": 1620,
+        "opaque": 1424664
+      },
+      "divisible_by_tile_sizes": [
+        16,
+        24,
+        48
+      ],
+      "estimated_tile_dimensions": "48x48",
+      "category": "sprite_sheet_interiors",
+      "role": "production_asset",
+      "content_type": "mixed_tileset_and_objects",
+      "production_eligible": true,
+      "extraction_strategy": "alpha_segment_and_grid",
+      "license_ref": "free_pack_non_commercial",
+      "duplicate_or_variant": {
+        "type": "resolution_variant",
+        "group": "Interiors_free",
+        "scale": "48x48",
+        "is_canonical_1x": false,
+        "pixel_exact_visible_scale": true
+      }
+    },
+    {
+      "filename": "Room_Builder_free_48x48.png",
+      "relative_path": "Interiors_free/48x48/Room_Builder_free_48x48.png",
+      "full_relative_path": "assets/Interiors_free/48x48/Room_Builder_free_48x48.png",
+      "file_size_bytes": 21487,
+      "sha256": "325bbcfc9ba5375c2a9200cc7e3c41374681da45b25988db48eff640f253586a",
+      "is_image": true,
+      "format": "PNG",
+      "color_mode": "RGBA",
+      "dimensions": {
+        "width": 816,
+        "height": 1104
+      },
+      "has_alpha_channel": true,
+      "transparency_used": true,
+      "pixel_alpha_stats": {
+        "transparent": 396945,
+        "semi_transparent": 0,
+        "opaque": 503919
+      },
+      "divisible_by_tile_sizes": [
+        16,
+        24,
+        48
+      ],
+      "estimated_tile_dimensions": "48x48",
+      "category": "tileset_room_builder",
+      "role": "production_asset",
+      "content_type": "regular_tileset",
+      "production_eligible": true,
+      "extraction_strategy": "grid_slice",
+      "license_ref": "free_pack_non_commercial",
+      "duplicate_or_variant": {
+        "type": "resolution_variant",
+        "group": "Room_Builder_free",
+        "scale": "48x48",
+        "is_canonical_1x": false,
+        "pixel_exact_visible_scale": true
+      }
+    },
+    {
+      "filename": "LICENSE.txt",
+      "relative_path": "LICENSE.txt",
+      "full_relative_path": "assets/LICENSE.txt",
+      "file_size_bytes": 308,
+      "sha256": "a3a88dc952c3a4793bff4c29cdcfe512e5c959766f52a5cba712088fd44178d8",
+      "is_image": false,
+      "format": null,
+      "color_mode": null,
+      "dimensions": null,
+      "has_alpha_channel": false,
+      "transparency_used": false,
+      "pixel_alpha_stats": null,
+      "divisible_by_tile_sizes": [],
+      "estimated_tile_dimensions": null,
+      "category": "license_document",
+      "role": "documentation",
+      "content_type": "text_license",
+      "production_eligible": false,
+      "extraction_strategy": "none",
+      "license_ref": "free_pack_non_commercial",
+      "duplicate_or_variant": null
+    },
+    {
+      "filename": "Tileset_16x16_1.png",
+      "relative_path": "Old/Tileset_16x16_1.png",
+      "full_relative_path": "assets/Old/Tileset_16x16_1.png",
+      "file_size_bytes": 2246,
+      "sha256": "d7742bfd06b99d42f7cd197ba48d812a28fb384cc3d1dc7150bdc730f88c9e5f",
+      "is_image": true,
+      "format": "PNG",
+      "color_mode": "RGBA",
+      "dimensions": {
+        "width": 160,
+        "height": 160
+      },
+      "has_alpha_channel": true,
+      "transparency_used": true,
+      "pixel_alpha_stats": {
+        "transparent": 9172,
+        "semi_transparent": 0,
+        "opaque": 16428
+      },
+      "divisible_by_tile_sizes": [
+        16,
+        32
+      ],
+      "estimated_tile_dimensions": "16x16",
+      "category": "legacy_tileset",
+      "role": "legacy_archive",
+      "content_type": "regular_tileset",
+      "production_eligible": true,
+      "extraction_strategy": "grid_slice",
+      "license_ref": "unverified_legacy_provenance",
+      "duplicate_or_variant": {
+        "type": "resolution_variant",
+        "group": "Old_Tileset_1",
+        "scale": "16x16",
+        "is_canonical_1x": true,
+        "pixel_exact_visible_scale": true
+      }
+    },
+    {
+      "filename": "Tileset_16x16_16.png",
+      "relative_path": "Old/Tileset_16x16_16.png",
+      "full_relative_path": "assets/Old/Tileset_16x16_16.png",
+      "file_size_bytes": 6510,
+      "sha256": "adad3dfbf2bccd5e8da127baeba03ec00c1b68d91db275900c0fab357802a449",
+      "is_image": true,
+      "format": "PNG",
+      "color_mode": "RGBA",
+      "dimensions": {
+        "width": 192,
+        "height": 224
+      },
+      "has_alpha_channel": true,
+      "transparency_used": true,
+      "pixel_alpha_stats": {
+        "transparent": 9364,
+        "semi_transparent": 0,
+        "opaque": 33644
+      },
+      "divisible_by_tile_sizes": [
+        16,
+        32
+      ],
+      "estimated_tile_dimensions": "16x16",
+      "category": "legacy_tileset",
+      "role": "legacy_archive",
+      "content_type": "regular_tileset",
+      "production_eligible": true,
+      "extraction_strategy": "grid_slice",
+      "license_ref": "unverified_legacy_provenance",
+      "duplicate_or_variant": {
+        "type": "resolution_variant",
+        "group": "Old_Tileset_16",
+        "scale": "16x16",
+        "is_canonical_1x": true,
+        "pixel_exact_visible_scale": true
+      }
+    },
+    {
+      "filename": "Tileset_16x16_2.png",
+      "relative_path": "Old/Tileset_16x16_2.png",
+      "full_relative_path": "assets/Old/Tileset_16x16_2.png",
+      "file_size_bytes": 2562,
+      "sha256": "9174495a6a30da9e520a2ed9eab4503c58fa6e8610c1e42aa0d98f89a2f8b638",
+      "is_image": true,
+      "format": "PNG",
+      "color_mode": "RGBA",
+      "dimensions": {
+        "width": 160,
+        "height": 160
+      },
+      "has_alpha_channel": true,
+      "transparency_used": true,
+      "pixel_alpha_stats": {
+        "transparent": 8820,
+        "semi_transparent": 0,
+        "opaque": 16780
+      },
+      "divisible_by_tile_sizes": [
+        16,
+        32
+      ],
+      "estimated_tile_dimensions": "16x16",
+      "category": "legacy_tileset",
+      "role": "legacy_archive",
+      "content_type": "regular_tileset",
+      "production_eligible": true,
+      "extraction_strategy": "grid_slice",
+      "license_ref": "unverified_legacy_provenance",
+      "duplicate_or_variant": {
+        "type": "resolution_variant",
+        "group": "Old_Tileset_2",
+        "scale": "16x16",
+        "is_canonical_1x": true,
+        "pixel_exact_visible_scale": true
+      }
+    },
+    {
+      "filename": "Tileset_16x16_3.png",
+      "relative_path": "Old/Tileset_16x16_3.png",
+      "full_relative_path": "assets/Old/Tileset_16x16_3.png",
+      "file_size_bytes": 3174,
+      "sha256": "649ec8c75f0feae311e7740a4361306c1ca27ec1c55037ed2b87671db86e56b4",
+      "is_image": true,
+      "format": "PNG",
+      "color_mode": "RGBA",
+      "dimensions": {
+        "width": 160,
+        "height": 160
+      },
+      "has_alpha_channel": true,
+      "transparency_used": true,
+      "pixel_alpha_stats": {
+        "transparent": 6004,
+        "semi_transparent": 0,
+        "opaque": 19596
+      },
+      "divisible_by_tile_sizes": [
+        16,
+        32
+      ],
+      "estimated_tile_dimensions": "16x16",
+      "category": "legacy_tileset",
+      "role": "legacy_archive",
+      "content_type": "regular_tileset",
+      "production_eligible": true,
+      "extraction_strategy": "grid_slice",
+      "license_ref": "unverified_legacy_provenance",
+      "duplicate_or_variant": {
+        "type": "resolution_variant",
+        "group": "Old_Tileset_3",
+        "scale": "16x16",
+        "is_canonical_1x": true,
+        "pixel_exact_visible_scale": true
+      }
+    },
+    {
+      "filename": "Tileset_16x16_9.png",
+      "relative_path": "Old/Tileset_16x16_9.png",
+      "full_relative_path": "assets/Old/Tileset_16x16_9.png",
+      "file_size_bytes": 5773,
+      "sha256": "bbb6c7ed6c1a6b6bbda61c65d34b282af80a3c9258ccc9f0d6ba6a1140726ec1",
+      "is_image": true,
+      "format": "PNG",
+      "color_mode": "RGBA",
+      "dimensions": {
+        "width": 160,
+        "height": 160
+      },
+      "has_alpha_channel": true,
+      "transparency_used": true,
+      "pixel_alpha_stats": {
+        "transparent": 6516,
+        "semi_transparent": 0,
+        "opaque": 19084
+      },
+      "divisible_by_tile_sizes": [
+        16,
+        32
+      ],
+      "estimated_tile_dimensions": "16x16",
+      "category": "legacy_tileset",
+      "role": "legacy_archive",
+      "content_type": "regular_tileset",
+      "production_eligible": true,
+      "extraction_strategy": "grid_slice",
+      "license_ref": "unverified_legacy_provenance",
+      "duplicate_or_variant": {
+        "type": "resolution_variant",
+        "group": "Old_Tileset_9",
+        "scale": "16x16",
+        "is_canonical_1x": true,
+        "pixel_exact_visible_scale": true
+      }
+    },
+    {
+      "filename": "Tileset_32x32_1.png",
+      "relative_path": "Old/Tileset_32x32_1.png",
+      "full_relative_path": "assets/Old/Tileset_32x32_1.png",
+      "file_size_bytes": 4702,
+      "sha256": "5f766f5d7711a36b3ccbacad82f2e4c91c3687647c1be67d756c7ed2225703de",
+      "is_image": true,
+      "format": "PNG",
+      "color_mode": "RGBA",
+      "dimensions": {
+        "width": 320,
+        "height": 320
+      },
+      "has_alpha_channel": true,
+      "transparency_used": true,
+      "pixel_alpha_stats": {
+        "transparent": 36688,
+        "semi_transparent": 0,
+        "opaque": 65712
+      },
+      "divisible_by_tile_sizes": [
+        16,
+        32
+      ],
+      "estimated_tile_dimensions": "32x32",
+      "category": "legacy_tileset",
+      "role": "legacy_archive",
+      "content_type": "regular_tileset",
+      "production_eligible": true,
+      "extraction_strategy": "grid_slice",
+      "license_ref": "unverified_legacy_provenance",
+      "duplicate_or_variant": {
+        "type": "resolution_variant",
+        "group": "Old_Tileset_1",
+        "scale": "32x32",
+        "is_canonical_1x": false,
+        "pixel_exact_visible_scale": true
+      }
+    },
+    {
+      "filename": "Tileset_32x32_16.png",
+      "relative_path": "Old/Tileset_32x32_16.png",
+      "full_relative_path": "assets/Old/Tileset_32x32_16.png",
+      "file_size_bytes": 10176,
+      "sha256": "2fc29901f8db9beb7e1c7d753b4006580561dc97db12d861f8bef4b88a6e726b",
+      "is_image": true,
+      "format": "PNG",
+      "color_mode": "RGBA",
+      "dimensions": {
+        "width": 384,
+        "height": 448
+      },
+      "has_alpha_channel": true,
+      "transparency_used": true,
+      "pixel_alpha_stats": {
+        "transparent": 37456,
+        "semi_transparent": 0,
+        "opaque": 134576
+      },
+      "divisible_by_tile_sizes": [
+        16,
+        32
+      ],
+      "estimated_tile_dimensions": "32x32",
+      "category": "legacy_tileset",
+      "role": "legacy_archive",
+      "content_type": "regular_tileset",
+      "production_eligible": true,
+      "extraction_strategy": "grid_slice",
+      "license_ref": "unverified_legacy_provenance",
+      "duplicate_or_variant": {
+        "type": "resolution_variant",
+        "group": "Old_Tileset_16",
+        "scale": "32x32",
+        "is_canonical_1x": false,
+        "pixel_exact_visible_scale": true
+      }
+    },
+    {
+      "filename": "Tileset_32x32_2.png",
+      "relative_path": "Old/Tileset_32x32_2.png",
+      "full_relative_path": "assets/Old/Tileset_32x32_2.png",
+      "file_size_bytes": 4954,
+      "sha256": "256283058ce28f5a828b3b8724889c54e33ff475dca63a208f20ba129cd1993f",
+      "is_image": true,
+      "format": "PNG",
+      "color_mode": "RGBA",
+      "dimensions": {
+        "width": 320,
+        "height": 320
+      },
+      "has_alpha_channel": true,
+      "transparency_used": true,
+      "pixel_alpha_stats": {
+        "transparent": 35280,
+        "semi_transparent": 0,
+        "opaque": 67120
+      },
+      "divisible_by_tile_sizes": [
+        16,
+        32
+      ],
+      "estimated_tile_dimensions": "32x32",
+      "category": "legacy_tileset",
+      "role": "legacy_archive",
+      "content_type": "regular_tileset",
+      "production_eligible": true,
+      "extraction_strategy": "grid_slice",
+      "license_ref": "unverified_legacy_provenance",
+      "duplicate_or_variant": {
+        "type": "resolution_variant",
+        "group": "Old_Tileset_2",
+        "scale": "32x32",
+        "is_canonical_1x": false,
+        "pixel_exact_visible_scale": true
+      }
+    },
+    {
+      "filename": "Tileset_32x32_3.png",
+      "relative_path": "Old/Tileset_32x32_3.png",
+      "full_relative_path": "assets/Old/Tileset_32x32_3.png",
+      "file_size_bytes": 4556,
+      "sha256": "3a44df7e2e1cc2fbe61883a9f1507bf0e05e545e0533524b9e7bbf82b82ab369",
+      "is_image": true,
+      "format": "PNG",
+      "color_mode": "RGBA",
+      "dimensions": {
+        "width": 320,
+        "height": 320
+      },
+      "has_alpha_channel": true,
+      "transparency_used": true,
+      "pixel_alpha_stats": {
+        "transparent": 24016,
+        "semi_transparent": 0,
+        "opaque": 78384
+      },
+      "divisible_by_tile_sizes": [
+        16,
+        32
+      ],
+      "estimated_tile_dimensions": "32x32",
+      "category": "legacy_tileset",
+      "role": "legacy_archive",
+      "content_type": "regular_tileset",
+      "production_eligible": true,
+      "extraction_strategy": "grid_slice",
+      "license_ref": "unverified_legacy_provenance",
+      "duplicate_or_variant": {
+        "type": "resolution_variant",
+        "group": "Old_Tileset_3",
+        "scale": "32x32",
+        "is_canonical_1x": false,
+        "pixel_exact_visible_scale": true
+      }
+    },
+    {
+      "filename": "Tileset_32x32_9.png",
+      "relative_path": "Old/Tileset_32x32_9.png",
+      "full_relative_path": "assets/Old/Tileset_32x32_9.png",
+      "file_size_bytes": 9608,
+      "sha256": "b1842be6f06496137be4d9c1a5c9df6aa3c9a89842cdb50933a4af5d93e07913",
+      "is_image": true,
+      "format": "PNG",
+      "color_mode": "RGBA",
+      "dimensions": {
+        "width": 320,
+        "height": 320
+      },
+      "has_alpha_channel": true,
+      "transparency_used": true,
+      "pixel_alpha_stats": {
+        "transparent": 26064,
+        "semi_transparent": 0,
+        "opaque": 76336
+      },
+      "divisible_by_tile_sizes": [
+        16,
+        32
+      ],
+      "estimated_tile_dimensions": "32x32",
+      "category": "legacy_tileset",
+      "role": "legacy_archive",
+      "content_type": "regular_tileset",
+      "production_eligible": true,
+      "extraction_strategy": "grid_slice",
+      "license_ref": "unverified_legacy_provenance",
+      "duplicate_or_variant": {
+        "type": "resolution_variant",
+        "group": "Old_Tileset_9",
+        "scale": "32x32",
+        "is_canonical_1x": false,
+        "pixel_exact_visible_scale": true
+      }
+    },
+    {
+      "filename": "Tileset_48x48_1.png",
+      "relative_path": "Old/Tileset_48x48_1.png",
+      "full_relative_path": "assets/Old/Tileset_48x48_1.png",
+      "file_size_bytes": 5995,
+      "sha256": "55713278e92e126f45c982970fa2955300087f77dd63f611297670554ea8c7a0",
+      "is_image": true,
+      "format": "PNG",
+      "color_mode": "RGBA",
+      "dimensions": {
+        "width": 480,
+        "height": 480
+      },
+      "has_alpha_channel": true,
+      "transparency_used": true,
+      "pixel_alpha_stats": {
+        "transparent": 82548,
+        "semi_transparent": 0,
+        "opaque": 147852
+      },
+      "divisible_by_tile_sizes": [
+        16,
+        24,
+        32,
+        48
+      ],
+      "estimated_tile_dimensions": "48x48",
+      "category": "legacy_tileset",
+      "role": "legacy_archive",
+      "content_type": "regular_tileset",
+      "production_eligible": true,
+      "extraction_strategy": "grid_slice",
+      "license_ref": "unverified_legacy_provenance",
+      "duplicate_or_variant": {
+        "type": "resolution_variant",
+        "group": "Old_Tileset_1",
+        "scale": "48x48",
+        "is_canonical_1x": false,
+        "pixel_exact_visible_scale": true
+      }
+    },
+    {
+      "filename": "Tileset_48x48_16.png",
+      "relative_path": "Old/Tileset_48x48_16.png",
+      "full_relative_path": "assets/Old/Tileset_48x48_16.png",
+      "file_size_bytes": 13066,
+      "sha256": "8fb5f0415055976f3f3ba8c3ae91c0eb7aa8c2c7ab5f57c043ef58110c27643f",
+      "is_image": true,
+      "format": "PNG",
+      "color_mode": "RGBA",
+      "dimensions": {
+        "width": 576,
+        "height": 672
+      },
+      "has_alpha_channel": true,
+      "transparency_used": true,
+      "pixel_alpha_stats": {
+        "transparent": 84276,
+        "semi_transparent": 0,
+        "opaque": 302796
+      },
+      "divisible_by_tile_sizes": [
+        16,
+        24,
+        32,
+        48
+      ],
+      "estimated_tile_dimensions": "48x48",
+      "category": "legacy_tileset",
+      "role": "legacy_archive",
+      "content_type": "regular_tileset",
+      "production_eligible": true,
+      "extraction_strategy": "grid_slice",
+      "license_ref": "unverified_legacy_provenance",
+      "duplicate_or_variant": {
+        "type": "resolution_variant",
+        "group": "Old_Tileset_16",
+        "scale": "48x48",
+        "is_canonical_1x": false,
+        "pixel_exact_visible_scale": true
+      }
+    },
+    {
+      "filename": "Tileset_48x48_2.png",
+      "relative_path": "Old/Tileset_48x48_2.png",
+      "full_relative_path": "assets/Old/Tileset_48x48_2.png",
+      "file_size_bytes": 6248,
+      "sha256": "9ef95687568721ec9bacc156bfea49c65311b38d978bc1ba5b466a700b8c5466",
+      "is_image": true,
+      "format": "PNG",
+      "color_mode": "RGBA",
+      "dimensions": {
+        "width": 480,
+        "height": 480
+      },
+      "has_alpha_channel": true,
+      "transparency_used": true,
+      "pixel_alpha_stats": {
+        "transparent": 79380,
+        "semi_transparent": 0,
+        "opaque": 151020
+      },
+      "divisible_by_tile_sizes": [
+        16,
+        24,
+        32,
+        48
+      ],
+      "estimated_tile_dimensions": "48x48",
+      "category": "legacy_tileset",
+      "role": "legacy_archive",
+      "content_type": "regular_tileset",
+      "production_eligible": true,
+      "extraction_strategy": "grid_slice",
+      "license_ref": "unverified_legacy_provenance",
+      "duplicate_or_variant": {
+        "type": "resolution_variant",
+        "group": "Old_Tileset_2",
+        "scale": "48x48",
+        "is_canonical_1x": false,
+        "pixel_exact_visible_scale": true
+      }
+    },
+    {
+      "filename": "Tileset_48x48_3.png",
+      "relative_path": "Old/Tileset_48x48_3.png",
+      "full_relative_path": "assets/Old/Tileset_48x48_3.png",
+      "file_size_bytes": 5845,
+      "sha256": "c2ee062c7837939d9269988164ccc0ad4a461231d957bac6d4f62fcce5ad9d88",
+      "is_image": true,
+      "format": "PNG",
+      "color_mode": "RGBA",
+      "dimensions": {
+        "width": 480,
+        "height": 480
+      },
+      "has_alpha_channel": true,
+      "transparency_used": true,
+      "pixel_alpha_stats": {
+        "transparent": 54036,
+        "semi_transparent": 0,
+        "opaque": 176364
+      },
+      "divisible_by_tile_sizes": [
+        16,
+        24,
+        32,
+        48
+      ],
+      "estimated_tile_dimensions": "48x48",
+      "category": "legacy_tileset",
+      "role": "legacy_archive",
+      "content_type": "regular_tileset",
+      "production_eligible": true,
+      "extraction_strategy": "grid_slice",
+      "license_ref": "unverified_legacy_provenance",
+      "duplicate_or_variant": {
+        "type": "resolution_variant",
+        "group": "Old_Tileset_3",
+        "scale": "48x48",
+        "is_canonical_1x": false,
+        "pixel_exact_visible_scale": true
+      }
+    },
+    {
+      "filename": "Tileset_48x48_9.png",
+      "relative_path": "Old/Tileset_48x48_9.png",
+      "full_relative_path": "assets/Old/Tileset_48x48_9.png",
+      "file_size_bytes": 11599,
+      "sha256": "556fb42c6ee781d39bac01603a80b5fd1f1dbe28b739dee5a9dca1845e3f10ef",
+      "is_image": true,
+      "format": "PNG",
+      "color_mode": "RGBA",
+      "dimensions": {
+        "width": 480,
+        "height": 480
+      },
+      "has_alpha_channel": true,
+      "transparency_used": true,
+      "pixel_alpha_stats": {
+        "transparent": 58644,
+        "semi_transparent": 0,
+        "opaque": 171756
+      },
+      "divisible_by_tile_sizes": [
+        16,
+        24,
+        32,
+        48
+      ],
+      "estimated_tile_dimensions": "48x48",
+      "category": "legacy_tileset",
+      "role": "legacy_archive",
+      "content_type": "regular_tileset",
+      "production_eligible": true,
+      "extraction_strategy": "grid_slice",
+      "license_ref": "unverified_legacy_provenance",
+      "duplicate_or_variant": {
+        "type": "resolution_variant",
+        "group": "Old_Tileset_9",
+        "scale": "48x48",
+        "is_canonical_1x": false,
+        "pixel_exact_visible_scale": true
+      }
+    },
+    {
+      "filename": "idle_16x16_2.png",
+      "relative_path": "Old/idle_16x16_2.png",
+      "full_relative_path": "assets/Old/idle_16x16_2.png",
+      "file_size_bytes": 1315,
+      "sha256": "4014227842bb194fa2c59452ae4eb4597f510d61228f0f56eaf8e1e8c4d58982",
+      "is_image": true,
+      "format": "PNG",
+      "color_mode": "RGBA",
+      "dimensions": {
+        "width": 64,
+        "height": 32
+      },
+      "has_alpha_channel": true,
+      "transparency_used": true,
+      "pixel_alpha_stats": {
+        "transparent": 1206,
+        "semi_transparent": 0,
+        "opaque": 842
+      },
+      "divisible_by_tile_sizes": [
+        16,
+        32
+      ],
+      "estimated_tile_dimensions": "16x32",
+      "category": "legacy_character_sheet",
+      "role": "legacy_archive",
+      "content_type": "animation_strip",
+      "production_eligible": true,
+      "extraction_strategy": "character_metadata",
+      "license_ref": "unverified_legacy_provenance",
+      "duplicate_or_variant": {
+        "type": "resolution_variant",
+        "group": "Old_idle_2",
+        "scale": "16x16",
+        "is_canonical_1x": true,
+        "pixel_exact_visible_scale": true
+      }
+    },
+    {
+      "filename": "idle_32x32_2.png",
+      "relative_path": "Old/idle_32x32_2.png",
+      "full_relative_path": "assets/Old/idle_32x32_2.png",
+      "file_size_bytes": 2016,
+      "sha256": "d264f3303e94c72205fe8df2c5bfef493fe728391b421d246759107868c507b8",
+      "is_image": true,
+      "format": "PNG",
+      "color_mode": "RGBA",
+      "dimensions": {
+        "width": 128,
+        "height": 64
+      },
+      "has_alpha_channel": true,
+      "transparency_used": true,
+      "pixel_alpha_stats": {
+        "transparent": 4824,
+        "semi_transparent": 0,
+        "opaque": 3368
+      },
+      "divisible_by_tile_sizes": [
+        16,
+        32
+      ],
+      "estimated_tile_dimensions": "32x64",
+      "category": "legacy_character_sheet",
+      "role": "legacy_archive",
+      "content_type": "animation_strip",
+      "production_eligible": true,
+      "extraction_strategy": "character_metadata",
+      "license_ref": "unverified_legacy_provenance",
+      "duplicate_or_variant": {
+        "type": "resolution_variant",
+        "group": "Old_idle_2",
+        "scale": "32x32",
+        "is_canonical_1x": false,
+        "pixel_exact_visible_scale": true
+      }
+    },
+    {
+      "filename": "idle_48x48_2.png",
+      "relative_path": "Old/idle_48x48_2.png",
+      "full_relative_path": "assets/Old/idle_48x48_2.png",
+      "file_size_bytes": 2223,
+      "sha256": "bb7e82e3e78b742ef05ec15fab2c5a6ca327f42dfe3ba9f41bf6ce6470ec40c0",
+      "is_image": true,
+      "format": "PNG",
+      "color_mode": "RGBA",
+      "dimensions": {
+        "width": 192,
+        "height": 96
+      },
+      "has_alpha_channel": true,
+      "transparency_used": true,
+      "pixel_alpha_stats": {
+        "transparent": 10854,
+        "semi_transparent": 0,
+        "opaque": 7578
+      },
+      "divisible_by_tile_sizes": [
+        16,
+        24,
+        32,
+        48
+      ],
+      "estimated_tile_dimensions": "48x96",
+      "category": "legacy_character_sheet",
+      "role": "legacy_archive",
+      "content_type": "animation_strip",
+      "production_eligible": true,
+      "extraction_strategy": "character_metadata",
+      "license_ref": "unverified_legacy_provenance",
+      "duplicate_or_variant": {
+        "type": "resolution_variant",
+        "group": "Old_idle_2",
+        "scale": "48x48",
+        "is_canonical_1x": false,
+        "pixel_exact_visible_scale": true
+      }
+    },
+    {
+      "filename": "Character_2_16x16_RPGMAKER.png",
+      "relative_path": "Old/mv/Character_2_16x16_RPGMAKER.png",
+      "full_relative_path": "assets/Old/mv/Character_2_16x16_RPGMAKER.png",
+      "file_size_bytes": 3495,
+      "sha256": "c0f102ff32fcdea48d1d6c25e3e44bacc8d4e6a9b2c10a530f231b63b1dcdcc0",
+      "is_image": true,
+      "format": "PNG",
+      "color_mode": "RGBA",
+      "dimensions": {
+        "width": 48,
+        "height": 128
+      },
+      "has_alpha_channel": true,
+      "transparency_used": true,
+      "pixel_alpha_stats": {
+        "transparent": 3684,
+        "semi_transparent": 0,
+        "opaque": 2460
+      },
+      "divisible_by_tile_sizes": [
+        16
+      ],
+      "estimated_tile_dimensions": "16x32",
+      "category": "legacy_character_sheet",
+      "role": "legacy_archive",
+      "content_type": "character_animation_grid",
+      "production_eligible": true,
+      "extraction_strategy": "character_metadata",
+      "license_ref": "unverified_legacy_provenance",
+      "duplicate_or_variant": {
+        "type": "resolution_variant",
+        "group": "Old_Character_2_RPGMAKER",
+        "scale": "16x16",
+        "is_canonical_1x": true,
+        "pixel_exact_visible_scale": true
+      }
+    },
+    {
+      "filename": "Character_2_32x32_RPGMAKER.png",
+      "relative_path": "Old/mv/Character_2_32x32_RPGMAKER.png",
+      "full_relative_path": "assets/Old/mv/Character_2_32x32_RPGMAKER.png",
+      "file_size_bytes": 4519,
+      "sha256": "f0afad0906c65ca03a6fbcf2999bd33051266a0a3bdb2a3265cdb822cdafb435",
+      "is_image": true,
+      "format": "PNG",
+      "color_mode": "RGBA",
+      "dimensions": {
+        "width": 96,
+        "height": 256
+      },
+      "has_alpha_channel": true,
+      "transparency_used": true,
+      "pixel_alpha_stats": {
+        "transparent": 14736,
+        "semi_transparent": 0,
+        "opaque": 9840
+      },
+      "divisible_by_tile_sizes": [
+        16,
+        32
+      ],
+      "estimated_tile_dimensions": "32x64",
+      "category": "legacy_character_sheet",
+      "role": "legacy_archive",
+      "content_type": "character_animation_grid",
+      "production_eligible": true,
+      "extraction_strategy": "character_metadata",
+      "license_ref": "unverified_legacy_provenance",
+      "duplicate_or_variant": {
+        "type": "resolution_variant",
+        "group": "Old_Character_2_RPGMAKER",
+        "scale": "32x32",
+        "is_canonical_1x": false,
+        "pixel_exact_visible_scale": true
+      }
+    },
+    {
+      "filename": "Character_2_48x48_RPGMAKER.png",
+      "relative_path": "Old/mv/Character_2_48x48_RPGMAKER.png",
+      "full_relative_path": "assets/Old/mv/Character_2_48x48_RPGMAKER.png",
+      "file_size_bytes": 5900,
+      "sha256": "6f2e41a92059c0901d6f0b6ec89f88d76659f8b0106091d702240784b4159304",
+      "is_image": true,
+      "format": "PNG",
+      "color_mode": "RGBA",
+      "dimensions": {
+        "width": 144,
+        "height": 384
+      },
+      "has_alpha_channel": true,
+      "transparency_used": true,
+      "pixel_alpha_stats": {
+        "transparent": 33156,
+        "semi_transparent": 0,
+        "opaque": 22140
+      },
+      "divisible_by_tile_sizes": [
+        16,
+        24,
+        48
+      ],
+      "estimated_tile_dimensions": "48x96",
+      "category": "legacy_character_sheet",
+      "role": "legacy_archive",
+      "content_type": "character_animation_grid",
+      "production_eligible": true,
+      "extraction_strategy": "character_metadata",
+      "license_ref": "unverified_legacy_provenance",
+      "duplicate_or_variant": {
+        "type": "resolution_variant",
+        "group": "Old_Character_2_RPGMAKER",
+        "scale": "48x48",
+        "is_canonical_1x": false,
+        "pixel_exact_visible_scale": true
+      }
+    },
+    {
+      "filename": "run_horizontal_16x16_2.png",
+      "relative_path": "Old/run_horizontal_16x16_2.png",
+      "full_relative_path": "assets/Old/run_horizontal_16x16_2.png",
+      "file_size_bytes": 5725,
+      "sha256": "db3a1e05c9d068ac74c7ebda99f62a08daa5f807d759caab3f27b784756a1af9",
+      "is_image": true,
+      "format": "PNG",
+      "color_mode": "RGBA",
+      "dimensions": {
+        "width": 384,
+        "height": 32
+      },
+      "has_alpha_channel": true,
+      "transparency_used": true,
+      "pixel_alpha_stats": {
+        "transparent": 7370,
+        "semi_transparent": 0,
+        "opaque": 4918
+      },
+      "divisible_by_tile_sizes": [
+        16,
+        32
+      ],
+      "estimated_tile_dimensions": "16x32",
+      "category": "legacy_character_sheet",
+      "role": "legacy_archive",
+      "content_type": "animation_strip",
+      "production_eligible": true,
+      "extraction_strategy": "character_metadata",
+      "license_ref": "unverified_legacy_provenance",
+      "duplicate_or_variant": {
+        "type": "resolution_variant",
+        "group": "Old_run_horizontal_2",
+        "scale": "16x16",
+        "is_canonical_1x": true,
+        "pixel_exact_visible_scale": true
+      }
+    },
+    {
+      "filename": "run_horizontal_32x32_2.png",
+      "relative_path": "Old/run_horizontal_32x32_2.png",
+      "full_relative_path": "assets/Old/run_horizontal_32x32_2.png",
+      "file_size_bytes": 6572,
+      "sha256": "c7451ab77ed014302631a0fc9e20c2be4e650982b8de5358babcadf7e648f694",
+      "is_image": true,
+      "format": "PNG",
+      "color_mode": "RGBA",
+      "dimensions": {
+        "width": 768,
+        "height": 64
+      },
+      "has_alpha_channel": true,
+      "transparency_used": true,
+      "pixel_alpha_stats": {
+        "transparent": 29480,
+        "semi_transparent": 0,
+        "opaque": 19672
+      },
+      "divisible_by_tile_sizes": [
+        16,
+        32
+      ],
+      "estimated_tile_dimensions": "32x64",
+      "category": "legacy_character_sheet",
+      "role": "legacy_archive",
+      "content_type": "animation_strip",
+      "production_eligible": true,
+      "extraction_strategy": "character_metadata",
+      "license_ref": "unverified_legacy_provenance",
+      "duplicate_or_variant": {
+        "type": "resolution_variant",
+        "group": "Old_run_horizontal_2",
+        "scale": "32x32",
+        "is_canonical_1x": false,
+        "pixel_exact_visible_scale": true
+      }
+    },
+    {
+      "filename": "run_horizontal_48x48_2.png",
+      "relative_path": "Old/run_horizontal_48x48_2.png",
+      "full_relative_path": "assets/Old/run_horizontal_48x48_2.png",
+      "file_size_bytes": 7438,
+      "sha256": "a167f9821a98133a5dc0bf1f9355ca05b2379003af9e83ed956277dc2ba84a00",
+      "is_image": true,
+      "format": "PNG",
+      "color_mode": "RGBA",
+      "dimensions": {
+        "width": 1152,
+        "height": 96
+      },
+      "has_alpha_channel": true,
+      "transparency_used": true,
+      "pixel_alpha_stats": {
+        "transparent": 66330,
+        "semi_transparent": 0,
+        "opaque": 44262
+      },
+      "divisible_by_tile_sizes": [
+        16,
+        24,
+        32,
+        48
+      ],
+      "estimated_tile_dimensions": "48x96",
+      "category": "legacy_character_sheet",
+      "role": "legacy_archive",
+      "content_type": "animation_strip",
+      "production_eligible": true,
+      "extraction_strategy": "character_metadata",
+      "license_ref": "unverified_legacy_provenance",
+      "duplicate_or_variant": {
+        "type": "resolution_variant",
+        "group": "Old_run_horizontal_2",
+        "scale": "48x48",
+        "is_canonical_1x": false,
+        "pixel_exact_visible_scale": true
+      }
+    },
+    {
+      "filename": "free_overview.png",
+      "relative_path": "free_overview.png",
+      "full_relative_path": "assets/free_overview.png",
+      "file_size_bytes": 297078,
+      "sha256": "e3d592487c2883c0b54631a0466f2cbcc61b28b8dfcc8d223b003d8c4808802a",
+      "is_image": true,
+      "format": "PNG",
+      "color_mode": "RGBA",
+      "dimensions": {
+        "width": 1886,
+        "height": 1792
+      },
+      "has_alpha_channel": true,
+      "transparency_used": true,
+      "pixel_alpha_stats": {
+        "transparent": 2134416,
+        "semi_transparent": 720,
+        "opaque": 1244576
+      },
+      "divisible_by_tile_sizes": [],
+      "estimated_tile_dimensions": 32,
+      "category": "asset_overview_reference",
+      "role": "reference_only",
+      "content_type": "composite_showcase",
+      "production_eligible": false,
+      "extraction_strategy": "reference_only",
+      "license_ref": "free_pack_non_commercial",
+      "duplicate_or_variant": null
+    }
+  ]
+}

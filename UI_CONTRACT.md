@@ -1,8 +1,9 @@
 # UI Contract & Shared Boundaries — LearnNexus
 
-> **Status:** Locked M0 Contract on `main`
+> **Status:** Locked M0 Contract on `main` (Verified 25 November 2026)
 > **Visual Direction:** Cozy Digital Campus (`docs/DESIGN.md` v0.3)
 > **Technical Reference:** `docs/ARCHITECTURE.md` v0.3 (ADR-011, ADR-012, ADR-013, ADR-014)
+> **Antislop Design Read & Dials:** Academic collaboration web app in warm cream and pastel pixel-art style; `ENERGY 1 / RHYTHM 2 / MOTION 1`.
 
 All worktrees and contributors must inherit this contract verbatim. Do not create duplicate navbars, global layouts, custom theme overrides, or unapproved rendering engines.
 
@@ -21,15 +22,17 @@ Defined in `src/styles/index.css`:
 | `--color-accent-sage-soft` | `#C9D7BA` | Soft sage supporting tint / tag background | With `#30343B`: use dark text only |
 | `--color-accent-sage` | `#A4B99C` | Muted green brand accent (borders, dark-text pills) | With `#30343B`: 5.95:1 (AA); never pair with `#FFFFFF` text |
 | `--color-accent-sage-strong` | `#4A6B46` | Primary CTA button fill (`btn-primary`) | With `#FFFFFF`: 6.03:1 (AA) |
-| `--color-accent-lavender` | `#DAD2E9` | Soft lavender category / team tag | With `#30343B` |
-| `--color-accent-blue` | `#C9DFE8` | Soft sky blue info / resource link tint | With `#30343B` |
-| `--color-accent-peach` | `#F1D2BC` | Warm peach milestones / warning tint | With `#30343B` |
-| `--color-accent-yellow` | `#F0DFA7` | Butter yellow pending notices | With `#30343B` |
-| `--color-text-charcoal` | `#343A40` | Headings and high-contrast titles | — |
-| `--color-text-primary` | `#30343B` | Primary body copy and form inputs | 12.50:1 on `#FFFFFF` |
+| `--color-accent-sage-strong-hover` | `#3B5638` | Primary CTA hover/active fill (`btn-primary:hover`) | With `#FFFFFF`: 8.16:1 (AAA) |
+| `--color-accent-lavender` | `#DAD2E9` | Soft lavender category / team tag | With `#30343B`: 8.56:1 (AAA) |
+| `--color-accent-blue` | `#C9DFE8` | Soft sky blue info / resource link tint | With `#30343B`: 9.05:1 (AAA) |
+| `--color-accent-peach` | `#F1D2BC` | Warm peach milestones / warning tint | With `#30343B`: 8.74:1 (AAA) |
+| `--color-accent-yellow` | `#F0DFA7` | Butter yellow pending notices | With `#30343B`: 9.42:1 (AAA) |
+| `--color-text-charcoal` | `#343A40` | Headings and high-contrast titles | With `#FFFFFF`: 11.51:1 (AAA) |
+| `--color-text-primary` | `#30343B` | Primary body copy and form inputs | 12.50:1 on `#FFFFFF` (AAA) |
 | `--color-text-secondary` | `#5C665C` | Secondary labels, captions, metadata | 5.98:1 on `#FFFFFF`, 5.24:1 on `#EEF1E8` (AA) |
-| `--color-border-subtle` | `#E3E5DC` | Subtle 1px card and panel borders | — |
-| `--color-border-focus` | `#4A6B46` | High-contrast focus ring (`2px solid`, `2px offset`) | >= 3:1 non-text contrast |
+| `--color-border-subtle` | `#E3E5DC` | Subtle 1px decorative card dividers only | 1.27:1 on `#FFFFFF` (decorative only) |
+| `--color-border-control` | `#757E74` | Interactive control and input borders (WCAG 1.4.11) | 4.21:1 on `#FFFFFF`, 3.83:1 on `#F7F4EC`, 3.68:1 on `#EEF1E8` |
+| `--color-border-focus` | `#4A6B46` | High-contrast focus ring (`2px solid`, `2px offset`) | 6.03:1 on `#FFFFFF`, 5.49:1 on `#F7F4EC` |
 
 ### Prohibited Visual Patterns
 - No dark sci-fi / cyberpunk themes (`#020617`, neon accents, scanlines, glowing HUDs).
@@ -159,3 +162,34 @@ export interface BridgeEvents {
 - Never silently substitute mock/hardcoded data on a failed Supabase request.
 - Any demonstration profile selector must be explicitly labeled as Demo Mode and still read/write real Postgres records (never fake in-memory success).
 - Never display `"Saved"` until the Postgres mutation resolves cleanly.
+
+---
+
+## 7. Multi-Agent Worktree Isolation & Ownership Matrix
+
+All M1–M3 worktrees branch from `main` after M0 is locked. Subagents must obey these strict boundaries:
+
+### Locked Central Files (Orchestrator-Only on `main`)
+Feature worktrees must NOT modify these shared files:
+- `UI_CONTRACT.md`, `HANDOFF_TEMPLATE.md`
+- `src/styles/index.css`
+- `src/types/contracts.ts`, `src/types/database.ts`
+- `src/app/routerContract.ts`, `src/app/App.tsx`
+- `src/lib/supabase.ts`
+- `package.json`, `vite.config.ts`, `tsconfig.json`
+
+### Non-Overlapping Worktree Lanes (M1–M3)
+| Worktree Branch | Exclusive Folder Ownership | Owns |
+|---|---|---|
+| `feature/m1-game-engine` | `src/game/**`, `public/assets/**` | `PhaserHost.tsx`, `createGame.ts`, `eventBridge.ts`, `CampusScene.ts`, static pixel assets |
+| `feature/m2-supabase-data` | `supabase/**`, `src/services/**` | SQL migrations, seed SQL, RLS policies, `academicService.ts` |
+| `feature/m2-entry-spaces` | `src/components/entry/**`, `src/components/campus/**` | `EntryGateway.tsx`, `AcademicSpacesSelector.tsx` |
+| `feature/m2-workstation-panels` | `src/components/workstation/**` | `WorkstationPanel.tsx`, `ProjectOverviewPanel.tsx`, `TasksSprintBoardPanel.tsx`, `ResourceLibraryPanel.tsx` |
+| `feature/e2e-verification` | `tests/e2e/**` | Playwright end-to-end specs against `localhost` |
+
+### Subagent Compliance Rules
+1. Import shared types and routes from `src/types/contracts.ts`, `src/types/database.ts`, and `src/app/routerContract.ts`.
+2. Reuse CSS classes and tokens from `src/styles/index.css` (`.btn-primary`, `.btn-secondary`, `.btn-ghost`, `.control-input`, `.surface-card`, `.status-badge`). Never create duplicate navbars, global layouts, or custom theme overrides.
+3. Implement real Supabase Postgres queries/mutations via `AcademicRepository` (zero mock data or silent fallbacks).
+4. Handle loading, empty (cause + next action), and error (cause + retry) states in every data view.
+5. Pass the Antislop Delivery Gate (WCAG AA contrast, keyboard focus, zero em dashes in UI copy) and write a `HANDOFF.md` following `HANDOFF_TEMPLATE.md`.

@@ -1,0 +1,50 @@
+{
+  "generated_at_utc": "2026-11-25T09:40:34.362936+00:00",
+  "pilot_passed": true,
+  "free_overview_reference_only": true,
+  "interiors_48x48_validation": {
+    "source_file": "Interiors_free/48x48/Interiors_free_48x48.png",
+    "passed": true,
+    "components_checked": 269,
+    "missing_files": 0,
+    "tight_bbox_failures": 0,
+    "transparency_mode_failures": 0,
+    "pixel_equality_failures": 0,
+    "source_reconstruction_visible_diff_pixels": 0,
+    "atlas_pixel_mismatches": 0
+  },
+  "room_builder_48x48_validation": {
+    "source_file": "Interiors_free/48x48/Room_Builder_free_48x48.png",
+    "passed": true,
+    "total_cells": 391,
+    "occupied_cells": 243,
+    "usable_game_tiles": 227,
+    "excluded_annotation_tiles": 16,
+    "out_of_bounds_errors": 0,
+    "occupancy_mismatch_errors": 0
+  },
+  "adam_character_validation": {
+    "characters_checked": [
+      "Adam"
+    ],
+    "passed": true,
+    "empty_frame_errors": 0,
+    "master_strip_mismatch_errors": 0,
+    "sit_frame_clipping_errors": 0,
+    "sequence_order_errors": 0
+  },
+  "contact_sheets_validation": {
+    "passed": true,
+    "contact_sheets_checked": 6,
+    "failures": [],
+    "dimensions": {
+      "interiors_48x48_bbox_overlay.png": "768x4272",
+      "room_builder_48x48_grid.png": "816x1132",
+      "pilot_interiors_48x48_clean_sample.png": "1428x1712",
+      "pilot_interiors_48x48_ambiguous_p01.png": "1572x1844",
+      "pilot_interiors_48x48_ambiguous_p02.png": "1572x652",
+      "pilot_adam_16x16_animations.png": "860x760"
+    }
+  },
+  "originals_unchanged": true
+}

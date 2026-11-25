@@ -2,24 +2,26 @@
 
 > Audit date: 2026-11-25  
 > Repository: [edgiaxel/LearnNexus](https://github.com/edgiaxel/LearnNexus)  
-> Audit mode: Local workspace & repository state inspection (Clean Slate M0)  
+> Audit mode: Local workspace & repository state inspection (Clean Slate — Starting M0)  
 > Confidence labels: **Verified** = directly observed; **Reported** = supplied in project context; **Unknown** = not inspected or not available.
 
 ## 1. Verified Current State
 
 | Area | Observed state | Evidence / confidence |
 |---|---|---|
-| Repository | `edgiaxel/LearnNexus`, public | Verified via GitHub repository metadata |
+| Repository | `edgiaxel/LearnNexus`, public | Verified |
 | Default branch | `main` | Verified |
-| Current local branch | `main` (clean M0 baseline) | Verified |
-| M0 Contracts & Tokens | `UI_CONTRACT.md`, `HANDOFF_TEMPLATE.md`, `src/styles/index.css`, `.env.example`, `.gitignore` | Verified |
-| Supabase project | `LearnNexus` (`zftymjkcrdkhtshazzmw`) in `edgiaxel` org | Verified via Supabase CLI |
-| Application source | None (`src/styles/index.css` only; app scaffold pending M1) | Verified |
-| Package manifest / lockfile | None (`package.json`, `package-lock.json` removed for M0 restart) | Verified |
-| Tests | None (`tests/` removed for M0 restart) | Verified |
+| Current local branch | `main` (M0 completed baseline; 0 stale worktrees/branches) | Verified |
+| M0 Contracts & Tokens | `UI_CONTRACT.md`, `HANDOFF_TEMPLATE.md`, `src/styles/index.css`, `src/types/contracts.ts`, `src/types/database.ts`, `src/app/routerContract.ts`, `.env.example`, `.gitignore` present & locked | Verified |
+| Supabase project | `.env` gitignored; `zftymjkcrdkhtshazzmw.supabase.co` `/auth/v1/health` returns `200`; `VITE_SUPABASE_ANON_KEY` verified `role: anon` JWT (`supabase` CLI present; `supabase_mcp` unsigned) | Verified |
+| Runtime & Tooling | Node `v24.22.1`, npm `9.2.0`, Playwright `1.65.1`, `gh` CLI authenticated (`edgiaxel`, open issues `#3`–`#7`) | Verified |
+| WCAG Contrast Audit | `docs/DESIGN.md` synced to passing tokens (`#5C665C` `5.98:1`, `#4A6B46` `6.03:1`, `#3B5638` `8.16:1`, `#757E74` control border `4.21:1` / `3.83:1`) | Verified |
+| Application source | Shared contracts only (`src/types/*`, `src/app/routerContract.ts`, `src/styles/index.css`); app scaffold pending M1 | Verified |
+| Package manifest / lockfile | None (`package.json`, `package-lock.json` pending M1) | Verified |
+| Tests | None (`tests/` pending M1) | Verified |
 | CI workflows | None committed yet | Verified |
-| GitHub Issues | Clean slate — ready for M0+ issue tracking | Verified |
-| GitHub Milestones | M0 active; M1–M5 planned | Verified |
+| GitHub Issues | Clean slate — ready for M0+ issue tracking | Reported |
+| GitHub Milestones | M0 starting; M1–M5 planned | Verified |
 | Prototype Screens | Present in `screens/` | Verified |
 | Canonical Documents | `PRD.md`, `DESIGN.md`, `ARCHITECTURE.md`, `MILESTONES.md`, `CHANGELOG.md`, `PROJECT_AUDIT.md` present in `docs/` | Verified |
 
@@ -119,25 +121,19 @@ The workspace file's actual loading in the user's local Antigravity installation
 - Exact dependency versions and package manager.
 - External deployment configuration.
 
-## 6. Recommended M0 Exit
+## 6. Recommended M0 Checklist
 
-- [x] Remote repository identity and default branch verified.
-- [x] Remote tree and latest commit inspected.
-- [x] Existing issues and pull requests checked.
-- [x] Existing source/configuration distinguished from planned work.
-- [x] Antigravity's documented `AGENTS.md` workspace-rule convention checked.
-- [x] Audit record created.
-- [x] Agent instruction and onboarding templates prepared.
-- [x] Confirm local worktree status with the repository owner.
-- [x] Add approved canonical documents to the repository.
-- [x] Confirm the architecture decisions that are approved (React + TS + Vite, Phaser 3, Supabase, npm/Node 24).
-- [x] Create the first bounded GitHub Issues from the approved vertical slices (#1 through #7).
-- [ ] Initialize the application scaffold and verify its commands (GH-01 #1).
-- [ ] Add CI checks once the scaffold exposes the relevant scripts.
+- [x] Remote repository identity, default branch, and clean `main` baseline verified.
+- [x] Stale branches and worktrees cleaned up.
+- [x] `UI_CONTRACT.md` reviewed and locked on `main`.
+- [x] `src/styles/index.css` Cozy Digital Campus tokens verified.
+- [x] `.env.example`, local `.env`, and Supabase project access verified.
+- [x] `HANDOFF_TEMPLATE.md` and zero-mock rules confirmed for subagent tasks.
+- [ ] First bounded GitHub Issues created from approved vertical slices for M1.
 
 ## 7. Single Recommended Next Action
 
-M0, M1, and M2 are complete and closed. Proceed to M3: execute GH-05 (#5) to complete Supabase data persistence verification across page refresh/leave-return cycles, and apply the canvas rendering sharpness fix (ADR-012) in `src/game/createGame.ts`.
+Begin **M1 — Foundation & Sharp Canvas Engine**: scaffold React 19 + TypeScript + Vite + Tailwind + Phaser 3 (`v3.88.2`) + Playwright on `main`, then branch M2 worktrees per `UI_CONTRACT.md` Section 7.
 
 ## 8. Audit Record — 24 Nov 2026: Direction, Assets & Canvas Rendering Audit
 
@@ -161,8 +157,10 @@ Inspection of `src/game/createGame.ts` and `src/game/scenes/CampusScene.ts` iden
 
 ### 8.3 Implementation status verification
 
-- M0 (Audit & Preparation): Completed and closed.
-- M1 (Foundation): Completed and closed (single Phaser mount, event bridge, drawer).
-- M2 (Core Workflow): Completed and closed (Entry Gateway, Academic Spaces Selector, live Supabase schema, 9 Playwright tests passing).
-- M2.5 (Design Alignment & Canvas Sharpness): Documented and active.
-- M3 (Persistent Student Workspace): In progress (Issue #5).
+- M0 (Audit, Preparation & Shared Contract): **Completed** (`UI_CONTRACT.md`, `src/styles/index.css`, `src/types/*`, `src/app/routerContract.ts` locked on `main`).
+- M1 (Foundation & Sharp Canvas Engine): Ready / Next.
+- M2 (Core Workflow & Cozy Academic Space): Planned.
+- M2.5 (Design Alignment & Canvas Sharpness): Planned (specifications documented in `DESIGN.md` and `ARCHITECTURE.md`).
+- M3 (Persistent Student Workspace): Planned.
+- M4 (Quality & Integration): Planned.
+- M5 (Release / Demo): Planned.

@@ -139,22 +139,25 @@ later, but it must not define the primary visual direction.
 
   /* Pastel Accents */
   --color-accent-sage-soft: #C9D7BA;/* Soft sage (supporting tint / tag backgrounds) */
-  --color-accent-sage: #A4B99C;     /* Muted green / primary brand accent */
+  --color-accent-sage: #A4B99C;     /* Muted green brand accent (borders, dark-text pills) */
+  --color-accent-sage-strong: #4A6B46; /* Primary CTA button fill (6.03:1 with #FFFFFF) */
+  --color-accent-sage-strong-hover: #3B5638; /* Primary CTA hover/active fill (8.16:1 with #FFFFFF) */
   --color-accent-lavender: #DAD2E9; /* Soft lavender / category / team tags */
   --color-accent-blue: #C9DFE8;     /* Soft sky blue / info links / library resources */
   --color-accent-peach: #F1D2BC;    /* Warm peach / milestones / warning accents */
   --color-accent-yellow: #F0DFA7;   /* Butter yellow / pending tasks / notices */
 
-  /* Text and Content */
+  /* Text and Content (WCAG AA >= 4.5:1 verified) */
   --color-text-charcoal: #343A40;   /* Muted charcoal for headings and high contrast */
   --color-text-primary: #30343B;    /* Dark readable text for body and inputs */
-  --color-text-secondary: #727B72;  /* Muted slate sage for secondary labels and hints */
-  --color-text-muted: #9BA39B;      /* Light muted text for disabled states and metadata */
+  --color-text-secondary: #5C665C;  /* Muted slate sage for secondary labels and hints */
+  --color-text-muted: #636B63;      /* Accessible muted text for disabled states and metadata */
   --color-text-inverse: #FFFFFF;    /* White text for filled accent buttons */
 
   /* Borders and Dividers */
-  --color-border-subtle: #E3E5DC;   /* Soft border for cards and panels */
-  --color-border-focus: #A4B99C;    /* Focused outline / active border */
+  --color-border-subtle: #E3E5DC;   /* Soft border for decorative cards and dividers */
+  --color-border-control: #757E74;  /* Interactive input and control border (>= 3:1 WCAG 1.4.11) */
+  --color-border-focus: #4A6B46;    /* High-contrast focused outline / active border */
 
   /* Functional Status Colors */
   --color-status-todo-bg: #FBF4DE;
@@ -174,15 +177,18 @@ All primary color pairs satisfy WCAG 2.1 AA requirements:
 
 | Element | Background | Text Color | Contrast Ratio | Compliance |
 |---|---|---|---|---|
-| Primary Body Text | `#FFFFFF` (Primary Surface) | `#30343B` | **11.8:1** | WCAG AAA (≥ 7:1) |
-| Primary Body Text | `#F7F4EC` (Warm Background) | `#30343B` | **10.8:1** | WCAG AAA (≥ 7:1) |
-| Charcoal Headings | `#FFFFFF` (Primary Surface) | `#343A40` | **10.1:1** | WCAG AAA (≥ 7:1) |
-| Secondary Text | `#FFFFFF` (Primary Surface) | `#727B72` | **4.6:1** | WCAG AA (≥ 4.5:1) |
-| Secondary Text | `#EEF1E8` (Secondary Surface) | `#727B72` | **4.5:1** | WCAG AA (≥ 4.5:1) |
-| High-Contrast Button | `#30343B` (Charcoal) | `#FFFFFF` | **11.8:1** | WCAG AAA |
-| To Do Badge | `#FBF4DE` (Butter Tint) | `#785A10` | **5.8:1** | WCAG AA |
-| In Progress Badge | `#F7ECE4` (Peach Tint) | `#7C4520` | **6.1:1** | WCAG AA |
-| Done Badge | `#EAF2EB` (Sage Tint) | `#2D5A34` | **5.9:1** | WCAG AA |
+| Primary Body Text | `#FFFFFF` (Primary Surface) | `#30343B` | **12.50:1** | WCAG AAA (>= 7:1) |
+| Primary Body Text | `#F7F4EC` (Warm Background) | `#30343B` | **11.37:1** | WCAG AAA (>= 7:1) |
+| Charcoal Headings | `#FFFFFF` (Primary Surface) | `#343A40` | **11.51:1** | WCAG AAA (>= 7:1) |
+| Secondary Text | `#FFFFFF` (Primary Surface) | `#5C665C` | **5.98:1** | WCAG AA (>= 4.5:1) |
+| Secondary Text | `#EEF1E8` (Secondary Surface) | `#5C665C` | **5.24:1** | WCAG AA (>= 4.5:1) |
+| Primary CTA Button | `#4A6B46` (Strong Sage) | `#FFFFFF` | **6.03:1** | WCAG AA (>= 4.5:1) |
+| Primary CTA Hover | `#3B5638` (Strong Sage Hover) | `#FFFFFF` | **8.16:1** | WCAG AAA (>= 7:1) |
+| Control Border | `#FFFFFF` / `#F7F4EC` | `#757E74` | **4.21:1** / **3.83:1** | WCAG 1.4.11 (>= 3:1) |
+| To Do Badge | `#FBF4DE` (Butter Tint) | `#785A10` | **5.84:1** | WCAG AA |
+| In Progress Badge | `#F7ECE4` (Peach Tint) | `#7C4520` | **6.62:1** | WCAG AA |
+| Done Badge | `#EAF2EB` (Sage Tint) | `#2D5A34` | **7.01:1** | WCAG AA |
+| Error Badge | `#FAECEB` (Error Tint) | `#8E2F29` | **7.05:1** | WCAG AA |
 
 ### 2.2 Typography
 
@@ -216,8 +222,8 @@ The typography uses a clean, friendly, readable sans-serif typeface.
     -   Productivity panels and dialogs: `14px` (`rounded-xl`).
     -   Pill badges: `9999px` (`rounded-full`).
 -   **Borders:**
-    -   Subtle `1px solid var(--color-border-subtle)` (`#E3E5DC`).
-    -   Focus rings: `2px solid var(--color-accent-sage)` (`#8FAE91`) with `2px offset`.
+    -   Subtle `1px solid var(--color-border-subtle)` (`#E3E5DC`) for decorative dividers and cards; `1px solid var(--color-border-control)` (`#757E74`) for interactive inputs and control edges.
+    -   Focus rings: `2px solid var(--color-border-focus)` (`#4A6B46`) with `2px offset`.
 -   **Elevation & Shadows:**
     -   Elevation 0 (Flat): `none` (default for embedded cards).
     -   Elevation 1 (Gentle): `0 1px 3px rgba(52, 59, 54, 0.05)`.
@@ -410,13 +416,13 @@ When selecting and implementing 2D pixel-art assets for LearnNexus:
 
 | Screen ID | Screen Name | Purpose | Entry Point | Primary Action | Status |
 |---|---|---|---|---|---|
-| **UI-01** | Entry Gateway | Establish student session / demo entry | App launch | Sign In / Continue as Demo | Implemented (Verified) |
-| **UI-02** | Academic Spaces Directory | Display student's assigned classes | Successful entry | Select Academic Space | Implemented (Verified) |
-| **UI-03** | Campus / Classroom Space | Navigable 2D academic environment | Space selection | Move to Team Workspace | Implemented (Verified) |
-| **UI-04** | Team Workspace Studio | Collaborative team studio with workstations | Navigate into studio | Interact with Workstation (`E`) | Implemented (Verified) |
-| **UI-05** | Project Overview Panel | View project vision, objectives & status | Overview Workstation | Read / Review Project Info | Implemented (Verified) |
-| **UI-06** | Tasks Sprint Board Panel | View & update team tasks and sprints | Tasks Workstation | View / Update Task Status | Implemented (Verified) |
-| **UI-07** | Resource Library Panel | Access reference links and project assets | Resources Workstation | Open Verified Resource Link | Implemented (Verified) |
+| **UI-01** | Entry Gateway | Establish student session / demo entry | App launch | Sign In / Continue as Demo | Planned |
+| **UI-02** | Academic Spaces Directory | Display student's assigned classes | Successful entry | Select Academic Space | Planned |
+| **UI-03** | Campus / Classroom Space | Navigable 2D academic environment | Space selection | Move to Team Workspace | Planned |
+| **UI-04** | Team Workspace Studio | Collaborative team studio with workstations | Navigate into studio | Interact with Workstation (`E`) | Planned |
+| **UI-05** | Project Overview Panel | View project vision, objectives & status | Overview Workstation | Read / Review Project Info | Planned |
+| **UI-06** | Tasks Sprint Board Panel | View & update team tasks and sprints | Tasks Workstation | View / Update Task Status | Planned |
+| **UI-07** | Resource Library Panel | Access reference links and project assets | Resources Workstation | Open Verified Resource Link | Planned |
 | **UI-08** | Lecturer Management | Organize classes, teams, and materials | Lecturer entry | Manage Academic Spaces | Future / P1 |
 | **UI-09** | Deliverables & Review | Project submission and feedback | Deliverables Station | Submit Deliverable | Future / P2 |
 | **UI-10** | Campus Main Hall | Campus entry, information board, auditorium | Campus entry | View Announcements / Auditorium | Future / P1 |
@@ -533,28 +539,29 @@ When selecting and implementing 2D pixel-art assets for LearnNexus:
 ### 7.1 Button hierarchy
 
 ```css
-/* Primary Action Button (Muted Green / Sage) */
+/* Primary Action Button (Strong Sage, WCAG AA 6.03:1 with #FFFFFF) */
 .btn-primary {
-  background-color: #A4B99C;
+  background-color: #4A6B46;
   color: #FFFFFF;
   border-radius: 8px;
-  padding: 8px 16px;
+  padding: 10px 16px;
   font-weight: 500;
-  border: 1px solid #8FA687;
+  border: 1px solid #4A6B46;
   transition: background-color 0.15s ease;
 }
 .btn-primary:hover {
-  background-color: #8FA687;
+  background-color: #3B5638;
+  border-color: #3B5638;
 }
 
-/* Secondary Action Button (Warm Surface) */
+/* Secondary Action Button (Warm Surface with >= 3:1 control border) */
 .btn-secondary {
   background-color: #EEF1E8;
   color: #30343B;
   border-radius: 8px;
-  padding: 8px 16px;
+  padding: 10px 16px;
   font-weight: 500;
-  border: 1px solid #E3E5DC;
+  border: 1px solid #757E74;
 }
 .btn-secondary:hover {
   background-color: #E5E9DE;
@@ -563,9 +570,9 @@ When selecting and implementing 2D pixel-art assets for LearnNexus:
 /* Subtle / Ghost Button */
 .btn-ghost {
   background-color: transparent;
-  color: #727B72;
+  color: #5C665C;
   border-radius: 8px;
-  padding: 6px 12px;
+  padding: 8px 12px;
 }
 .btn-ghost:hover {
   background-color: #EEF1E8;
@@ -635,10 +642,10 @@ When selecting and implementing 2D pixel-art assets for LearnNexus:
 
 | Prototype Increment | Scope Tested | Visual Style | Persistence | Status |
 |---|---|---|---|---|
-| **M1 Foundation** | Phaser single mount, event bridge, drawer placeholder | Dark temporary scaffold | None | Completed |
-| **M2 Core Workflow** | Student entry, academic spaces, 2D studio scene, workstation panels | Transitional theme | Seeded / Supabase | Completed |
-| **M2.5 Design Alignment** | Cozy Digital Campus: pastel tokens, pixel-art specs, HTML panels | Cozy Digital Campus approved | Supabase PostgreSQL | **Active Alignment** |
-| **M3 Persistence** | Real PostgreSQL reads/writes, task status mutation, refresh test | Cozy Digital Campus | Supabase PostgreSQL | Planned / Next |
+| **M1 Foundation** | App shell, Phaser single mount, sharp pixel-art config, event bridge | Cozy Digital Campus | None | Planned |
+| **M2 Core Workflow** | Student entry, academic spaces, 2D studio scene, workstation panels | Cozy Digital Campus | Seeded / Supabase | Planned |
+| **M2.5 Design Alignment** | Cozy Digital Campus: pastel tokens, pixel-art specs, HTML panels | Cozy Digital Campus approved | Supabase PostgreSQL | Planned |
+| **M3 Persistence** | Real PostgreSQL reads/writes, task status mutation, refresh test | Cozy Digital Campus | Supabase PostgreSQL | Planned |
 
 ---
 
@@ -665,13 +672,13 @@ When selecting and implementing 2D pixel-art assets for LearnNexus:
 
 | Design Screen | Related PRD Features | Implementation Status |
 |---|---|---|
-| **UI-01 Entry Gateway** | `F-001` (Student Entry and Session) | Implemented (Verified with demo profiles) |
-| **UI-02 Academic Spaces** | `F-002` (Assigned Space Selection) | Implemented (Verified with Team SibukTA) |
-| **UI-03 Class Environment** | `F-003` (2D Spatial Navigation), `F-004` | Implemented (Phaser 3 scene) |
-| **UI-04 Team Workspace Studio** | `F-003`, `F-004`, `F-005` | Implemented (Studio pod with 3 workstations) |
-| **UI-05 Project Overview Panel** | `F-005`, `F-006`, `F-009` | Implemented (Overview drawer) |
-| **UI-06 Tasks Sprint Board** | `F-005`, `F-007`, `F-009` | Implemented (Tasks drawer + status updates) |
-| **UI-07 Resource Library Panel** | `F-005`, `F-008`, `F-009` | Implemented (Resource links drawer) |
+| **UI-01 Entry Gateway** | `F-001` (Student Entry and Session) | Planned |
+| **UI-02 Academic Spaces** | `F-002` (Assigned Space Selection) | Planned |
+| **UI-03 Class Environment** | `F-003` (2D Spatial Navigation), `F-004` | Planned |
+| **UI-04 Team Workspace Studio** | `F-003`, `F-004`, `F-005` | Planned |
+| **UI-05 Project Overview Panel** | `F-005`, `F-006`, `F-009` | Planned |
+| **UI-06 Tasks Sprint Board** | `F-005`, `F-007`, `F-009` | Planned |
+| **UI-07 Resource Library Panel** | `F-005`, `F-008`, `F-009` | Planned |
 | **UI-08 Lecturer Management** | `F-010` (Lecturer Setup) | Future / P1 |
 | **UI-09 Deliverables** | `F-012` (Submissions) | Future / P2 |
 | **UI-10 Campus Main Hall** | `F-003`, `F-004` (Campus Gateway) | Future / P1 |
