@@ -111,7 +111,7 @@ export interface AuthRepository {
     demoKey: DemoProfileKey,
   ): Promise<RepositoryResult<StudentProfile>>;
   signOut(): Promise<RepositoryResult<void>>;
-  onAuthStateChange?(
+  onAuthStateChange(
     handler: (event: AuthStateChangeEvent, hasSession: boolean) => void,
   ): () => void;
 }

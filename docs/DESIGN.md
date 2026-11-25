@@ -645,7 +645,7 @@ When selecting and implementing 2D pixel-art assets for LearnNexus:
 | **M1 Foundation** | App shell, Phaser single mount, sharp pixel-art config, event bridge | Cozy Digital Campus | None | Completed & Verified |
 | **M2 Core Workflow** | Student entry, academic spaces, 2D studio scene, workstation panels | Cozy Digital Campus | Supabase PostgreSQL | Completed & Verified |
 | **M2.5 Design Alignment** | Cozy Digital Campus: pastel tokens, pixel-art specs, HTML panels | Cozy Digital Campus approved | Supabase PostgreSQL | Completed & Verified |
-| **M3 Persistence** | Real PostgreSQL reads/writes, task status mutation, refresh test | Cozy Digital Campus | Supabase PostgreSQL | Baseline Tested |
+| **M3 Persistence** | Real PostgreSQL reads/writes, cross-session persistence, failure recovery | Cozy Digital Campus | Supabase PostgreSQL | Completed & Verified |
 
 ---
 

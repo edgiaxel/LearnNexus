@@ -1,5 +1,5 @@
-> **Current milestone:** M2 & M2.5 Complete — Core Workflow, Cozy Academic Space & Design Alignment  
-> **Overall status:** M2 & M2.5 complete & E2E verified (`14/14` Playwright tests passing) on `main`; ready for M3/M4 verification & hardening  
+> **Current milestone:** M3 Complete — Persistent Student Workspace  
+> **Overall status:** M0–M3 complete & verified on `main` (`18/18` Playwright E2E, `11/11` unit, `4/4` live RLS actors); ready for M4 Quality & Integration freeze  
 > **Deadline:** 30 November 2026, 23:59 WIB  
 > **Last updated:** 26 November 2026  
 > **Repository:** [edgiaxel/LearnNexus](https://github.com/edgiaxel/LearnNexus)
@@ -44,8 +44,8 @@ Remember check again to make sure theres a shared contract before doing the exec
 
 - **Goal:** Demonstrate a persistent, spatial academic workspace that connects academic spaces with collaborative project workspaces for university students.
 - **MVP outcome:** A student enters the application, selects an assigned academic space, navigates a 2D environment to a team workspace, interacts with workstations, accesses project/task/resource panels, updates task status, and can leave and return with saved project information retained.
-- **Current state:** M0, M1, M2, and M2.5 complete & verified on `main` — Supabase schema + RLS + demo seed (`zftymjkcrdkhtshazzmw`) live; `EntryGateway`, `AcademicSpacesSelector`, `WorkstationPanel` (`ProjectOverviewPanel`, `TasksSprintBoardPanel`, `ResourceLibraryPanel`), and ADR-012 Config A Phaser studio wired into `App.tsx`; `14/14` Playwright E2E specs passing (including reload and leave-and-return task status persistence).
-- **Next action:** Execute **M3 — Persistent Student Workspace** formal verification & edge-case hardening (optional/error path matrix, RLS audit, resource validation review) before M4 integration freeze.
+- **Current state:** M0, M1, M2, M2.5, and M3 complete & verified on `main` — Supabase Auth lifecycle listener (`onAuthStateChange`), session-expiry redirect + notice, per-task unsaved/retry/revert resilience, in-panel Postgres `Refresh`, `Seeded Demo Data` badges, `workspace_layouts` metadata display, 4-actor live RLS script (`npm run test:rls`), 11 unit guard tests (`npm run test:unit`), and `18/18` Playwright E2E specs (including cross-user `Nadia -> Bima -> Nadia` clean-context persistence and simulated HTTP 500 save/fetch recovery) passing.
+- **Next action:** Execute **M4 — Quality & Integration** final P0 release checklist (bundle chunking review, secrets & link audit, final demo rehearsal) before M5 submission.
 - **Links:** `PRD.md` / `DESIGN.md` / `ARCHITECTURE.md` / GitHub repository.
 - **Planning note:** The schedule is intentionally aggressive because the semifinal submission is due on 30 November 2026. Deliverable is an honest, high-trust single-user demonstrator with real persistence.
 
@@ -57,7 +57,7 @@ Remember check again to make sure theres a shared contract before doing the exec
 | M1 | Foundation & Sharp Canvas Engine | App boots, single Phaser host, ADR-012 sharp pixel-art rendering, and typed event bridge | Completed | App builds; Phaser mounts once with `pixelArt: true`, `antialias: false`, integer zoom; `8/8` Playwright specs pass | — |
 | M2 | Core Workflow & Cozy Academic Space | Student navigates distinct 2D pixel-art studio and accesses live Supabase workstation panels | Completed | Distinct 2D pixel-art environment (`Interiors_free` / `Characters_free`); avatar controller; live Supabase panels; `14/14` E2E verified | — |
 | M2.5 | Design & Rendering Alignment | Cozy Digital Campus (pastel tokens, master design system, sharp canvas rendering rules) | Completed | `DESIGN.md` approved, tokens locked, `ENERGY 1 / RHYTHM 2 / MOTION 1` & sharp ADR-012 pixel-art config verified across desktop/mobile | — |
-| M3 | Persistent Student Workspace | Project, tasks and resources are loaded from durable Supabase Postgres data; task status updates persist | Planned | Refresh/re-entry preserves project/task data; failure states visible; E2E verified | — |
+| M3 | Persistent Student Workspace | Project, tasks and resources are loaded from durable Supabase Postgres data; task status updates persist | Completed | Clean-context cross-user persistence (`Nadia -> Bima -> Nadia`), 4-actor RLS matrix, `11/11` unit tests, save/fetch failure recovery, and `18/18` E2E verified | — |
 | M4 | Quality & Integration | Integrated P0 demo is stable, sharp, and verified | Planned | Critical student journey passes; no blocking errors; access rules reviewed; rendering verified sharp | — |
 | M5 | Release / Demo | Shareable demo, evidence and submission materials are ready | Planned | Deployment smoke-tested; proposal/video evidence complete before deadline | — |
 
@@ -141,22 +141,22 @@ Remember check again to make sure theres a shared contract before doing the exec
 **Target window:** 27–28 November  
 **Outcome:** The demonstrator proves that useful project information survives leaving and returning, rendered crisply within the Cozy Digital Campus theme.
 
-- [ ] Supabase project and environment variables configured.
-- [ ] Initial SQL migration and fictional seed data committed.
-- [ ] Minimal class/team/project/task/resource schema implemented.
-- [ ] RLS enabled and tested for demo and authenticated sessions.
-- [ ] Project overview loads from Supabase Postgres.
-- [ ] Task list loads from Supabase Postgres.
-- [ ] Resource list loads from Supabase Postgres.
-- [ ] Task status update mutations write to Supabase Postgres.
-- [ ] Canvas sharpness configuration (ADR-012) verified in `createGame.ts`.
-- [ ] Full page refresh and leave/re-enter test verifies persisted data across clean browser sessions.
-- [ ] Save failure and fetch failure states reviewed.
+- [x] Supabase project and environment variables configured.
+- [x] Initial SQL migration and fictional seed data committed.
+- [x] Minimal class/team/project/task/resource schema implemented.
+- [x] RLS enabled and tested for demo and authenticated sessions (`npm run test:rls`: 4 actors verified).
+- [x] Project overview loads from Supabase Postgres.
+- [x] Task list loads from Supabase Postgres.
+- [x] Resource list loads from Supabase Postgres.
+- [x] Task status update mutations write to Supabase Postgres.
+- [x] Canvas sharpness configuration (ADR-012) verified in `createGame.ts`.
+- [x] Full page refresh and leave/re-enter test verifies persisted data across clean browser sessions (`Nadia -> Bima -> Nadia`).
+- [x] Save failure and fetch failure states reviewed (verified with HTTP 500 injection + `Unsaved change` / `Retry save` / `Revert`).
 
 | Slice ID | Vertical slice | Feature IDs | GitHub issues | Status | Demo outcome |
 |---|---|---|---|---|---|
-| VS-04 | Seeded team workspace data loads from Postgres | F-006, F-007, F-008, F-009 | — | Planned | Panels show real persisted records |
-| VS-05 | Update → save → refresh → reload | F-007, F-009 | — | Planned | A changed value remains after a refresh |
+| VS-04 | Seeded team workspace data loads from Postgres | F-006, F-007, F-008, F-009 | — | Completed | Panels show real persisted records |
+| VS-05 | Update → save → refresh → reload | F-007, F-009 | — | Completed | A changed value remains after a refresh |
 
 **Exit criteria:** At least one durable data path is demonstrated end-to-end across a page reload or leave/re-enter cycle, and the canvas renders crisply without blur.
 
@@ -209,18 +209,18 @@ Remember check again to make sure theres a shared contract before doing the exec
 
 ## 4. Current Focus
 
-- **Current focus:** **M3 — Persistent Student Workspace** (Hardening & Verification)
-- **Why this is next:** M2 & M2.5 deliverables are complete and verified on `main` (`14/14` Playwright tests passing, live Supabase Auth/RLS/Postgres reads and task status mutations verified across reload and leave-and-return cycles). M3 formalizes failure-mode tests, multi-profile write checks, and clean-session audit before M4 integration freeze.
-- **Dependencies:** Applied migration `20261126000001_m2_core_schema.sql` & `supabase/seed.sql` on `zftymjkcrdkhtshazzmw`, `authService.ts`, `academicService.ts`, and `tests/e2e/m2-student-journey.spec.ts`.
-- **Expected result:** Complete M3 persistence & access-control signoff (save-failure recovery, Member `Bima` update verification, empty/error states across all panels) and M4 release readiness.
-- **Verification:** `npm run typecheck`, `npm run build`, `npm run test:e2e`, and manual/Playwright error-injection tests.
+- **Current focus:** **M4 — Quality & Integration**
+- **Why this is next:** M3 persistence, cross-user clean-session durability, 4-actor RLS/column-grant enforcement, session-expiry recovery, and failure-mode resilience are all verified (`18/18` E2E, `11/11` unit, `4/4` live RLS actors). M4 locks P0 demo stability before M5 deployment and submission.
+- **Dependencies:** M3 `main` baseline, `npm run test:unit`, `npm run test:rls`, `npm run test:e2e`, and `zftymjkcrdkhtshazzmw`.
+- **Expected result:** Final P0 acceptance signoff, optional Phaser chunk optimization, clean secrets/bundle audit, and demo rehearsal readiness.
+- **Verification:** `npm run typecheck`, `npm run test:unit`, `npm run test:rls`, `npm run build`, and `npm run test:e2e`.
 - **Blockers:** None.
 
 ## 5. Next Actions
 
-1. Expand M3 automated tests for Bima (`member`) cross-session task updates and simulated save/fetch error recovery UI.
-2. Run M4 integrated P0 quality audit (link checks, bundle review, secrets scan, RLS member vs non-member matrix).
-3. Prepare M5 production deployment and semifinal submission package (proposal + <2m demo video before 30 Nov 2026, 23:59 WIB).
+1. Execute M4 P0 quality & security audit (secrets scan, production chunking review, full desktop/laptop demo rehearsal, all `F-001`–`F-009` checklist verification).
+2. Confirm M5 hosting target (`Vercel`) with environment variables (`VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`).
+3. Capture verified screenshots/video (<2m) and finalize STACK 2026 semifinal proposal before 30 Nov 2026, 23:59 WIB.
 
 ## 6. Risks and Blockers
 
@@ -240,3 +240,4 @@ Remember check again to make sure theres a shared contract before doing the exec
 | 25 Nov 2026 | Completed M0: verified repo/runtime/Supabase access, resolved `DESIGN.md` WCAG contrast conflicts, locked `UI_CONTRACT.md`, `src/styles/index.css`, `src/types/*`, `src/app/routerContract.ts`, and wrote M0 `HANDOFF.md`. |
 | 26 Nov 2026 | Completed M1: clean-slated Supabase project `zftymjkcrdkhtshazzmw`, scaffolded React 19/Vite/TS/Tailwind/Phaser `3.88.2`/Playwright shell, ported Config A sharp studio scene + assets + typed `eventBridge`, passed `typecheck`, `build`, and `8/8` Playwright E2E specs, and wrote M1 `HANDOFF.md`. |
 | 26 Nov 2026 | Completed M2 & M2.5: locked M2/M2.5 contracts (`components.ts`, `AuthRepository`, `DEMO_PROFILE_DESCRIPTORS`), delivered schema/RLS/seed/services + `EntryGateway` + `AcademicSpacesSelector` + `WorkstationPanel` (`ProjectOverviewPanel`, `TasksSprintBoardPanel`, `ResourceLibraryPanel`) across 3 isolated worktrees, pushed migration & seed to `zftymjkcrdkhtshazzmw`, wired `App.tsx`, verified `14/14` Playwright E2E specs, and wrote M2/M2.5 `HANDOFF.md`. |
+| 26 Nov 2026 | Completed M3: added `onAuthStateChange` + session-expiry guards, per-task unsaved/retry/revert resilience, panel `Refresh` & `Seeded Demo Data` badges, `workspace_layouts` metadata, `tests/rls/verify-rls.mjs` (4-actor RLS pass), `tests/unit/m3-guards.test.ts` (`11/11` pass), and `tests/e2e/m3-persistence-and-resilience.spec.ts` (`18/18` E2E pass), plus M3 `HANDOFF.md`. |

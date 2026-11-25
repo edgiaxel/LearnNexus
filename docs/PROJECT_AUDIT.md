@@ -11,14 +11,14 @@
 |---|---|---|
 | Repository | `edgiaxel/LearnNexus`, public | Verified |
 | Default branch | `main` | Verified |
-| Current local branch | `main` (M2 & M2.5 completed baseline; 0 stale worktrees/branches) | Verified |
+| Current local branch | `main` (M3 completed baseline; 0 stale worktrees/branches) | Verified |
 | M0 Contracts & Tokens | `UI_CONTRACT.md`, `HANDOFF_TEMPLATE.md`, `src/styles/index.css`, `src/types/contracts.ts`, `src/types/database.ts`, `src/types/components.ts`, `src/types/gameDebug.ts`, `src/app/routerContract.ts`, `.env.example`, `.gitignore` present & locked | Verified |
-| Supabase project | `.env` gitignored; `zftymjkcrdkhtshazzmw.supabase.co` migrated (`20261126000001_m2_core_schema.sql`), seeded (`3` demo users, `2` classes, `2` teams, `2` projects, `8` tasks, `6` resources), RLS verified (`anon` denied, Nadia read/write, Rani 0 rows) | Verified |
+| Supabase project | `.env` gitignored; `zftymjkcrdkhtshazzmw.supabase.co` migrated (`20261126000001_m2_core_schema.sql`), seeded (`3` demo users, `2` classes, `2` teams, `2` projects, `8` tasks, `6` resources, `2` layouts), 4-actor RLS & column grants verified via `npm run test:rls` | Verified |
 | Runtime & Tooling | Node `v24.15.0`, npm `11.12.1`, Playwright `@playwright/test` `1.51.1`, `supabase` CLI `3.4.0` | Verified |
 | WCAG Contrast Audit | `docs/DESIGN.md` synced to passing tokens (`#5C665C` `5.98:1`, `#4A6B46` `6.03:1`, `#3B5638` `8.16:1`, `#757E74` control border `4.21:1` / `3.83:1`) | Verified |
-| Application source | M2 & M2.5 complete: `App.tsx`, `EntryGateway.tsx`, `AcademicSpacesSelector.tsx`, `WorkstationPanel.tsx`, `ProjectOverviewPanel.tsx`, `TasksSprintBoardPanel.tsx`, `ResourceLibraryPanel.tsx`, `authService.ts`, `academicService.ts`, `errorMapper.ts`, `PhaserHost.tsx`, `CampusScene.ts` | Verified |
+| Application source | M0–M3 complete: `App.tsx`, `EntryGateway.tsx`, `AcademicSpacesSelector.tsx`, `WorkstationPanel.tsx`, `ProjectOverviewPanel.tsx`, `TasksSprintBoardPanel.tsx`, `ResourceLibraryPanel.tsx`, `authService.ts`, `academicService.ts`, `errorMapper.ts`, `PhaserHost.tsx`, `CampusScene.ts` | Verified |
 | Package manifest / lockfile | `package.json`, `package-lock.json`, `tsconfig.json`, `vite.config.ts`, `playwright.config.ts` committed | Verified |
-| Tests | `tests/e2e/m2-student-journey.spec.ts`, `tests/e2e/phaser-lifecycle.spec.ts`, `tests/e2e/workstation-bridge.spec.ts` (`14/14` Playwright tests passing) | Verified |
+| Tests | `tests/unit/m3-guards.test.ts` (`11/11` passing), `tests/rls/verify-rls.mjs` (`4/4` actors passing), `tests/e2e/{m2-student-journey,m3-persistence-and-resilience,phaser-lifecycle,workstation-bridge}.spec.ts` (`18/18` Playwright tests passing) | Verified |
 | CI workflows | None committed yet | Verified |
 | GitHub Issues | Clean slate — ready for M0+ issue tracking | Reported |
 | GitHub Milestones | M0 starting; M1–M5 planned | Verified |
@@ -161,6 +161,6 @@ Inspection of `src/game/createGame.ts` and `src/game/scenes/CampusScene.ts` iden
 - M1 (Foundation & Sharp Canvas Engine): **Completed** (`package.json`, `App.tsx`, `PhaserHost.tsx`, `createGame.ts`, `CampusScene.ts`, `eventBridge.ts`, `public/assets/`, `tests/e2e/` verified).
 - M2 (Core Workflow & Cozy Academic Space): **Completed & E2E Verified** (`supabase/migrations/*`, `supabase/seed.sql`, `src/services/*`, `EntryGateway.tsx`, `AcademicSpacesSelector.tsx`, `WorkstationPanel.tsx` & panels, `14/14` Playwright tests passing).
 - M2.5 (Design Alignment & Canvas Sharpness): **Completed & Verified** (Cozy Digital Campus tokens, `ENERGY 1 / RHYTHM 2 / MOTION 1` static skeletons, compact responsive controls, ADR-012 Config A sharpness verified at `1x` and `2x` HiDPI).
-- M3 (Persistent Student Workspace): Baseline persistence tested during M2; formal failure-mode & multi-role audit next.
-- M4 (Quality & Integration): Planned.
+- M3 (Persistent Student Workspace): **Completed & Verified** (`onAuthStateChange`, per-task unsaved/retry/revert UX, panel `Refresh` & `Seeded Demo Data` badges, `workspace_layouts` metadata, `npm run test:unit` `11/11`, `npm run test:rls` `4/4` actors, `18/18` Playwright E2E passing).
+- M4 (Quality & Integration): Ready / Next.
 - M5 (Release / Demo): Planned.

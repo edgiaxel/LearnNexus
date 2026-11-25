@@ -13,9 +13,13 @@ import type {
   AsyncState,
   StudentProfile,
   TeamWorkspace,
+  WorkspaceLayoutConfig,
   WorkstationId,
 } from '../types/contracts';
 import { canTransitionRoute, WORKSTATION_META } from './routerContract';
+
+const SESSION_EXPIRED_NOTICE =
+  'Your session expired. Sign in again to continue. Unsaved edits were not stored.';
 
 interface HealthSnapshot {
   latencyMs: number;
@@ -62,6 +66,9 @@ export function App() {
   const [activeWorkspace, setActiveWorkspace] = useState<TeamWorkspace | null>(
     null,
   );
+  const [workspaceLayout, setWorkspaceLayout] =
+    useState<WorkspaceLayoutConfig | null>(null);
+  const [sessionNotice, setSessionNotice] = useState<string | null>(null);
   const [nearbyWorkstation, setNearbyWorkstation] =
     useState<WorkstationId | null>(null);
   const [activeWorkstation, setActiveWorkstation] =
@@ -75,6 +82,9 @@ export function App() {
   });
 
   const canvasWrapperRef = useRef<HTMLDivElement | null>(null);
+  const profileRef = useRef<StudentProfile | null>(null);
+  profileRef.current = profile;
+  const intentionalSignOutRef = useRef(false);
 
   const runHealthCheck = useCallback(async () => {
     setSupabaseState({
@@ -149,6 +159,55 @@ export function App() {
   }, []);
 
   useEffect(() => {
+    const unsubscribe = authService.onAuthStateChange((event, hasSession) => {
+      if (
+        event === 'SIGNED_OUT' &&
+        !hasSession &&
+        !intentionalSignOutRef.current &&
+        profileRef.current !== null
+      ) {
+        writeSelectedClassId(null);
+        setActiveWorkstation(null);
+        setNearbyWorkstation(null);
+        setActiveWorkspace(null);
+        setWorkspaceLayout(null);
+        setProfile(null);
+        setSessionNotice(SESSION_EXPIRED_NOTICE);
+        setRoute('entry');
+      }
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, []);
+
+  useEffect(() => {
+    const teamId = activeWorkspace?.teamId;
+    if (!teamId) {
+      setWorkspaceLayout(null);
+      return;
+    }
+
+    let cancelled = false;
+    const loadWorkspaceLayout = async () => {
+      const result = await academicService.getWorkspaceLayout(teamId);
+      if (cancelled) return;
+      if (result.ok) {
+        setWorkspaceLayout(result.data);
+      } else {
+        setWorkspaceLayout(null);
+      }
+    };
+
+    void loadWorkspaceLayout();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [activeWorkspace?.teamId]);
+
+  useEffect(() => {
     const unsubProximity = eventBridge.on('workstation:proximity', (payload) => {
       setNearbyWorkstation(payload.workstationId);
     });
@@ -183,8 +242,10 @@ export function App() {
   const handleAuthenticated = useCallback(
     (nextProfile: StudentProfile) => {
       writeSelectedClassId(null);
+      setSessionNotice(null);
       setProfile(nextProfile);
       setActiveWorkspace(null);
+      setWorkspaceLayout(null);
       setNearbyWorkstation(null);
       setActiveWorkstation(null);
       if (canTransitionRoute(route, 'spaces')) {
@@ -200,6 +261,7 @@ export function App() {
     (space: AcademicSpace, workspace: TeamWorkspace) => {
       writeSelectedClassId(space.id);
       setActiveWorkspace(workspace);
+      setWorkspaceLayout(null);
       setNearbyWorkstation(null);
       setActiveWorkstation(null);
       if (canTransitionRoute(route, 'workspace')) {
@@ -217,21 +279,46 @@ export function App() {
     setActiveWorkstation(null);
     setNearbyWorkstation(null);
     setActiveWorkspace(null);
+    setWorkspaceLayout(null);
     setRoute('spaces');
   }, [route]);
 
   const handleSignOut = useCallback(async () => {
     if (signingOut) return;
     setSigningOut(true);
-    await authService.signOut();
-    writeSelectedClassId(null);
-    setActiveWorkstation(null);
-    setNearbyWorkstation(null);
-    setActiveWorkspace(null);
-    setProfile(null);
-    setRoute('entry');
-    setSigningOut(false);
+    intentionalSignOutRef.current = true;
+    try {
+      await authService.signOut();
+      writeSelectedClassId(null);
+      setActiveWorkstation(null);
+      setNearbyWorkstation(null);
+      setActiveWorkspace(null);
+      setWorkspaceLayout(null);
+      setProfile(null);
+      setSessionNotice(null);
+      setRoute('entry');
+    } finally {
+      intentionalSignOutRef.current = false;
+      setSigningOut(false);
+    }
   }, [signingOut]);
+
+  const handleSessionExpired = useCallback(async () => {
+    intentionalSignOutRef.current = true;
+    try {
+      await authService.signOut();
+    } finally {
+      writeSelectedClassId(null);
+      setActiveWorkstation(null);
+      setNearbyWorkstation(null);
+      setActiveWorkspace(null);
+      setWorkspaceLayout(null);
+      setProfile(null);
+      setSessionNotice(SESSION_EXPIRED_NOTICE);
+      setRoute('entry');
+      intentionalSignOutRef.current = false;
+    }
+  }, []);
 
   const openWorkstation = useCallback((workstationId: WorkstationId) => {
     eventBridge.emit('workstation:interact', {
@@ -408,6 +495,7 @@ export function App() {
                 ? supabaseState.error.message
                 : null
             }
+            sessionNotice={sessionNotice}
             onRetryHealth={() => void runHealthCheck()}
             onAuthenticated={handleAuthenticated}
           />
@@ -417,6 +505,7 @@ export function App() {
             repository={academicService}
             onSelectSpace={handleSelectSpace}
             onSwitchProfile={() => void handleSignOut()}
+            onSessionExpired={() => void handleSessionExpired()}
           />
         ) : route === 'workspace' && activeWorkspace ? (
           <>
@@ -494,7 +583,11 @@ export function App() {
                     </span>
                   ))}
                 </div>
-                <span>16px pixel grid with integer zoom</span>
+                <span data-testid="workspace-layout-meta">
+                  {workspaceLayout
+                    ? `16px pixel grid (${workspaceLayout.layoutKey})`
+                    : '16px pixel grid with integer zoom'}
+                </span>
               </div>
             </section>
           </>
@@ -507,6 +600,7 @@ export function App() {
                 ? supabaseState.error.message
                 : null
             }
+            sessionNotice={sessionNotice}
             onRetryHealth={() => void runHealthCheck()}
             onAuthenticated={handleAuthenticated}
           />
@@ -518,6 +612,8 @@ export function App() {
           workstationId={activeWorkstation}
           workspace={activeWorkspace}
           repository={academicService}
+          isDemoSession={profile?.isDemo ?? false}
+          onSessionExpired={() => void handleSessionExpired()}
           onClose={closeDrawer}
         />
       )}

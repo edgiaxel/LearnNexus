@@ -4,6 +4,7 @@ import { canTransitionRoute } from '../../src/app/routerContract.ts';
 import {
   formatDisplayDate,
   getTwoLetterInitials,
+  parseSafeHttpUrl,
 } from '../../src/components/workstation/workstationUtils.ts';
 import {
   createAppError,
@@ -119,5 +120,29 @@ describe('workstationUtils', () => {
       timeStyle: 'short',
     }).format(new Date(isoSample));
     assert.equal(formatDisplayDate(isoSample, 'datetime'), expectedDatetime);
+  });
+});
+
+describe('parseSafeHttpUrl', () => {
+  it('accepts https and http URLs and extracts hostname labels', () => {
+    const httpsResult = parseSafeHttpUrl('  https://github.com/edgiaxel/LearnNexus  ');
+    assert.deepEqual(httpsResult, {
+      safeHref: 'https://github.com/edgiaxel/LearnNexus',
+      hostLabel: 'github.com',
+    });
+
+    const httpResult = parseSafeHttpUrl('http://localhost:5173/docs');
+    assert.deepEqual(httpResult, {
+      safeHref: 'http://localhost:5173/docs',
+      hostLabel: 'localhost',
+    });
+  });
+
+  it('rejects unsafe protocols, empty strings, and malformed URLs', () => {
+    assert.equal(parseSafeHttpUrl('javascript:alert(1)'), null);
+    assert.equal(parseSafeHttpUrl('data:text/html,<script>alert(1)</script>'), null);
+    assert.equal(parseSafeHttpUrl('ftp://files.example.edu/notes.pdf'), null);
+    assert.equal(parseSafeHttpUrl('   '), null);
+    assert.equal(parseSafeHttpUrl('not-a-valid-url'), null);
   });
 });

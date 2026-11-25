@@ -7,6 +7,10 @@ This file records completed work only. Planned features and unfinished tasks bel
 ## [Unreleased]
 
 ### Added
+- Added M3 auth lifecycle and persistence hardening: `AuthStateChangeEvent` and `onAuthStateChange` on `AuthRepository`/`SupabaseAuthRepository`, pre-mutation `getSession()` expiry guard in `academicService.updateTaskStatus`, and `sessionNotice` / `onSessionExpired` handling across `App.tsx`, `EntryGateway.tsx`, `AcademicSpacesSelector.tsx`, and `WorkstationPanel.tsx`.
+- Added per-task concurrent save and failure-preservation maps (`savingStatusByTaskId`, `failedSaveByTaskId`) in `TasksSprintBoardPanel.tsx` displaying `Unsaved change`, `Retry save`, and `Revert` without overwriting persisted status badges or filter counts.
+- Added in-panel `Refresh` buttons (`panel-refresh-btn`), `Seeded Demo Data` pills (`demo-data-badge`) across `ProjectOverviewPanel`, `TasksSprintBoardPanel`, and `ResourceLibraryPanel`, and `workspace_layouts` metadata display (`workspace-layout-meta`) in `App.tsx`.
+- Added repeatable verification suites: `tests/rls/verify-rls.mjs` (`npm run test:rls`, 4-actor Postgres RLS and column-grant checks), `tests/unit/m3-guards.test.ts` (`npm run test:unit`, `11/11` Node 24 native unit tests), and `tests/e2e/m3-persistence-and-resilience.spec.ts` (`18/18` total Playwright E2E tests passing).
 - Locked M2/M2.5 central contracts (`src/types/components.ts`, `AuthRepository` in `src/types/database.ts`, `DEMO_PROFILE_DESCRIPTORS` and `TeamMemberSummary` in `src/types/contracts.ts`, and `data-testid` / static skeleton rules in `UI_CONTRACT.md`).
 - Added Supabase Postgres M2 schema, triggers (`set_updated_at`, `handle_new_user`), `SECURITY DEFINER` membership helpers, least-privilege grants (`GRANT UPDATE (status) ON public.tasks`), and authenticated-only RLS policies in `supabase/migrations/20261126000001_m2_core_schema.sql`.
 - Added idempotent demo seed data (`supabase/seed.sql`) for 3 fictional demo accounts (`nadia.demo@learnnexus.edu`, `bima.demo@learnnexus.edu`, `rani.demo@learnnexus.edu`), 2 courses (`IF-4031`, `IF-3210`), 2 teams, 2 projects, 8 tasks, 6 HTTPS resources, and 2 workspace layouts, applied and verified against remote `zftymjkcrdkhtshazzmw`.
@@ -24,6 +28,8 @@ This file records completed work only. Planned features and unfinished tasks bel
 - Added M0 milestone handoff in `HANDOFF.md`.
 
 ### Changed
+- Extracted `parseSafeHttpUrl` and `ParsedSafeHttpUrl` into pure TypeScript `src/components/workstation/workstationUtils.ts` (re-exported by `ResourceLibraryPanel.tsx`) so Node 24 unit tests execute directly with zero extra test runner dependencies.
+- Tightened `tests/e2e/m2-student-journey.spec.ts` Test 1 (`UI-01`) to assert zero uncaught `pageErrors` while filtering only the intentional Supabase HTTP `400` invalid-credentials console log.
 - Wired `src/app/App.tsx` to hydrate Supabase Auth sessions, route through `EntryGateway` -> `AcademicSpacesSelector` -> `Team Workspace Studio` (`PhaserHost` + `WorkstationPanel`), expose compact-viewport workstation triggers (`mobile-workstation-btn-*`), and manage `Sign Out` / `Leave Studio` cleanly.
 - Locked `UI_CONTRACT.md` on `main` with Antislop dials (`ENERGY 1 / RHYTHM 2 / MOTION 1`) and verified contrast ratios.
 - Extended `src/styles/index.css` with `--color-border-control` (`#757E74`), `--color-accent-sage-strong-hover` (`#3B5638`), and shared Cozy button/input/card/badge primitives.

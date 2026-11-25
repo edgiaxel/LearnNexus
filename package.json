@@ -8,6 +8,8 @@
     "build": "tsc --noEmit && vite build",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",
+    "test:unit": "node --test tests/unit/m3-guards.test.ts",
+    "test:rls": "node tests/rls/verify-rls.mjs",
     "test:e2e": "playwright test"
   },
   "dependencies": {
