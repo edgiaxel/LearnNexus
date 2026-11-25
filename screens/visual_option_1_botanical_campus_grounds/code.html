@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Plus+Jakarta+Sans:wght@600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      "colors": {
+        "inverse-primary": "#afcfb0",
+        "on-primary-fixed": "#05210d",
+        "surface-container": "#e9f0e8",
+        "error": "#ba1a1a",
+        "outline-variant": "#c2c8bf",
+        "primary-fixed": "#caebcb",
+        "surface-container-highest": "#dde4dd",
+        "error-container": "#ffdad6",
+        "primary-container": "#8fae91",
+        "tertiary-container": "#c1a089",
+        "on-secondary": "#ffffff",
+        "surface-container-lowest": "#ffffff",
+        "on-secondary-fixed-variant": "#4b425f",
+        "on-tertiary-fixed": "#2a1708",
+        "on-tertiary-container": "#4e3726",
+        "tertiary-fixed": "#ffdcc5",
+        "outline": "#737971",
+        "on-primary": "#ffffff",
+        "surface-tint": "#49654c",
+        "surface-dim": "#d5dcd5",
+        "secondary-fixed": "#e9ddff",
+        "secondary": "#635a78",
+        "surface-container-low": "#eef5ee",
+        "on-primary-fixed-variant": "#314d36",
+        "on-secondary-fixed": "#1f1731",
+        "secondary-container": "#e7dafe",
+        "on-secondary-container": "#675e7c",
+        "tertiary": "#745945",
+        "surface-container-high": "#e3eae3",
+        "surface-variant": "#dde4dd",
+        "on-error": "#ffffff",
+        "inverse-surface": "#2b322d",
+        "background": "#f4fbf4",
+        "on-surface-variant": "#424842",
+        "surface": "#f4fbf4",
+        "on-background": "#161d19",
+        "on-tertiary": "#ffffff",
+        "on-surface": "#161d19",
+        "inverse-on-surface": "#ecf3eb",
+        "tertiary-fixed-dim": "#e3c0a8",
+        "secondary-fixed-dim": "#cdc1e4",
+        "surface-bright": "#f4fbf4",
+        "on-tertiary-fixed-variant": "#5a4230",
+        "on-primary-container": "#26422b",
+        "on-error-container": "#93000a",
+        "primary-fixed-dim": "#afcfb0",
+        "primary": "#49654c"
+      },
+      "borderRadius": {
+        "DEFAULT": "0.25rem",
+        "lg": "0.5rem",
+        "xl": "0.75rem",
+        "full": "9999px"
+      },
+      "spacing": {
+        "space-xs": "0.25rem",
+        "margin-mobile": "1rem",
+        "gutter": "1.5rem",
+        "space-sm": "0.5rem",
+        "margin": "2rem",
+        "gutter-mobile": "1rem",
+        "space-xl": "2.5rem",
+        "space-lg": "1.5rem",
+        "space-md": "1rem"
+      },
+      "fontFamily": {
+        "headline-md": [
+          "Plus Jakarta Sans"
+        ],
+        "title-md": [
+          "Plus Jakarta Sans"
+        ],
+        "label-md": [
+          "Inter"
+        ],
+        "body-sm": [
+          "Inter"
+        ],
+        "body-lg": [
+          "Inter"
+        ],
+        "headline-xl-mobile": [
+          "Plus Jakarta Sans"
+        ],
+        "headline-xl": [
+          "Plus Jakarta Sans"
+        ],
+        "headline-sm": [
+          "Plus Jakarta Sans"
+        ],
+        "label-sm": [
+          "Inter"
+        ],
+        "headline-lg-mobile": [
+          "Plus Jakarta Sans"
+        ],
+        "body-md": [
+          "Inter"
+        ],
+        "headline-lg": [
+          "Plus Jakarta Sans"
+        ]
+      },
+      "fontSize": {
+        "headline-md": [
+          "24px",
+          {
+            "lineHeight": "32px",
+            "letterSpacing": "-0.01em",
+            "fontWeight": "600"
+          }
+        ],
+        "title-md": [
+          "16px",
+          {
+            "lineHeight": "24px",
+            "letterSpacing": "0em",
+            "fontWeight": "600"
+          }
+        ],
+        "label-md": [
+          "14px",
+          {
+            "lineHeight": "20px",
+            "letterSpacing": "0.01em",
+            "fontWeight": "500"
+          }
+        ],
+        "body-sm": [
+          "13px",
+          {
+            "lineHeight": "20px",
+            "letterSpacing": "0em",
+            "fontWeight": "400"
+          }
+        ],
+        "body-lg": [
+          "18px",
+          {
+            "lineHeight": "28px",
+            "letterSpacing": "0em",
+            "fontWeight": "400"
+          }
+        ],
+        "headline-xl-mobile": [
+          "30px",
+          {
+            "lineHeight": "36px",
+            "letterSpacing": "-0.01em",
+            "fontWeight": "700"
+          }
+        ],
+        "headline-xl": [
+          "40px",
+          {
+            "lineHeight": "48px",
+            "letterSpacing": "-0.02em",
+            "fontWeight": "700"
+          }
+        ],
+        "headline-sm": [
+          "20px",
+          {
+            "lineHeight": "28px",
+            "letterSpacing": "0em",
+            "fontWeight": "600"
+          }
+        ],
+        "label-sm": [
+          "12px",
+          {
+            "lineHeight": "16px",
+            "letterSpacing": "0.02em",
+            "fontWeight": "500"
+          }
+        ],
+        "headline-lg-mobile": [
+          "24px",
+          {
+            "lineHeight": "32px",
+            "letterSpacing": "-0.01em",
+            "fontWeight": "600"
+          }
+        ],
+        "body-md": [
+          "15px",
+          {
+            "lineHeight": "24px",
+            "letterSpacing": "0em",
+            "fontWeight": "400"
+          }
+        ],
+        "headline-lg": [
+          "32px",
+          {
+            "lineHeight": "40px",
+            "letterSpacing": "-0.015em",
+            "fontWeight": "600"
+          }
+        ]
+      }
+    }
+  }
+}</script></head><body class="bg-surface font-body-md text-on-surface antialiased"><header class="fixed top-0 left-0 right-0 h-16 bg-surface-container-lowest/90 backdrop-blur-xl border-b border-outline-variant/50 shadow-[0_1px_8px_rgba(0,0,0,0.03)] z-50"><div class="h-16 w-full px-margin flex items-center justify-between"><div class="flex items-center gap-space-sm"><div class="w-9 h-9 rounded-lg bg-primary-container flex items-center justify-center text-on-primary shadow-sm"><span class="material-symbols-outlined text-[22px]">local_florist</span></div><div class="flex flex-col"><span class="font-title-md text-title-md text-on-surface tracking-tight leading-none">LearnNexus</span><span class="font-label-sm text-label-sm text-on-surface-variant leading-none mt-1">Cozy Academic Campus</span></div></div><nav class="hidden md:flex items-center gap-space-lg h-full" data-active-classes="text-primary font-semibold border-b-2 border-primary"><a aria-current="page" class="h-full flex items-center transition-colors pb-0.5 text-primary font-semibold border-b-2 border-primary" data-path="campus-grounds" href="#">Campus Grounds</a><a class="h-full flex items-center font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors pb-0.5" data-path="my-studios" href="#">My Studios</a><a class="h-full flex items-center font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors pb-0.5" data-path="study-library" href="#">Study Library</a></nav><div class="flex items-center gap-space-md"><button aria-label="Notifications" class="w-9 h-9 rounded-lg flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" type="button"><span class="material-symbols-outlined text-[20px]">notifications</span></button><div class="hidden sm:flex items-center gap-space-xs px-space-md py-1.5 rounded-full bg-surface-container-low border border-outline-variant/60"><span class="material-symbols-outlined text-[16px] text-primary">calendar_today</span><span class="font-label-sm text-label-sm text-on-surface-variant font-medium">Semester 5, 2026/2027</span></div><div class="flex items-center gap-space-sm pl-space-xs"><div class="flex items-center gap-space-xs pl-1.5 pr-3 py-1 rounded-full bg-surface-container-low border border-outline-variant/60 hover:bg-surface-container transition-colors cursor-pointer"><div class="w-7 h-7 rounded-full bg-primary flex items-center justify-center font-label-sm text-label-sm text-on-primary font-semibold">DA</div><span class="hidden lg:inline font-label-sm text-label-sm text-on-surface font-medium">Dian Arisandy</span></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></div></header><aside class="fixed left-0 top-16 bottom-0 w-[260px] bg-surface-container-low border-r border-outline-variant/50 z-40 flex flex-col justify-between overflow-y-auto"><div class="p-space-md flex flex-col gap-space-lg"><div class="p-space-md rounded-xl bg-surface-container-lowest border border-outline-variant/50 shadow-sm"><div class="flex items-center gap-space-xs mb-1.5"><span class="w-2 h-2 rounded-full bg-primary"></span><span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider font-semibold">Active Studio</span></div><div class="font-title-md text-title-md text-on-surface leading-tight">CS-302</div><div class="font-body-sm text-body-sm text-on-surface-variant mt-0.5 line-clamp-1">Software Engineering Studio</div></div><div class="flex flex-col gap-space-xs"><span class="px-space-sm font-label-sm text-label-sm uppercase tracking-wider font-semibold text-on-surface-variant/80">Campus Spaces</span><nav class="flex flex-col gap-1" data-active-classes="bg-surface-container-highest text-primary font-semibold"><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="campus-quad" href="#"><span class="material-symbols-outlined text-[18px]">park</span><span>Campus Quad</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="central-library" href="#"><span class="material-symbols-outlined text-[18px]">menu_book</span><span>Central Library</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="botanical-courtyard" href="#"><span class="material-symbols-outlined text-[18px]">yard</span><span>Botanical Courtyard</span></a></nav></div><div class="flex flex-col gap-space-xs"><span class="px-space-sm font-label-sm text-label-sm uppercase tracking-wider font-semibold text-on-surface-variant/80">Workspace Pods</span><nav class="flex flex-col gap-1" data-active-classes="bg-surface-container-highest text-primary font-semibold"><a class="flex items-center justify-between px-space-sm py-2 rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="team-sibukta-pod" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[18px] text-tertiary">groups</span><span class="truncate">Team SibukTA Pod</span></div><span class="w-2 h-2 rounded-full bg-primary-container"></span></a><a class="flex items-center justify-between px-space-sm py-2 rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="studio-delta" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[18px] text-secondary">hub</span><span class="truncate">Studio Delta</span></div><span class="w-2 h-2 rounded-full bg-outline-variant"></span></a></nav></div></div><div class="p-space-md border-t border-outline-variant/40"><div class="p-space-sm rounded-lg bg-surface-container flex items-center justify-between"><div class="flex items-center gap-space-xs"><span class="material-symbols-outlined text-[18px] text-primary">spa</span><span class="font-label-sm text-label-sm text-on-surface-variant">Focus Atmosphere</span></div><span class="font-label-sm text-label-sm text-primary font-semibold">Calm</span></div></div></aside><div class="pl-[260px]"><main class="relative pt-16 min-h-screen bg-surface w-full px-margin py-margin"><div class="flex flex-col w-full gap-space-xl">
+<!-- Top Welcome & Ambient Weather Strip -->
+<section class="flex flex-col lg:flex-row lg:items-end justify-between gap-space-lg bg-surface-container-lowest rounded-xl p-space-lg shadow-sm">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center gap-space-sm text-primary font-label-sm text-label-sm tracking-wider uppercase">
+<span class="material-symbols-outlined text-[18px]">wb_sunny</span>
+<span>Campus Atmosphere • Spring Term 2027</span>
+</div>
+<h1 class="font-headline-xl text-headline-xl text-on-surface tracking-tight">Good morning, Dian · Welcome back to Campus Grounds</h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl">
+        Sunny, 24°C · 3 study pods active in Botanical Courtyard. Gentle breeze through the cedar pavilions.
+      </p>
+</div>
+<!-- Quick Stats Cards in Parchment/Sage -->
+<div class="flex items-center gap-space-md shrink-0">
+<div class="flex items-center gap-space-md px-space-md py-3 rounded-lg bg-surface-container-low">
+<div class="w-10 h-10 rounded-lg bg-primary-fixed flex items-center justify-center text-on-primary-fixed">
+<span class="material-symbols-outlined text-[20px]">groups</span>
+</div>
+<div class="flex flex-col">
+<span class="font-title-md text-title-md text-on-surface leading-tight">18 Peers</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Around Quad</span>
+</div>
+</div>
+<div class="flex items-center gap-space-md px-space-md py-3 rounded-lg bg-surface-container-low">
+<div class="w-10 h-10 rounded-lg bg-secondary-container flex items-center justify-center text-on-secondary-container">
+<span class="material-symbols-outlined text-[20px]">psychology</span>
+</div>
+<div class="flex flex-col">
+<span class="font-title-md text-title-md text-on-surface leading-tight">Quiet Focus</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Optimal Hours</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Main Exploration Hub: Interactive Canvas & Right Docked Inspector -->
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-space-lg items-start">
+<!-- Quadrangle 2D Pixel Canvas Area (Left 8 Cols) -->
+<div class="xl:col-span-8 flex flex-col gap-space-md">
+<!-- Quad Controller Bar -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-wrap items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-sm">
+<span class="w-3 h-3 rounded-full bg-primary animate-pulse"></span>
+<span class="font-title-md text-title-md text-on-surface">Interactive Botanical Quadrangle</span>
+<span class="px-2.5 py-0.5 rounded-full bg-primary-container/20 text-on-primary-container font-label-sm text-label-sm">Live Sandbox</span>
+</div>
+<div class="flex items-center gap-space-xs font-label-sm text-label-sm text-on-surface-variant bg-surface-container px-space-md py-1.5 rounded-full">
+<span class="material-symbols-outlined text-[16px] text-primary">keyboard</span>
+<span>Walk with Arrow Keys / WASD · Approach any studio or reading bench</span>
+</div>
+</div>
+<!-- Top-Down 2D Pixel-Art Style Canvas Container -->
+<div class="relative w-full h-[540px] rounded-xl bg-surface-container overflow-hidden shadow-sm select-none" id="campus-viewport">
+<!-- Botanical Quad SVG Layer -->
+<svg class="w-full h-full" id="quad-canvas" preserveaspectratio="xMidYMid slice" viewbox="0 0 900 600" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<!-- Pixel / Cobble Grass Pattern -->
+<pattern height="20" id="pixel-grass" patternunits="userSpaceOnUse" width="20">
+<rect fill="#dde8dc" height="20" width="20"></rect>
+<rect fill="#d4e1d3" height="10" width="10" x="0" y="0"></rect>
+<rect fill="#8fae91" height="2" opacity="0.35" width="2" x="14" y="2"></rect>
+<rect fill="#8fae91" height="2" opacity="0.25" width="2" x="4" y="12"></rect>
+<rect fill="#745945" height="2" opacity="0.15" width="2" x="16" y="14"></rect>
+</pattern>
+<!-- Warm Cobblestone Walkway Pattern -->
+<pattern height="24" id="stone-path" patternunits="userSpaceOnUse" width="24">
+<rect fill="#eee7dc" height="24" width="24"></rect>
+<rect fill="#f7f2ea" height="10" rx="1" width="10" x="1" y="1"></rect>
+<rect fill="#e5ded2" height="10" rx="1" width="10" x="13" y="1"></rect>
+<rect fill="#ded7cb" height="10" rx="1" width="10" x="1" y="13"></rect>
+<rect fill="#f4eee4" height="10" rx="1" width="10" x="13" y="13"></rect>
+</pattern>
+<!-- Lavender Bed Pattern -->
+<pattern height="16" id="lavender-bed" patternunits="userSpaceOnUse" width="16">
+<rect fill="#745945" height="16" opacity="0.2" width="16"></rect>
+<circle cx="4" cy="4" fill="#635a78" opacity="0.6" r="3"></circle>
+<circle cx="12" cy="12" fill="#e7dafe" r="3"></circle>
+<circle cx="12" cy="4" fill="#8fae91" r="2.5"></circle>
+<circle cx="4" cy="12" fill="#635a78" opacity="0.4" r="2.5"></circle>
+</pattern>
+</defs>
+<!-- Lawn Background -->
+<rect fill="url(#pixel-grass)" height="600" width="900"></rect>
+<!-- Intersecting Stone Pathways -->
+<!-- Central Cross Paths -->
+<rect fill="url(#stone-path)" height="600" width="100" x="400" y="0"></rect>
+<rect fill="url(#stone-path)" height="100" width="900" x="0" y="250"></rect>
+<!-- Lavender Flowerbeds Bordering Paths -->
+<rect fill="url(#lavender-bed)" height="50" rx="6" width="240" x="140" y="180"></rect>
+<rect fill="url(#lavender-bed)" height="50" rx="6" width="240" x="520" y="180"></rect>
+<rect fill="url(#lavender-bed)" height="50" rx="6" width="240" x="140" y="370"></rect>
+<rect fill="url(#lavender-bed)" height="50" rx="6" width="240" x="520" y="370"></rect>
+<!-- Central Circular Fountain Plaza -->
+<circle cx="450" cy="300" fill="#eee7dc" r="92"></circle>
+<circle cx="450" cy="300" fill="#caebcb" opacity="0.6" r="76"></circle>
+<circle cx="450" cy="300" fill="#8fae91" r="54"></circle>
+<!-- Fountain Basin Tier -->
+<circle cx="450" cy="300" fill="#49654c" r="28"></circle>
+<circle cx="450" cy="300" fill="#ffffff" opacity="0.8" r="10"></circle>
+<path d="M 430 300 Q 450 270 470 300 Q 450 330 430 300" fill="#caebcb" opacity="0.5"></path>
+<!-- Shaded Outdoor Wooden Study Pavilions (Top Left & Bottom Right) -->
+<g transform="translate(60, 60)">
+<rect fill="#ffdcc5" height="90" opacity="0.45" rx="8" width="140"></rect>
+<!-- Pergola Wooden Slats -->
+<rect fill="#745945" height="8" rx="2" width="120" x="10" y="12"></rect>
+<rect fill="#745945" height="8" rx="2" width="120" x="10" y="32"></rect>
+<rect fill="#745945" height="8" rx="2" width="120" x="10" y="52"></rect>
+<rect fill="#745945" height="8" rx="2" width="120" x="10" y="72"></rect>
+<!-- Wooden Table & Benches -->
+<rect fill="#c1a089" height="42" rx="4" width="50" x="45" y="24"></rect>
+<rect fill="#745945" height="30" rx="2" width="8" x="30" y="30"></rect>
+<rect fill="#745945" height="30" rx="2" width="8" x="102" y="30"></rect>
+</g>
+<g transform="translate(700, 440)">
+<rect fill="#ffdcc5" height="90" opacity="0.45" rx="8" width="140"></rect>
+<rect fill="#745945" height="8" rx="2" width="120" x="10" y="12"></rect>
+<rect fill="#745945" height="8" rx="2" width="120" x="10" y="32"></rect>
+<rect fill="#745945" height="8" rx="2" width="120" x="10" y="52"></rect>
+<rect fill="#745945" height="8" rx="2" width="120" x="10" y="72"></rect>
+<rect fill="#c1a089" height="42" rx="4" width="50" x="45" y="24"></rect>
+<rect fill="#745945" height="30" rx="2" width="8" x="30" y="30"></rect>
+<rect fill="#745945" height="30" rx="2" width="8" x="102" y="30"></rect>
+</g>
+<!-- Campus Quad Buildings: Top-down facades / footprint -->
+<!-- 1. Central Library (Top Edge) -->
+<g transform="translate(330, 16)">
+<rect fill="#ffffff" height="74" rx="6" width="240"></rect>
+<rect fill="#e9f0e8" height="62" rx="4" width="228" x="6" y="6"></rect>
+<rect fill="#745945" height="20" rx="3" width="70" x="85" y="54"></rect>
+<!-- Wooden Signboard -->
+<rect fill="#745945" height="24" rx="4" width="120" x="60" y="-12"></rect>
+<text fill="#ffffff" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" text-anchor="middle" x="120" y="4">Central Library</text>
+</g>
+<!-- 2. Software Studio Hall (Right Edge) -->
+<g transform="translate(730, 200)">
+<rect fill="#ffffff" height="200" rx="6" width="150"></rect>
+<rect fill="#dde4dd" height="188" rx="4" width="138" x="6" y="6"></rect>
+<!-- Entrance Door Mat -->
+<rect fill="#49654c" height="40" rx="2" width="16" x="0" y="80"></rect>
+<!-- Signboard -->
+<rect fill="#745945" height="22" rx="4" width="132" x="-8" y="45"></rect>
+<text fill="#ffffff" font-family="'Plus Jakarta Sans', sans-serif" font-size="10" font-weight="700" text-anchor="middle" x="58" y="60">Software Studio Hall</text>
+</g>
+<!-- 3. Botanical Greenhouse (Bottom Edge) -->
+<g transform="translate(310, 500)">
+<rect fill="#caebcb" height="85" opacity="0.8" rx="6" width="280"></rect>
+<rect fill="#ffffff" height="69" opacity="0.65" rx="4" width="264" x="8" y="8"></rect>
+<!-- Glass Panel Lines -->
+<line stroke="#8fae91" stroke-width="2" x1="74" x2="74" y1="8" y2="77"></line>
+<line stroke="#8fae91" stroke-width="2" x1="140" x2="140" y1="8" y2="77"></line>
+<line stroke="#8fae91" stroke-width="2" x1="206" x2="206" y1="8" y2="77"></line>
+<!-- Signboard -->
+<rect fill="#49654c" height="22" rx="4" width="140" x="70" y="-8"></rect>
+<text fill="#ffffff" font-family="'Plus Jakarta Sans', sans-serif" font-size="10" font-weight="700" text-anchor="middle" x="140" y="7">Botanical Greenhouse</text>
+</g>
+<!-- 4. Student Commons (Left Edge) -->
+<g transform="translate(16, 210)">
+<rect fill="#ffffff" height="180" rx="6" width="100"></rect>
+<rect fill="#e9ddff" height="168" opacity="0.5" rx="4" width="88" x="6" y="6"></rect>
+<rect fill="#635a78" height="40" rx="2" width="14" x="86" y="70"></rect>
+<!-- Signboard -->
+<rect fill="#635a78" height="22" rx="4" width="96" x="2" y="40"></rect>
+<text fill="#ffffff" font-family="'Plus Jakarta Sans', sans-serif" font-size="9" font-weight="700" text-anchor="middle" x="50" y="55">Student Commons</text>
+</g>
+<!-- Cozy Potted Plant Clusters -->
+<g transform="translate(380, 220)">
+<circle cx="6" cy="6" fill="#745945" r="6"></circle>
+<circle cx="6" cy="6" fill="#49654c" r="4.5"></circle>
+</g>
+<g transform="translate(510, 220)">
+<circle cx="6" cy="6" fill="#745945" r="6"></circle>
+<circle cx="6" cy="6" fill="#49654c" r="4.5"></circle>
+</g>
+<g transform="translate(380, 370)">
+<circle cx="6" cy="6" fill="#745945" r="6"></circle>
+<circle cx="6" cy="6" fill="#49654c" r="4.5"></circle>
+</g>
+<g transform="translate(510, 370)">
+<circle cx="6" cy="6" fill="#745945" r="6"></circle>
+<circle cx="6" cy="6" fill="#49654c" r="4.5"></circle>
+</g>
+<!-- Interactive Avatar Position (Dian A.) standing near Software Studio -->
+<g id="avatar-group" transform="translate(690, 280)">
+<!-- Proximity Pulse Ring -->
+<circle cx="16" cy="16" fill="#8fae91" opacity="0.25" r="28">
+<animate attributename="r" dur="2.4s" repeatcount="indefinite" values="20;32;20"></animate>
+<animate attributename="opacity" dur="2.4s" repeatcount="indefinite" values="0.35;0.1;0.35"></animate>
+</circle>
+<!-- Pixel Avatar Character -->
+<!-- Shadow -->
+<ellipse cx="16" cy="28" fill="#161d19" opacity="0.2" rx="10" ry="4"></ellipse>
+<!-- Body -->
+<rect fill="#49654c" height="12" rx="3" width="12" x="10" y="16"></rect>
+<!-- Bag/Satchel Strap -->
+<line stroke="#ffdcc5" stroke-width="2" x1="11" x2="21" y1="16" y2="28"></line>
+<!-- Head & Hair -->
+<circle cx="16" cy="11" fill="#ffdcc5" r="7"></circle>
+<path d="M 9 10 Q 16 4 23 10 Q 23 7 16 6 Q 9 7 9 10" fill="#2a1708"></path>
+<circle cx="14" cy="11" fill="#161d19" r="1"></circle>
+<circle cx="18" cy="11" fill="#161d19" r="1"></circle>
+<!-- Avatar Nametag -->
+<g transform="translate(-16, -18)">
+<rect fill="#161d19" height="18" opacity="0.85" rx="9" width="64"></rect>
+<text fill="#ffffff" font-family="'Inter', sans-serif" font-size="9.5" font-weight="600" text-anchor="middle" x="32" y="13">You (Dian)</text>
+</g>
+</g>
+</svg>
+<!-- Dynamic Proximity Popover near Software Studio entrance -->
+<div class="absolute right-12 top-48 bg-surface-container-lowest/95 backdrop-blur-md rounded-xl p-space-md shadow-lg max-w-xs animate-bounce" style="animation-duration: 2.8s;">
+<div class="flex items-center gap-space-xs text-primary font-label-sm text-label-sm font-semibold mb-1">
+<span class="material-symbols-outlined text-[16px]">sensors</span>
+<span>Pod In Range</span>
+</div>
+<p class="font-title-md text-title-md text-on-surface">Software Studio Pod</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Press <kbd class="px-1.5 py-0.5 text-xs bg-surface-container-highest rounded text-on-surface font-semibold">[E]</kbd> to enter workstation station.</p>
+</div>
+<!-- Canvas Controls Footer Overlay -->
+<div class="absolute bottom-space-md left-space-md flex items-center gap-space-sm bg-surface-container-lowest/90 backdrop-blur-sm px-space-md py-1.5 rounded-full shadow-sm">
+<span class="material-symbols-outlined text-[18px] text-tertiary">park</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Courtyard Flora: French Lavender, Dwarf Juniper, Evergreen Magnolia</span>
+</div>
+</div>
+<!-- Campus Atmosphere Highlights Bar: 3 Mini Rich Visual Cards -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-md">
+<!-- Botanical Quad Cam Preview -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex items-center gap-space-md">
+<div class="w-14 h-14 rounded-lg overflow-hidden shrink-0">
+<img class="w-full h-full object-cover" data-alt="Sunny top-down view of peaceful Japanese botanical garden courtyard with lush emerald moss, stone lantern, wooden bench, and soft sunbeams casting warm dappled light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuByID-okiXEpJ238xCvEwf8GIrduUW3icR7iCOkdJq394v7yAZ_klwvunU3q2u9hFm1rA9IiadaQypEtfQ8vrpwYVo4mOxpxRG-6KcNMmxRB_s28_dg0yUT8leQ2-1bq8ml9n5kBmTrDwTmo1x4oqfh-RSKpWPsSuf-qcNSjwrHZrvnsyVvjk9Dkhay4G9Ny-3Urs8fmIIdpvKo8NWSVa7-zoqmW77zsgfmbiImUwv8"/>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-sm text-label-sm text-primary font-semibold truncate">Botanical Quadrangle</span>
+<span class="font-title-md text-title-md text-on-surface truncate">Courtyard Cam 02</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant truncate">Sunny · Light breeze</span>
+</div>
+</div>
+<!-- Outdoor Study Pavilion Photo -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex items-center gap-space-md">
+<div class="w-14 h-14 rounded-lg overflow-hidden shrink-0">
+<img class="w-full h-full object-cover" data-alt="Cozy outdoor wooden study arbor pavilion on university grounds with wooden desks, open notebooks, ceramic teacup, surrounded by potted ferns and creeping ivy in natural daylight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBqFdooyLHj_to0EvzC2Nus6wZL0XzIL6CAfo28f2dl_gS___-fWh13kMPQCAjBnUvZUHgly65g4wD4UYCzRDMnCDxdgVX5oQSQ83YjkXoqq6OyOcC3UhaCcdCvUvMSebJsTGoBeG3GIRM7OHb_9p4CY7woGl3OvzYSN71ngaJDzTk4ZGHzKAd1vEZeCALREB3wjlwEkUu0qyJQrKc05Ib5xefXEzgRoDRWXZ68eqPr"/>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-sm text-label-sm text-secondary font-semibold truncate">Cedar Pavilion 01</span>
+<span class="font-title-md text-title-md text-on-surface truncate">Open Seating Available</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant truncate">2 of 6 benches taken</span>
+</div>
+</div>
+<!-- Silent Greenhouse Pod Preview -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex items-center gap-space-md">
+<div class="w-14 h-14 rounded-lg overflow-hidden shrink-0">
+<img class="w-full h-full object-cover" data-alt="Warm botanical greenhouse reading nook filled with lush monstera leaves, hanging eucalyptus plants, rustic oak writing desk, sunlit glass ceiling with soft warm glow" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDPXvn8stw9Z1ZAeRLKGyjPIJZP2QItDAWrgwksekzQi1aGNWGHflGVQ1qU03iKuTfuOQfSVnyEeoDr1AhBtlzV8owilmwauf7b9qbRpHzUUAP-R-Y3k5QjRpj5MoiKRPJGb8QOd5I9ptIPmgaVjtjj9waz2MOtx7pFTzY9mbDOj3qcPPyqS6LMUOeihgLiXwIplKUSfE3Qq_eoRvoexuWPfid4D86CNUFCNnY7aKTM"/>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-sm text-label-sm text-tertiary font-semibold truncate">Greenhouse Nook</span>
+<span class="font-title-md text-title-md text-on-surface truncate">Deep Focus Reserve</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant truncate">Quiet zone · No calls</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Docked Team Studio Preview Panel (Width ~380px on desktop) -->
+<aside class="xl:col-span-4 w-full flex flex-col gap-space-md">
+<div class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm flex flex-col gap-space-lg">
+<!-- Header & Breadcrumb -->
+<div class="flex flex-col gap-1">
+<div class="flex items-center justify-between">
+<span class="px-2.5 py-1 rounded-full bg-primary-fixed text-on-primary-fixed-variant font-label-sm text-label-sm font-semibold">
+              CS-302 Software Studio
+            </span>
+<span class="flex items-center gap-1 font-label-sm text-label-sm text-primary font-medium">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+              Live Sync
+            </span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface mt-1">Team SibukTA Pod · Station 04</h2>
+<div class="flex items-center gap-space-xs text-on-surface-variant font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-[16px] text-tertiary">cottage</span>
+<span>3 members present · Working on Capstone Demonstrator</span>
+</div>
+</div>
+<!-- Teammates Presence Strip -->
+<div class="flex flex-col gap-space-xs bg-surface-container-low p-space-md rounded-xl">
+<span class="font-label-sm text-label-sm text-on-surface-variant font-semibold uppercase tracking-wider">Teammates In Studio</span>
+<div class="flex flex-wrap gap-space-xs pt-1">
+<!-- Dian A. (Current) -->
+<div class="flex items-center gap-1.5 pl-1.5 pr-3 py-1 rounded-full bg-surface-container-lowest shadow-sm">
+<div class="w-6 h-6 rounded-full bg-primary flex items-center justify-center font-label-sm text-label-sm text-on-primary font-semibold">DA</div>
+<span class="font-label-sm text-label-sm text-on-surface font-medium">Dian A. (You)</span>
+</div>
+<!-- Farhan M. -->
+<div class="flex items-center gap-1.5 pl-1.5 pr-3 py-1 rounded-full bg-surface-container-lowest shadow-sm">
+<div class="w-6 h-6 rounded-full bg-secondary flex items-center justify-center font-label-sm text-label-sm text-on-secondary font-semibold">FM</div>
+<span class="font-label-sm text-label-sm text-on-surface font-medium">Farhan M.</span>
+</div>
+<!-- Putri S. -->
+<div class="flex items-center gap-1.5 pl-1.5 pr-3 py-1 rounded-full bg-surface-container-lowest shadow-sm">
+<div class="w-6 h-6 rounded-full bg-tertiary flex items-center justify-center font-label-sm text-label-sm text-on-tertiary font-semibold">PS</div>
+<span class="font-label-sm text-label-sm text-on-surface font-medium">Putri S.</span>
+</div>
+<!-- Wardhana K. -->
+<div class="flex items-center gap-1.5 pl-1.5 pr-3 py-1 rounded-full bg-surface-container-lowest opacity-70">
+<div class="w-6 h-6 rounded-full bg-surface-container-highest flex items-center justify-center font-label-sm text-label-sm text-on-surface-variant font-semibold">WK</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-medium">Wardhana (Away)</span>
+</div>
+</div>
+</div>
+<!-- Mini Workstation Status Cards -->
+<div class="flex flex-col gap-space-sm">
+<span class="font-label-sm text-label-sm text-on-surface-variant font-semibold uppercase tracking-wider">Station Micro-Desks</span>
+<!-- Desk 1: Overview Desk -->
+<div class="flex items-center justify-between p-space-md rounded-xl bg-surface-container-low hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-space-sm min-w-0">
+<div class="w-9 h-9 rounded-lg bg-primary-container/30 flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-[20px]">architecture</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-title-md text-title-md text-on-surface truncate">Overview Desk</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant truncate">System Schema &amp; Requirements</span>
+</div>
+</div>
+<span class="px-3 py-1 rounded-full bg-primary-fixed text-on-primary-fixed-variant font-label-sm text-label-sm font-semibold shrink-0">
+              Active · Capstone Scope v2
+            </span>
+</div>
+<!-- Desk 2: Sprint Board -->
+<div class="flex items-center justify-between p-space-md rounded-xl bg-surface-container-low hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-space-sm min-w-0">
+<div class="w-9 h-9 rounded-lg bg-tertiary-fixed flex items-center justify-center text-tertiary shrink-0">
+<span class="material-symbols-outlined text-[20px]">view_kanban</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-title-md text-title-md text-on-surface truncate">Sprint Board</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant truncate">Iteration Sprint 3</span>
+</div>
+</div>
+<span class="px-3 py-1 rounded-full bg-tertiary-fixed text-on-tertiary-fixed-variant font-label-sm text-label-sm font-semibold shrink-0">
+              6 tasks in progress · Due Fri
+            </span>
+</div>
+<!-- Desk 3: Reading Library -->
+<div class="flex items-center justify-between p-space-md rounded-xl bg-surface-container-low hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-space-sm min-w-0">
+<div class="w-9 h-9 rounded-lg bg-secondary-container flex items-center justify-center text-secondary shrink-0">
+<span class="material-symbols-outlined text-[20px]">auto_stories</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-title-md text-title-md text-on-surface truncate">Reading Library</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant truncate">Curated Papers &amp; Notes</span>
+</div>
+</div>
+<span class="px-3 py-1 rounded-full bg-secondary-fixed text-on-secondary-fixed-variant font-label-sm text-label-sm font-semibold shrink-0">
+              4 shared references linked
+            </span>
+</div>
+</div>
+<!-- Weekly Milestone Progress Ring Inline Visualization -->
+<div class="p-space-md rounded-xl bg-surface-container-low flex items-center justify-between gap-space-md">
+<div class="flex flex-col gap-1">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider font-semibold">Studio Goal</span>
+<span class="font-title-md text-title-md text-on-surface leading-snug">Demo Prototype Review</span>
+<span class="font-body-sm text-body-sm text-primary font-medium">82% completed for milestone</span>
+</div>
+<div class="relative w-16 h-16 shrink-0 flex items-center justify-center">
+<svg class="w-16 h-16 transform -rotate-90" viewbox="0 0 36 36">
+<path class="text-surface-container-highest" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-width="3.5"></path>
+<path class="text-primary" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="82, 100" stroke-linecap="round" stroke-width="3.5"></path>
+</svg>
+<span class="absolute font-title-md text-title-md text-on-surface font-semibold">82%</span>
+</div>
+</div>
+<!-- Primary Entrance Action Button -->
+<div class="flex flex-col gap-space-xs pt-space-xs">
+<button class="w-full flex items-center justify-center gap-space-sm px-space-lg py-3 rounded-lg bg-primary-container hover:bg-primary text-on-primary font-label-md text-label-md font-semibold shadow-sm transition-all transform active:scale-[0.99]" id="enter-pod-btn" type="button">
+<span class="material-symbols-outlined text-[20px]">door_open</span>
+<span>Walk into Team Studio</span>
+</button>
+<span class="font-label-sm text-label-sm text-center text-on-surface-variant">Shortcut: Press [E] while standing in courtyard proximity</span>
+</div>
+</div>
+<!-- Live Courtyard Chatter & Ambient Bulletin -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm font-semibold uppercase tracking-wider text-on-surface-variant">Courtyard Chime</span>
+<span class="font-label-sm text-label-sm text-primary font-medium">Just now</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface">
+          Putri pinned a new Figma board for “Microservices Diagram v3” inside Studio Delta.
+        </p>
+</div>
+</aside>
+</div>
+</div>
+<script>
+  (function() {
+    let posX = 690;
+    let posY = 280;
+    const avatarGroup = document.getElementById('avatar-group');
+    const enterBtn = document.getElementById('enter-pod-btn');
+
+    function updateAvatarPosition() {
+      if (avatarGroup) {
+        avatarGroup.setAttribute('transform', `translate(${posX}, ${posY})`);
+      }
+    }
+
+    window.addEventListener('keydown', function(e) {
+      const step = 14;
+      const key = e.key.toLowerCase();
+      let moved = false;
+
+      if (key === 'arrowleft' || key === 'a') {
+        posX = Math.max(50, posX - step);
+        moved = true;
+      } else if (key === 'arrowright' || key === 'd') {
+        posX = Math.min(840, posX + step);
+        moved = true;
+      } else if (key === 'arrowup' || key === 'w') {
+        posY = Math.max(40, posY - step);
+        moved = true;
+      } else if (key === 'arrowdown' || key === 's') {
+        posY = Math.min(540, posY + step);
+        moved = true;
+      } else if (key === 'e') {
+        triggerEnterStudio();
+      }
+
+      if (moved) {
+        e.preventDefault();
+        updateAvatarPosition();
+      }
+    });
+
+    function triggerEnterStudio() {
+      if (enterBtn) {
+        enterBtn.classList.add('bg-primary');
+        setTimeout(() => {
+          enterBtn.classList.remove('bg-primary');
+        }, 300);
+      }
+    }
+
+    if (enterBtn) {
+      enterBtn.addEventListener('click', triggerEnterStudio);
+    }
+  })();
+</script></main></div></body></html>

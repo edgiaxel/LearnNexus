@@ -1,0 +1,115 @@
+/* LearnNexus — Cozy Digital Campus Design Tokens & Base Layer
+ * Canonical source: UI_CONTRACT.md & docs/DESIGN.md
+ */
+
+:root {
+  /* Warm Surface and Backgrounds */
+  --color-bg-warm: #F7F4EC;
+  --color-surface-primary: #FFFFFF;
+  --color-surface-secondary: #EEF1E8;
+  --color-surface-tertiary: #E5E9DE;
+
+  /* Pastel Accents */
+  --color-accent-sage-soft: #C9D7BA;
+  --color-accent-sage: #A4B99C;
+  --color-accent-sage-strong: #4A6B46;
+  --color-accent-lavender: #DAD2E9;
+  --color-accent-blue: #C9DFE8;
+  --color-accent-peach: #F1D2BC;
+  --color-accent-yellow: #F0DFA7;
+
+  /* Text and Content (WCAG AA >= 4.5:1 verified) */
+  --color-text-charcoal: #343A40;
+  --color-text-primary: #30343B;
+  --color-text-secondary: #5C665C;
+  --color-text-muted: #636B63;
+  --color-text-inverse: #FFFFFF;
+
+  /* Borders and Dividers */
+  --color-border-subtle: #E3E5DC;
+  --color-border-focus: #4A6B46;
+
+  /* Functional Status Colors */
+  --color-status-todo-bg: #FBF4DE;
+  --color-status-todo-text: #785A10;
+  --color-status-inprogress-bg: #F7ECE4;
+  --color-status-inprogress-text: #7C4520;
+  --color-status-done-bg: #EAF2EB;
+  --color-status-done-text: #2D5A34;
+  --color-status-error-bg: #FAECEB;
+  --color-status-error-text: #8E2F29;
+
+  /* Typography */
+  --font-sans: 'Inter', 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  /* Geometry & Elevation */
+  --radius-sm: 8px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-pill: 9999px;
+  --shadow-subtle: 0 1px 3px rgba(52, 59, 54, 0.05);
+  --shadow-hover: 0 4px 12px rgba(52, 59, 54, 0.07);
+  --shadow-drawer: 0 12px 28px rgba(52, 59, 54, 0.09);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  background-color: var(--color-bg-warm);
+  color: var(--color-text-primary);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Interactive cursor affordance (R-39) */
+a[href],
+button:not(:disabled),
+summary,
+select:not(:disabled),
+label[for],
+[role="button"]:not([aria-disabled="true"]),
+[role="tab"]:not([aria-disabled="true"]),
+[role="switch"]:not([aria-disabled="true"]) {
+  cursor: pointer;
+}
+
+button:disabled,
+select:disabled,
+[aria-disabled="true"] {
+  cursor: not-allowed;
+}
+
+/* Visible keyboard focus indicator (R-32) */
+:focus-visible {
+  outline: 2px solid var(--color-border-focus);
+  outline-offset: 2px;
+}
+
+/* Crisp pixel-art canvas rendering (ADR-012) */
+canvas {
+  image-rendering: -moz-crisp-edges;
+  image-rendering: -webkit-crisp-edges;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

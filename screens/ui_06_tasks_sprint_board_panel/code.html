@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Plus+Jakarta+Sans:wght@500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={"darkMode":"class","theme":{"extend":{"colors":{"secondary-container":"#e7dafe","on-surface":"#161d19","secondary-fixed-dim":"#cdc1e4","on-surface-variant":"#424842","tertiary":"#745945","surface-dim":"#d5dcd5","inverse-on-surface":"#ecf3eb","on-secondary-fixed":"#1f1731","on-secondary-fixed-variant":"#4b425f","surface-container-highest":"#dde4dd","surface-tint":"#49654c","surface-variant":"#dde4dd","on-secondary":"#ffffff","surface-container":"#e9f0e8","primary-container":"#8fae91","on-tertiary":"#ffffff","on-error-container":"#93000a","inverse-primary":"#afcfb0","surface-container-low":"#eef5ee","on-background":"#161d19","on-primary-container":"#26422b","on-primary":"#ffffff","outline":"#737971","on-tertiary-fixed-variant":"#5a4230","primary":"#49654c","on-tertiary-container":"#4e3726","on-tertiary-fixed":"#2a1708","on-secondary-container":"#675e7c","error-container":"#ffdad6","on-primary-fixed":"#05210d","outline-variant":"#c2c8bf","tertiary-container":"#c1a089","surface":"#f4fbf4","tertiary-fixed-dim":"#e3c0a8","surface-container-high":"#e3eae3","secondary-fixed":"#e9ddff","secondary":"#635a78","primary-fixed":"#caebcb","tertiary-fixed":"#ffdcc5","background":"#f4fbf4","inverse-surface":"#2b322d","surface-container-lowest":"#ffffff","on-primary-fixed-variant":"#314d36","surface-bright":"#f4fbf4","error":"#ba1a1a","primary-fixed-dim":"#afcfb0","on-error":"#ffffff"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"space-md":"1rem","space-lg":"1.5rem","gutter":"1.5rem","space-xl":"2.5rem","margin":"2rem","gutter-mobile":"1rem","space-sm":"0.5rem","margin-mobile":"1rem","space-xs":"0.25rem"},"fontFamily":{"headline-xl-mobile":["Plus Jakarta Sans"],"body-md":["Inter"],"headline-md":["Plus Jakarta Sans"],"headline-lg-mobile":["Plus Jakarta Sans"],"body-sm":["Inter"],"headline-sm":["Plus Jakarta Sans"],"body-lg":["Inter"],"headline-xl":["Plus Jakarta Sans"],"label-sm":["Inter"],"label-md":["Inter"],"headline-lg":["Plus Jakarta Sans"],"title-md":["Plus Jakarta Sans"]},"fontSize":{"headline-xl-mobile":["30px",{"lineHeight":"36px","letterSpacing":"-0.01em","fontWeight":"700"}],"body-md":["15px",{"lineHeight":"24px","letterSpacing":"0em","fontWeight":"400"}],"headline-md":["24px",{"lineHeight":"32px","letterSpacing":"-0.01em","fontWeight":"600"}],"headline-lg-mobile":["24px",{"lineHeight":"32px","letterSpacing":"-0.01em","fontWeight":"600"}],"body-sm":["13px",{"lineHeight":"20px","letterSpacing":"0em","fontWeight":"400"}],"headline-sm":["20px",{"lineHeight":"28px","letterSpacing":"0em","fontWeight":"600"}],"body-lg":["18px",{"lineHeight":"28px","letterSpacing":"0em","fontWeight":"400"}],"headline-xl":["40px",{"lineHeight":"48px","letterSpacing":"-0.02em","fontWeight":"700"}],"label-sm":["12px",{"lineHeight":"16px","letterSpacing":"0.02em","fontWeight":"500"}],"label-md":["14px",{"lineHeight":"20px","letterSpacing":"0.01em","fontWeight":"500"}],"headline-lg":["32px",{"lineHeight":"40px","letterSpacing":"-0.015em","fontWeight":"600"}],"title-md":["16px",{"lineHeight":"24px","letterSpacing":"0em","fontWeight":"600"}]}}}}</script></head><body class="bg-surface font-body-md text-on-surface antialiased"><header class="fixed top-0 left-0 right-0 h-16 bg-surface/85 backdrop-blur-md shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-50 flex items-center justify-between px-gutter"><div class="flex items-center gap-space-sm"><div class="w-9 h-9 rounded-lg bg-primary flex items-center justify-center text-on-primary shadow-sm"><span class="material-symbols-outlined text-[20px]">school</span></div><div class="flex flex-col"><span class="font-title-md text-title-md text-on-surface leading-tight">LearnNexus</span><span class="font-label-sm text-label-sm text-on-surface-variant leading-none">Cozy Academic Campus</span></div></div><nav class="hidden md:flex items-center gap-space-xs" data-active-classes="bg-primary-container text-on-primary-container font-semibold rounded-lg"><a class="px-space-md py-space-xs rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="campus-grounds" href="#">Campus Grounds</a><a class="px-space-md py-space-xs rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="my-studios" href="#">My Studios</a><a class="px-space-md py-space-xs rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="study-library" href="#">Study Library</a></nav><div class="flex items-center gap-space-md"><div class="hidden sm:flex items-center px-space-sm py-1 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm">Semester 5, 2026/2027</div><button aria-label="Notifications" class="w-9 h-9 rounded-lg flex items-center justify-center text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[20px]">notifications</span></button><div class="flex items-center gap-space-sm pl-space-xs"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="font-label-sm text-label-sm font-semibold text-on-primary">DA</span></div><div class="hidden lg:flex flex-col text-left"><span class="font-label-md text-label-md text-on-surface font-semibold leading-tight">Dian Arisandy</span><span class="font-label-sm text-label-sm text-on-surface-variant leading-none">Student</span></div></div></div></header><aside class="fixed left-0 top-16 bottom-0 w-72 bg-surface-container-low shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-40 flex flex-col justify-between p-space-md overflow-y-auto"><div class="flex flex-col gap-space-lg"><div class="p-space-md rounded-lg bg-surface-container-lowest shadow-[0_1px_8px_rgba(0,0,0,0.03)]"><div class="flex items-center justify-between mb-space-xs"><span class="font-label-sm text-label-sm text-primary font-semibold uppercase tracking-wider">Active Studio</span><span class="material-symbols-outlined text-outline text-[18px]">palette</span></div><div class="font-title-md text-title-md text-on-surface leading-snug">CS-302: Software Engineering Studio</div><div class="mt-space-xs font-body-sm text-body-sm text-on-surface-variant">Main Campus Ground Track</div></div><div class="flex flex-col gap-space-xs"><span class="px-space-sm font-label-sm text-label-sm text-on-surface-variant font-semibold uppercase tracking-wider">Campus Spaces</span><nav class="flex flex-col gap-1" data-active-classes="bg-primary-container text-on-primary-container font-semibold rounded-lg"><a class="flex items-center gap-space-sm px-space-md py-space-xs rounded-lg font-body-sm text-body-sm text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" data-path="campus-quad" href="#"><span class="material-symbols-outlined text-[18px]">park</span><span>Campus Quad</span></a><a class="flex items-center gap-space-sm px-space-md py-space-xs rounded-lg font-body-sm text-body-sm text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" data-path="central-library" href="#"><span class="material-symbols-outlined text-[18px]">local_library</span><span>Central Library</span></a><a class="flex items-center gap-space-sm px-space-md py-space-xs rounded-lg font-body-sm text-body-sm text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" data-path="botanical-courtyard" href="#"><span class="material-symbols-outlined text-[18px]">nature_people</span><span>Botanical Courtyard</span></a></nav></div><div class="flex flex-col gap-space-xs"><span class="px-space-sm font-label-sm text-label-sm text-on-surface-variant font-semibold uppercase tracking-wider">Workspace Pods</span><nav class="flex flex-col gap-1" data-active-classes="bg-primary-container text-on-primary-container font-semibold rounded-lg"><a aria-current="page" class="flex items-center justify-between px-space-md py-space-xs transition-all bg-primary-container text-on-primary-container font-semibold rounded-lg" data-path="team-sibukta-pod" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[18px]">groups</span><span>Team SibukTA Pod</span></div><span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span></a><a class="flex items-center gap-space-sm px-space-md py-space-xs rounded-lg font-body-sm text-body-sm text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" data-path="studio-delta" href="#"><span class="material-symbols-outlined text-[18px]">meeting_room</span><span>Studio Delta</span></a></nav></div></div><div class="p-space-md rounded-lg bg-surface-container-high mt-space-md flex flex-col gap-space-xs"><div class="flex items-center justify-between"><div class="flex items-center gap-space-xs"><span class="material-symbols-outlined text-tertiary text-[18px]">wb_sunny</span><span class="font-label-sm text-label-sm font-semibold text-on-surface">Atmosphere</span></div><span class="w-2 h-2 rounded-full bg-primary"></span></div><div class="font-body-sm text-body-sm text-on-surface-variant">Calm &amp; Sunlit Courtyard</div><div class="flex items-center justify-between mt-space-xs pt-space-xs"><span class="font-label-sm text-label-sm text-on-surface-variant">Focus Ambience</span><span class="material-symbols-outlined text-primary text-[18px] cursor-pointer">volume_up</span></div></div></aside><div class="pl-72"><main class="w-full min-h-[calc(100vh-4rem)] pt-16 bg-surface px-gutter py-space-lg"><div class="flex flex-col w-full">
+<div class="flex flex-col gap-space-lg w-full max-w-[1400px] mx-auto pb-space-xl">
+<!-- Top Context & Live Breadcrumb Header -->
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-md bg-surface-container-lowest p-space-lg rounded-xl shadow-sm">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center gap-space-sm">
+<span class="inline-flex items-center gap-1.5 px-space-sm py-0.5 rounded-full bg-surface-container text-on-surface-variant font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[15px] text-primary">meeting_room</span>
+            Team SibukTA Pod
+          </span>
+<span class="text-outline text-label-sm">/</span>
+<span class="inline-flex items-center gap-1.5 px-space-sm py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-semibold">
+<span class="material-symbols-outlined text-[15px]">desktop_windows</span>
+            Desk 02: Sprint Studio
+          </span>
+</div>
+<h1 class="font-headline-md text-headline-md text-on-surface">Sprint Tasks: Milestone 2 Demonstrator</h1>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Team SibukTA · Synchronized with GitHub Project #5 and Supabase Database</p>
+</div>
+<div class="flex items-center flex-wrap gap-space-sm">
+<button class="inline-flex items-center gap-space-xs px-space-md py-2.5 rounded-lg bg-surface-container text-on-surface hover:bg-surface-container-high transition-colors font-label-md text-label-md" id="syncGithubBtn">
+<span class="material-symbols-outlined text-[18px]" id="syncIcon">sync</span>
+<span>Sync GitHub Project #5</span>
+</button>
+<button class="inline-flex items-center gap-space-xs px-space-md py-2.5 rounded-lg bg-primary text-on-primary hover:bg-[#3d5640] transition-colors shadow-sm font-label-md text-label-md font-medium">
+<span class="material-symbols-outlined text-[18px]">add_task</span>
+<span>+ Add New Studio Task</span>
+</button>
+</div>
+</div>
+<!-- Quick Stats Ticker -->
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-space-md">
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Sprint Velocity</span>
+<span class="font-headline-sm text-headline-sm text-on-surface">9 of 12 Completed</span>
+<span class="font-body-sm text-body-sm text-primary font-medium">75% target achieved</span>
+</div>
+<div class="relative w-12 h-12 flex items-center justify-center">
+<svg class="w-12 h-12 transform -rotate-90" viewbox="0 0 36 36">
+<path class="text-surface-container" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-width="3.5"></path>
+<path class="text-primary" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="75, 100" stroke-linecap="round" stroke-width="3.5"></path>
+</svg>
+<span class="absolute font-label-sm text-label-sm font-semibold text-on-surface">75%</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Review Queue</span>
+<span class="font-headline-sm text-headline-sm text-on-surface">2 Open Pull Requests</span>
+<span class="font-body-sm text-body-sm text-secondary font-medium">Both passing CI checks</span>
+</div>
+<div class="w-10 h-10 rounded-lg bg-secondary-container flex items-center justify-center text-on-secondary-container">
+<span class="material-symbols-outlined text-[22px]">merge_type</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Studio Health</span>
+<span class="font-headline-sm text-headline-sm text-on-surface">Zero Blockers</span>
+<span class="font-body-sm text-body-sm text-primary font-medium">All dependencies satisfied</span>
+</div>
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[22px]">verified</span>
+</div>
+</div>
+</div>
+<!-- Filter & View Controls -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm bg-surface-container-low p-space-xs rounded-xl">
+<div class="flex items-center gap-space-xs overflow-x-auto pb-1 sm:pb-0">
+<button class="px-space-md py-1.5 rounded-lg bg-surface-container-lowest text-on-surface font-label-md text-label-md font-semibold shadow-sm whitespace-nowrap">
+          All Tasks (12)
+        </button>
+<button class="px-space-md py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-lowest/60 font-label-md text-label-md whitespace-nowrap transition-colors">
+          My Tasks (Dian)
+        </button>
+<button class="px-space-md py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-lowest/60 font-label-md text-label-md whitespace-nowrap transition-colors">
+          Milestone 2
+        </button>
+<button class="px-space-md py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-lowest/60 font-label-md text-label-md whitespace-nowrap transition-colors flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-error"></span>
+          High Priority
+        </button>
+</div>
+<div class="flex items-center gap-space-xs px-space-xs">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Pod Mode:</span>
+<span class="inline-flex items-center gap-1 font-label-sm text-label-sm font-semibold text-primary">
+<span class="material-symbols-outlined text-[16px]">spatial_audio_off</span>
+          Spatial Split View
+        </span>
+</div>
+</div>
+<!-- Main Workspace: Split Studio (Left: Pod Map Preview | Right: Kanban Board) -->
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-space-lg items-start">
+<!-- 2D Spatial Pod Micro-Viewport (4 cols on XL) -->
+<div class="xl:col-span-3 flex flex-col gap-space-md bg-surface-container-lowest p-space-md rounded-xl shadow-sm">
+<div class="flex items-center justify-between pb-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[20px]">domain</span>
+<span class="font-title-md text-title-md text-on-surface">Spatial Studio Pod</span>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-primary-container text-on-primary-container font-label-sm text-label-sm font-semibold">Active</span>
+</div>
+<!-- 2D Top-down Pod Map Visual Representation -->
+<div class="relative w-full h-56 rounded-lg bg-surface-container overflow-hidden p-space-sm flex flex-col justify-between">
+<div class="absolute inset-0 bg-cover bg-center opacity-40" data-alt="Warm top-down 2D pixel isometric architectural floor plan of an academic studio pod with wooden study tables, leafy botanical houseplants in terracotta planters, warm natural ambient sunlight, clean modern aesthetic with sage accents." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC4aWXKg4iKUN-WBPM7c3Cry51ivzCS27H5p53zHr8ZoCkO_AR-s5uiXJd_KCZ_lUTmk2F24hyzC2UU1P-MSjwEagpE3OD7o_5-KGYQznSqgNEf6jbQrvuRQe7eJRERJ9aC0jns-894rL9ZfktdoGVuQxkxuC6MpPkd3TidC5o3Q7edr9W4R5dXiRFj1oNcaI6n77o9jHBZLsF1UPWjsselotz9nLYL5QNYv-zzQ5b6')"></div>
+<div class="relative z-10 flex items-center justify-between text-on-surface font-label-sm text-label-sm bg-surface-container-lowest/90 px-space-sm py-1 rounded-md backdrop-blur-sm shadow-sm">
+<span class="flex items-center gap-1 font-medium"><span class="w-2 h-2 rounded-full bg-primary"></span>SibukTA Floor 2</span>
+<span class="text-on-surface-variant">4 / 5 Seats Full</span>
+</div>
+<!-- Interactive Desks Simulation Overlay -->
+<div class="relative z-10 grid grid-cols-2 gap-2 my-auto px-2">
+<!-- Desk 01 -->
+<div class="p-2 rounded bg-surface-container-lowest/80 text-on-surface-variant flex flex-col text-left">
+<span class="font-label-sm text-[11px] font-semibold">Desk 01</span>
+<span class="font-body-sm text-[11px] text-on-surface">Wardhana K.</span>
+</div>
+<!-- Desk 02 Active Target -->
+<div class="p-2 rounded bg-primary text-on-primary shadow-sm flex flex-col text-left">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-[11px] font-semibold">Desk 02</span>
+<span class="material-symbols-outlined text-[13px]">my_location</span>
+</div>
+<span class="font-body-sm text-[11px] font-semibold">Tasks Board (You)</span>
+</div>
+<!-- Desk 03 -->
+<div class="p-2 rounded bg-surface-container-lowest/80 text-on-surface-variant flex flex-col text-left">
+<span class="font-label-sm text-[11px] font-semibold">Desk 03</span>
+<span class="font-body-sm text-[11px] text-on-surface">Farhan R.</span>
+</div>
+<!-- Desk 04 -->
+<div class="p-2 rounded bg-surface-container-lowest/80 text-on-surface-variant flex flex-col text-left">
+<span class="font-label-sm text-[11px] font-semibold">Desk 04</span>
+<span class="font-body-sm text-[11px] text-on-surface">Putri S.</span>
+</div>
+</div>
+<div class="relative z-10 flex items-center justify-between bg-surface-container-lowest/90 px-space-sm py-1 rounded-md text-on-surface-variant font-label-sm text-[11px] backdrop-blur-sm">
+<span>Press [E] nearby to interact</span>
+<span class="font-semibold text-primary">Desk 02 Active</span>
+</div>
+</div>
+<!-- Pod Quick Info & Active Teammates -->
+<div class="flex flex-col gap-space-xs pt-space-xs">
+<span class="font-label-sm text-label-sm font-semibold text-on-surface-variant uppercase tracking-wider">Collaborators in Pod</span>
+<div class="flex flex-col gap-1.5">
+<div class="flex items-center justify-between py-1 px-2 rounded-lg bg-surface-container-low">
+<div class="flex items-center gap-space-xs">
+<div class="w-6 h-6 rounded-full bg-primary flex items-center justify-center text-on-primary text-[10px] font-bold">DA</div>
+<span class="font-body-sm text-body-sm text-on-surface">Dian Arisandy</span>
+</div>
+<span class="font-label-sm text-label-sm text-primary font-medium">Writing Specs</span>
+</div>
+<div class="flex items-center justify-between py-1 px-2 rounded-lg bg-surface-container-low">
+<div class="flex items-center gap-space-xs">
+<div class="w-6 h-6 rounded-full bg-secondary flex items-center justify-center text-on-secondary text-[10px] font-bold">WK</div>
+<span class="font-body-sm text-body-sm text-on-surface">Wardhana K.</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Postgres RLS</span>
+</div>
+<div class="flex items-center justify-between py-1 px-2 rounded-lg bg-surface-container-low">
+<div class="flex items-center gap-space-xs">
+<div class="w-6 h-6 rounded-full bg-tertiary flex items-center justify-center text-on-tertiary text-[10px] font-bold">FR</div>
+<span class="font-body-sm text-body-sm text-on-surface">Farhan R.</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Phaser Host</span>
+</div>
+<div class="flex items-center justify-between py-1 px-2 rounded-lg bg-surface-container-low">
+<div class="flex items-center gap-space-xs">
+<div class="w-6 h-6 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container text-[10px] font-bold">PS</div>
+<span class="font-body-sm text-body-sm text-on-surface">Putri S.</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Design QA</span>
+</div>
+</div>
+</div>
+<div class="p-space-sm rounded-lg bg-surface-container-high flex items-center gap-space-xs text-on-surface-variant font-body-sm text-[12px]">
+<span class="material-symbols-outlined text-[16px] text-primary">info</span>
+<span>Changes made on this board instantly broadcast via Supabase Realtime to all members.</span>
+</div>
+</div>
+<!-- 4-Column Kanban Board (9 cols on XL) -->
+<div class="xl:col-span-9 grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-4 gap-space-md items-start">
+<!-- Column 1: To Do (3) -->
+<div class="flex flex-col gap-space-sm bg-surface-container-low p-space-sm rounded-xl">
+<div class="flex items-center justify-between px-space-xs py-1">
+<div class="flex items-center gap-space-xs">
+<span class="px-2.5 py-1 rounded-full text-label-sm font-semibold font-label-md" style="background-color: #FBF4DE; color: #785A10;">
+                To Do (3)
+              </span>
+</div>
+<button class="w-6 h-6 flex items-center justify-center rounded text-on-surface-variant hover:bg-surface-container-highest transition-colors">
+<span class="material-symbols-outlined text-[18px]">more_horiz</span>
+</button>
+</div>
+<!-- Task Card 1 -->
+<div class="bg-surface-container-lowest p-space-md rounded-[10px] shadow-sm flex flex-col gap-space-xs hover:shadow transition-shadow">
+<div class="flex items-center justify-between">
+<span class="px-2 py-0.5 rounded-full bg-error-container text-on-error-container font-label-sm text-[11px] font-semibold">
+                High Priority
+              </span>
+<span class="font-label-sm text-[11px] text-on-surface-variant">M2-T01</span>
+</div>
+<h2 class="font-title-md text-title-md text-on-surface">E2E Playwright test for student entry flow</h2>
+<div class="flex items-center justify-between pt-space-xs mt-space-xs">
+<div class="flex items-center gap-1.5">
+<div class="w-6 h-6 rounded-full bg-primary flex items-center justify-center text-on-primary text-[10px] font-bold">DA</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Dian A.</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">event</span>
+                Nov 26
+              </span>
+</div>
+</div>
+<!-- Task Card 2 -->
+<div class="bg-surface-container-lowest p-space-md rounded-[10px] shadow-sm flex flex-col gap-space-xs hover:shadow transition-shadow">
+<div class="flex items-center justify-between">
+<span class="px-2 py-0.5 rounded-full bg-surface-container text-on-surface-variant font-label-sm text-[11px] font-medium">
+                Database
+              </span>
+<span class="font-label-sm text-[11px] text-on-surface-variant">M2-T02</span>
+</div>
+<h2 class="font-title-md text-title-md text-on-surface">Postgres RLS policy verification for team_members</h2>
+<div class="flex items-center justify-between pt-space-xs mt-space-xs">
+<div class="flex items-center gap-1.5">
+<div class="w-6 h-6 rounded-full bg-secondary flex items-center justify-center text-on-secondary text-[10px] font-bold">WK</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Wardhana K.</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">event</span>
+                Nov 27
+              </span>
+</div>
+</div>
+<!-- Task Card 3 -->
+<div class="bg-surface-container-lowest p-space-md rounded-[10px] shadow-sm flex flex-col gap-space-xs hover:shadow transition-shadow">
+<div class="flex items-center justify-between">
+<span class="px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-[11px] font-medium">
+                UI / UX
+              </span>
+<span class="font-label-sm text-[11px] text-on-surface-variant">M2-T03</span>
+</div>
+<h2 class="font-title-md text-title-md text-on-surface">Audit mobile viewport fallback for panel overlays</h2>
+<div class="flex items-center justify-between pt-space-xs mt-space-xs">
+<div class="flex items-center gap-1.5">
+<div class="w-6 h-6 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container text-[10px] font-bold">PS</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Putri S.</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">event</span>
+                Nov 28
+              </span>
+</div>
+</div>
+</div>
+<!-- Column 2: In Progress (2) -->
+<div class="flex flex-col gap-space-sm bg-surface-container-low p-space-sm rounded-xl">
+<div class="flex items-center justify-between px-space-xs py-1">
+<div class="flex items-center gap-space-xs">
+<span class="px-2.5 py-1 rounded-full text-label-sm font-semibold font-label-md" style="background-color: #F7ECE4; color: #7C4520;">
+                In Progress (2)
+              </span>
+</div>
+<button class="w-6 h-6 flex items-center justify-center rounded text-on-surface-variant hover:bg-surface-container-highest transition-colors">
+<span class="material-symbols-outlined text-[18px]">more_horiz</span>
+</button>
+</div>
+<!-- Task Card 4 -->
+<div class="bg-surface-container-lowest p-space-md rounded-[10px] shadow-sm flex flex-col gap-space-xs hover:shadow transition-shadow">
+<div class="flex items-center justify-between">
+<span class="px-2 py-0.5 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-[11px] font-medium">
+                Engine Hook
+              </span>
+<span class="font-label-sm text-[11px] text-on-surface-variant">M2-T04</span>
+</div>
+<h2 class="font-title-md text-title-md text-on-surface">Phaser 3 host lifecycle clean mount and unmount in React</h2>
+<div class="flex items-center justify-between pt-space-xs mt-space-xs">
+<div class="flex items-center gap-1.5">
+<div class="w-6 h-6 rounded-full bg-tertiary flex items-center justify-center text-on-tertiary text-[10px] font-bold">FR</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Farhan R.</span>
+</div>
+<span class="font-label-sm text-label-sm text-tertiary font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">schedule</span>
+                Due Today
+              </span>
+</div>
+</div>
+<!-- Task Card 5 -->
+<div class="bg-surface-container-lowest p-space-md rounded-[10px] shadow-sm flex flex-col gap-space-xs hover:shadow transition-shadow">
+<div class="flex items-center justify-between">
+<span class="px-2 py-0.5 rounded-full bg-surface-container text-on-surface-variant font-label-sm text-[11px] font-medium">
+                Data Layer
+              </span>
+<span class="font-label-sm text-[11px] text-on-surface-variant">M2-T05</span>
+</div>
+<h2 class="font-title-md text-title-md text-on-surface">Supabase data layer repository abstraction for tasks table</h2>
+<div class="flex items-center justify-between pt-space-xs mt-space-xs">
+<div class="flex items-center gap-1.5">
+<div class="w-6 h-6 rounded-full bg-secondary flex items-center justify-center text-on-secondary text-[10px] font-bold">WK</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Wardhana K.</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">event</span>
+                Due Tomorrow
+              </span>
+</div>
+</div>
+</div>
+<!-- Column 3: In Review / PR (2) -->
+<div class="flex flex-col gap-space-sm bg-surface-container-low p-space-sm rounded-xl">
+<div class="flex items-center justify-between px-space-xs py-1">
+<div class="flex items-center gap-space-xs">
+<span class="px-2.5 py-1 rounded-full text-label-sm font-semibold font-label-md" style="background-color: #EBE5F7; color: #533B78;">
+                In Review / PR (2)
+              </span>
+</div>
+<button class="w-6 h-6 flex items-center justify-center rounded text-on-surface-variant hover:bg-surface-container-highest transition-colors">
+<span class="material-symbols-outlined text-[18px]">more_horiz</span>
+</button>
+</div>
+<!-- Task Card 6 -->
+<div class="bg-surface-container-lowest p-space-md rounded-[10px] shadow-sm flex flex-col gap-space-xs hover:shadow transition-shadow">
+<div class="flex items-center justify-between">
+<span class="px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-[11px] font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">alt_route</span>
+                PR #4
+              </span>
+<span class="font-label-sm text-[11px] text-on-surface-variant">M2-T06</span>
+</div>
+<h2 class="font-title-md text-title-md text-on-surface">Interactive proximity trigger [E] on workstation hitboxes</h2>
+<div class="flex items-center justify-between pt-space-xs mt-space-xs">
+<div class="flex items-center gap-1.5">
+<span class="font-label-sm text-[11px] text-on-surface-variant">Reviewer:</span>
+<div class="w-5 h-5 rounded-full bg-primary flex items-center justify-center text-on-primary text-[9px] font-bold">DA</div>
+<span class="font-body-sm text-body-sm text-on-surface font-medium">Dian A.</span>
+</div>
+<span class="material-symbols-outlined text-primary text-[18px]">rate_review</span>
+</div>
+</div>
+<!-- Task Card 7 -->
+<div class="bg-surface-container-lowest p-space-md rounded-[10px] shadow-sm flex flex-col gap-space-xs hover:shadow transition-shadow">
+<div class="flex items-center justify-between">
+<span class="px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-[11px] font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">alt_route</span>
+                PR #6
+              </span>
+<span class="font-label-sm text-[11px] text-on-surface-variant">M2-T07</span>
+</div>
+<h2 class="font-title-md text-title-md text-on-surface">Cozy Botanical color tokens and WCAG contrast audit</h2>
+<div class="flex items-center justify-between pt-space-xs mt-space-xs">
+<div class="flex items-center gap-1.5">
+<span class="font-label-sm text-[11px] text-on-surface-variant">Reviewer:</span>
+<div class="w-5 h-5 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container text-[9px] font-bold">PS</div>
+<span class="font-body-sm text-body-sm text-on-surface font-medium">Putri S.</span>
+</div>
+<span class="material-symbols-outlined text-primary text-[18px]">rate_review</span>
+</div>
+</div>
+</div>
+<!-- Column 4: Completed / Done (5) -->
+<div class="flex flex-col gap-space-sm bg-surface-container-low p-space-sm rounded-xl">
+<div class="flex items-center justify-between px-space-xs py-1">
+<div class="flex items-center gap-space-xs">
+<span class="px-2.5 py-1 rounded-full text-label-sm font-semibold font-label-md" style="background-color: #EAF2EB; color: #2D5A34;">
+                Completed / Done (5)
+              </span>
+</div>
+<button class="w-6 h-6 flex items-center justify-center rounded text-on-surface-variant hover:bg-surface-container-highest transition-colors">
+<span class="material-symbols-outlined text-[18px]">more_horiz</span>
+</button>
+</div>
+<!-- Task Card 8 -->
+<div class="bg-surface-container-lowest p-space-md rounded-[10px] shadow-sm flex flex-col gap-space-xs hover:shadow transition-shadow">
+<div class="flex items-center justify-between">
+<span class="px-2 py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed font-label-sm text-[11px] font-medium">
+                Repository
+              </span>
+<span class="material-symbols-outlined text-primary text-[16px]">check_circle</span>
+</div>
+<h2 class="font-title-md text-title-md text-on-surface line-through opacity-80">M0 initial repository audit and LICENSE setup</h2>
+<div class="pt-space-xs mt-space-xs">
+<span class="font-label-sm text-[11px] text-on-surface-variant font-mono bg-surface-container px-1.5 py-0.5 rounded">Closed in #a83cb9</span>
+</div>
+</div>
+<!-- Task Card 9 -->
+<div class="bg-surface-container-lowest p-space-md rounded-[10px] shadow-sm flex flex-col gap-space-xs hover:shadow transition-shadow">
+<div class="flex items-center justify-between">
+<span class="px-2 py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed font-label-sm text-[11px] font-medium">
+                Design System
+              </span>
+<span class="material-symbols-outlined text-primary text-[16px]">check_circle</span>
+</div>
+<h2 class="font-title-md text-title-md text-on-surface line-through opacity-80">Design system tokens and shell navigation scaffold</h2>
+<div class="flex items-center justify-between pt-space-xs mt-space-xs">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Dian A.</span>
+<span class="font-label-sm text-label-sm text-primary font-medium">Merged</span>
+</div>
+</div>
+<!-- Task Card 10 -->
+<div class="bg-surface-container-lowest p-space-md rounded-[10px] shadow-sm flex flex-col gap-space-xs hover:shadow transition-shadow">
+<div class="flex items-center justify-between">
+<span class="px-2 py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed font-label-sm text-[11px] font-medium">
+                Spatial Map
+              </span>
+<span class="material-symbols-outlined text-primary text-[16px]">check_circle</span>
+</div>
+<h2 class="font-title-md text-title-md text-on-surface line-through opacity-80">Botanical campus quadrangle 2D coordinate mapping</h2>
+<div class="flex items-center justify-between pt-space-xs mt-space-xs">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Farhan R.</span>
+<span class="font-label-sm text-label-sm text-primary font-medium">Merged</span>
+</div>
+</div>
+<!-- Summary collapsed indicator for remaining completed items -->
+<button class="w-full py-2 rounded-lg bg-surface-container hover:bg-surface-container-high transition-colors font-label-sm text-label-sm text-on-surface-variant text-center font-medium">
+            + 2 more finished items
+          </button>
+</div>
+</div>
+</div>
+<!-- Bottom Persistent Status Bar -->
+<div class="flex flex-col sm:flex-row items-center justify-between gap-space-sm px-space-md py-3 rounded-xl bg-surface-container-lowest shadow-sm mt-space-xs">
+<div class="flex items-center gap-space-sm">
+<span class="relative flex h-2.5 w-2.5">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-primary"></span>
+</span>
+<span class="font-body-sm text-body-sm text-on-surface font-medium">
+          Live Database Bridge: Connected · Latency 18ms · All updates synced
+        </span>
+</div>
+<div class="flex items-center gap-space-md">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Desk 02 Node: #pod-sibukta-ws-2</span>
+<button class="font-label-sm text-label-sm text-primary hover:underline font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[15px]">refresh</span>
+          Force Refresh
+        </button>
+</div>
+</div>
+</div>
+<script>
+    const syncBtn = document.getElementById('syncGithubBtn');
+    const syncIcon = document.getElementById('syncIcon');
+    if (syncBtn && syncIcon) {
+      syncBtn.addEventListener('click', () => {
+        syncIcon.classList.add('animate-spin');
+        setTimeout(() => {
+          syncIcon.classList.remove('animate-spin');
+        }, 1200);
+      });
+    }
+  </script>
+</div></main></div></body></html>
