@@ -12,6 +12,8 @@ export function WorkstationPanel({
   workstationId,
   workspace,
   repository,
+  isDemoSession,
+  onSessionExpired,
   onClose,
 }: WorkstationPanelProps) {
   const drawerRef = useRef<HTMLElement | null>(null);
@@ -121,6 +123,8 @@ export function WorkstationPanel({
               teamId={workspace.teamId}
               workspace={workspace}
               repository={repository}
+              isDemoSession={isDemoSession}
+              onSessionExpired={onSessionExpired}
             />
           )}
           {workstationId === 'tasks' && (
@@ -128,6 +132,8 @@ export function WorkstationPanel({
               projectId={workspace.projectId}
               workspace={workspace}
               repository={repository}
+              isDemoSession={isDemoSession}
+              onSessionExpired={onSessionExpired}
             />
           )}
           {workstationId === 'resources' && (
@@ -135,6 +141,8 @@ export function WorkstationPanel({
               projectId={workspace.projectId}
               workspace={workspace}
               repository={repository}
+              isDemoSession={isDemoSession}
+              onSessionExpired={onSessionExpired}
             />
           )}
         </div>

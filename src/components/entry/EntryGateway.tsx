@@ -32,6 +32,7 @@ export function EntryGateway({
   authRepository,
   supabaseReady,
   supabaseError,
+  sessionNotice,
   onRetryHealth,
   onAuthenticated,
 }: EntryGatewayProps) {
@@ -224,6 +225,16 @@ export function EntryGateway({
           >
             Retry connection
           </button>
+        </div>
+      )}
+
+      {sessionNotice && sessionNotice.trim() !== '' && (
+        <div
+          role="status"
+          data-testid="entry-session-notice"
+          className="rounded-[10px] border border-[#D4C07C] bg-[var(--color-status-todo-bg)] p-4 text-[13px] font-medium leading-5 text-[var(--color-status-todo-text)]"
+        >
+          {sessionNotice}
         </div>
       )}
 

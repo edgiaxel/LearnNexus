@@ -17,6 +17,7 @@ export function AcademicSpacesSelector({
   repository,
   onSelectSpace,
   onSwitchProfile,
+  onSessionExpired,
 }: AcademicSpacesSelectorProps) {
   const [spacesState, setSpacesState] = useState<AsyncState<AcademicSpace[]>>({
     status: 'loading',
@@ -27,6 +28,8 @@ export function AcademicSpacesSelector({
 
   const loadSeqRef = useRef(0);
   const enterSeqRef = useRef(0);
+  const onSessionExpiredRef = useRef(onSessionExpired);
+  onSessionExpiredRef.current = onSessionExpired;
 
   const loadSpaces = useCallback(async () => {
     const requestId = ++loadSeqRef.current;
@@ -44,6 +47,9 @@ export function AcademicSpacesSelector({
       if (requestId !== loadSeqRef.current) return;
 
       if (!result.ok) {
+        if (result.error.code === 'auth') {
+          onSessionExpiredRef.current?.();
+        }
         setSpacesState({ status: 'error', error: result.error });
         return;
       }
@@ -93,6 +99,9 @@ export function AcademicSpacesSelector({
       if (enterRequestId !== enterSeqRef.current) return;
 
       if (!result.ok) {
+        if (result.error.code === 'auth') {
+          onSessionExpiredRef.current?.();
+        }
         setEnterError({
           spaceId: space.id,
           spaceCode: space.code,
