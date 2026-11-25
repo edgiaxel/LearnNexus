@@ -1,43 +1,47 @@
-# Handoff — M1: Foundation & Sharp Canvas Engine
+# Handoff — M2 & M2.5: Core Workflow, Cozy Academic Space & Design Alignment
 
-- **Branch / Worktree:** `main` (single clean worktree; merged `feature/m1-game-engine` and `feature/e2e-verification` and removed temporary branches/worktrees)
-- **Owner:** Main Orchestrator (with isolated M1 Game Engine and M1 E2E Verification worktrees)
-- **Linked Contract:** `UI_CONTRACT.md` (Locked M0 Contract preserved; zero unauthorized edits)
+- **Branch / Worktree:** `main` (merged `feature/m2-supabase-data`, `feature/m2-entry-spaces`, and `feature/m2-workstation-panels` via `--no-ff`, removed all temporary subagent worktrees and local feature branches)
+- **Owner:** Main Orchestrator (with isolated DB, UI, and WS worktrees)
+- **Linked Contract:** `UI_CONTRACT.md` (Locked M0/M2 contracts on `main`)
 - **Date:** 26 November 2026
 
 ## Completed Scope & Exit Criteria
 
-- **Supabase Clean Slate (`zftymjkcrdkhtshazzmw`, `ap-southeast-1`):** Purged all existing `public` tables/views/functions/types and truncated `supabase_migrations.schema_migrations` (`rows: []` verified). Populated local gitignored `.env` via Supabase CLI (`VITE_SUPABASE_URL` + `anon` key; zero secrets committed) and verified `/auth/v1/health` HTTP `200`.
-- **Root App Shell & Contracts (`main`):** Scaffolded `package.json` (`react` 19, `phaser` `3.88.2`, `@supabase/supabase-js` v2, `vite` 6, `tailwindcss` 4, `typescript` 5.8, `@playwright/test`), `tsconfig.json`, `vite.config.ts`, `playwright.config.ts`, `index.html`, `src/main.tsx`, `src/app/App.tsx`, `src/lib/supabase.ts`, and `src/types/gameDebug.ts`.
-- **Sharp Canvas Engine (`src/game/**`, `public/assets/**`):**
-  - Ported `campusStudioMap.json` (`src/game/maps/campusStudioMap.json`), `createGame.ts` (`pixelArt: true`, `antialias: false`, `roundPixels: true`, `Phaser.Scale.RESIZE`, `#F7F4EC`), and `CampusScene.ts` (Config A: `16px` tiles, integer zoom `3` on width >= `640px` and `2` on `< 640px`, `Phaser.Textures.FilterMode.NEAREST` on all 5 loaded textures, Adam 4-directional walking & idle animations).
-  - Mapped spike interactables to locked `WorkstationId` values (`workstation-overview` -> `overview`, `meeting-table` -> `tasks`, `resource-shelf` -> `resources`) using `WORKSTATION_META` titles.
-  - Built StrictMode-safe `PhaserHost.tsx` (1 `<canvas>` mounted, 0 unmounted, `ResizeObserver` resizing, `panel:closed` focus return) and typed `eventBridge.ts`.
-  - Exposed read/test inspection handle `window.__LEARNNEXUS_GAME__` (`src/types/gameDebug.ts`).
-- **Cozy Digital Campus Shell (`src/app/App.tsx`):** Single `<header>` top bar with live Supabase health check (`Checking Supabase...` / `Supabase connected` / `Supabase offline` + `Retry`), `Leave Studio` / `Enter Studio` route transition, accessible right drawer (`role="dialog"`, `Tab` trap, `Escape` close restoring canvas focus), and honest M1 empty states.
-- **Playwright Verification (`tests/e2e/**`):** 8/8 E2E tests pass against localhost (`phaser-lifecycle.spec.ts` + `workstation-bridge.spec.ts`) covering Cozy shell tokens, zero em dashes, live Supabase health, standard + `2x` HiDPI ADR-012 sharpness, unmount/remount lifecycle, `1280x720` / `1024x700` / `390x844` responsiveness, keyboard walking, all 3 workstation `[E]` / click / `Escape` / `Tab`-trap flows, and 0 console/page errors.
+- **Phase 1 Shared Contracts (`main`):** Locked `DemoProfileKey`, `DEMO_PROFILE_DESCRIPTORS`, `TeamMemberSummary`, and extended `StudentProfile`, `ProjectOverview`, `ResourceItem` in `src/types/contracts.ts`; locked `AuthRepository` and updated row shapes in `src/types/database.ts`; locked component prop contracts in `src/types/components.ts`; documented `MOTION 1` static skeleton rule and `data-testid` contract in `UI_CONTRACT.md`.
+- **Supabase Schema, RLS & Seed (`supabase/**`, `zftymjkcrdkhtshazzmw`):**
+  - Applied `supabase/migrations/20261126000001_m2_core_schema.sql` (9 relational tables, `set_updated_at()` and `handle_new_user()` triggers, `SECURITY DEFINER` membership helpers, `REVOKE ALL` from `anon, authenticated`, `GRANT SELECT` + column-scoped `GRANT UPDATE (status)` on `tasks` to `authenticated`, zero policies for `anon`).
+  - Applied idempotent `supabase/seed.sql` creating 3 fictional demo accounts (`nadia.demo@learnnexus.edu` / `team_lead`, `bima.demo@learnnexus.edu` / `student`, `rani.demo@learnnexus.edu` / `guest_demo` unassigned), 2 classes (`IF-4031`, `IF-3210`), 2 teams (`Team SibukTA`, `Team Studio B`), 2 projects, 8 sprint tasks (including intentional `NULL` assignee and `NULL` due date cases), 6 HTTPS resources, and 2 workspace layouts.
+- **Typed Supabase Services (`src/services/**`):** Implemented `errorMapper.ts`, `authService.ts` (`SupabaseAuthRepository` using real `supabase.auth.signInWithPassword` for both Credentials and Demo Mode), and `academicService.ts` (`SupabaseAcademicRepository`) with zero mock fallbacks.
+- **Cozy Digital Campus Views (`src/components/**` & `src/app/App.tsx`):**
+  - `EntryGateway.tsx` (UI-01): asymmetric 2-column layout, honest `"Demo Mode (Live Supabase Postgres)"` selector, credentials login with password visibility toggle, calm validation/error banners.
+  - `AcademicSpacesSelector.tsx` (UI-02): live course directory, static `#EEF1E8` skeleton loader, unassigned empty state (`Rani Kusuma (Demo)`), error retry banner, studio workspace entry.
+  - `WorkstationPanel.tsx`, `ProjectOverviewPanel.tsx` (UI-05), `TasksSprintBoardPanel.tsx` (UI-06), `ResourceLibraryPanel.tsx` (UI-07): focus-trapped `440px` right drawer, live overview + team roster, task status filter tabs & Postgres-confirmed task status updates, resource category tabs & strict `http:`/`https:` URL safety validation (`parseSafeHttpUrl`).
+  - `App.tsx`: single `<header>` top bar, dynamic breadcrumbs, session bootstrap/restore via `sessionStorage` class pointer (`learnnexus:selectedClassId`), `Leave Studio` / `Sign Out`, M1 Phaser studio preserved, compact mobile quick-workstation controls (`mobile-workstation-btn-*`).
+- **M2.5 Design & Rendering Alignment:** Enforced Cozy Digital Campus palette (`#F7F4EC`, `#FFFFFF`, `#EEF1E8`, `#4A6B46`, `#30343B`), `ENERGY 1 / RHYTHM 2 / MOTION 1` (zero `animate-pulse` loops, zero em dashes, zero decorative emoji), ADR-012 `16px` Config A sharp canvas rendering (`1x` and `2x` HiDPI), and responsive zero-overflow layout across `1280x720`, `1024x700`, and `390x844`.
 
 ## Files Touched
 
-- Root config & shell: `package.json`, `package-lock.json`, `tsconfig.json`, `vite.config.ts`, `playwright.config.ts`, `index.html`, `src/main.tsx`, `src/app/App.tsx`, `src/styles/index.css`, `src/lib/supabase.ts`, `src/types/gameDebug.ts`
-- Game engine & assets: `src/game/PhaserHost.tsx`, `src/game/createGame.ts`, `src/game/bridge/eventBridge.ts`, `src/game/scenes/CampusScene.ts`, `src/game/maps/campusStudioMap.json`, `public/assets/{atlases,tilesets,characters}/*`
-- Tests & docs: `tests/e2e/phaser-lifecycle.spec.ts`, `tests/e2e/workstation-bridge.spec.ts`, `HANDOFF.md`, `README.md`, `docs/MILESTONES.md`, `docs/CHANGELOG.md`, `docs/PROJECT_AUDIT.md`
+- Contracts & Shell: `UI_CONTRACT.md`, `src/types/contracts.ts`, `src/types/database.ts`, `src/types/components.ts`, `src/app/App.tsx`
+- Database & Services: `supabase/migrations/20261126000001_m2_core_schema.sql`, `supabase/seed.sql`, `src/services/errorMapper.ts`, `src/services/authService.ts`, `src/services/academicService.ts`
+- Components: `src/components/entry/EntryGateway.tsx`, `src/components/campus/AcademicSpacesSelector.tsx`, `src/components/workstation/WorkstationPanel.tsx`, `src/components/workstation/ProjectOverviewPanel.tsx`, `src/components/workstation/TasksSprintBoardPanel.tsx`, `src/components/workstation/ResourceLibraryPanel.tsx`, `src/components/workstation/PanelStateCards.tsx`, `src/components/workstation/workstationUtils.ts`
+- E2E Tests & Docs: `tests/e2e/helpers/authFlow.ts`, `tests/e2e/m2-student-journey.spec.ts`, `tests/e2e/phaser-lifecycle.spec.ts`, `tests/e2e/workstation-bridge.spec.ts`, `HANDOFF.md`, `README.md`, `docs/MILESTONES.md`, `docs/CHANGELOG.md`, `docs/DESIGN.md`, `docs/PROJECT_AUDIT.md`
 
 ## Verified Commands & Results
 
 - `npm run typecheck` (`tsc --noEmit`): **PASS** (exit `0`)
-- `npm run build` (`tsc --noEmit && vite build`): **PASS** (exit `0`, 82 modules transformed)
-- `npm run test:e2e` (`playwright test`): **PASS** (`8 passed (46.1s)`, 0 console/page errors)
-- WCAG Contrast check (`contrast-check.py`): All UI text pairings pass AA (`4.5:1+`; e.g., `#30343B`/`#F7F4EC` `11.37:1`, `#30343B`/`#FFFFFF` `12.50:1`, `#FFFFFF`/`#4A6B46` `6.03:1`); control border `#757E74` meets WCAG 1.4.11 (`4.21:1` on `#FFFFFF`, `3.83:1` on `#F7F4EC`).
+- `npm run build` (`tsc --noEmit && vite build`): **PASS** (exit `0`, `94 modules transformed`)
+- Live Supabase Auth & RLS Node Verification (`zftymjkcrdkhtshazzmw`): **PASS** (`anon` blocked with `42501` and `0` rows; Nadia reads 2 classes / 5 tasks / 4 resources and updates/restores task status with `updated_at` update; Rani sees `0` rows across all tables and `0` rows updated cross-team; bad password rejected `400 invalid_credentials`).
+- `npm run test:e2e` (`playwright test`): **PASS** (`14 passed (48.7s)` covering M2 student journey, reload + leave-and-return persistence, RLS empty state, M1 Phaser lifecycle, `1x` + `2x` HiDPI ADR-012 sharpness, `1280x720` / `1024x700` / `390x844` responsiveness, keyboard walking, `[E]` / `Tab`-trap / `Escape`, and compact mobile drawer).
+- Contrast & Static Antislop Checks: All foreground/background pairs pass WCAG AA (`4.5:1+`) / 1.4.11 (`4.21:1` border); `0` em dashes (`\u2014`) and `0` `animate-pulse`/`animate-bounce` across `src/` and `supabase/`.
 
 ## Database & Environment State
 
-- Remote project: `zftymjkcrdkhtshazzmw` (`ap-southeast-1`) is clean-slated (`0` tables/views/functions/types in `public`; `supabase_migrations.schema_migrations` empty).
-- Local `.env`: gitignored, configured with `VITE_SUPABASE_URL` and `anon` key.
-- Migrations: None yet (scoped to M2 `feature/m2-supabase-data`).
+- Remote project: `zftymjkcrdkhtshazzmw` (`ap-southeast-1`) has migration `20261126000001_m2_core_schema` applied and recorded in `supabase_migrations.schema_migrations`, with idempotent demo seed active.
+- Local `.env`: gitignored (`VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`); zero secrets in source or git history.
+- Demo accounts (seeded fictional profiles; real Supabase Auth): `nadia.demo@learnnexus.edu` (`Team Leader`, 2 classes), `bima.demo@learnnexus.edu` (`Team Member`, 1 class), `rani.demo@learnnexus.edu` (`Guest`, 0 classes).
 
-## Caveats & Next Steps (M2 Readiness)
+## Caveats & Next Steps (M3/M4 Readiness)
 
-- **Caveat (M1 Scope):** `Academic Spaces` and the three workstation drawers currently render honest M1 empty states backed only by live `/auth/v1/health` checks; Postgres tables, seed rows, RLS policies, and `AcademicRepository` CRUD are scoped to M2.
-- **Caveat (Bundle size):** Production Vite build warns on chunk size (`~1.97 MB` JS due to Phaser); acceptable for semifinal M1, optional code-splitting in M4.
-- **Next step (M2 worktrees per `UI_CONTRACT.md` Section 7):** Branch `feature/m2-supabase-data` (`supabase/**`, `src/services/**`), `feature/m2-entry-spaces` (`src/components/entry/**`, `src/components/campus/**`), and `feature/m2-workstation-panels` (`src/components/workstation/**`) from `main`.
+- **Caveat (Test 1 invalid-credentials console log):** In `tests/e2e/m2-student-journey.spec.ts` Test 1 (`UI-01`), intentionally submitting an invalid password triggers Supabase Auth HTTP `400` in browser console (`Failed to load resource`), so `assertNoErrors` is skipped in that test while all remaining 13 tests assert strict `0` console errors and `0` page errors.
+- **Caveat (Bundle size):** Production JS bundle is `~2.02 MB` due to Phaser 3; optional chunk splitting belongs to M4.
+- **Next Steps (M3 / M4):** Verify `bima.demo@learnnexus.edu` (`student`) write/isolation behavior, add Playwright negative tests for simulated save-failure / network-offline error recovery UI, audit resource URLs and RLS matrix, and prepare M5 deployment + submission package before 30 Nov 2026, 23:59 WIB.

@@ -1,5 +1,5 @@
-> **Current milestone:** M2 — Core Workflow & Cozy Academic Space  
-> **Overall status:** M1 complete & E2E verified on `main`; ready for M2 parallel worktrees  
+> **Current milestone:** M2 & M2.5 Complete — Core Workflow, Cozy Academic Space & Design Alignment  
+> **Overall status:** M2 & M2.5 complete & E2E verified (`14/14` Playwright tests passing) on `main`; ready for M3/M4 verification & hardening  
 > **Deadline:** 30 November 2026, 23:59 WIB  
 > **Last updated:** 26 November 2026  
 > **Repository:** [edgiaxel/LearnNexus](https://github.com/edgiaxel/LearnNexus)
@@ -44,8 +44,8 @@ Remember check again to make sure theres a shared contract before doing the exec
 
 - **Goal:** Demonstrate a persistent, spatial academic workspace that connects academic spaces with collaborative project workspaces for university students.
 - **MVP outcome:** A student enters the application, selects an assigned academic space, navigates a 2D environment to a team workspace, interacts with workstations, accesses project/task/resource panels, updates task status, and can leave and return with saved project information retained.
-- **Current state:** M1 complete & verified on `main` — React 19 + TypeScript + Vite + Tailwind + Phaser 3 (`v3.88.2`) + Playwright scaffolded, ADR-012 Config A (`16px` tiles, `3x` desktop / `2x` mobile zoom, `NEAREST` filtering) integrated with typed `eventBridge` and Cozy app shell (`8/8` Playwright E2E tests passing), and remote Supabase (`zftymjkcrdkhtshazzmw`) clean-slated for M2.
-- **Next action:** Execute **M2 — Core Workflow & Cozy Academic Space** across isolated worktrees (`feature/m2-supabase-data`, `feature/m2-entry-spaces`, `feature/m2-workstation-panels`) per `UI_CONTRACT.md` Section 7.
+- **Current state:** M0, M1, M2, and M2.5 complete & verified on `main` — Supabase schema + RLS + demo seed (`zftymjkcrdkhtshazzmw`) live; `EntryGateway`, `AcademicSpacesSelector`, `WorkstationPanel` (`ProjectOverviewPanel`, `TasksSprintBoardPanel`, `ResourceLibraryPanel`), and ADR-012 Config A Phaser studio wired into `App.tsx`; `14/14` Playwright E2E specs passing (including reload and leave-and-return task status persistence).
+- **Next action:** Execute **M3 — Persistent Student Workspace** formal verification & edge-case hardening (optional/error path matrix, RLS audit, resource validation review) before M4 integration freeze.
 - **Links:** `PRD.md` / `DESIGN.md` / `ARCHITECTURE.md` / GitHub repository.
 - **Planning note:** The schedule is intentionally aggressive because the semifinal submission is due on 30 November 2026. Deliverable is an honest, high-trust single-user demonstrator with real persistence.
 
@@ -55,8 +55,8 @@ Remember check again to make sure theres a shared contract before doing the exec
 |---|---|---|---|---|---|
 | M0 | Audit, Preparation & Shared Contract | Trustworthy starting point, locked `UI_CONTRACT.md`, Cozy design tokens, and runnable baseline | Completed | Local repo clean; shared contract locked on `main`; Tailwind tokens verified; subagent isolation ready | — |
 | M1 | Foundation & Sharp Canvas Engine | App boots, single Phaser host, ADR-012 sharp pixel-art rendering, and typed event bridge | Completed | App builds; Phaser mounts once with `pixelArt: true`, `antialias: false`, integer zoom; `8/8` Playwright specs pass | — |
-| M2 | Core Workflow & Cozy Academic Space | Student navigates distinct 2D pixel-art studio and accesses live Supabase workstation panels | Planned | Distinct 2D pixel-art environment (`Interiors_free` / `Characters_free`); avatar controller; live Supabase panels; E2E verified | — |
-| M2.5 | Design & Rendering Alignment | Cozy Digital Campus (pastel tokens, master design system, sharp canvas rendering rules) | Planned | DESIGN.md approved, tokens locked, rendering rules applied, sharp pixel-art config verified | — |
+| M2 | Core Workflow & Cozy Academic Space | Student navigates distinct 2D pixel-art studio and accesses live Supabase workstation panels | Completed | Distinct 2D pixel-art environment (`Interiors_free` / `Characters_free`); avatar controller; live Supabase panels; `14/14` E2E verified | — |
+| M2.5 | Design & Rendering Alignment | Cozy Digital Campus (pastel tokens, master design system, sharp canvas rendering rules) | Completed | `DESIGN.md` approved, tokens locked, `ENERGY 1 / RHYTHM 2 / MOTION 1` & sharp ADR-012 pixel-art config verified across desktop/mobile | — |
 | M3 | Persistent Student Workspace | Project, tasks and resources are loaded from durable Supabase Postgres data; task status updates persist | Planned | Refresh/re-entry preserves project/task data; failure states visible; E2E verified | — |
 | M4 | Quality & Integration | Integrated P0 demo is stable, sharp, and verified | Planned | Critical student journey passes; no blocking errors; access rules reviewed; rendering verified sharp | — |
 | M5 | Release / Demo | Shareable demo, evidence and submission materials are ready | Planned | Deployment smoke-tested; proposal/video evidence complete before deadline | — |
@@ -103,19 +103,19 @@ Remember check again to make sure theres a shared contract before doing the exec
 **Target window:** 26–27 November  
 **Outcome:** Student moves from Entry Gateway through Academic Spaces into a distinct 2D pixel-art studio pod and interacts with live Supabase workstation panels.
 
-- [ ] Build `CampusScene.ts` with 2D pixel-art tiles and furniture from `assets/Interiors_free` (wood/tile floors, desks, collaborative tables, bookshelves, plants).
-- [ ] Implement player avatar using `assets/Characters_free` with 4-directional walking and idle animations, keyboard input (WASD / Arrows), and collision boundaries.
-- [ ] Implement proximity interaction detection ("Press [E] to open Workstation") around 3 distinct workstations: Project Overview Desk, Tasks Sprint Board, and Resource Library Shelves.
-- [ ] Build `EntryGateway.tsx` in Cozy Digital Campus visual system with honest profile selection (Team Leader, Member, Guest).
-- [ ] Build `AcademicSpacesSelector.tsx` with cozy cards, course directory, and team workspace entry.
-- [ ] Build Workstation Panels (`ProjectOverviewPanel`, `TasksSprintBoardPanel`, `ResourceLibraryPanel`) as warm drawer dialogs with zero mock data—loading directly from Supabase Postgres.
-- [ ] Verify panel open/close via keyboard [E], click, and UI close button without resetting avatar or scene context.
-- [ ] Run Playwright test suite to verify end-to-end journey.
+- [x] Build `CampusScene.ts` with 2D pixel-art tiles and furniture from `assets/Interiors_free` (wood/tile floors, desks, collaborative tables, bookshelves, plants).
+- [x] Implement player avatar using `assets/Characters_free` with 4-directional walking and idle animations, keyboard input (WASD / Arrows), and collision boundaries.
+- [x] Implement proximity interaction detection ("Press [E] to open Workstation") around 3 distinct workstations: Project Overview Desk, Tasks Sprint Board, and Resource Library Shelves.
+- [x] Build `EntryGateway.tsx` in Cozy Digital Campus visual system with honest profile selection (Team Leader, Member, Guest).
+- [x] Build `AcademicSpacesSelector.tsx` with cozy cards, course directory, and team workspace entry.
+- [x] Build Workstation Panels (`ProjectOverviewPanel`, `TasksSprintBoardPanel`, `ResourceLibraryPanel`) as warm drawer dialogs with zero mock data—loading directly from Supabase Postgres.
+- [x] Verify panel open/close via keyboard [E], click, and UI close button without resetting avatar or scene context.
+- [x] Run Playwright test suite to verify end-to-end journey (`14/14` passing).
 
 | Slice ID | Vertical slice | Feature IDs | GitHub issues | Status | Demo outcome |
 |---|---|---|---|---|---|
-| VS-02 | Cozy Entry → Academic Spaces → 2D Pixel Studio | F-001, F-002, F-003, F-004 | — | Planned | Student reaches distinct 2D pixel-art studio pod with avatar navigation |
-| VS-03 | Workstation Proximity → Live Supabase Drawers → Return | F-005, F-006, F-007, F-008 | — | Planned | Interactive workstations open live Postgres drawers in Cozy Digital Campus style |
+| VS-02 | Cozy Entry → Academic Spaces → 2D Pixel Studio | F-001, F-002, F-003, F-004 | — | Completed | Student reaches distinct 2D pixel-art studio pod with avatar navigation |
+| VS-03 | Workstation Proximity → Live Supabase Drawers → Return | F-005, F-006, F-007, F-008 | — | Completed | Interactive workstations open live Postgres drawers in Cozy Digital Campus style |
 
 **Exit criteria:** Complete student journey works with distinct Cozy pixel-art environment, sharp rendering, live Supabase data, and passes all Playwright tests.
 
@@ -124,15 +124,15 @@ Remember check again to make sure theres a shared contract before doing the exec
 **Target window:** Aligned with M1/M2  
 **Outcome:** Cozy Digital Campus visual direction, target information architecture, Gather Town 2.0 design references, and sharp canvas rendering configuration applied from the start.
 
-- [ ] **Visual direction:** Cozy Digital Campus (warm pastel palette `#F7F4EC` + welcoming 2D pixel-art virtual campus).
-- [ ] **Target information architecture:** Virtual Campus (Main Hall, Auditorium, Classrooms, Library, Commons), Academic Spaces, and Team Workspaces aligned with `PRD.md` and `DESIGN.md`.
-- [ ] **Gather Town 2.0 design reference review:** Visual and layout references (`assets/1.png` to `7.png`) applied for spatial navigation, room layouts, furniture placement, and side drawers; asset licensing rules respected (`assets/LICENSE.txt`).
-- [ ] **Canvas rendering quality:** Enforce ADR-012 (`antialias: false`, `pixelArt: true`, `roundPixels: true`, nearest-neighbor filtering, integer zoom, DPR awareness).
-- [ ] **Master design system:** Design tokens, accessible sans-serif typography, restrained geometry, subtle elevation, and drawer specifications from `DESIGN.md`.
+- [x] **Visual direction:** Cozy Digital Campus (warm pastel palette `#F7F4EC` + welcoming 2D pixel-art virtual campus).
+- [x] **Target information architecture:** Virtual Campus (Main Hall, Auditorium, Classrooms, Library, Commons), Academic Spaces, and Team Workspaces aligned with `PRD.md` and `DESIGN.md`.
+- [x] **Gather Town 2.0 design reference review:** Visual and layout references (`assets/1.png` to `7.png`) applied for spatial navigation, room layouts, furniture placement, and side drawers; asset licensing rules respected (`assets/LICENSE.txt`).
+- [x] **Canvas rendering quality:** Enforce ADR-012 (`antialias: false`, `pixelArt: true`, `roundPixels: true`, nearest-neighbor filtering, integer zoom, DPR awareness).
+- [x] **Master design system:** Design tokens, accessible sans-serif typography, restrained geometry, subtle elevation, and drawer specifications from `DESIGN.md`.
 
 | Slice ID | Vertical slice | Feature IDs | GitHub issues | Status | Demo outcome |
 |---|---|---|---|---|---|
-| VS-03.5 | Cozy Digital Campus & Canvas Sharpness Alignment | UI-01–UI-12, F-001–F-008 | — | Planned | Master design spec and sharp canvas rendering enforced |
+| VS-03.5 | Cozy Digital Campus & Canvas Sharpness Alignment | UI-01–UI-12, F-001–F-008 | — | Completed | Master design spec and sharp canvas rendering enforced |
 
 **Exit criteria:** `DESIGN.md` serves as the unambiguous source of truth for UI, rejected futuristic directions are avoided, and canvas sharpness rules are verified.
 
@@ -209,24 +209,24 @@ Remember check again to make sure theres a shared contract before doing the exec
 
 ## 4. Current Focus
 
-- **Current focus:** **M2 — Core Workflow & Cozy Academic Space**
-- **Why this is next:** M1 foundation, sharp Config A Phaser engine (`src/game/**`), Cozy app shell (`src/app/App.tsx`), and live Supabase health client (`src/lib/supabase.ts`) are verified on `main` (`8/8` Playwright tests passing), and remote Supabase (`zftymjkcrdkhtshazzmw`) is clean-slated for M2 schema migrations and UI panels.
-- **Dependencies:** Locked M0/M1 contracts on `main`, remote Supabase project `zftymjkcrdkhtshazzmw`, Node `v24.15.0`, npm `11.12.1`, and `public/assets/`.
-- **Expected result:** SQL schema + RLS + seed data in Supabase Postgres, `AcademicRepository` service, `EntryGateway`, `AcademicSpacesSelector`, and live data-backed Workstation Panels (`ProjectOverviewPanel`, `TasksSprintBoardPanel`, `ResourceLibraryPanel`).
-- **Verification:** `npm run typecheck`, `npm run build`, and Playwright end-to-end persistence specs.
-- **Blockers:** None. Ready to execute M2.
+- **Current focus:** **M3 — Persistent Student Workspace** (Hardening & Verification)
+- **Why this is next:** M2 & M2.5 deliverables are complete and verified on `main` (`14/14` Playwright tests passing, live Supabase Auth/RLS/Postgres reads and task status mutations verified across reload and leave-and-return cycles). M3 formalizes failure-mode tests, multi-profile write checks, and clean-session audit before M4 integration freeze.
+- **Dependencies:** Applied migration `20261126000001_m2_core_schema.sql` & `supabase/seed.sql` on `zftymjkcrdkhtshazzmw`, `authService.ts`, `academicService.ts`, and `tests/e2e/m2-student-journey.spec.ts`.
+- **Expected result:** Complete M3 persistence & access-control signoff (save-failure recovery, Member `Bima` update verification, empty/error states across all panels) and M4 release readiness.
+- **Verification:** `npm run typecheck`, `npm run build`, `npm run test:e2e`, and manual/Playwright error-injection tests.
+- **Blockers:** None.
 
 ## 5. Next Actions
 
-1. Fan out M2 isolated worktrees (`feature/m2-supabase-data`, `feature/m2-entry-spaces`, `feature/m2-workstation-panels`) per `UI_CONTRACT.md` Section 7.
-2. Apply Supabase SQL migrations, RLS policies, and fictional Team SibukTA seed data to `zftymjkcrdkhtshazzmw`.
-3. Wire live `AcademicRepository` reads/mutations into `EntryGateway`, `AcademicSpacesSelector`, and Workstation Panels, then run full Playwright verification.
+1. Expand M3 automated tests for Bima (`member`) cross-session task updates and simulated save/fetch error recovery UI.
+2. Run M4 integrated P0 quality audit (link checks, bundle review, secrets scan, RLS member vs non-member matrix).
+3. Prepare M5 production deployment and semifinal submission package (proposal + <2m demo video before 30 Nov 2026, 23:59 WIB).
 
 ## 6. Risks and Blockers
 
 | Item | Impact | Owner/next action | Status |
 |---|---|---|---|
-| Canvas visual sharpness | Blurry canvas weakens prototype presentation | Enforce ADR-012 (`pixelArt: true`, `antialias: false`, DPR awareness) from M1 | Planned |
+| Canvas visual sharpness | Blurry canvas weakens prototype presentation | Enforced ADR-012 (`pixelArt: true`, `antialias: false`, `NEAREST`, DPR & integer zoom) | Resolved & Tested |
 | Deadline is 30 Nov | Feature creep could prevent a coherent demo | Team: protect P0; defer P1/P2 | Active |
 | Realtime multiplayer scope | Synchronous networking could derail timeline | Keep asynchronous persistence as core; defer realtime | Mitigated (ADR-013) |
 | Unapproved engine swap | Migrating to PixiJS would waste critical days | Retain Phaser 3; focus on config and assets | Resolved (ADR-002) |
@@ -239,3 +239,4 @@ Remember check again to make sure theres a shared contract before doing the exec
 | 25 Nov 2026 | Clean slate reset: reverted project progress to M0 starting point; synced canonical docs and prepared M0 baseline. |
 | 25 Nov 2026 | Completed M0: verified repo/runtime/Supabase access, resolved `DESIGN.md` WCAG contrast conflicts, locked `UI_CONTRACT.md`, `src/styles/index.css`, `src/types/*`, `src/app/routerContract.ts`, and wrote M0 `HANDOFF.md`. |
 | 26 Nov 2026 | Completed M1: clean-slated Supabase project `zftymjkcrdkhtshazzmw`, scaffolded React 19/Vite/TS/Tailwind/Phaser `3.88.2`/Playwright shell, ported Config A sharp studio scene + assets + typed `eventBridge`, passed `typecheck`, `build`, and `8/8` Playwright E2E specs, and wrote M1 `HANDOFF.md`. |
+| 26 Nov 2026 | Completed M2 & M2.5: locked M2/M2.5 contracts (`components.ts`, `AuthRepository`, `DEMO_PROFILE_DESCRIPTORS`), delivered schema/RLS/seed/services + `EntryGateway` + `AcademicSpacesSelector` + `WorkstationPanel` (`ProjectOverviewPanel`, `TasksSprintBoardPanel`, `ResourceLibraryPanel`) across 3 isolated worktrees, pushed migration & seed to `zftymjkcrdkhtshazzmw`, wired `App.tsx`, verified `14/14` Playwright E2E specs, and wrote M2/M2.5 `HANDOFF.md`. |

@@ -416,13 +416,13 @@ When selecting and implementing 2D pixel-art assets for LearnNexus:
 
 | Screen ID | Screen Name | Purpose | Entry Point | Primary Action | Status |
 |---|---|---|---|---|---|
-| **UI-01** | Entry Gateway | Establish student session / demo entry | App launch | Sign In / Continue as Demo | Planned |
-| **UI-02** | Academic Spaces Directory | Display student's assigned classes | Successful entry | Select Academic Space | Planned |
-| **UI-03** | Campus / Classroom Space | Navigable 2D academic environment | Space selection | Move to Team Workspace | Planned |
-| **UI-04** | Team Workspace Studio | Collaborative team studio with workstations | Navigate into studio | Interact with Workstation (`E`) | Planned |
-| **UI-05** | Project Overview Panel | View project vision, objectives & status | Overview Workstation | Read / Review Project Info | Planned |
-| **UI-06** | Tasks Sprint Board Panel | View & update team tasks and sprints | Tasks Workstation | View / Update Task Status | Planned |
-| **UI-07** | Resource Library Panel | Access reference links and project assets | Resources Workstation | Open Verified Resource Link | Planned |
+| **UI-01** | Entry Gateway | Establish student session / demo entry | App launch | Sign In / Continue as Demo | Implemented |
+| **UI-02** | Academic Spaces Directory | Display student's assigned classes | Successful entry | Select Academic Space | Implemented |
+| **UI-03** | Campus / Classroom Space | Navigable 2D academic environment | Space selection | Move to Team Workspace | Implemented |
+| **UI-04** | Team Workspace Studio | Collaborative team studio with workstations | Navigate into studio | Interact with Workstation (`E`) | Implemented |
+| **UI-05** | Project Overview Panel | View project vision, objectives & status | Overview Workstation | Read / Review Project Info | Implemented |
+| **UI-06** | Tasks Sprint Board Panel | View & update team tasks and sprints | Tasks Workstation | View / Update Task Status | Implemented |
+| **UI-07** | Resource Library Panel | Access reference links and project assets | Resources Workstation | Open Verified Resource Link | Implemented |
 | **UI-08** | Lecturer Management | Organize classes, teams, and materials | Lecturer entry | Manage Academic Spaces | Future / P1 |
 | **UI-09** | Deliverables & Review | Project submission and feedback | Deliverables Station | Submit Deliverable | Future / P2 |
 | **UI-10** | Campus Main Hall | Campus entry, information board, auditorium | Campus entry | View Announcements / Auditorium | Future / P1 |
@@ -642,10 +642,10 @@ When selecting and implementing 2D pixel-art assets for LearnNexus:
 
 | Prototype Increment | Scope Tested | Visual Style | Persistence | Status |
 |---|---|---|---|---|
-| **M1 Foundation** | App shell, Phaser single mount, sharp pixel-art config, event bridge | Cozy Digital Campus | None | Planned |
-| **M2 Core Workflow** | Student entry, academic spaces, 2D studio scene, workstation panels | Cozy Digital Campus | Seeded / Supabase | Planned |
-| **M2.5 Design Alignment** | Cozy Digital Campus: pastel tokens, pixel-art specs, HTML panels | Cozy Digital Campus approved | Supabase PostgreSQL | Planned |
-| **M3 Persistence** | Real PostgreSQL reads/writes, task status mutation, refresh test | Cozy Digital Campus | Supabase PostgreSQL | Planned |
+| **M1 Foundation** | App shell, Phaser single mount, sharp pixel-art config, event bridge | Cozy Digital Campus | None | Completed & Verified |
+| **M2 Core Workflow** | Student entry, academic spaces, 2D studio scene, workstation panels | Cozy Digital Campus | Supabase PostgreSQL | Completed & Verified |
+| **M2.5 Design Alignment** | Cozy Digital Campus: pastel tokens, pixel-art specs, HTML panels | Cozy Digital Campus approved | Supabase PostgreSQL | Completed & Verified |
+| **M3 Persistence** | Real PostgreSQL reads/writes, task status mutation, refresh test | Cozy Digital Campus | Supabase PostgreSQL | Baseline Tested |
 
 ---
 

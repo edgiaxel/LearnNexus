@@ -6,7 +6,7 @@ LearnNexus is a browser-based virtual campus platform developed by **SibukTA** f
 
 The platform combines a welcoming, pastel-colored productivity application with a navigable 2D pixel-art virtual campus. Rather than functioning as a generic meeting tool or Gather Town clone, LearnNexus connects academic course contexts (syllabus, announcements, learning materials) directly to persistent team workspaces where student groups manage their project overviews, task sprint boards, and resource libraries across sessions.
 
-> **Project status:** M1 complete & verified (`8/8` Playwright specs passing) — sharp Config A Phaser 3 studio integrated; next: **M2 (Core Workflow & Cozy Academic Space)**. Track tasks on the [LearnNexus Kanban](https://github.com/users/edgiaxel/projects/5).
+> **Project status:** M2 & M2.5 complete & verified (`14/14` Playwright specs passing) — Cozy Entry Gateway, Academic Spaces, live Supabase Auth/RLS/Postgres persistence, Workstation Panels, and sharp Config A Phaser 3 studio integrated; next: **M3/M4 Persistence Hardening & Release Readiness**. Track tasks on the [LearnNexus Kanban](https://github.com/users/edgiaxel/projects/5).
 
 ## Team
 

@@ -1,5 +1,8 @@
 import { expect, test, type Page } from '@playwright/test';
-import type { LearnNexusGameState } from '../../src/types/gameDebug';
+import {
+  signInAsDemoAndEnterStudio,
+  waitForGameReady,
+} from './helpers/authFlow';
 
 function trackPageErrors(page: Page): () => void {
   const consoleErrors: string[] = [];
@@ -27,29 +30,14 @@ function trackPageErrors(page: Page): () => void {
   };
 }
 
-async function waitForGameReady(page: Page): Promise<LearnNexusGameState> {
-  await page.waitForFunction(
-    () => window.__LEARNNEXUS_GAME__?.getState().ready === true,
-    null,
-    { timeout: 15000 },
-  );
-
-  const state = await page.evaluate(() => window.__LEARNNEXUS_GAME__?.getState());
-  if (!state) {
-    throw new Error('Expected window.__LEARNNEXUS_GAME__.getState() to be defined');
-  }
-  return state;
-}
-
-test.describe('Phaser M1 Studio lifecycle and ADR-012 rendering', () => {
+test.describe('Phaser M1/M2 Studio lifecycle and ADR-012 rendering', () => {
   test('renders app shell, single canvas, Cozy tokens, accessibility basics, and live Supabase health', async ({
     page,
   }) => {
     const assertNoErrors = trackPageErrors(page);
 
     await page.setViewportSize({ width: 1280, height: 720 });
-    await page.goto('/');
-    await waitForGameReady(page);
+    await signInAsDemoAndEnterStudio(page);
 
     await expect(
       page.locator('[data-testid="phaser-canvas-container"] canvas'),
@@ -88,8 +76,7 @@ test.describe('Phaser M1 Studio lifecycle and ADR-012 rendering', () => {
     const assertNoErrors = trackPageErrors(page);
 
     await page.setViewportSize({ width: 1280, height: 720 });
-    await page.goto('/');
-    const state = await waitForGameReady(page);
+    const state = await signInAsDemoAndEnterStudio(page);
 
     const canvas = page.locator('[data-testid="phaser-canvas-container"] canvas');
     await expect(canvas).toHaveCount(1);
@@ -129,8 +116,7 @@ test.describe('Phaser M1 Studio lifecycle and ADR-012 rendering', () => {
     const assertNoErrors = trackPageErrors(page);
 
     try {
-      await page.goto('/');
-      const state = await waitForGameReady(page);
+      const state = await signInAsDemoAndEnterStudio(page);
 
       await expect(
         page.locator('[data-testid="phaser-canvas-container"] canvas'),
@@ -170,8 +156,7 @@ test.describe('Phaser M1 Studio lifecycle and ADR-012 rendering', () => {
     const assertNoErrors = trackPageErrors(page);
 
     await page.setViewportSize({ width: 1280, height: 720 });
-    await page.goto('/');
-    await waitForGameReady(page);
+    await signInAsDemoAndEnterStudio(page);
     await expect(
       page.locator('[data-testid="phaser-canvas-container"] canvas'),
     ).toHaveCount(1);
@@ -188,8 +173,10 @@ test.describe('Phaser M1 Studio lifecycle and ADR-012 rendering', () => {
       )
       .toBe(true);
 
-    // Header and main both expose enter-studio-btn on the spaces view; click the main CTA explicitly.
-    await page.locator('main [data-testid="enter-studio-btn"]').click();
+    await page
+      .getByTestId('space-card-IF-4031')
+      .getByTestId('enter-studio-btn')
+      .click();
 
     await waitForGameReady(page);
     await expect(page.locator('h1')).toHaveText('Team Workspace Studio');
@@ -206,8 +193,7 @@ test.describe('Phaser M1 Studio lifecycle and ADR-012 rendering', () => {
     const assertNoErrors = trackPageErrors(page);
 
     await page.setViewportSize({ width: 1280, height: 720 });
-    await page.goto('/');
-    await waitForGameReady(page);
+    await signInAsDemoAndEnterStudio(page);
 
     const viewports = [
       { width: 1280, height: 720, expectedZoom: 3 },

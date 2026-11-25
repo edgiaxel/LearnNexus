@@ -11,14 +11,14 @@
 |---|---|---|
 | Repository | `edgiaxel/LearnNexus`, public | Verified |
 | Default branch | `main` | Verified |
-| Current local branch | `main` (M1 completed baseline; 0 stale worktrees/branches) | Verified |
-| M0 Contracts & Tokens | `UI_CONTRACT.md`, `HANDOFF_TEMPLATE.md`, `src/styles/index.css`, `src/types/contracts.ts`, `src/types/database.ts`, `src/types/gameDebug.ts`, `src/app/routerContract.ts`, `.env.example`, `.gitignore` present & locked | Verified |
-| Supabase project | `.env` gitignored; `zftymjkcrdkhtshazzmw.supabase.co` purged clean (`0` `public` tables, empty `schema_migrations`); `/auth/v1/health` returns `200` (`anon` key) | Verified |
+| Current local branch | `main` (M2 & M2.5 completed baseline; 0 stale worktrees/branches) | Verified |
+| M0 Contracts & Tokens | `UI_CONTRACT.md`, `HANDOFF_TEMPLATE.md`, `src/styles/index.css`, `src/types/contracts.ts`, `src/types/database.ts`, `src/types/components.ts`, `src/types/gameDebug.ts`, `src/app/routerContract.ts`, `.env.example`, `.gitignore` present & locked | Verified |
+| Supabase project | `.env` gitignored; `zftymjkcrdkhtshazzmw.supabase.co` migrated (`20261126000001_m2_core_schema.sql`), seeded (`3` demo users, `2` classes, `2` teams, `2` projects, `8` tasks, `6` resources), RLS verified (`anon` denied, Nadia read/write, Rani 0 rows) | Verified |
 | Runtime & Tooling | Node `v24.15.0`, npm `11.12.1`, Playwright `@playwright/test` `1.51.1`, `supabase` CLI `3.4.0` | Verified |
 | WCAG Contrast Audit | `docs/DESIGN.md` synced to passing tokens (`#5C665C` `5.98:1`, `#4A6B46` `6.03:1`, `#3B5638` `8.16:1`, `#757E74` control border `4.21:1` / `3.83:1`) | Verified |
-| Application source | M1 complete: `App.tsx`, `PhaserHost.tsx`, `createGame.ts`, `CampusScene.ts`, `eventBridge.ts`, `campusStudioMap.json`, `supabase.ts`, `public/assets/**` | Verified |
+| Application source | M2 & M2.5 complete: `App.tsx`, `EntryGateway.tsx`, `AcademicSpacesSelector.tsx`, `WorkstationPanel.tsx`, `ProjectOverviewPanel.tsx`, `TasksSprintBoardPanel.tsx`, `ResourceLibraryPanel.tsx`, `authService.ts`, `academicService.ts`, `errorMapper.ts`, `PhaserHost.tsx`, `CampusScene.ts` | Verified |
 | Package manifest / lockfile | `package.json`, `package-lock.json`, `tsconfig.json`, `vite.config.ts`, `playwright.config.ts` committed | Verified |
-| Tests | `tests/e2e/phaser-lifecycle.spec.ts` & `tests/e2e/workstation-bridge.spec.ts` (`8/8` Playwright tests passing) | Verified |
+| Tests | `tests/e2e/m2-student-journey.spec.ts`, `tests/e2e/phaser-lifecycle.spec.ts`, `tests/e2e/workstation-bridge.spec.ts` (`14/14` Playwright tests passing) | Verified |
 | CI workflows | None committed yet | Verified |
 | GitHub Issues | Clean slate — ready for M0+ issue tracking | Reported |
 | GitHub Milestones | M0 starting; M1–M5 planned | Verified |
@@ -158,9 +158,9 @@ Inspection of `src/game/createGame.ts` and `src/game/scenes/CampusScene.ts` iden
 ### 8.3 Implementation status verification
 
 - M0 (Audit, Preparation & Shared Contract): **Completed** (`UI_CONTRACT.md`, `src/styles/index.css`, `src/types/*`, `src/app/routerContract.ts` locked on `main`).
-- M1 (Foundation & Sharp Canvas Engine): **Completed** (`package.json`, `App.tsx`, `PhaserHost.tsx`, `createGame.ts`, `CampusScene.ts`, `eventBridge.ts`, `public/assets/`, `tests/e2e/` verified `8/8` Playwright tests passing).
-- M2 (Core Workflow & Cozy Academic Space): Ready / Next.
-- M2.5 (Design Alignment & Canvas Sharpness): Planned (specifications documented in `DESIGN.md` and `ARCHITECTURE.md`).
-- M3 (Persistent Student Workspace): Planned.
+- M1 (Foundation & Sharp Canvas Engine): **Completed** (`package.json`, `App.tsx`, `PhaserHost.tsx`, `createGame.ts`, `CampusScene.ts`, `eventBridge.ts`, `public/assets/`, `tests/e2e/` verified).
+- M2 (Core Workflow & Cozy Academic Space): **Completed & E2E Verified** (`supabase/migrations/*`, `supabase/seed.sql`, `src/services/*`, `EntryGateway.tsx`, `AcademicSpacesSelector.tsx`, `WorkstationPanel.tsx` & panels, `14/14` Playwright tests passing).
+- M2.5 (Design Alignment & Canvas Sharpness): **Completed & Verified** (Cozy Digital Campus tokens, `ENERGY 1 / RHYTHM 2 / MOTION 1` static skeletons, compact responsive controls, ADR-012 Config A sharpness verified at `1x` and `2x` HiDPI).
+- M3 (Persistent Student Workspace): Baseline persistence tested during M2; formal failure-mode & multi-role audit next.
 - M4 (Quality & Integration): Planned.
 - M5 (Release / Demo): Planned.

@@ -2,6 +2,7 @@ import { expect, test, type Page } from '@playwright/test';
 import { WORKSTATION_META } from '../../src/app/routerContract';
 import type { WorkstationId } from '../../src/types/contracts';
 import type { LearnNexusGameState } from '../../src/types/gameDebug';
+import { signInAsDemoAndEnterStudio } from './helpers/authFlow';
 
 function trackPageErrors(page: Page): () => void {
   const consoleErrors: string[] = [];
@@ -37,15 +38,6 @@ async function getGameState(page: Page): Promise<LearnNexusGameState> {
   return state;
 }
 
-async function waitForGameReady(page: Page): Promise<LearnNexusGameState> {
-  await page.waitForFunction(
-    () => window.__LEARNNEXUS_GAME__?.getState().ready === true,
-    null,
-    { timeout: 15000 },
-  );
-  return getGameState(page);
-}
-
 test.describe('Phaser-React workstation bridge and keyboard focus management', () => {
   test('moves avatar with keyboard walking and transitions to directional idle animations', async ({
     page,
@@ -53,8 +45,7 @@ test.describe('Phaser-React workstation bridge and keyboard focus management', (
     const assertNoErrors = trackPageErrors(page);
 
     await page.setViewportSize({ width: 1280, height: 720 });
-    await page.goto('/');
-    await waitForGameReady(page);
+    await signInAsDemoAndEnterStudio(page);
 
     const container = page.getByTestId('phaser-canvas-container');
     await container.click({ position: { x: 24, y: 24 } });
@@ -108,8 +99,7 @@ test.describe('Phaser-React workstation bridge and keyboard focus management', (
     const assertNoErrors = trackPageErrors(page);
 
     await page.setViewportSize({ width: 1280, height: 720 });
-    await page.goto('/');
-    await waitForGameReady(page);
+    await signInAsDemoAndEnterStudio(page);
 
     const container = page.getByTestId('phaser-canvas-container');
     const prompt = page.getByTestId('workstation-prompt');
@@ -207,8 +197,7 @@ test.describe('Phaser-React workstation bridge and keyboard focus management', (
     const assertNoErrors = trackPageErrors(page);
 
     await page.setViewportSize({ width: 1280, height: 720 });
-    await page.goto('/');
-    await waitForGameReady(page);
+    await signInAsDemoAndEnterStudio(page);
 
     const teleported = await page.evaluate(
       () => window.__LEARNNEXUS_GAME__?.teleportToWorkstation('tasks') ?? false,

@@ -1,22 +1,27 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { AcademicSpacesSelector } from '../components/campus/AcademicSpacesSelector';
+import { EntryGateway } from '../components/entry/EntryGateway';
+import { WorkstationPanel } from '../components/workstation/WorkstationPanel';
 import { PhaserHost } from '../game/PhaserHost';
 import { eventBridge } from '../game/bridge/eventBridge';
 import { checkSupabaseHealth } from '../lib/supabase';
-import type { AppRoute, AsyncState, WorkstationId } from '../types/contracts';
+import { academicService } from '../services/academicService';
+import { authService } from '../services/authService';
+import type {
+  AcademicSpace,
+  AppRoute,
+  AsyncState,
+  StudentProfile,
+  TeamWorkspace,
+  WorkstationId,
+} from '../types/contracts';
 import { canTransitionRoute, WORKSTATION_META } from './routerContract';
 
 interface HealthSnapshot {
   latencyMs: number;
 }
 
-const WORKSTATION_PURPOSE: Record<WorkstationId, string> = {
-  overview:
-    'Displays the team project brief, semester goals, and milestone scope for the active studio.',
-  tasks:
-    'Displays team sprint items across To Do, In Progress, and Done statuses with persisted updates.',
-  resources:
-    'Displays verified reference documents, design guides, and repository links for the team.',
-};
+const SELECTED_CLASS_STORAGE_KEY = 'learnnexus:selectedClassId';
 
 const WORKSTATION_LEGEND: ReadonlyArray<{ id: WorkstationId; hint: string }> = [
   { id: 'overview', hint: 'West study pod' },
@@ -24,12 +29,44 @@ const WORKSTATION_LEGEND: ReadonlyArray<{ id: WorkstationId; hint: string }> = [
   { id: 'resources', hint: 'North bookcase' },
 ];
 
+const WORKSTATION_IDS: readonly WorkstationId[] = [
+  'overview',
+  'tasks',
+  'resources',
+];
+
+function readSelectedClassId(): string | null {
+  try {
+    return window.sessionStorage.getItem(SELECTED_CLASS_STORAGE_KEY);
+  } catch {
+    return null;
+  }
+}
+
+function writeSelectedClassId(classId: string | null): void {
+  try {
+    if (classId) {
+      window.sessionStorage.setItem(SELECTED_CLASS_STORAGE_KEY, classId);
+    } else {
+      window.sessionStorage.removeItem(SELECTED_CLASS_STORAGE_KEY);
+    }
+  } catch {
+    // Ignore storage failures in restricted browser contexts.
+  }
+}
+
 export function App() {
-  const [route, setRoute] = useState<AppRoute>('workspace');
+  const [sessionBootstrapping, setSessionBootstrapping] = useState(true);
+  const [route, setRoute] = useState<AppRoute>('entry');
+  const [profile, setProfile] = useState<StudentProfile | null>(null);
+  const [activeWorkspace, setActiveWorkspace] = useState<TeamWorkspace | null>(
+    null,
+  );
   const [nearbyWorkstation, setNearbyWorkstation] =
     useState<WorkstationId | null>(null);
   const [activeWorkstation, setActiveWorkstation] =
     useState<WorkstationId | null>(null);
+  const [signingOut, setSigningOut] = useState(false);
   const [supabaseState, setSupabaseState] = useState<
     AsyncState<HealthSnapshot>
   >({
@@ -37,8 +74,6 @@ export function App() {
     label: 'Checking Supabase connection...',
   });
 
-  const drawerRef = useRef<HTMLElement | null>(null);
-  const closeButtonRef = useRef<HTMLButtonElement | null>(null);
   const canvasWrapperRef = useRef<HTMLDivElement | null>(null);
 
   const runHealthCheck = useCallback(async () => {
@@ -67,6 +102,51 @@ export function App() {
   useEffect(() => {
     void runHealthCheck();
   }, [runHealthCheck]);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    const restoreSession = async () => {
+      const profileResult = await authService.getCurrentProfile();
+      if (cancelled) return;
+
+      if (!profileResult.ok || !profileResult.data) {
+        writeSelectedClassId(null);
+        setProfile(null);
+        setActiveWorkspace(null);
+        setRoute('entry');
+        setSessionBootstrapping(false);
+        return;
+      }
+
+      setProfile(profileResult.data);
+
+      const savedClassId = readSelectedClassId();
+      if (savedClassId) {
+        const workspaceResult =
+          await academicService.getTeamWorkspace(savedClassId);
+        if (cancelled) return;
+
+        if (workspaceResult.ok) {
+          setActiveWorkspace(workspaceResult.data);
+          setRoute('workspace');
+          setSessionBootstrapping(false);
+          return;
+        }
+        writeSelectedClassId(null);
+      }
+
+      setActiveWorkspace(null);
+      setRoute('spaces');
+      setSessionBootstrapping(false);
+    };
+
+    void restoreSession();
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   useEffect(() => {
     const unsubProximity = eventBridge.on('workstation:proximity', (payload) => {
@@ -100,67 +180,76 @@ export function App() {
     restoreCanvasFocus();
   }, [restoreCanvasFocus]);
 
-  useEffect(() => {
-    if (!activeWorkstation) return;
-
-    closeButtonRef.current?.focus();
-
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
-        event.preventDefault();
-        closeDrawer();
-        return;
-      }
-
-      if (event.key !== 'Tab' || !drawerRef.current) return;
-
-      const focusable = Array.from(
-        drawerRef.current.querySelectorAll<HTMLElement>(
-          'button:not([disabled]), a[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])',
-        ),
-      );
-      if (focusable.length === 0) return;
-
-      const first = focusable[0];
-      const last = focusable[focusable.length - 1];
-      if (event.shiftKey && document.activeElement === first) {
-        event.preventDefault();
-        last.focus();
-      } else if (!event.shiftKey && document.activeElement === last) {
-        event.preventDefault();
-        first.focus();
-      }
-    };
-
-    window.addEventListener('keydown', handleKeyDown);
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-    };
-  }, [activeWorkstation, closeDrawer]);
-
-  const navigateTo = useCallback(
-    (target: AppRoute) => {
-      if (!canTransitionRoute(route, target)) return;
-      setActiveWorkstation(null);
+  const handleAuthenticated = useCallback(
+    (nextProfile: StudentProfile) => {
+      writeSelectedClassId(null);
+      setProfile(nextProfile);
+      setActiveWorkspace(null);
       setNearbyWorkstation(null);
-      setRoute(target);
+      setActiveWorkstation(null);
+      if (canTransitionRoute(route, 'spaces')) {
+        setRoute('spaces');
+      } else {
+        setRoute('spaces');
+      }
     },
     [route],
   );
 
+  const handleSelectSpace = useCallback(
+    (space: AcademicSpace, workspace: TeamWorkspace) => {
+      writeSelectedClassId(space.id);
+      setActiveWorkspace(workspace);
+      setNearbyWorkstation(null);
+      setActiveWorkstation(null);
+      if (canTransitionRoute(route, 'workspace')) {
+        setRoute('workspace');
+      } else {
+        setRoute('workspace');
+      }
+    },
+    [route],
+  );
+
+  const handleLeaveStudio = useCallback(() => {
+    if (!canTransitionRoute(route, 'spaces')) return;
+    writeSelectedClassId(null);
+    setActiveWorkstation(null);
+    setNearbyWorkstation(null);
+    setActiveWorkspace(null);
+    setRoute('spaces');
+  }, [route]);
+
+  const handleSignOut = useCallback(async () => {
+    if (signingOut) return;
+    setSigningOut(true);
+    await authService.signOut();
+    writeSelectedClassId(null);
+    setActiveWorkstation(null);
+    setNearbyWorkstation(null);
+    setActiveWorkspace(null);
+    setProfile(null);
+    setRoute('entry');
+    setSigningOut(false);
+  }, [signingOut]);
+
+  const openWorkstation = useCallback((workstationId: WorkstationId) => {
+    eventBridge.emit('workstation:interact', {
+      workstationId,
+      label: WORKSTATION_META[workstationId].title,
+    });
+  }, []);
+
   const handlePromptClick = useCallback(() => {
     if (!nearbyWorkstation) return;
-    eventBridge.emit('workstation:interact', {
-      workstationId: nearbyWorkstation,
-      label: WORKSTATION_META[nearbyWorkstation].title,
-    });
-  }, [nearbyWorkstation]);
+    openWorkstation(nearbyWorkstation);
+  }, [nearbyWorkstation, openWorkstation]);
 
   return (
     <div className="min-h-screen flex flex-col bg-[var(--color-bg-warm)] text-[var(--color-text-primary)]">
       <header className="w-full border-b border-[var(--color-border-subtle)] bg-[var(--color-surface-primary)]">
         <div className="mx-auto flex w-full max-w-[1200px] flex-wrap items-center justify-between gap-3 px-4 py-3 sm:px-6">
-          <div className="flex flex-wrap items-center gap-3">
+          <div className="flex min-w-0 flex-wrap items-center gap-3">
             <div className="flex items-center gap-2.5">
               <svg
                 width="26"
@@ -194,17 +283,41 @@ export function App() {
               </span>
             </div>
 
-            <span
-              className="text-[12px] font-medium text-[var(--color-text-secondary)]"
-              aria-current="page"
+            <nav
+              aria-label="Campus breadcrumb"
+              data-testid="header-breadcrumbs"
+              className="flex min-w-0 flex-wrap items-center gap-1.5 text-[12px] font-medium text-[var(--color-text-secondary)]"
             >
-              {route === 'workspace'
-                ? 'Academic Spaces / Team Workspace Studio'
-                : 'Academic Spaces'}
-            </span>
+              {route === 'entry' && (
+                <span aria-current="page">Campus Entry</span>
+              )}
+              {route === 'spaces' && (
+                <span aria-current="page">Academic Spaces</span>
+              )}
+              {route === 'workspace' && activeWorkspace && (
+                <>
+                  <button
+                    type="button"
+                    onClick={handleLeaveStudio}
+                    className="btn-ghost min-h-[44px] px-2 py-1 text-[12px] font-medium"
+                  >
+                    Academic Spaces
+                  </button>
+                  <span aria-hidden="true">/</span>
+                  <span>{activeWorkspace.classCode}</span>
+                  <span aria-hidden="true">/</span>
+                  <span
+                    aria-current="page"
+                    className="text-[var(--color-text-primary)]"
+                  >
+                    {activeWorkspace.teamName}
+                  </span>
+                </>
+              )}
+            </nav>
           </div>
 
-          <div className="flex flex-wrap items-center gap-2.5">
+          <div className="flex flex-wrap items-center gap-2">
             {supabaseState.status === 'loading' && (
               <span className="status-badge status-badge--todo" role="status">
                 Checking Supabase...
@@ -230,27 +343,35 @@ export function App() {
               </div>
             )}
 
-            <span className="status-badge bg-[var(--color-accent-lavender)] text-[var(--color-text-primary)] border border-[#C4BAD6]">
-              M1 Studio Preview
-            </span>
+            {profile && (
+              <span
+                data-testid="header-user-badge"
+                className="status-badge border border-[#C4BAD6] bg-[var(--color-accent-lavender)] text-[var(--color-text-primary)]"
+              >
+                {profile.displayName}
+              </span>
+            )}
 
-            {route === 'workspace' ? (
+            {route === 'workspace' && activeWorkspace && (
               <button
                 type="button"
                 className="btn-secondary"
                 data-testid="leave-studio-btn"
-                onClick={() => navigateTo('spaces')}
+                onClick={handleLeaveStudio}
               >
                 Leave Studio
               </button>
-            ) : (
+            )}
+
+            {profile && (
               <button
                 type="button"
-                className="btn-primary"
-                data-testid="header-enter-studio-btn"
-                onClick={() => navigateTo('workspace')}
+                className="btn-ghost"
+                data-testid="sign-out-btn"
+                disabled={signingOut}
+                onClick={() => void handleSignOut()}
               >
-                Enter Studio
+                {signingOut ? 'Signing out...' : 'Sign Out'}
               </button>
             )}
           </div>
@@ -258,12 +379,57 @@ export function App() {
       </header>
 
       <main className="mx-auto flex w-full max-w-[1200px] flex-1 flex-col gap-4 px-4 py-5 sm:px-6">
-        {route === 'workspace' ? (
+        {sessionBootstrapping ? (
+          <section
+            aria-label="Restoring campus session"
+            aria-busy="true"
+            className="surface-card mx-auto my-auto flex w-full max-w-[540px] flex-col gap-4 p-6 sm:p-8"
+          >
+            <h1 className="m-0 text-[22px] font-semibold leading-7 text-[var(--color-text-charcoal)]">
+              Loading Campus Session
+            </h1>
+            <p
+              role="status"
+              className="m-0 text-[14px] text-[var(--color-text-secondary)]"
+            >
+              Checking campus session...
+            </p>
+            <div className="flex flex-col gap-3" aria-hidden="true">
+              <div className="h-5 w-2/3 rounded-[8px] bg-[var(--color-surface-secondary)]" />
+              <div className="h-14 w-full rounded-[10px] bg-[var(--color-surface-secondary)]" />
+            </div>
+          </section>
+        ) : route === 'entry' ? (
+          <EntryGateway
+            authRepository={authService}
+            supabaseReady={supabaseState.status === 'success'}
+            supabaseError={
+              supabaseState.status === 'error'
+                ? supabaseState.error.message
+                : null
+            }
+            onRetryHealth={() => void runHealthCheck()}
+            onAuthenticated={handleAuthenticated}
+          />
+        ) : route === 'spaces' && profile ? (
+          <AcademicSpacesSelector
+            profile={profile}
+            repository={academicService}
+            onSelectSpace={handleSelectSpace}
+            onSwitchProfile={() => void handleSignOut()}
+          />
+        ) : route === 'workspace' && activeWorkspace ? (
           <>
             <div className="flex flex-wrap items-baseline justify-between gap-2">
-              <h1 className="m-0 text-[22px] font-semibold leading-7 text-[var(--color-text-charcoal)]">
-                Team Workspace Studio
-              </h1>
+              <div className="flex flex-col gap-0.5">
+                <h1 className="m-0 text-[22px] font-semibold leading-7 text-[var(--color-text-charcoal)]">
+                  Team Workspace Studio
+                </h1>
+                <p className="m-0 text-[13px] font-medium text-[var(--color-text-secondary)]">
+                  {activeWorkspace.classCode} {activeWorkspace.className} (
+                  {activeWorkspace.teamName})
+                </p>
+              </div>
               <p className="m-0 text-[13px] text-[var(--color-text-secondary)]">
                 Use WASD or Arrow keys to walk. Press E near a workstation.
               </p>
@@ -297,6 +463,26 @@ export function App() {
                 )}
               </div>
 
+              <div className="mt-3 flex flex-col gap-2 rounded-[10px] border border-[var(--color-border-subtle)] bg-[var(--color-surface-secondary)] p-3 md:hidden">
+                <p className="m-0 text-[12px] text-[var(--color-text-secondary)]">
+                  Compact viewport: open a workstation panel directly below, or
+                  use a desktop browser for full keyboard walking.
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {WORKSTATION_IDS.map((id) => (
+                    <button
+                      key={id}
+                      type="button"
+                      className="btn-secondary flex-1"
+                      data-testid={`mobile-workstation-btn-${id}`}
+                      onClick={() => openWorkstation(id)}
+                    >
+                      {WORKSTATION_META[id].title}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
               <div className="mt-3 flex flex-wrap items-center justify-between gap-2 px-1 text-[12px] text-[var(--color-text-secondary)]">
                 <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
                   {WORKSTATION_LEGEND.map((station) => (
@@ -313,168 +499,27 @@ export function App() {
             </section>
           </>
         ) : (
-          <section
-            aria-label="Academic spaces directory"
-            className="surface-card mx-auto my-auto flex w-full max-w-[680px] flex-col gap-5 p-6 sm:p-8"
-          >
-            <div className="flex flex-col gap-2">
-              <h1 className="m-0 text-[22px] font-semibold leading-7 text-[var(--color-text-charcoal)]">
-                Academic Spaces
-              </h1>
-              <p className="m-0 text-[14px] leading-relaxed text-[var(--color-text-secondary)]">
-                No enrolled courses are loaded in M1. Database tables, team
-                assignments, and row-level policies connect here in M2.
-              </p>
-            </div>
-
-            <div className="rounded-[10px] border border-[var(--color-border-subtle)] bg-[var(--color-surface-secondary)] p-4">
-              <h2 className="m-0 mb-1.5 text-[15px] font-medium text-[var(--color-text-charcoal)]">
-                Supabase Backend Status
-              </h2>
-              {supabaseState.status === 'loading' && (
-                <p className="m-0 text-[13px] text-[var(--color-text-secondary)]">
-                  Checking Supabase health endpoint...
-                </p>
-              )}
-              {supabaseState.status === 'success' && (
-                <p className="m-0 text-[13px] text-[var(--color-text-primary)]">
-                  Connected to Supabase project ({supabaseState.data.latencyMs}
-                  ms response). Clean database ready for M2 schema migrations.
-                </p>
-              )}
-              {supabaseState.status === 'error' && (
-                <div className="flex flex-wrap items-center justify-between gap-3">
-                  <p className="m-0 text-[13px] text-[var(--color-status-error-text)]">
-                    {supabaseState.error.message}
-                  </p>
-                  <button
-                    type="button"
-                    className="btn-secondary"
-                    onClick={() => void runHealthCheck()}
-                  >
-                    Retry check
-                  </button>
-                </div>
-              )}
-            </div>
-
-            <div className="flex flex-wrap items-center gap-3">
-              <button
-                type="button"
-                className="btn-primary"
-                data-testid="enter-studio-btn"
-                onClick={() => navigateTo('workspace')}
-              >
-                Enter Studio
-              </button>
-            </div>
-          </section>
+          <EntryGateway
+            authRepository={authService}
+            supabaseReady={supabaseState.status === 'success'}
+            supabaseError={
+              supabaseState.status === 'error'
+                ? supabaseState.error.message
+                : null
+            }
+            onRetryHealth={() => void runHealthCheck()}
+            onAuthenticated={handleAuthenticated}
+          />
         )}
       </main>
 
-      {activeWorkstation && (
-        <>
-          <button
-            type="button"
-            tabIndex={-1}
-            aria-label="Close workstation drawer"
-            onClick={closeDrawer}
-            className="fixed inset-0 z-40 border-0 p-0"
-            style={{ backgroundColor: 'rgba(48, 52, 59, 0.15)' }}
-          />
-
-          <aside
-            ref={drawerRef}
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="workstation-drawer-title"
-            data-testid="workstation-drawer"
-            data-workstation-id={activeWorkstation}
-            className="fixed top-0 right-0 z-50 flex h-full w-full max-w-[440px] flex-col border-l border-[var(--color-border-subtle)] bg-[var(--color-surface-primary)]"
-            style={{ boxShadow: 'var(--shadow-drawer)' }}
-          >
-            <div className="flex items-start justify-between gap-3 border-b border-[var(--color-border-subtle)] px-6 py-5">
-              <div className="flex flex-col gap-1.5">
-                <span className="status-badge w-fit bg-[var(--color-accent-sage-soft)] text-[var(--color-text-primary)] border border-[var(--color-accent-sage)]">
-                  Workstation
-                </span>
-                <h2
-                  id="workstation-drawer-title"
-                  className="m-0 text-[18px] font-semibold leading-6 text-[var(--color-text-charcoal)]"
-                >
-                  {WORKSTATION_META[activeWorkstation].title}
-                </h2>
-              </div>
-
-              <button
-                ref={closeButtonRef}
-                type="button"
-                className="btn-ghost"
-                aria-label="Close panel"
-                data-testid="close-drawer-btn"
-                onClick={closeDrawer}
-              >
-                Close
-              </button>
-            </div>
-
-            <div className="flex flex-1 flex-col gap-4 overflow-y-auto px-6 py-5">
-              <p className="m-0 text-[14px] leading-relaxed text-[var(--color-text-primary)]">
-                {WORKSTATION_PURPOSE[activeWorkstation]}
-              </p>
-
-              <div className="rounded-[10px] border border-[var(--color-border-subtle)] bg-[var(--color-surface-secondary)] p-4">
-                <h3 className="m-0 mb-1.5 text-[15px] font-medium text-[var(--color-text-charcoal)]">
-                  No workspace records loaded yet
-                </h3>
-                <p className="m-0 text-[13px] leading-relaxed text-[var(--color-text-secondary)]">
-                  The database is clean-slated for M1. M2 adds Postgres tables,
-                  seed data, and RLS queries for this workstation.
-                </p>
-              </div>
-
-              <div className="rounded-[10px] border border-[var(--color-border-subtle)] bg-[var(--color-surface-primary)] p-4">
-                <h3 className="m-0 mb-1.5 text-[15px] font-medium text-[var(--color-text-charcoal)]">
-                  Database connection
-                </h3>
-                {supabaseState.status === 'loading' && (
-                  <p className="m-0 text-[13px] text-[var(--color-text-secondary)]">
-                    Checking live Supabase endpoint...
-                  </p>
-                )}
-                {supabaseState.status === 'success' && (
-                  <p className="m-0 text-[13px] text-[var(--color-status-done-text)]">
-                    Supabase ready ({supabaseState.data.latencyMs}ms).
-                  </p>
-                )}
-                {supabaseState.status === 'error' && (
-                  <div className="flex flex-col gap-2">
-                    <p className="m-0 text-[13px] text-[var(--color-status-error-text)]">
-                      {supabaseState.error.message}
-                    </p>
-                    <button
-                      type="button"
-                      className="btn-secondary w-fit"
-                      onClick={() => void runHealthCheck()}
-                    >
-                      Retry connection
-                    </button>
-                  </div>
-                )}
-              </div>
-            </div>
-
-            <div className="border-t border-[var(--color-border-subtle)] px-6 py-4">
-              <button
-                type="button"
-                className="btn-secondary w-full"
-                onClick={closeDrawer}
-              >
-                Return to Studio (Esc)
-              </button>
-            </div>
-          </aside>
-        </>
+      {activeWorkstation && activeWorkspace && (
+        <WorkstationPanel
+          workstationId={activeWorkstation}
+          workspace={activeWorkspace}
+          repository={academicService}
+          onClose={closeDrawer}
+        />
       )}
     </div>
   );
