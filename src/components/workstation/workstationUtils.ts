@@ -26,6 +26,32 @@ export function formatDisplayDate(
   }).format(parsed);
 }
 
+export interface ParsedSafeHttpUrl {
+  safeHref: string;
+  hostLabel: string;
+}
+
+export function parseSafeHttpUrl(rawUrl: string): ParsedSafeHttpUrl | null {
+  const trimmed = rawUrl.trim();
+  if (!trimmed) return null;
+
+  try {
+    const parsed = new URL(trimmed);
+    if (parsed.protocol !== 'https:' && parsed.protocol !== 'http:') {
+      return null;
+    }
+    if (!parsed.hostname) {
+      return null;
+    }
+    return {
+      safeHref: parsed.toString(),
+      hostLabel: parsed.hostname,
+    };
+  } catch {
+    return null;
+  }
+}
+
 export function getTwoLetterInitials(displayName: string): string {
   const withoutParens = displayName.replace(/\([^)]*\)/g, ' ').trim();
   const source = withoutParens || displayName.trim();

@@ -7,10 +7,14 @@ import type {
 } from '../../types/contracts';
 import {
   FilterTabBar,
+  PanelContextHeader,
   PanelEmptyCard,
   PanelErrorCard,
   PanelLoadingSkeleton,
 } from './PanelStateCards';
+import { parseSafeHttpUrl, type ParsedSafeHttpUrl } from './workstationUtils';
+
+export { parseSafeHttpUrl, type ParsedSafeHttpUrl };
 
 type ResourceFilterKey = 'all' | ResourceCategory;
 
@@ -57,36 +61,12 @@ const CATEGORY_BADGE_META: Record<
   },
 };
 
-export interface ParsedSafeHttpUrl {
-  safeHref: string;
-  hostLabel: string;
-}
-
-export function parseSafeHttpUrl(rawUrl: string): ParsedSafeHttpUrl | null {
-  const trimmed = rawUrl.trim();
-  if (!trimmed) return null;
-
-  try {
-    const parsed = new URL(trimmed);
-    if (parsed.protocol !== 'https:' && parsed.protocol !== 'http:') {
-      return null;
-    }
-    if (!parsed.hostname) {
-      return null;
-    }
-    return {
-      safeHref: parsed.toString(),
-      hostLabel: parsed.hostname,
-    };
-  } catch {
-    return null;
-  }
-}
-
 export function ResourceLibraryPanel({
   projectId,
   workspace,
   repository,
+  isDemoSession,
+  onSessionExpired,
 }: ResourceLibraryPanelProps) {
   const [state, setState] = useState<AsyncState<ResourceItem[]>>(() =>
     projectId === null
@@ -102,6 +82,8 @@ export function ResourceLibraryPanel({
   const [activeCategory, setActiveCategory] =
     useState<ResourceFilterKey>('all');
   const requestSeqRef = useRef(0);
+  const onSessionExpiredRef = useRef(onSessionExpired);
+  onSessionExpiredRef.current = onSessionExpired;
 
   const fetchResources = useCallback(async () => {
     if (projectId === null) {
@@ -119,30 +101,48 @@ export function ResourceLibraryPanel({
       label: 'Loading resource library...',
     });
 
-    const result = await repository.getProjectResources(projectId);
-    if (seq !== requestSeqRef.current) return;
+    try {
+      const result = await repository.getProjectResources(projectId);
+      if (seq !== requestSeqRef.current) return;
 
-    if (!result.ok) {
+      if (!result.ok) {
+        if (result.error.code === 'auth') {
+          onSessionExpiredRef.current?.();
+        }
+        setState({
+          status: 'error',
+          error: result.error,
+        });
+        return;
+      }
+
+      if (result.data.length === 0) {
+        setState({
+          status: 'empty',
+          reason: 'No resources attached to this workspace yet.',
+          actionLabel: 'Refresh resources',
+        });
+        return;
+      }
+
+      setState({
+        status: 'success',
+        data: result.data,
+      });
+    } catch (err) {
+      if (seq !== requestSeqRef.current) return;
       setState({
         status: 'error',
-        error: result.error,
+        error: {
+          code: 'unknown',
+          message:
+            err instanceof Error
+              ? err.message
+              : 'Unable to load project resources right now.',
+          retryable: true,
+        },
       });
-      return;
     }
-
-    if (result.data.length === 0) {
-      setState({
-        status: 'empty',
-        reason: 'No resources attached to this workspace yet.',
-        actionLabel: 'Refresh resources',
-      });
-      return;
-    }
-
-    setState({
-      status: 'success',
-      data: result.data,
-    });
   }, [projectId, repository]);
 
   useEffect(() => {
@@ -153,6 +153,7 @@ export function ResourceLibraryPanel({
     };
   }, [fetchResources]);
 
+  const isLoading = state.status === 'loading' || state.status === 'idle';
   const resources = state.status === 'success' ? state.data : [];
 
   const counts = useMemo(() => {
@@ -174,123 +175,117 @@ export function ResourceLibraryPanel({
     return resources.filter((item) => item.category === activeCategory);
   }, [activeCategory, resources]);
 
-  if (state.status === 'loading' || state.status === 'idle') {
-    return (
-      <PanelLoadingSkeleton
-        testId="resource-library-panel"
-        statusText="Loading resource library..."
-        blocks={RESOURCE_SKELETON_BLOCKS}
-      />
-    );
-  }
-
-  if (state.status === 'error') {
-    return (
-      <PanelErrorCard
-        testId="resource-library-panel"
-        heading="Could not load resources"
-        message={state.error.message}
-        onRetry={() => void fetchResources()}
-      />
-    );
-  }
-
-  if (state.status === 'empty') {
-    return (
-      <PanelEmptyCard
-        testId="resource-library-panel"
-        heading={projectId === null ? 'No linked project' : 'No resources yet'}
-        message={state.reason}
-        actionLabel={projectId !== null ? 'Refresh resources' : undefined}
-        onAction={projectId !== null ? () => void fetchResources() : undefined}
-      />
-    );
-  }
-
   return (
     <div data-testid="resource-library-panel" className="flex flex-col gap-4">
-      <p className="m-0 text-[12px] font-medium text-[var(--color-text-secondary)]">
-        {workspace.classCode} / {workspace.teamName}
-      </p>
-
-      <FilterTabBar
-        ariaLabel="Filter resources by category"
-        tabs={RESOURCE_FILTER_TABS}
-        activeKey={activeCategory}
-        counts={counts}
-        testIdPrefix="resource-filter"
-        onSelect={setActiveCategory}
+      <PanelContextHeader
+        classCode={workspace.classCode}
+        teamName={workspace.teamName}
+        variant="text"
+        isDemoSession={isDemoSession}
+        refreshDisabled={isLoading}
+        onRefresh={() => void fetchResources()}
       />
 
-      {filteredResources.length === 0 ? (
-        <div className="surface-card flex flex-col gap-3 bg-[var(--color-surface-secondary)] p-4">
-          <p className="m-0 text-[13px] text-[var(--color-text-secondary)]">
-            No resources in the{' '}
-            {RESOURCE_FILTER_TABS.find((c) => c.key === activeCategory)?.label ??
-              activeCategory}{' '}
-            category.
-          </p>
-          <button
-            type="button"
-            className="btn-secondary w-fit"
-            onClick={() => setActiveCategory('all')}
-          >
-            Show all resources
-          </button>
-        </div>
+      {isLoading ? (
+        <PanelLoadingSkeleton
+          statusText="Loading resource library..."
+          blocks={RESOURCE_SKELETON_BLOCKS}
+        />
+      ) : state.status === 'error' ? (
+        <PanelErrorCard
+          heading="Could not load resources"
+          message={state.error.message}
+          onRetry={() => void fetchResources()}
+        />
+      ) : state.status === 'empty' ? (
+        <PanelEmptyCard
+          heading={projectId === null ? 'No linked project' : 'No resources yet'}
+          message={state.reason}
+          actionLabel={projectId !== null ? 'Refresh resources' : undefined}
+          onAction={projectId !== null ? () => void fetchResources() : undefined}
+        />
       ) : (
-        <ul className="m-0 flex list-none flex-col gap-3 p-0">
-          {filteredResources.map((item) => {
-            const categoryMeta = CATEGORY_BADGE_META[item.category];
-            const parsedUrl = parseSafeHttpUrl(item.url);
+        <>
+          <FilterTabBar
+            ariaLabel="Filter resources by category"
+            tabs={RESOURCE_FILTER_TABS}
+            activeKey={activeCategory}
+            counts={counts}
+            testIdPrefix="resource-filter"
+            onSelect={setActiveCategory}
+          />
 
-            return (
-              <li
-                key={item.id}
-                data-testid={`resource-item-${item.id}`}
-                className="surface-card flex flex-col gap-2.5 p-4"
+          {filteredResources.length === 0 ? (
+            <div className="surface-card flex flex-col gap-3 bg-[var(--color-surface-secondary)] p-4">
+              <p className="m-0 text-[13px] text-[var(--color-text-secondary)]">
+                No resources in the{' '}
+                {RESOURCE_FILTER_TABS.find((c) => c.key === activeCategory)
+                  ?.label ?? activeCategory}{' '}
+                category.
+              </p>
+              <button
+                type="button"
+                className="btn-secondary w-fit"
+                onClick={() => setActiveCategory('all')}
               >
-                <div className="flex items-start justify-between gap-2">
-                  <h3 className="m-0 text-[15px] font-medium leading-5 text-[var(--color-text-charcoal)]">
-                    {item.title}
-                  </h3>
-                  <span className={`${categoryMeta.badgeClass} shrink-0`}>
-                    {categoryMeta.label}
-                  </span>
-                </div>
+                Show all resources
+              </button>
+            </div>
+          ) : (
+            <ul className="m-0 flex list-none flex-col gap-3 p-0">
+              {filteredResources.map((item) => {
+                const categoryMeta = CATEGORY_BADGE_META[item.category];
+                const parsedUrl = parseSafeHttpUrl(item.url);
 
-                {item.description && item.description.trim() !== '' && (
-                  <p className="m-0 text-[13px] leading-relaxed text-[var(--color-text-primary)]">
-                    {item.description}
-                  </p>
-                )}
-
-                <div className="flex flex-wrap items-center justify-between gap-2 pt-1">
-                  {parsedUrl ? (
-                    <>
-                      <span className="status-badge border border-[var(--color-border-subtle)] bg-[var(--color-surface-secondary)] text-[var(--color-text-secondary)]">
-                        {parsedUrl.hostLabel}
+                return (
+                  <li
+                    key={item.id}
+                    data-testid={`resource-item-${item.id}`}
+                    className="surface-card flex flex-col gap-2.5 p-4"
+                  >
+                    <div className="flex items-start justify-between gap-2">
+                      <h3 className="m-0 text-[15px] font-medium leading-5 text-[var(--color-text-charcoal)]">
+                        {item.title}
+                      </h3>
+                      <span className={`${categoryMeta.badgeClass} shrink-0`}>
+                        {categoryMeta.label}
                       </span>
-                      <a
-                        href={parsedUrl.safeHref}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="btn-secondary"
-                        data-testid={`resource-open-link-${item.id}`}
-                      >
-                        Open Link
-                      </a>
-                    </>
-                  ) : (
-                    <span className="status-badge status-badge--error">
-                      Invalid or unsupported URL
-                    </span>
-                  )}
-                </div>
-              </li>
-            );
-          })}
-        </ul>
+                    </div>
+
+                    {item.description && item.description.trim() !== '' && (
+                      <p className="m-0 text-[13px] leading-relaxed text-[var(--color-text-primary)]">
+                        {item.description}
+                      </p>
+                    )}
+
+                    <div className="flex flex-wrap items-center justify-between gap-2 pt-1">
+                      {parsedUrl ? (
+                        <>
+                          <span className="status-badge border border-[var(--color-border-subtle)] bg-[var(--color-surface-secondary)] text-[var(--color-text-secondary)]">
+                            {parsedUrl.hostLabel}
+                          </span>
+                          <a
+                            href={parsedUrl.safeHref}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="btn-secondary"
+                            data-testid={`resource-open-link-${item.id}`}
+                          >
+                            Open Link
+                          </a>
+                        </>
+                      ) : (
+                        <span className="status-badge status-badge--error">
+                          Invalid or unsupported URL
+                        </span>
+                      )}
+                    </div>
+                  </li>
+                );
+              })}
+            </ul>
+          )}
+        </>
       )}
     </div>
   );

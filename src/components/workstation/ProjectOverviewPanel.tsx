@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import type { ProjectOverviewPanelProps } from '../../types/components';
 import type { AsyncState, ProjectOverview } from '../../types/contracts';
 import {
+  PanelContextHeader,
   PanelEmptyCard,
   PanelErrorCard,
   PanelLoadingSkeleton,
@@ -19,12 +20,16 @@ export function ProjectOverviewPanel({
   teamId,
   workspace,
   repository,
+  isDemoSession,
+  onSessionExpired,
 }: ProjectOverviewPanelProps) {
   const [state, setState] = useState<AsyncState<ProjectOverview>>({
     status: 'loading',
     label: 'Loading project overview...',
   });
   const requestSeqRef = useRef(0);
+  const onSessionExpiredRef = useRef(onSessionExpired);
+  onSessionExpiredRef.current = onSessionExpired;
 
   const fetchOverview = useCallback(async () => {
     const seq = ++requestSeqRef.current;
@@ -33,45 +38,63 @@ export function ProjectOverviewPanel({
       label: 'Loading project overview...',
     });
 
-    const result = await repository.getProjectOverview(teamId);
-    if (seq !== requestSeqRef.current) return;
+    try {
+      const result = await repository.getProjectOverview(teamId);
+      if (seq !== requestSeqRef.current) return;
 
-    if (!result.ok) {
-      if (result.error.code === 'not_found') {
+      if (!result.ok) {
+        if (result.error.code === 'auth') {
+          onSessionExpiredRef.current?.();
+        }
+        if (result.error.code === 'not_found') {
+          setState({
+            status: 'empty',
+            reason: 'No project brief is linked to this team studio yet.',
+            actionLabel: 'Refresh overview',
+          });
+          return;
+        }
+
+        setState({
+          status: 'error',
+          error: result.error,
+        });
+        return;
+      }
+
+      const overview = result.data;
+      if (
+        !overview ||
+        (!overview.title.trim() &&
+          !overview.description.trim() &&
+          overview.objectives.length === 0)
+      ) {
         setState({
           status: 'empty',
           reason: 'No project brief is linked to this team studio yet.',
-          actionLabel: 'Refresh',
+          actionLabel: 'Refresh overview',
         });
         return;
       }
 
       setState({
-        status: 'error',
-        error: result.error,
+        status: 'success',
+        data: overview,
       });
-      return;
-    }
-
-    const overview = result.data;
-    if (
-      !overview ||
-      (!overview.title.trim() &&
-        !overview.description.trim() &&
-        overview.objectives.length === 0)
-    ) {
+    } catch (err) {
+      if (seq !== requestSeqRef.current) return;
       setState({
-        status: 'empty',
-        reason: 'No project brief is linked to this team studio yet.',
-        actionLabel: 'Refresh',
+        status: 'error',
+        error: {
+          code: 'unknown',
+          message:
+            err instanceof Error
+              ? err.message
+              : 'Unable to load the project overview right now.',
+          retryable: true,
+        },
       });
-      return;
     }
-
-    setState({
-      status: 'success',
-      data: overview,
-    });
   }, [repository, teamId]);
 
   useEffect(() => {
@@ -81,55 +104,45 @@ export function ProjectOverviewPanel({
     };
   }, [fetchOverview]);
 
-  if (state.status === 'loading' || state.status === 'idle') {
-    return (
-      <PanelLoadingSkeleton
-        testId="project-overview-panel"
-        statusText="Loading project overview..."
-        blocks={OVERVIEW_SKELETON_BLOCKS}
-      />
-    );
-  }
-
-  if (state.status === 'error') {
-    return (
-      <PanelErrorCard
-        testId="project-overview-panel"
-        heading="Could not load project overview"
-        message={state.error.message}
-        onRetry={() => void fetchOverview()}
-      />
-    );
-  }
-
-  if (state.status === 'empty') {
-    return (
-      <PanelEmptyCard
-        testId="project-overview-panel"
-        heading="No project brief available"
-        message={state.reason}
-        actionLabel="Refresh"
-        onAction={() => void fetchOverview()}
-      />
-    );
-  }
-
-  const overview = state.data;
-  const teamMembers = overview.teamMembers ?? [];
-  const lastUpdatedText = formatDisplayDate(overview.updatedAt, 'datetime');
+  const isLoading = state.status === 'loading' || state.status === 'idle';
+  const overview = state.status === 'success' ? state.data : null;
+  const teamMembers = overview?.teamMembers ?? [];
+  const lastUpdatedText = overview
+    ? formatDisplayDate(overview.updatedAt, 'datetime')
+    : null;
 
   return (
     <div data-testid="project-overview-panel" className="flex flex-col gap-4">
-      <div className="flex flex-wrap items-center gap-2">
-        <span className="status-badge border border-[#A5C6D4] bg-[var(--color-accent-blue)] text-[var(--color-text-primary)]">
-          {workspace.classCode}
-        </span>
-        <span className="status-badge border border-[#C4BAD6] bg-[var(--color-accent-lavender)] text-[var(--color-text-primary)]">
-          {workspace.teamName}
-        </span>
-      </div>
+      <PanelContextHeader
+        classCode={workspace.classCode}
+        teamName={workspace.teamName}
+        variant="badges"
+        isDemoSession={isDemoSession}
+        refreshDisabled={isLoading}
+        onRefresh={() => void fetchOverview()}
+      />
 
-      <div className="flex flex-col gap-1">
+      {isLoading ? (
+        <PanelLoadingSkeleton
+          statusText="Loading project overview..."
+          blocks={OVERVIEW_SKELETON_BLOCKS}
+        />
+      ) : state.status === 'error' ? (
+        <PanelErrorCard
+          heading="Could not load project overview"
+          message={state.error.message}
+          onRetry={() => void fetchOverview()}
+        />
+      ) : state.status === 'empty' ? (
+        <PanelEmptyCard
+          heading="No project brief available"
+          message={state.reason}
+          actionLabel="Refresh overview"
+          onAction={() => void fetchOverview()}
+        />
+      ) : overview ? (
+        <>
+          <div className="flex flex-col gap-1">
         <h3
           data-testid="project-title"
           className="m-0 text-[16px] font-semibold leading-6 text-[var(--color-text-charcoal)]"
@@ -247,11 +260,13 @@ export function ProjectOverviewPanel({
         </ul>
       </section>
 
-      {lastUpdatedText && (
-        <p className="m-0 text-[12px] text-[var(--color-text-secondary)]">
-          Last updated: {lastUpdatedText}
-        </p>
-      )}
+          {lastUpdatedText && (
+            <p className="m-0 text-[12px] text-[var(--color-text-secondary)]">
+              Last updated: {lastUpdatedText}
+            </p>
+          )}
+        </>
+      ) : null}
     </div>
   );
 }

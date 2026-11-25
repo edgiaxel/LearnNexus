@@ -1,5 +1,61 @@
+interface PanelContextHeaderProps {
+  classCode: string;
+  teamName: string;
+  variant?: 'text' | 'badges';
+  isDemoSession?: boolean;
+  refreshDisabled?: boolean;
+  onRefresh: () => void;
+}
+
+export function PanelContextHeader({
+  classCode,
+  teamName,
+  variant = 'text',
+  isDemoSession = false,
+  refreshDisabled = false,
+  onRefresh,
+}: PanelContextHeaderProps) {
+  return (
+    <div className="flex flex-wrap items-center justify-between gap-2">
+      <div className="flex min-w-0 flex-wrap items-center gap-2">
+        {variant === 'badges' ? (
+          <>
+            <span className="status-badge border border-[#A5C6D4] bg-[var(--color-accent-blue)] text-[var(--color-text-primary)]">
+              {classCode}
+            </span>
+            <span className="status-badge border border-[#C4BAD6] bg-[var(--color-accent-lavender)] text-[var(--color-text-primary)]">
+              {teamName}
+            </span>
+          </>
+        ) : (
+          <p className="m-0 text-[12px] font-medium text-[var(--color-text-secondary)]">
+            {classCode} / {teamName}
+          </p>
+        )}
+        {isDemoSession === true && (
+          <span
+            data-testid="demo-data-badge"
+            className="status-badge border border-[#D4C07C] bg-[var(--color-accent-yellow)] text-[var(--color-text-primary)]"
+          >
+            Seeded Demo Data
+          </span>
+        )}
+      </div>
+      <button
+        type="button"
+        data-testid="panel-refresh-btn"
+        className="btn-ghost min-h-[44px] shrink-0"
+        disabled={refreshDisabled}
+        onClick={onRefresh}
+      >
+        Refresh
+      </button>
+    </div>
+  );
+}
+
 interface PanelLoadingSkeletonProps {
-  testId: string;
+  testId?: string;
   statusText: string;
   blocks: readonly string[];
 }
@@ -29,7 +85,7 @@ export function PanelLoadingSkeleton({
 }
 
 interface PanelErrorCardProps {
-  testId: string;
+  testId?: string;
   heading: string;
   message: string;
   onRetry: () => void;
@@ -68,7 +124,7 @@ export function PanelErrorCard({
 }
 
 interface PanelEmptyCardProps {
-  testId: string;
+  testId?: string;
   heading: string;
   message: string;
   actionLabel?: string;
