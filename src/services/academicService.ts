@@ -89,6 +89,28 @@ function isPlainRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === 'object' && value !== null && !Array.isArray(value);
 }
 
+function normalizeWorkspaceConfigJson(value: unknown): Record<string, unknown> {
+  if (isPlainRecord(value)) {
+    return { ...value };
+  }
+
+  if (typeof value === 'string') {
+    const trimmed = value.trim();
+    if (trimmed.length > 0) {
+      try {
+        const parsed: unknown = JSON.parse(trimmed);
+        if (isPlainRecord(parsed)) {
+          return { ...parsed };
+        }
+      } catch {
+        return {};
+      }
+    }
+  }
+
+  return {};
+}
+
 function isTaskStatus(value: unknown): value is TaskStatus {
   return typeof value === 'string' && VALID_TASK_STATUSES.has(value as TaskStatus);
 }
@@ -638,8 +660,23 @@ export class SupabaseAcademicRepository implements AcademicRepository {
       return { ok: false, error: clientCheck.error };
     }
 
+    const client = clientCheck.client;
+
     try {
-      const { data, error } = await clientCheck.client
+      const { data: sessionData, error: sessionError } =
+        await client.auth.getSession();
+      if (sessionError || !sessionData.session) {
+        return {
+          ok: false,
+          error: createAppError(
+            'auth',
+            'Your authentication session has expired. Please sign in again.',
+            false,
+          ),
+        };
+      }
+
+      const { data, error } = await client
         .from('tasks')
         .update({ status })
         .eq('id', normalizedTaskId)
@@ -730,8 +767,8 @@ export class SupabaseAcademicRepository implements AcademicRepository {
         data: {
           id: data.id,
           teamId: data.team_id,
-          layoutKey: data.layout_key,
-          configJson: isPlainRecord(data.config_json) ? data.config_json : {},
+          layoutKey: typeof data.layout_key === 'string' ? data.layout_key : '',
+          configJson: normalizeWorkspaceConfigJson(data.config_json),
         },
       };
     } catch (err) {

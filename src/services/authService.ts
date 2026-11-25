@@ -8,6 +8,7 @@ import {
 } from '../types/contracts';
 import type {
   AuthRepository,
+  AuthStateChangeEvent,
   ProfileRow,
   RepositoryResult,
 } from '../types/database';
@@ -267,6 +268,28 @@ export class SupabaseAuthRepository implements AuthRepository {
         ),
       };
     }
+  }
+
+  onAuthStateChange(
+    handler: (event: AuthStateChangeEvent, hasSession: boolean) => void,
+  ): () => void {
+    if (!supabase) {
+      return () => {};
+    }
+
+    const { data } = supabase.auth.onAuthStateChange((event, session) => {
+      if (
+        event === 'SIGNED_IN' ||
+        event === 'SIGNED_OUT' ||
+        event === 'TOKEN_REFRESHED'
+      ) {
+        handler(event, Boolean(session));
+      }
+    });
+
+    return () => {
+      data.subscription.unsubscribe();
+    };
   }
 }
 
