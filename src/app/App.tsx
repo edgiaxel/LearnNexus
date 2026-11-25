@@ -247,7 +247,7 @@ export function App() {
               <button
                 type="button"
                 className="btn-primary"
-                data-testid="enter-studio-btn"
+                data-testid="header-enter-studio-btn"
                 onClick={() => navigateTo('workspace')}
               >
                 Enter Studio
@@ -396,7 +396,7 @@ export function App() {
             <div className="flex items-start justify-between gap-3 border-b border-[var(--color-border-subtle)] px-6 py-5">
               <div className="flex flex-col gap-1.5">
                 <span className="status-badge w-fit bg-[var(--color-accent-sage-soft)] text-[var(--color-text-primary)] border border-[var(--color-accent-sage)]">
-                  Workstation {WORKSTATION_META[activeWorkstation].screenId}
+                  Workstation
                 </span>
                 <h2
                   id="workstation-drawer-title"
