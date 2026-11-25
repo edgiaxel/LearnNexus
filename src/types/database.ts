@@ -6,10 +6,13 @@
 import type {
   AcademicSpace,
   AppError,
+  DemoProfileKey,
   ProjectOverview,
   ResourceCategory,
   ResourceItem,
   SprintTask,
+  StudentProfile,
+  StudentRole,
   TaskStatus,
   TeamWorkspace,
   WorkspaceLayoutConfig,
@@ -18,6 +21,8 @@ import type {
 export interface ProfileRow {
   id: string;
   display_name: string;
+  role: StudentRole;
+  is_demo: boolean;
   created_at: string;
 }
 
@@ -66,6 +71,7 @@ export interface TaskRow {
   assignee_id: string | null;
   assignee_name: string | null;
   due_at: string | null;
+  sort_order: number;
   updated_at: string;
 }
 
@@ -73,6 +79,7 @@ export interface ResourceRow {
   id: string;
   project_id: string;
   title: string;
+  description: string | null;
   url: string;
   resource_type: ResourceCategory;
   created_at: string;
@@ -88,6 +95,18 @@ export interface WorkspaceLayoutRow {
 export type RepositoryResult<T> =
   | { ok: true; data: T }
   | { ok: false; error: AppError };
+
+export interface AuthRepository {
+  getCurrentProfile(): Promise<RepositoryResult<StudentProfile | null>>;
+  signInWithPassword(
+    email: string,
+    password: string,
+  ): Promise<RepositoryResult<StudentProfile>>;
+  signInAsDemoProfile(
+    demoKey: DemoProfileKey,
+  ): Promise<RepositoryResult<StudentProfile>>;
+  signOut(): Promise<RepositoryResult<void>>;
+}
 
 export interface AcademicRepository {
   getMyAcademicSpaces(): Promise<RepositoryResult<AcademicSpace[]>>;

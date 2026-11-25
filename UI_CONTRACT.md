@@ -171,10 +171,11 @@ All M1–M3 worktrees branch from `main` after M0 is locked. Subagents must obey
 
 ### Locked Central Files (Orchestrator-Only on `main`)
 Feature worktrees must NOT modify these shared files:
-- `UI_CONTRACT.md`, `HANDOFF_TEMPLATE.md`
+- `UI_CONTRACT.md`, `HANDOFF.md`, `HANDOFF_TEMPLATE.md`
 - `src/styles/index.css`
-- `src/types/contracts.ts`, `src/types/database.ts`
+- `src/types/contracts.ts`, `src/types/database.ts`, `src/types/components.ts`, `src/types/gameDebug.ts`
 - `src/app/routerContract.ts`, `src/app/App.tsx`
+- `src/game/**`, `public/assets/**`
 - `src/lib/supabase.ts`
 - `package.json`, `vite.config.ts`, `tsconfig.json`
 
@@ -182,14 +183,24 @@ Feature worktrees must NOT modify these shared files:
 | Worktree Branch | Exclusive Folder Ownership | Owns |
 |---|---|---|
 | `feature/m1-game-engine` | `src/game/**`, `public/assets/**` | `PhaserHost.tsx`, `createGame.ts`, `eventBridge.ts`, `CampusScene.ts`, static pixel assets |
-| `feature/m2-supabase-data` | `supabase/**`, `src/services/**` | SQL migrations, seed SQL, RLS policies, `academicService.ts` |
-| `feature/m2-entry-spaces` | `src/components/entry/**`, `src/components/campus/**` | `EntryGateway.tsx`, `AcademicSpacesSelector.tsx` |
-| `feature/m2-workstation-panels` | `src/components/workstation/**` | `WorkstationPanel.tsx`, `ProjectOverviewPanel.tsx`, `TasksSprintBoardPanel.tsx`, `ResourceLibraryPanel.tsx` |
+| `feature/m2-supabase-data` | `supabase/**`, `src/services/**` | SQL migrations, seed SQL, RLS policies, `errorMapper.ts`, `authService.ts`, `academicService.ts`, `src/services/HANDOFF.md` |
+| `feature/m2-entry-spaces` | `src/components/entry/**`, `src/components/campus/**` | `EntryGateway.tsx`, `AcademicSpacesSelector.tsx`, `src/components/entry/HANDOFF.md` |
+| `feature/m2-workstation-panels` | `src/components/workstation/**` | `WorkstationPanel.tsx`, `ProjectOverviewPanel.tsx`, `TasksSprintBoardPanel.tsx`, `ResourceLibraryPanel.tsx`, `src/components/workstation/HANDOFF.md` |
 | `feature/e2e-verification` | `tests/e2e/**` | Playwright end-to-end specs against `localhost` |
 
+### M2 / M2.5 Additional Contract Rules
+- **Repository & Auth Contracts:** `src/types/database.ts` locks `AuthRepository` and `AcademicRepository`; `src/types/components.ts` locks all M2 view component prop contracts (`EntryGatewayProps`, `AcademicSpacesSelectorProps`, `WorkstationPanelProps`, `ProjectOverviewPanelProps`, `TasksSprintBoardPanelProps`, `ResourceLibraryPanelProps`).
+- **Per-Lane Handoff Path:** Worktrees must write their handoff report inside their owned folder (`src/services/HANDOFF.md`, `src/components/entry/HANDOFF.md`, `src/components/workstation/HANDOFF.md`) rather than editing root `HANDOFF.md`.
+- **M2.5 MOTION 1 Skeleton Rule:** Loading states must use static `#EEF1E8` placeholder blocks with explicit status text and `aria-busy="true"`; endless CSS pulse/bounce loops (`animate-pulse`) are prohibited.
+- **Locked `data-testid` Contract:**
+  - Entry (`UI-01`): `entry-gateway`, `demo-profile-<key>`, `demo-enter-btn`, `email-input`, `password-input`, `toggle-password-btn`, `credentials-submit-btn`, `entry-error-banner`
+  - Academic Spaces (`UI-02`): `academic-spaces-directory`, `space-card-<code>`, `enter-studio-btn`, `spaces-empty-state`, `spaces-error-banner`, `spaces-retry-btn`, `switch-profile-btn`
+  - Workstation Drawer & Panels (`UI-05`–`UI-07`): `workstation-drawer`, `close-drawer-btn`, `return-to-studio-btn`, `project-overview-panel`, `project-title`, `project-objectives-list`, `team-roster-list`, `tasks-sprint-panel`, `task-filter-<all|todo|in_progress|done>`, `task-item-<id>`, `task-status-select-<id>`, `tasks-save-indicator`, `resource-library-panel`, `resource-filter-<all|docs|design|tools|general>`, `resource-item-<id>`, `resource-open-link-<id>`
+  - App Shell (`App.tsx`): `leave-studio-btn`, `sign-out-btn`, `header-user-badge`, `header-breadcrumbs`, `workstation-prompt`, `mobile-workstation-btn-<overview|tasks|resources>`
+
 ### Subagent Compliance Rules
-1. Import shared types and routes from `src/types/contracts.ts`, `src/types/database.ts`, and `src/app/routerContract.ts`.
+1. Import shared types and routes from `src/types/contracts.ts`, `src/types/database.ts`, `src/types/components.ts`, and `src/app/routerContract.ts`.
 2. Reuse CSS classes and tokens from `src/styles/index.css` (`.btn-primary`, `.btn-secondary`, `.btn-ghost`, `.control-input`, `.surface-card`, `.status-badge`). Never create duplicate navbars, global layouts, or custom theme overrides.
-3. Implement real Supabase Postgres queries/mutations via `AcademicRepository` (zero mock data or silent fallbacks).
+3. Implement real Supabase Postgres queries/mutations via `AuthRepository` and `AcademicRepository` (zero mock data or silent fallbacks).
 4. Handle loading, empty (cause + next action), and error (cause + retry) states in every data view.
-5. Pass the Antislop Delivery Gate (WCAG AA contrast, keyboard focus, zero em dashes in UI copy) and write a `HANDOFF.md` following `HANDOFF_TEMPLATE.md`.
+5. Pass the Antislop Delivery Gate (WCAG AA contrast, keyboard focus, zero em dashes in UI copy, zero `animate-pulse`) and write a lane `HANDOFF.md` following `HANDOFF_TEMPLATE.md`.

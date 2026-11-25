@@ -13,11 +13,57 @@ export type ResourceCategory = 'docs' | 'design' | 'tools' | 'general';
 
 export type StudentRole = 'student' | 'team_lead' | 'guest_demo';
 
+export type DemoProfileKey = 'team_lead' | 'member' | 'guest_empty';
+
+export interface DemoProfileDescriptor {
+  key: DemoProfileKey;
+  displayName: string;
+  email: string;
+  role: StudentRole;
+  roleLabel: string;
+  assignmentSummary: string;
+}
+
+export const DEMO_PROFILE_DESCRIPTORS: readonly DemoProfileDescriptor[] = [
+  {
+    key: 'team_lead',
+    displayName: 'Nadia Pratama (Demo)',
+    email: 'nadia.demo@learnnexus.edu',
+    role: 'team_lead',
+    roleLabel: 'Team Leader',
+    assignmentSummary: 'Enrolled in IF-4031 and IF-3210 (Team SibukTA)',
+  },
+  {
+    key: 'member',
+    displayName: 'Bima Santoso (Demo)',
+    email: 'bima.demo@learnnexus.edu',
+    role: 'student',
+    roleLabel: 'Team Member',
+    assignmentSummary: 'Enrolled in IF-4031 (Team SibukTA)',
+  },
+  {
+    key: 'guest_empty',
+    displayName: 'Rani Kusuma (Demo)',
+    email: 'rani.demo@learnnexus.edu',
+    role: 'guest_demo',
+    roleLabel: 'Guest (Unassigned)',
+    assignmentSummary:
+      'No enrolled classes (verifies empty state and RLS isolation)',
+  },
+];
+
 export interface StudentProfile {
   id: string;
   displayName: string;
+  email?: string;
   role: StudentRole;
   isDemo: boolean;
+}
+
+export interface TeamMemberSummary {
+  userId: string;
+  displayName: string;
+  role: 'member' | 'team_lead';
 }
 
 export interface AcademicSpace {
@@ -44,6 +90,10 @@ export interface ProjectOverview {
   title: string;
   description: string;
   objectives: string[];
+  courseCode?: string;
+  courseName?: string;
+  teamName?: string;
+  teamMembers?: TeamMemberSummary[];
   updatedAt: string;
 }
 
@@ -62,6 +112,7 @@ export interface ResourceItem {
   id: string;
   projectId: string;
   title: string;
+  description?: string | null;
   url: string;
   category: ResourceCategory;
   createdAt: string;
