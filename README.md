@@ -4,12 +4,12 @@
 
 - **Competition Track:** STACK 2026 — Case 1: Smarter Campus and Learning (GDGoC ITB)
 - **Team:** SibukTA
-- **Live Demo Deployment:** `[LIVE_VERCEL_URL — UPDATED AFTER DEPLOY]`
+- **Live Demo Deployment:** [https://learnnexus-nine.vercel.app](https://learnnexus-nine.vercel.app)
 - **License:** Apache License 2.0 for source code ([`LICENSE`](./LICENSE)); third-party pixel art governed by [`assets/LICENSE.txt`](./assets/LICENSE.txt)
 
 LearnNexus is a browser-based virtual campus built for university group projects. It pairs an accessible, warm-pastel React productivity workspace (**Cozy Digital Campus**) with an isolated 2D pixel-art studio powered by Phaser 3 and backed by Supabase Auth, 13-table PostgreSQL with Row Level Security (RLS), and Supabase Realtime. Instead of scattering project briefs, sprint tasks, reference links, and live collaboration across disconnected chat apps and temporary video calls, LearnNexus anchors every student team to a persistent academic course context and studio workspace.
 
-> **Current Status:** M0-M3 + Scoped M6/M9 prototype showcase complete and verified (`[M4_FINAL_VERIFICATION — UPDATED AFTER E2E]`), with M4 bundle optimization (lazy-loaded Phaser + Rollup vendor chunking), Vercel deployment configuration, CI automation, and M5 semifinal documentation prepared. Track team issues on the [LearnNexus Kanban](https://github.com/users/edgiaxel/projects/5).
+> **Current Status:** M4 Quality Freeze complete & M5 Production Deployment live (`typecheck` PASS, `17/17` unit tests, `4/4` live RLS actors across 13 tables, `26/26` Playwright E2E specs, `99`-module Vite bundle split, and Vercel smoke test passing at [https://learnnexus-nine.vercel.app](https://learnnexus-nine.vercel.app)). Ready for team semifinal submission steps (`docs/TEAM_SUBMISSION_CHECKLIST.md`). Track team issues on the [LearnNexus Kanban](https://github.com/users/edgiaxel/projects/5).
 
 ---
 

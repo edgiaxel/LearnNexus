@@ -2,8 +2,8 @@
 
 - **Project:** LearnNexus (A Persistent Virtual Campus for Collaborative Project-Based Learning)
 - **Team:** SibukTA (STACK 2026 — Case 1: Smarter Campus and Learning)
-- **Baseline:** Track 1 M0-M3 + Scoped M6/M9 integrated on `main`, followed by M4 Quality & Integration Freeze
-- **Live Deployment:** `[LIVE_VERCEL_URL — UPDATED AFTER DEPLOY]`
+- **Baseline:** Track 1 M0-M4 Quality Freeze + Scoped M6/M9 complete & M5 Production Deployment live
+- **Live Deployment:** [https://learnnexus-nine.vercel.app](https://learnnexus-nine.vercel.app)
 - **Date:** 26 November 2026
 
 ---
@@ -38,16 +38,17 @@ Before M4 optimization, the single Vite production bundle totaled `~2.13 MB` bec
 
 #### Production Bundle Metrics
 
-`[M4_BUNDLE_METRICS — UPDATED AFTER BUILD]`
+Measured from `npm run build` (`vite v6.4.6`, `99` modules transformed in `11.22s`): initial JS + CSS load totals `663.15 kB` raw (`174.59 kB` gzip), deferring `1,511.73 kB` raw (`347.75 kB` gzip) of Phaser engine and scene code until a student enters the 2D `workspace` route.
 
 | Chunk / Asset | Category | Raw Size (`kB`) | Gzip Size (`kB`) | Loading Timing |
 |---|---|---|---|---|
-| `index-*.js` | App Shell, UI-01/02, Drawers & Services | `[PENDING BUILD]` | `[PENDING BUILD]` | Initial page load |
-| `PhaserHost-*.js` | Spatial Studio Scene & Map Data | `[PENDING BUILD]` | `[PENDING BUILD]` | Lazy on entering `workspace` |
-| `vendor-react-*.js` | React 19 + React DOM + Scheduler | `[PENDING BUILD]` | `[PENDING BUILD]` | Initial page load (cached) |
-| `vendor-supabase-*.js` | `@supabase/supabase-js` v2 | `[PENDING BUILD]` | `[PENDING BUILD]` | Initial page load (cached) |
-| `vendor-phaser-*.js` | Phaser `3.88.2` Engine | `[PENDING BUILD]` | `[PENDING BUILD]` | Lazy on entering `workspace` |
-| `index-*.css` | Tailwind CSS v4 + Cozy Tokens | `[PENDING BUILD]` | `[PENDING BUILD]` | Initial page load |
+| `dist/index.html` | Static HTML Shell | `0.60 kB` | `0.35 kB` | Initial page load |
+| `dist/assets/index-D2WuUhG2.js` | App Shell, UI-01/02, Drawers & Services | `158.67 kB` | `35.87 kB` | Initial page load |
+| `dist/assets/PhaserHost-CM4XjDcy.js` | Spatial Studio Scene & Map Data | `33.08 kB` | `8.74 kB` | Lazy on entering `workspace` |
+| `dist/assets/vendor-react-PY8vvcCh.js` | React 19 + React DOM + Scheduler | `223.19 kB` | `69.21 kB` | Initial page load (cached) |
+| `dist/assets/vendor-supabase-B9O_2iRq.js` | `@supabase/supabase-js` v2 | `230.52 kB` | `60.07 kB` | Initial page load (cached) |
+| `dist/assets/vendor-phaser-DNvWzekM.js` | Phaser `3.88.2` Engine | `1,478.65 kB` | `339.01 kB` | Lazy on entering `workspace` |
+| `dist/assets/index-FeizwK2V.css` | Tailwind CSS v4 + Cozy Tokens | `50.77 kB` | `9.44 kB` | Initial page load |
 
 ---
 
@@ -88,31 +89,44 @@ All 13 tables in `public` enable Row Level Security (`ALTER TABLE ... ENABLE ROW
 
 | Check Command | Scope & Coverage | Pre-M4 Baseline Result | Post-M4 Status |
 |---|---|---|---|
-| `npm run typecheck` | Strict `tsc --noEmit` across `src/`, `tests/`, `vite.config.ts`, `playwright.config.ts` | PASS (exit `0`) | `[M4_FINAL_VERIFICATION — UPDATED AFTER E2E]` |
-| `npm run test:unit` | `tests/unit/m3-guards.test.ts` (4 suites, 11 tests: `mapSupabaseError`, `canTransitionRoute`, `workstationUtils`, `parseSafeHttpUrl`) + `tests/unit/m6-m9-guards.test.ts` (4 suites, 6 tests: `getCharacterSpriteKey`, `truncateChatBubbleText`, `normalizeStrokePoints`, `WORKSTATION_META` & date helpers) | PASS (`17/17` across `8` suites) | `[M4_FINAL_VERIFICATION — UPDATED AFTER E2E]` |
-| `npm run test:rls` | `tests/rls/verify-rls.mjs`: live 4-actor verification (`anon`, Nadia, Bima, Rani) across all `13` public tables + cleanup count assertion | PASS (`4/4` actors, `13/13` tables) | `[M4_FINAL_VERIFICATION — UPDATED AFTER E2E]` |
-| `npm run test:e2e` | Baseline `22` Playwright Chromium specs across 5 files (`m2-student-journey.spec.ts` [6], `m3-persistence-and-resilience.spec.ts` [4], `m6-m9-realtime-and-pm.spec.ts` [4], `phaser-lifecycle.spec.ts` [5], `workstation-bridge.spec.ts` [3]) + M4 quality audit (`tests/e2e/m4-quality-audit.spec.ts`) | PASS (`22/22` baseline specs) | `[M4_FINAL_VERIFICATION — UPDATED AFTER E2E]` |
-| `npm run build` | `tsc --noEmit && vite build` with lazy `PhaserHost` + Rollup `manualChunks` + client secret scan | PASS (`98` modules pre-split) | `[M4_FINAL_VERIFICATION — UPDATED AFTER E2E]` |
+| `npm run typecheck` | Strict `tsc --noEmit` across `src/`, `tests/`, `vite.config.ts`, `playwright.config.ts` | PASS (exit `0`) | **PASS** (exit `0`) |
+| `npm run test:unit` | `tests/unit/m3-guards.test.ts` (4 suites, 11 tests: `mapSupabaseError`, `canTransitionRoute`, `workstationUtils`, `parseSafeHttpUrl`) + `tests/unit/m6-m9-guards.test.ts` (4 suites, 6 tests: `getCharacterSpriteKey`, `truncateChatBubbleText`, `normalizeStrokePoints`, `WORKSTATION_META` & date helpers) | PASS (`17/17` across `8` suites) | **PASS** (`17/17` across `8` suites, `0` failed) |
+| `npm run test:rls` | `tests/rls/verify-rls.mjs`: live 4-actor verification (`anon`, Nadia, Bima, Rani) across all `13` public tables + cleanup count assertion | PASS (`4/4` actors, `13/13` tables) | **PASS** (`4/4` actors, `13/13` tables; re-verified post-smoke) |
+| `npm run test:e2e` | `26` Playwright Chromium specs across `6` files (`m2-student-journey.spec.ts` [6], `m3-persistence-and-resilience.spec.ts` [4], `m4-quality-audit.spec.ts` [4], `m6-m9-realtime-and-pm.spec.ts` [4], `phaser-lifecycle.spec.ts` [5], `workstation-bridge.spec.ts` [3]) | PASS (`22/22` baseline specs) | **PASS** (`26/26` specs in `2.9m`, `0` failed, `0` skipped) |
+| `npm run build` | `tsc --noEmit && vite build` with lazy `PhaserHost` + Rollup `manualChunks` + client secret scan | PASS (`98` modules pre-split) | **PASS** (`99` modules transformed; `0` client secrets) |
 
 ### 4.2 Final M4 Verification Summary
 
-`[M4_FINAL_VERIFICATION — UPDATED AFTER E2E]`
+- `npm run typecheck`: **PASS** (exit `0`)
+- `npm run test:unit`: **PASS** (`17/17` tests across `8` suites)
+- `npm run test:rls`: **PASS** (`4/4` actors `anon`, `nadia.demo@learnnexus.edu`, `bima.demo@learnnexus.edu`, `rani.demo@learnnexus.edu` across all `13` tables; verified again after production smoke cleanup)
+- `npm run build`: **PASS** (`99` modules; separate `vendor-react`, `vendor-supabase`, `vendor-phaser`, and lazy `PhaserHost` chunks verified in `dist/assets/` with zero secrets)
+- `npm run test:e2e`: **PASS** (`26/26` Playwright Chromium tests passed in `2.9m`, including lazy Phaser isolation before Studio entry, two-way live Studio Chat and avatar bubbles between Nadia and Bima, `Tab`/`Enter`/`Escape` focus management, and responsive layout/antislop/safe-link checks at `1280x720`, `1024x700`, and `390x844`)
 
 ### 4.3 M4 Bug-Fix Log
 
-`[M4_BUGFIX_LOG]`
+1. **Remaining Em Dash in Token Header (`src/styles/index.css:1`):** Replaced the single `\u2014` character inside the CSS header comment with `:` so `src/` contains zero em dashes.
+2. **Root License Scope Restoration (`LICENSE`):** Restored Apache License 2.0 at repo root (fixing the broken README link) with an explicit carve-out preserving LimeZu sprite non-commercial licensing under `assets/LICENSE.txt`.
+3. **Split-Screen Bubble Spacing & History Clarity (`scripts/capture-evidence.mjs`):** Adjusted simultaneous screenshot coordinates from `(9.7, 9.4)` / `(11.8, 9.4)` to `(8.6, 9.4)` / `(12.5, 9.4)` (3.9 tiles inside the 4-tile proximity radius) and cleared prior rehearsal strings in `public.room_messages` so `09-multiuser-realtime-split.png` renders crisp non-overlapping speech bubbles and synchronized 4-message Studio Chat panels.
+4. **Runtime & Layout Audit Outcome:** `26/26` Playwright E2E checks and live production smoke testing uncovered `0` blocking runtime, console, horizontal-overflow, focus-trap, or RLS defects.
 
 ---
 
 ## 5. Curated Screenshot Evidence Gallery
 
-Screenshots captured by the M4/M5 QA pipeline from the running Chromium application (`docs/evidence/screenshots/`):
+Screenshots captured by the M4/M5 QA pipeline (`scripts/capture-evidence.mjs`) from the running Chromium application (`docs/evidence/screenshots/`):
 
 | # | Screen / Flow Demonstrated | Artifact Path | Notes |
 |---|---|---|---|
-| `01` | Entry Gateway (`UI-01`): Cozy Digital Campus welcome, Demo Mode profiles, and Student Sign In | [`docs/evidence/screenshots/01-entry-gateway.png`](./evidence/screenshots/01-entry-gateway.png) | Verified initial landing view |
-| `02`–`08` | Academic Spaces (`UI-02`), 2D Cozy Studio (`UI-03/04`), Project Overview (`UI-05`), Sprint Tasks CRUD (`UI-06`), Resource Library (`UI-07`), Team Whiteboard (`UI-08b`), and Studio Chat / Unassigned Boundary | `[SCREENSHOT_02_TO_08_FILENAMES — UPDATED AFTER QA CAPTURE]` | Populated after Phase 3 merge of QA evidence lane |
-| `09` | Multi-User Realtime Split View: Concurrent Nadia + Bima avatars, 64px proximity cue, live chat bubbles, and synced workspace updates | [`docs/evidence/screenshots/09-multiuser-realtime-split.png`](./evidence/screenshots/09-multiuser-realtime-split.png) | Verified live two-browser sync |
+| `01` | Entry Gateway (`UI-01`): Cozy Digital Campus welcome, Demo Mode profiles, and Student Sign In | [`docs/evidence/screenshots/01-entry-gateway.png`](./evidence/screenshots/01-entry-gateway.png) | Verified initial landing view (`1280x800`) |
+| `02` | Academic Spaces (`UI-02`): Enrolled course directory for Nadia (`IF-4031`, `IF-3210`) | [`docs/evidence/screenshots/02-academic-spaces.png`](./evidence/screenshots/02-academic-spaces.png) | Live Postgres space memberships (`1280x800`) |
+| `03` | Cozy 2D Pixel Studio (`UI-03/04`): Sharp ADR-012 studio with `[E] Open Sprint Tasks` prompt | [`docs/evidence/screenshots/03-studio-pixel-canvas.png`](./evidence/screenshots/03-studio-pixel-canvas.png) | Crisp `NEAREST` rendering (`1280x800`) |
+| `04` | Project Overview Drawer (`UI-05`): Editable brief, objectives, `"In studio"` roster badge | [`docs/evidence/screenshots/04-workstation-overview.png`](./evidence/screenshots/04-workstation-overview.png) | Trigger-backed activity & roster (`1280x800`) |
+| `05` | Sprint Tasks Board (`UI-06`): Sprint completion bar, filter pills, task CRUD & status controls | [`docs/evidence/screenshots/05-workstation-tasks-crud.png`](./evidence/screenshots/05-workstation-tasks-crud.png) | Persists to Supabase Postgres (`1280x800`) |
+| `06` | Resource Library (`UI-07`): Category filters (`Docs`, `Design`, `Tools`, `General`) and safe links | [`docs/evidence/screenshots/06-workstation-resources.png`](./evidence/screenshots/06-workstation-resources.png) | Validates `https?://` (`1280x800`) |
+| `07` | Team Whiteboard (`UI-08b`): Shared `480x260` sketch pad + persisted pastel sticky notes | [`docs/evidence/screenshots/07-workstation-whiteboard.png`](./evidence/screenshots/07-workstation-whiteboard.png) | Stroke cleaned up post-shot (`1280x800`) |
+| `08` | Unassigned Guest Boundary (`UI-02`): Honest empty state for `Rani Kusuma (Demo)` (`0` classes) | [`docs/evidence/screenshots/08-unassigned-guest-empty.png`](./evidence/screenshots/08-unassigned-guest-empty.png) | Verifies RLS isolation (`1280x800`) |
+| `09` | Multi-User Realtime Split View: Concurrent Nadia + Bima avatars, 64px proximity cue, live chat bubbles, and synced chat panels | [`docs/evidence/screenshots/09-multiuser-realtime-split.png`](./evidence/screenshots/09-multiuser-realtime-split.png) | Verified live two-browser sync (`1920x1080`) |
 
 ---
 
@@ -124,18 +138,18 @@ Raw captures live under `recordings/` (excluded from Git via `.gitignore`) so th
 
 | Take | Scenario | Output File | Measured Duration & Resolution |
 |---|---|---|---|
-| **Take A** | Single-user core journey: Entry (`UI-01`) -> `IF-4031` (`UI-02`) -> 2D studio walk -> `[E]` workstations -> Task/Brief/Resource persistence across browser reload | `recordings/take-a-single-user-core-crud-1080p.mp4` | `[DURATION_TBD] @ 1920x1080` (`[UPDATED AFTER RECORDING]`) |
-| **Take B** | Multi-user split-screen collaboration: Nadia & Bima concurrent avatars, 64px proximity ring, two-way Studio Chat + 5s floating bubbles, and Team Whiteboard live sync | `recordings/take-b-multi-user-splitscreen-1080p.mp4` | `[DURATION_TBD] @ 1920x1080` (`[UPDATED AFTER RECORDING]`) |
+| **Take A** | Single-user core journey: Entry (`UI-01`) -> `IF-4031` (`UI-02`) -> 2D studio walk -> `[E]` workstations -> Task/Brief/Resource persistence across browser reload | `recordings/take-a-single-user-core-crud-1080p.mp4` | `62.87s @ 1920x1080` (`h264`, `30 fps`, `3.39 MB`) |
+| **Take B** | Multi-user split-screen collaboration: Nadia & Bima concurrent avatars, 64px proximity ring, two-way Studio Chat + 5s floating bubbles, and Team Whiteboard live sync | `recordings/take-b-multi-user-splitscreen-1080p.mp4` | `75.73s @ 1920x1080` (`h264`, `30 fps`, `4.22 MB`) |
 
 ### 6.2 Vercel Production Deployment Smoke Test
 
-- **Target URL:** `[LIVE_VERCEL_URL — UPDATED AFTER DEPLOY]`
-- **Configuration Verified:** `vercel.json` SPA fallback rewrite (`/(.*) -> /index.html`), HTTP security headers (`nosniff`, `DENY`, `strict-origin-when-cross-origin`), and public-only env vars (`VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`).
-- **Smoke Test Checklist:**
-  - [ ] Incognito browser loads `UI-01` with `Supabase connected` status badge and zero console/network errors
-  - [ ] Lazy `PhaserHost` + `vendor-phaser` chunks load only upon entering `IF-4031` Team Workspace Studio
-  - [ ] Task status / CRUD update persists across hard browser refresh
-  - [ ] Multi-window Realtime (`Nadia` + `Bima`) connects with `Live sync` and syncs chat/whiteboard cleanly
+- **Target URL:** [https://learnnexus-nine.vercel.app](https://learnnexus-nine.vercel.app) (`zeenity/learnnexus`, `HTTP 200 OK`)
+- **Configuration Verified:** `vercel.json` SPA fallback rewrite (`/(.*) -> /index.html`), HTTP security headers (`nosniff`, `Strict-Transport-Security`, `strict-origin-when-cross-origin`), and public-only env vars (`VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`).
+- **Smoke Test Checklist (Verified in Fresh Chromium Contexts against `https://learnnexus-nine.vercel.app`):**
+  - [x] Incognito Chromium loads `UI-01` (`HTTP 200`, `Supabase connected`) with `0` console/page errors
+  - [x] Lazy `PhaserHost` + `vendor-phaser` chunks do not load until entering `IF-4031` Team Workspace Studio (`0` pre-studio requests; sharp Config A `pixelArt: true`, `antialias: false`, `cameraZoom: 3` on mount)
+  - [x] Multi-window Realtime (`Nadia` + `Bima`) connects with `Live sync`, `Online (2)`, and delivers two-way persisted Studio Chat cleanly on production
+  - [x] Synthetic smoke-test chat messages removed afterwards and `npm run test:rls` re-verified (`4/4` actors)
 
 ---
 

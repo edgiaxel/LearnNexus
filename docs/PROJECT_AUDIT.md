@@ -11,15 +11,16 @@
 |---|---|---|
 | Repository | `edgiaxel/LearnNexus`, public | Verified |
 | Default branch | `main` | Verified |
-| Current local branch | `main` (M3 completed baseline; 0 stale worktrees/branches) | Verified |
+| Current local branch | `main` (M0–M4 Quality Freeze + Scoped M6/M9 + M5 Production Deploy complete; 0 stale worktrees/branches) | Verified |
 | M0 Contracts & Tokens | `UI_CONTRACT.md`, `HANDOFF_TEMPLATE.md`, `src/styles/index.css`, `src/types/contracts.ts`, `src/types/database.ts`, `src/types/components.ts`, `src/types/gameDebug.ts`, `src/app/routerContract.ts`, `.env.example`, `.gitignore` present & locked | Verified |
-| Supabase project | `.env` gitignored; `zftymjkcrdkhtshazzmw.supabase.co` migrated (`20261126000001_m2_core_schema.sql`), seeded (`3` demo users, `2` classes, `2` teams, `2` projects, `8` tasks, `6` resources, `2` layouts), 4-actor RLS & column grants verified via `npm run test:rls` | Verified |
-| Runtime & Tooling | Node `v24.15.0`, npm `11.12.1`, Playwright `@playwright/test` `1.51.1`, `supabase` CLI `3.4.0` | Verified |
+| Supabase project | `.env` gitignored; `zftymjkcrdkhtshazzmw.supabase.co` migrated (`20261126000001_m2_core_schema.sql`, `20261126000002_m6_m9_collab_pm.sql`), seeded (`3` demo users, `2` classes, `2` teams, `2` projects, `8` tasks, `6` resources, `2` layouts, `2` whiteboard notes, `1` starter message), 4-actor RLS verified across 13 tables via `npm run test:rls` | Verified |
+| Runtime & Tooling | Node `v24.15.0`, npm `11.12.1`, Playwright `@playwright/test` `1.51.1`, `supabase` CLI, Vercel CLI `67.0.0`, `ffmpeg` `8.0.1` | Verified |
 | WCAG Contrast Audit | `docs/DESIGN.md` synced to passing tokens (`#5C665C` `5.98:1`, `#4A6B46` `6.03:1`, `#3B5638` `8.16:1`, `#757E74` control border `4.21:1` / `3.83:1`) | Verified |
-| Application source | M0–M3 complete: `App.tsx`, `EntryGateway.tsx`, `AcademicSpacesSelector.tsx`, `WorkstationPanel.tsx`, `ProjectOverviewPanel.tsx`, `TasksSprintBoardPanel.tsx`, `ResourceLibraryPanel.tsx`, `authService.ts`, `academicService.ts`, `errorMapper.ts`, `PhaserHost.tsx`, `CampusScene.ts` | Verified |
-| Package manifest / lockfile | `package.json`, `package-lock.json`, `tsconfig.json`, `vite.config.ts`, `playwright.config.ts` committed | Verified |
-| Tests | `tests/unit/m3-guards.test.ts` (`11/11` passing), `tests/rls/verify-rls.mjs` (`4/4` actors passing), `tests/e2e/{m2-student-journey,m3-persistence-and-resilience,phaser-lifecycle,workstation-bridge}.spec.ts` (`18/18` Playwright tests passing) | Verified |
-| CI workflows | None committed yet | Verified |
+| Application source | M0–M4 + Scoped M6/M9 complete: lazy-loaded `PhaserHost` + Rollup vendor chunks, `App.tsx`, `EntryGateway.tsx`, `AcademicSpacesSelector.tsx`, `StudioCollaborationBar.tsx`, `WorkstationPanel.tsx` (`ProjectOverviewPanel`, `TasksSprintBoardPanel`, `ResourceLibraryPanel`, `WhiteboardPanel`), services, realtime layer, `CampusScene.ts` | Verified |
+| Package manifest / lockfile | `package.json`, `package-lock.json`, `tsconfig.json`, `vite.config.ts`, `playwright.config.ts`, `vercel.json`, `LICENSE` committed | Verified |
+| Tests | `tests/unit/{m3-guards,m6-m9-guards}.test.ts` (`17/17` passing), `tests/rls/verify-rls.mjs` (`4/4` actors across 13 tables passing), `tests/e2e/*.spec.ts` (`26/26` Playwright tests passing) | Verified |
+| CI workflows | `.github/workflows/ci.yml` (`npm ci`, `typecheck`, `test:unit`, `build` on `push`/`pull_request` to `main`) | Verified |
+| Deployment | Vercel (`zeenity/learnnexus`) live at `https://learnnexus-nine.vercel.app` (`HTTP 200 OK`, smoke-tested with 0 console errors) | Verified |
 | GitHub Issues | Clean slate — ready for M0+ issue tracking | Reported |
 | GitHub Milestones | M0 starting; M1–M5 planned | Verified |
 | Prototype Screens | Present in `screens/` | Verified |
@@ -162,5 +163,5 @@ Inspection of `src/game/createGame.ts` and `src/game/scenes/CampusScene.ts` iden
 - M2 (Core Workflow & Cozy Academic Space): **Completed & E2E Verified** (`supabase/migrations/*`, `supabase/seed.sql`, `src/services/*`, `EntryGateway.tsx`, `AcademicSpacesSelector.tsx`, `WorkstationPanel.tsx` & panels, `14/14` Playwright tests passing).
 - M2.5 (Design Alignment & Canvas Sharpness): **Completed & Verified** (Cozy Digital Campus tokens, `ENERGY 1 / RHYTHM 2 / MOTION 1` static skeletons, compact responsive controls, ADR-012 Config A sharpness verified at `1x` and `2x` HiDPI).
 - M3 (Persistent Student Workspace): **Completed & Verified** (`onAuthStateChange`, per-task unsaved/retry/revert UX, panel `Refresh` & `Seeded Demo Data` badges, `workspace_layouts` metadata, `npm run test:unit` `11/11`, `npm run test:rls` `4/4` actors, `18/18` Playwright E2E passing).
-- M4 (Quality & Integration): Ready / Next.
-- M5 (Release / Demo): Planned.
+- M4 (Quality & Integration): **Completed & Verified** (`React.lazy` `PhaserHost` + Rollup vendor chunking across `99` modules, `.github/workflows/ci.yml`, Apache 2.0 `LICENSE` + `assets/LICENSE.txt`, `26/26` Playwright E2E including `m4-quality-audit.spec.ts`, `17/17` unit tests, `4/4` live RLS actors across 13 tables, zero client secrets or em dashes).
+- M5 (Release / Demo): **Deployed & Evidence Ready** (`https://learnnexus-nine.vercel.app` smoke-tested live, `9` curated PNG screenshots in `docs/evidence/screenshots/`, `Take A` `62.87s` + `Take B` `75.73s` `1080p` raw videos, `README.md`, `docs/REPORT.md`, `docs/PROPOSAL_SEMIFINAL.md`, `docs/USABILITY_TEST_SHEET.md`, `docs/TEAM_SUBMISSION_CHECKLIST.md`; remaining manual peer usability tests, signed Declaration of Originality, PDF export, and <=2m edited video pending team action before 30 Nov 2026).

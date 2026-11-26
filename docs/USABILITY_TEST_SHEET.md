@@ -1,13 +1,13 @@
 # LearnNexus: 5-Minute Peer Usability Test Sheet
 
 > **Purpose:** Collect primary student validation with 5-10 university classmates before the STACK 2026 semifinal deadline (`30 November 2026, 23:59 WIB`) and report real measured results honestly in `docs/PROPOSAL_SEMIFINAL.md` Section 6.
-> **Target Demo URL:** `[LIVE_VERCEL_URL — UPDATED AFTER DEPLOY]`
+> **Target Demo URL:** [https://learnnexus-nine.vercel.app](https://learnnexus-nine.vercel.app)
 
 ---
 
 ## 1. Facilitator Setup (Before Starting)
 
-1. Open two desktop/laptop browser windows side-by-side (or test on the participant's laptop + facilitator's laptop) pointing to `[LIVE_VERCEL_URL — UPDATED AFTER DEPLOY]`.
+1. Open two desktop/laptop browser windows side-by-side (or test on the participant's laptop + facilitator's laptop) pointing to [https://learnnexus-nine.vercel.app](https://learnnexus-nine.vercel.app).
 2. Ensure seeded data is clean (`supabase/seed.sql` applied if needed) and verify the header badge reads **Supabase connected**.
 3. **Demo Accounts for Testing:**
    - **Participant Window (Main Flow):** `nadia.demo@learnnexus.edu` (`Nadia Pratama (Demo)`, Team Lead) via **Enter Campus as Demo** on `UI-01`.

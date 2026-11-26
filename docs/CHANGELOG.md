@@ -7,6 +7,10 @@ This file records completed work only. Planned features and unfinished tasks bel
 ## [Unreleased]
 
 ### Added
+- Added M4 bundle optimization and deployment configuration: Rollup `manualChunks` in `vite.config.ts` (`vendor-phaser`, `vendor-supabase`, `vendor-react`), lazy-loaded `PhaserHost` via `React.lazy` + static Cozy `<Suspense>` fallback in `src/app/App.tsx`, `vercel.json` (Vite SPA rewrites + security headers), `.github/workflows/ci.yml` (`typecheck`, `test:unit`, `build`), root `LICENSE` (Apache 2.0 + non-commercial LimeZu exclusion in `assets/LICENSE.txt`), and M4/M5 ownership rules in `UI_CONTRACT.md`.
+- Added M4 QA audit suite and automated 1080p media scripts: `tests/e2e/m4-quality-audit.spec.ts` (lazy Phaser isolation, client bundle chunk/secret verification, two-way live Studio Chat & canvas speech bubbles between Nadia and Bima, `Tab`/`Enter`/`Escape` keyboard/focus/cursor checks, responsive overflow & safe resource links), `scripts/capture-evidence.mjs` (`9/9` curated screenshots in `docs/evidence/screenshots/`), and `scripts/record-demo.mjs` (`recordings/take-a-single-user-core-crud-1080p.mp4` `62.87s` and `recordings/take-b-multi-user-splitscreen-1080p.mp4` `75.73s`).
+- Added M5 team onboarding and STACK 2026 semifinal documentation pack: updated `README.md` (Vercel URL, setup/PR tutorial, demo reset runbook, Material AI Assistance Disclosure + glossary, Apache 2.0 & LimeZu `https://limezu.itch.io/moderninteriors` attribution), `docs/REPORT.md`, `docs/PROPOSAL_SEMIFINAL.md`, `docs/USABILITY_TEST_SHEET.md`, and `docs/TEAM_SUBMISSION_CHECKLIST.md`.
+- Deployed LearnNexus to Vercel (`zeenity/learnnexus`) at `https://learnnexus-nine.vercel.app` with public env vars (`VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`) and verified live production smoke tests (`HTTP 200`, `0` console errors, lazy Phaser loading, and two-browser Realtime sync).
 - Added Pre-M4 Scoped M6 + M9 Prototype Showcase contracts across `UI_CONTRACT.md`, `src/types/contracts.ts`, `src/types/database.ts`, `src/types/components.ts`, `src/types/gameDebug.ts`, and `src/app/routerContract.ts` (`'whiteboard'` / `UI-08b`, realtime presence/broadcast/bubble contracts, chat/whiteboard/activity records, and full CRUD payloads).
 - Added live Supabase migration `supabase/migrations/20261126000002_m6_m9_collab_pm.sql` (and matching `supabase/seed.sql` notes): granted team-member CRUD policies on `projects`/`tasks`/`resources` with `resources_url_http_check`, created `room_messages`, `whiteboard_notes`, `whiteboard_strokes`, and trigger-populated `activity_logs` (`log_project_activity()`), and enabled `REPLICA IDENTITY FULL` + `supabase_realtime` publication across 7 tables on remote project `zftymjkcrdkhtshazzmw`.
 - Implemented `src/services/realtimeService.ts` (`connectStudioRoom`, Presence, `80ms`-throttled Broadcast, `postgres_changes` + `workspace:sync` fallback), `src/services/realtimeUtils.ts`, and 18 live Supabase CRUD/chat/whiteboard/activity methods in `src/services/academicService.ts`.
@@ -34,6 +38,7 @@ This file records completed work only. Planned features and unfinished tasks bel
 - Added M0 milestone handoff in `HANDOFF.md`.
 
 ### Changed
+- Updated `.gitignore` to exclude gitignored raw video captures (`recordings/`) and local Vercel link state (`.vercel`), and synced `docs/STACK_2026.md`, `docs/MILESTONES.md`, `docs/PROJECT_AUDIT.md`, and root `HANDOFF.md`.
 - Wired `src/app/App.tsx` to manage the `studio:${teamId}` Realtime connection, coordinate remote-sync replay on `PhaserHost` mount, broadcast `avatar:chat-bubble` events and workstation `onDataMutated` revisions, and mount `StudioCollaborationBar` inside `<main>` (keeping `header [role="status"]` reserved for `Supabase connected`).
 - Extracted `toDateInputValue` and `dateInputToIso` helpers into `src/components/workstation/workstationUtils.ts` for Node 24 native unit verification.
 - Extracted `parseSafeHttpUrl` and `ParsedSafeHttpUrl` into pure TypeScript `src/components/workstation/workstationUtils.ts` (re-exported by `ResourceLibraryPanel.tsx`) so Node 24 unit tests execute directly with zero extra test runner dependencies.
@@ -44,6 +49,7 @@ This file records completed work only. Planned features and unfinished tasks bel
 - Updated `docs/MILESTONES.md`, `docs/PROJECT_AUDIT.md`, and `README.md` to reflect M0 completion and M1 readiness.
 
 ### Fixed
+- Replaced remaining `\u2014` em dash inside `src/styles/index.css:1` header comment with `:`, restored missing root `LICENSE`, and spaced multi-user split-screen capture positions (`x: 8.6` / `x: 12.5`) so floating chat bubbles do not overlap in `09-multiuser-realtime-split.png`.
 - Resolved WCAG AA contrast conflicts in `docs/DESIGN.md` by syncing secondary text (`#5C665C`), muted text (`#636B63`), primary CTA (`#4A6B46` / `#3B5638`), focus ring (`#4A6B46`), and control border (`#757E74`) tokens.
 
 ### Removed

@@ -518,8 +518,8 @@ async function captureMultiUserSplitEvidence(browser) {
     ]);
 
     await Promise.all([
-      walkPath(pageNadia, [{ x: 9.7 }, { y: 9.4 }], 'KeyD'),
-      walkPath(pageBima, [{ x: 11.8 }, { y: 9.4 }], 'KeyA'),
+      walkPath(pageNadia, [{ x: 8.6 }, { y: 9.4 }], 'KeyD'),
+      walkPath(pageBima, [{ x: 12.5 }, { y: 9.4 }], 'KeyA'),
     ]);
 
     await Promise.all([

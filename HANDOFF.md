@@ -1,53 +1,38 @@
-# Handoff — Pre-M4 Scoped M6 + M9 Prototype Showcase
+# Handoff — M4 Quality Freeze & M5 Release Readiness
 
-- **Branch / Worktree:** `main` (merged `feature/m6-m9-data-realtime`, `feature/m6-phaser-multiplayer`, `feature/m9-project-management`, and `feature/m6-studio-chat-ui` via `--no-ff`; temporary worktrees and feature branches removed)
-- **Owner:** Main Orchestrator (with 4 isolated `wt` lanes: `DB`, `GAME`, `PM`, `CHAT`)
-- **Linked Contract:** `UI_CONTRACT.md` (Locked M0–M3 + Scoped M6/M9 contracts on `main`)
+- **Branch / Worktree:** `main` (single clean worktree; merged `feature/m4-m5-qa-evidence` and `feature/m5-docs-proposal-pack` via `--no-ff`; temporary worktrees and feature branches removed)
+- **Owner:** Main Orchestrator (with 2 isolated `wt` lanes: `QA` and `DOC`)
+- **Live Production URL:** `https://learnnexus-nine.vercel.app` (`zeenity/learnnexus`)
+- **Linked Contract:** `UI_CONTRACT.md` (Locked M0–M5 contracts on `main`)
 - **Date:** 26 November 2026
 
 ## Completed Scope & Exit Criteria
 
-- **Shared Scoped M6 + M9 Contracts (`UI_CONTRACT.md`, `src/types/*`, `src/app/routerContract.ts`):**
-  - Extended `WorkstationId` with `'whiteboard'` (`UI-08b`, `WORKSTATION_META.whiteboard` `Team Whiteboard`), added realtime presence/broadcast/bubble types (`CharacterSpriteKey`, `AvatarPresencePayload`, `AvatarMoveBroadcast`, `AvatarChatBubbleEvent`, `WorkstationSyncKind`), and added domain records (`RoomMessageRecord`, `WhiteboardNoteRecord`, `WhiteboardStrokeRecord`, `ActivityLogRecord`, CRUD payloads).
-- **Supabase Migration, Realtime & 13-Table RLS (`supabase/migrations/20261126000002_m6_m9_collab_pm.sql`, `supabase/seed.sql`, `src/services/*`, `tests/rls/verify-rls.mjs`):**
-  - Applied live migration on remote Supabase project `zftymjkcrdkhtshazzmw` adding team-member CRUD grants & RLS policies across `projects`, `tasks`, and `resources`, `resources_url_http_check`, tables `room_messages`, `whiteboard_notes`, `whiteboard_strokes`, and `activity_logs`, security-definer `log_project_activity()` audit trigger, `REPLICA IDENTITY FULL` + `supabase_realtime` publication across 7 tables, and idempotent seeded notes.
-  - Replaced stubs in `src/services/academicService.ts` with 18 live Supabase CRUD/chat/whiteboard/activity methods; added `src/services/realtimeService.ts` (`connectStudioRoom`, Presence, `80ms`-throttled Broadcast, `postgres_changes` + `workspace:sync` fallback) and pure `src/services/realtimeUtils.ts`.
-  - Expanded `tests/rls/verify-rls.mjs` across all 4 actors (`anon`, `nadia.demo@learnnexus.edu`, `bima.demo@learnnexus.edu`, `rani.demo@learnnexus.edu`) and all 13 tables, verifying cleanup restores seeded row counts.
-- **Multiplayer Phaser Studio & 4th Whiteboard Workstation (`src/game/*`):**
-  - Bound north-wall `chalkboard_sprint` (`int16_obj_0134`) in `src/game/maps/campusStudioMap.json` to `objectId: "whiteboard-board"` -> `'whiteboard'`.
-  - Updated `src/game/scenes/CampusScene.ts` and `src/game/PhaserHost.tsx` to preload `adam`, `alex`, `amelia`, and `bob` with `Phaser.Textures.FilterMode.NEAREST`, emit throttled `avatar:local-move`, render interpolated pixel-snapped remote teammates + `resolution: 3` crisp nametags, draw 4-tile (`64px`) sage proximity rings (`avatar:proximity-peers`), display 5s `avatar:chat-bubble` pills, and suspend Phaser keyboard capture on `ui:input-focus`.
-- **Full Project Management & Whiteboard UI (`src/components/workstation/*`):**
-  - Upgraded `ProjectOverviewPanel.tsx` (inline `Edit Brief`, live `"In studio"` roster badges, trigger-backed `Recent Activity`), `TasksSprintBoardPanel.tsx` (real sprint progress summary, `+ New Task`, inline task Edit, two-step Delete, team roster assignee select, due dates, preserving M3 `Unsaved change`/`Retry save`/`Revert` UX), `ResourceLibraryPanel.tsx` (`+ Add Resource` with `parseSafeHttpUrl`, two-step Delete), `WorkstationPanel.tsx`, and `workstationUtils.ts` (`toDateInputValue`, `dateInputToIso`).
-  - Created `WhiteboardPanel.tsx` featuring a `480x260` shared HTML5 sketch pad (4 Cozy WCAG pen colors, 2 stroke widths, Undo, two-step Clear) and persisted pastel sticky notes.
-- **Studio Collaboration HUD, Central App Wiring & Suites (`src/components/realtime/StudioCollaborationBar.tsx`, `src/app/App.tsx`, `tests/*`):**
-  - Added `StudioCollaborationBar.tsx` inside `<main>` (live Realtime status pill, online/nearby peer chips, collapsible `room_messages` studio chat drawer) keeping `header [role="status"]` untouched (`Supabase connected`).
-  - Wired `App.tsx` to connect `realtimeService.connectStudioRoom`, coordinate `PhaserHost` ready-state remote replay, pass team roster / `onlineMemberIds` / `syncRevisionByWorkstation` / `onDataMutated`, and trigger floating avatar chat bubbles.
-  - Added `tests/unit/m6-m9-guards.test.ts` and `tests/e2e/m6-m9-realtime-and-pm.spec.ts` covering concurrent multi-context avatar/chat sync, cross-browser task CRUD, brief edit + activity log + resource CRUD, and whiteboard sketch + sticky note sync.
-
-## Files Touched
-
-- Central Contracts, Docs & Shell: `UI_CONTRACT.md`, `package.json`, `src/types/contracts.ts`, `src/types/database.ts`, `src/types/components.ts`, `src/types/gameDebug.ts`, `src/app/routerContract.ts`, `src/app/App.tsx`, `HANDOFF.md`, `README.md`, `docs/MILESTONES.md`, `docs/CHANGELOG.md`, `docs/DESIGN.md`
-- Database, Services & RLS: `supabase/migrations/20261126000002_m6_m9_collab_pm.sql`, `supabase/seed.sql`, `src/services/academicService.ts`, `src/services/realtimeService.ts`, `src/services/realtimeUtils.ts`, `src/services/HANDOFF.md`, `tests/rls/verify-rls.mjs`
-- Phaser Studio: `src/game/maps/campusStudioMap.json`, `src/game/scenes/CampusScene.ts`, `src/game/PhaserHost.tsx`, `src/game/HANDOFF.md`
-- Workstation & Collaboration UI: `src/components/workstation/WorkstationPanel.tsx`, `ProjectOverviewPanel.tsx`, `TasksSprintBoardPanel.tsx`, `ResourceLibraryPanel.tsx`, `WhiteboardPanel.tsx`, `workstationUtils.ts`, `src/components/workstation/HANDOFF.md`, `src/components/realtime/StudioCollaborationBar.tsx`, `src/components/realtime/HANDOFF.md`
-- Unit & E2E Tests: `tests/unit/m6-m9-guards.test.ts`, `tests/e2e/m6-m9-realtime-and-pm.spec.ts`
+- **Bundle Splitting, Hygiene, CI & License (Phase 1 on `main`):**
+  - Split Rollup output into deterministic cacheable chunks (`vite.config.ts`) and lazy-loaded `PhaserHost` behind `<Suspense>` (`src/app/App.tsx`), deferring `1,511.73 kB` raw (`347.75 kB` gzip) of Phaser engine/scene JS until entering the 2D Studio (`0` Phaser requests on Entry Gateway & Academic Spaces).
+  - Restored root `LICENSE` (Apache License 2.0 for LearnNexus code, carving out LimeZu sprites strictly to `assets/LICENSE.txt` non-commercial scope), added `vercel.json` (SPA rewrites + HTTP security headers), added `.github/workflows/ci.yml` (`npm ci`, `typecheck`, `test:unit`, `build`), replaced `src/styles/index.css:1` em dash with `:`, and added `recordings/` and `.vercel` to `.gitignore`.
+- **M4 Quality Audit, Curated Screenshots & Raw `1080p` Demo Captures:**
+  - `tests/e2e/m4-quality-audit.spec.ts` verifies lazy Phaser chunk isolation, client bundle chunk split + zero secrets, two-way live Studio Chat + avatar bubbles (`Nadia` <-> `Bima`), `Tab`/`Enter`/`Escape` keyboard/focus/cursor navigation, and zero horizontal overflow / antislop regressions across `1280x720`, `1024x700`, and `390x844`.
+  - `scripts/capture-evidence.mjs` generated all `9` curated PNG screenshots in `docs/evidence/screenshots/` (`01-entry-gateway.png` through `09-multiuser-realtime-split.png`).
+  - `scripts/record-demo.mjs` generated gitignored unedited `1920x1080` 30fps H.264 recordings (`recordings/take-a-single-user-core-crud-1080p.mp4` `62.87s` / `3.39 MB`, `recordings/take-b-multi-user-splitscreen-1080p.mp4` `75.73s` / `4.22 MB`).
+- **M5 Documentation Pack & Vercel Setup/Deploy:**
+  - Authored/updated onboarding `README.md` (Material AI Assistance Disclosure + glossary, teammate setup/PR tutorial, demo reset runbook, LimeZu public credit), `docs/REPORT.md`, `docs/PROPOSAL_SEMIFINAL.md` (formatted for `<= 10` A4 content pages, preserving `[PENDING REAL STUDENT USABILITY DATA]` anti-fabrication guard), `docs/USABILITY_TEST_SHEET.md`, and `docs/TEAM_SUBMISSION_CHECKLIST.md`.
+  - Configured Vercel CLI (`67.0.0`, `xgv1807-4213`), installed global `vercel-labs/agent-skills`, added `https://mcp.vercel.com` MCP server config (`~/.gemini/config/mcp_config.json` & T3 Antigravity `mcp_config.json`), linked `zeenity/learnnexus`, pushed `VITE_SUPABASE_URL` & `VITE_SUPABASE_ANON_KEY`, deployed `https://learnnexus-nine.vercel.app`, smoke-tested live two-browser sync (`HTTP 200`, `0` console errors), and cleaned temporary test chat rows.
 
 ## Verified Commands & Results
 
 - `npm run typecheck` (`tsc --noEmit`): **PASS** (exit `0`)
-- `npm run test:unit` (`node --test tests/unit/m3-guards.test.ts tests/unit/m6-m9-guards.test.ts`): **PASS** (`17/17` tests across `8` suites, `0` failed, `0` skipped)
-- `npm run test:rls` (`node tests/rls/verify-rls.mjs`): **PASS** (`4/4` actors `anon`, `nadia.demo@learnnexus.edu`, `bima.demo@learnnexus.edu`, `rani.demo@learnnexus.edu` across all `13` tables; seeded row counts restored cleanly)
-- `npm run build` (`tsc --noEmit && vite build`): **PASS** (exit `0`, `98` modules transformed)
-- Static antislop scan (`src/`, `tests/`): **PASS** (`0` em dashes `\u2014` outside `src/styles/index.css:1` header comment; `0` `animate-pulse` / `animate-bounce` classes)
-- `npx playwright test --reporter=list` (`npm run test:e2e`): **PASS** (`22 passed (2.0m)` across M1, M2, M2.5, M3, and Scoped M6 + M9 specs)
+- `npm run test:unit` (`node --test tests/unit/m3-guards.test.ts tests/unit/m6-m9-guards.test.ts`): **PASS** (`17/17` tests across `8` suites)
+- `npm run test:rls` (`node tests/rls/verify-rls.mjs`): **PASS** (`4/4` actors across all `13` tables; re-verified after smoke cleanup)
+- `npm run build` (`tsc --noEmit && vite build`): **PASS** (`99` modules; `index-D2WuUhG2.js` `158.67 kB`, `index-FeizwK2V.css` `50.77 kB`, `vendor-react-PY8vvcCh.js` `223.19 kB`, `vendor-supabase-B9O_2iRq.js` `230.52 kB`, lazy `PhaserHost-CM4XjDcy.js` `33.08 kB`, lazy `vendor-phaser-DNvWzekM.js` `1,478.65 kB`)
+- `npx playwright test --reporter=list`: **PASS** (`26/26` tests in `2.9m`, `0` failed, `0` skipped)
+- Live Vercel Production Smoke Test (`https://learnnexus-nine.vercel.app`): **PASS** (`HTTP 200 OK`, `0` pre-studio Phaser requests, sharp Config A studio, two-context `Live sync` & two-way chat, `0` console errors)
 
-## Database & Environment State
+## Remaining Team Actions Before 30 November 2026, 23:59 WIB
 
-- Remote project: `zftymjkcrdkhtshazzmw` (`ap-southeast-1`) running migrations `20261126000001_m2_core_schema` and `20261126000002_m6_m9_collab_pm`.
-- Deferred out of scope (remaining Planned): M7 multi-map campus & layout customizer, M8 Lecturer Studio Management (`UI-08`), self-service signup/avatar picker/admin (`M10`), WebRTC audio/video, Supabase Storage binary uploads, and Lecturer deliverable grading (`UI-09`).
-
-## Caveats & Next Steps (M4 Quality & Integration)
-
-- **Caveat (Bundle Size):** Single Vite client chunk exceeds `500 kB` (`~2.13 MB`) due to Phaser 3; evaluate manual vendor chunking during M4/M10 hardening.
-- **Caveat (Persisted Studio Chat Messages):** `room_messages` rows created during multi-user E2E chat tests remain persisted in Supabase Postgres by design (and are capped to recent room history on load).
-- **Next Steps (M4 Quality & Integration -> M5 Release):** Complete final M4 P0/M6/M9 acceptance checklist audit against `PRD.md`, review `.env`/bundle hygiene, rehearse desktop/laptop demo flow (`Nadia` + `Bima`), deploy to Vercel, and prepare STACK 2026 semifinal submission before 30 Nov 2026, 23:59 WIB.
+Tracked step-by-step in `docs/TEAM_SUBMISSION_CHECKLIST.md`:
+1. Sign official Declaration of Originality (`https://s.id/DeclarationOfOriginalitySTACK2026`) by all 4 members.
+2. Run 5–10 real peer usability tests (`docs/USABILITY_TEST_SHEET.md`) and replace Section 6 placeholder in `docs/PROPOSAL_SEMIFINAL.md` with factual measured results.
+3. Fill exact teammate roles (`[CONFIRM EXACT TEAM ROLE]` / `[CONFIRM CONTRIBUTION DETAILS]`) in `README.md` & `docs/PROPOSAL_SEMIFINAL.md`, and export `<= 10`-page A4 Proposal PDF with Declaration appendix.
+4. Combine raw `recordings/take-a-*.mp4` + `recordings/take-b-*.mp4` with team intro/voiceover & English subtitles (`<= 2:00`, `>= 1080p`).
+5. Share `.env` privately with teammates, verify Vercel URL/seed state (`supabase/seed.sql`), and submit deliverables before deadline.

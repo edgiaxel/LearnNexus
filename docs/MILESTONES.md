@@ -1,5 +1,5 @@
-> **Current milestone:** M4 — Quality & Integration (Pre-M4 Scoped M6 + M9 Prototype Showcase Complete)  
-> **Overall status:** Track 1 M0–M3 + approved Pre-M4 **Scoped M6 (Realtime Presence, Avatars & Text Chat Bubbles) + M9 (Task/Project/Resource CRUD & Team Whiteboard)** merged and verified on `main`; next: **M4 Quality & Integration Freeze** before **M5 Release / Demo**  
+> **Current milestone:** M4 Completed & M5 Deployed / Evidence Ready (Manual Team Submission Actions Pending)  
+> **Overall status:** Track 1 M0–M4 + Scoped M6/M9 complete & verified (`26/26` E2E, `17/17` unit, `4/4` live RLS actors across 13 tables, `99`-module lazy Phaser bundle split); M5 Vercel production live at `https://learnnexus-nine.vercel.app` with `9` screenshots + `2` raw `1080p` videos captured  
 > **Semifinal deadline:** 30 November 2026, 23:59 WIB  
 > **Last updated:** 26 November 2026  
 > **Repository:** [edgiaxel/LearnNexus](https://github.com/edgiaxel/LearnNexus)
@@ -44,9 +44,9 @@ Remember check again to make sure theres a shared contract before doing the exec
 
 - **Full-scale vision:** A browser-based, multiplayer persistent virtual campus for collaborative university project-based learning — combining multi-zone configurable 2D campus maps, real-time multi-user presence, lecturer course/team/assignment management, and full project workspace tools (task CRUD, uploads, deliverables, timeline, whiteboard, activity log).
 - **Semifinal prototype goal (Track 1, M0–M5):** Demonstrate the verified P0 vertical slice before 30 November 2026: student entry, assigned academic space selection, crisp 2D pixel-art studio navigation, interactive workstation panels, and durable Supabase Postgres persistence across sessions (with an optional scoped M6a real-time multi-user presence slice if approved before M5).
-- **Current verified state (M0–M3 + Scoped M6 & M9):** Complete & tested on `main` — Supabase Auth + 3 demo accounts (`onAuthStateChange` + expiry guard), Academic Spaces selector, sharp 2D pixel-art studio (`campusStudioMap.json`, ADR-012) with live multi-user Supabase Realtime avatars (`Adam`/`Alex`/`Amelia`/`Bob`), 64px proximity cues, persisted `room_messages` chat + floating 5s speech bubbles, full Project Overview brief editing + trigger-backed `Recent Activity`, full Task CRUD + per-task unsaved/retry/revert resilience, Resource Library safe HTTP(S) add/delete, 4th Team Whiteboard (`UI-08b`) sketch canvas + sticky notes, `4/4` live RLS actors across 13 tables (`npm run test:rls`), `17/17` unit tests (`npm run test:unit`), and `22/22` Playwright E2E specs (`npm run test:e2e`).
-- **Gap to full-scale product:** P0 Semifinal Core (`F-001`–`F-009`) plus Scoped M6/M9 collaborative showcase are verified on `main`. Multi-map/configurable campus (`M7`), Lecturer studio & class management (`M8` / `UI-08`), Supabase Storage binary uploads, Lecturer deliverables review (`UI-09`), WebRTC proximity audio/video, and production auth/admin ops (`M10`) remain **Planned** for post-semifinal delivery.
-- **Links:** `PRD.md` / `DESIGN.md` / `ARCHITECTURE.md` / `ABSTRACT.md` / GitHub repository.
+- **Current verified state (M0–M4 + Scoped M6 & M9 + M5 Code/Deploy):** Complete & tested on `main` and live at `https://learnnexus-nine.vercel.app` — lazy-loaded Phaser `3.88.2` (`React.lazy` + Rollup `manualChunks` splitting `vendor-phaser`, `vendor-supabase`, `vendor-react`), Supabase Auth + 3 demo accounts (`onAuthStateChange` + expiry guard), Academic Spaces selector, sharp 2D pixel-art studio (`campusStudioMap.json`, ADR-012) with live multi-user Supabase Realtime avatars (`Adam`/`Alex`/`Amelia`/`Bob`), 64px proximity cues, persisted `room_messages` chat + floating 5s speech bubbles, full Project Overview brief editing + trigger-backed `Recent Activity`, full Task CRUD + per-task unsaved/retry/revert resilience, Resource Library safe HTTP(S) add/delete, 4th Team Whiteboard (`UI-08b`) sketch canvas + sticky notes, CI workflow (`.github/workflows/ci.yml`), `LICENSE` (Apache 2.0 + LimeZu non-commercial exclusion), `vercel.json`, `4/4` live RLS actors across 13 tables (`npm run test:rls`), `17/17` unit tests (`npm run test:unit`), and `26/26` Playwright E2E specs (`npm run test:e2e`), plus `9` curated PNGs (`docs/evidence/screenshots/`) and `2` raw `1080p` H.264 demo captures (`recordings/`).
+- **Gap to full-scale product:** P0 Semifinal Core (`F-001`–`F-009`) plus Scoped M6/M9 collaborative showcase and M4/M5 engineering/deployment deliverables are verified. Multi-map/configurable campus (`M7`), Lecturer studio & class management (`M8` / `UI-08`), Supabase Storage binary uploads, Lecturer deliverables review (`UI-09`), WebRTC proximity audio/video, and production auth/admin ops (`M10`) remain **Planned** for post-semifinal delivery.
+- **Links:** `PRD.md` / `DESIGN.md` / `ARCHITECTURE.md` / `ABSTRACT.md` / `REPORT.md` / `PROPOSAL_SEMIFINAL.md` / `TEAM_SUBMISSION_CHECKLIST.md`.
 
 ## 2. Milestone Overview
 
@@ -59,8 +59,8 @@ Remember check again to make sure theres a shared contract before doing the exec
 | M2 | Core Workflow & Cozy Academic Space | Student navigates distinct 2D pixel-art studio and accesses live Supabase workstation panels | Completed | Distinct 2D pixel-art environment (`Interiors_free` / `Characters_free`); avatar controller; live Supabase panels; `14/14` E2E verified | GH-03, GH-04 |
 | M2.5 | Design & Rendering Alignment | Cozy Digital Campus (pastel tokens, master design system, sharp canvas rendering rules) | Completed | `DESIGN.md` approved, tokens locked, `ENERGY 1 / RHYTHM 2 / MOTION 1` & sharp ADR-012 pixel-art config verified across desktop/mobile | — |
 | M3 | Persistent Student Workspace | Project, tasks and resources load from durable Supabase Postgres; task status updates persist | Completed | Clean-context cross-user persistence (`Nadia -> Bima -> Nadia`), 4-actor RLS matrix, `11/11` unit tests, save/fetch failure recovery, and `18/18` E2E verified | GH-05 |
-| M4 | Quality & Integration | Integrated P0 + Scoped M6/M9 demo is stable, sharp, and verified | Next / In Progress | Critical student journey + multi-user/CRUD showcase passes; no blocking errors; access rules & secrets audited; rendering verified sharp | GH-06 |
-| M5 | Release / Demo | Shareable demo, evidence and submission materials are ready | Planned | Deployment smoke-tested; proposal/video evidence complete before 30 Nov 2026, 23:59 WIB | GH-07 |
+| M4 | Quality & Integration | Integrated P0 + Scoped M6/M9 demo is stable, sharp, code-split, and verified | Completed | `26/26` E2E (`m4-quality-audit.spec.ts` incl.), `17/17` unit, `4/4` RLS (`13` tables), `99`-module lazy Phaser split, zero secrets/em-dashes | GH-06 |
+| M5 | Release / Demo | Shareable Vercel deployment, CI, screenshots, raw `1080p` recordings, and proposal draft ready; manual team tasks pending | Code, Deploy & Evidence Ready (Manual Submission Pending) | Live `https://learnnexus-nine.vercel.app` smoke-tested; `9` PNGs + `Take A/B` `1080p` MP4s captured; remaining manual team tasks tracked in `docs/TEAM_SUBMISSION_CHECKLIST.md` before 30 Nov 2026 | GH-07 |
 
 ### Track 2 — Full-Scale LearnNexus Platform Roadmap (Post-Semifinal / Full Vision)
 
@@ -171,50 +171,49 @@ Remember check again to make sure theres a shared contract before doing the exec
 
 ### M4 — Quality & Integration
 
-**Target window:** 28–29 November  
-**Outcome:** The P0 student workflow is integrated, testable, sharp, and safe to demonstrate.
+**Target window:** 28–29 November (Completed 26 November 2026)  
+**Outcome:** The integrated P0 + Scoped M6/M9 workflow is code-split, testable, sharp, accessible, and safe to demonstrate.
 
-- [ ] Playwright smoke test covers the primary student journey.
-- [ ] Unit/component checks cover critical state and panel behavior.
-- [ ] Phaser mount/unmount and duplicate-canvas behavior verified.
-- [ ] Canvas rendering verified sharp on normal and high-DPI displays (no bilinear blur).
-- [ ] RLS membership checks verified (if restricted data/auth is enabled).
-- [ ] Empty, loading, error and save-failure states reviewed.
-- [ ] Resource links checked.
-- [ ] Desktop/laptop layout used in the demo checked.
-- [ ] No secrets or service-role key in the repository/client bundle.
-- [ ] All P0 acceptance criteria reviewed against PRD.
-- [ ] Optional promotion gate: evaluate pulling **M6a (Scoped Multi-User Realtime Presence + Live Task Sync)** before M5 only if P0 regression suite stays 100% green.
+- [x] Playwright smoke test covers the primary student journey (`26/26` Chromium tests passing, including `m4-quality-audit.spec.ts` two-way chat, focus/keyboard navigation, responsive views).
+- [x] Unit/component checks cover critical state and panel behavior (`17/17` tests across `8` suites).
+- [x] Phaser mount/unmount, lazy chunk isolation (`vendor-phaser` deferred until Studio entry), and duplicate-canvas prevention verified.
+- [x] Canvas rendering verified sharp on normal and high-DPI displays (`pixelArt: true`, `antialias: false`, integer zoom, `FilterMode.NEAREST`).
+- [x] RLS membership checks verified across all 4 actors and 13 public tables (`npm run test:rls`).
+- [x] Empty, loading, error and save-failure states reviewed.
+- [x] Resource links checked (`https?://` + `rel="noopener"` verified in E2E and DB constraints).
+- [x] Desktop/laptop (`1280x720`, `1024x700`) and compact (`390x844`) layouts checked with zero overflow or em dashes.
+- [x] No secrets or service-role key in repository or `dist/assets/` client bundle.
+- [x] All P0 + promoted Scoped M6/M9 acceptance criteria reviewed against PRD and `docs/REPORT.md`.
 
 | Slice ID | Vertical slice | Feature IDs | GitHub issues | Status | Demo outcome |
 |---|---|---|---|---|---|
-| VS-06 | Integrated P0 regression, sharpness, and access verification | F-001–F-009 | GH-06 | Planned | Repeatable student journey with verified error/access behavior |
+| VS-06 | Integrated P0 + Scoped M6/M9 regression, chunking, accessibility, and access verification | F-001–F-009, F-011 | GH-06 | Completed | Repeatable student + multi-user journey with verified bundle split, accessibility, and RLS behavior |
 
 **Exit criteria:** The demonstrator works repeatedly in the target browser, persistence is real, canvas rendering is sharp, and no known critical blocker remains.
 
 ### M5 — Release / Demo
 
-**Target window:** 29–30 November  
-**Outcome:** A stable shareable demo and complete semifinal submission evidence.
+**Target window:** 29–30 November (Code/Deploy/Evidence Prepared 26 Nov; Team Manual Submission Before 30 Nov, 23:59 WIB)  
+**Outcome:** A live Vercel demo deployment, onboarding README, engineering report, proposal draft, usability protocol, and raw `1080p` evidence captures ready for final team review and submission.
 
-- [ ] Deployment target and project access confirmed.
-- [ ] Production build deployed.
-- [ ] Environment variables configured without committing secrets.
-- [ ] Deployed URL opened and smoke-tested.
-- [ ] Demo account/entry instructions prepared.
-- [ ] Demo data reset/seed state prepared.
-- [ ] Screenshots captured from the actual working application.
-- [ ] Proposal PDF updated to match implemented behavior.
-- [ ] Under-2-minute video/Reel recorded and checked.
-- [ ] Submission links and files verified before 30 November, 23:59 WIB.
-- [ ] Final source and known limitations documented.
+- [x] Deployment target and project access confirmed (`zeenity/learnnexus` linked via Vercel CLI).
+- [x] Production build deployed (`https://learnnexus-nine.vercel.app`, `vercel.json` SPA rewrites & headers).
+- [x] Environment variables (`VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`) configured without committing secrets.
+- [x] Deployed URL opened and smoke-tested (`HTTP 200`, `Supabase connected`, lazy Phaser check, two-browser live chat PASS).
+- [x] Demo account/entry instructions and idempotent `supabase/seed.sql` reset runbook documented (`README.md`).
+- [x] Screenshots captured from the actual working application (`9/9` PNGs in `docs/evidence/screenshots/`).
+- [x] Raw unedited `1080p` demo videos recorded (`recordings/take-a-single-user-core-crud-1080p.mp4` `62.87s` + `recordings/take-b-multi-user-splitscreen-1080p.mp4` `75.73s`).
+- [ ] Real classmate usability test (`5-10` students) executed using `docs/USABILITY_TEST_SHEET.md` and real totals/quotes pasted into `docs/PROPOSAL_SEMIFINAL.md` Section 6 (team manual step).
+- [ ] Member roles confirmed, signed Declaration of Originality (`https://s.id/DeclarationOfOriginalitySTACK2026`) appended, and Semifinal Proposal PDF exported (`<= 10` A4 content pages, team manual step).
+- [ ] Final under-2-minute `1080p` English video/Reel edited with team intro/voiceover + subtitles from raw `Take A` + `Take B` captures (team manual step).
+- [ ] Submission links and files verified and uploaded before 30 November, 23:59 WIB.
 
 | Slice ID | Vertical slice | Feature IDs | GitHub issues | Status | Demo outcome |
 |---|---|---|---|---|---|
-| VS-07 | Deploy and rehearse the student journey | F-001–F-009 | GH-07 | Planned | Public demo link works from a clean browser session |
-| VS-08 | Evidence and submission package | Competition deliverables | GH-07 | Planned | Proposal/video demonstrate only verified capabilities |
+| VS-07 | Deploy and smoke-test the student & multi-user journey | F-001–F-009, F-011 | GH-07 | Completed | Public Vercel URL (`https://learnnexus-nine.vercel.app`) verified end-to-end against live Supabase |
+| VS-08 | Evidence, Proposal, Video & Submission Package | Competition deliverables | GH-07 | Partially Completed (Technical Evidence Ready; Team Recording/Usability/Signing Pending) | Proposal draft, report, 9 screenshots, and raw 1080p captures ready for team completion |
 
-**Exit criteria:** The team can run the demo from a clean browser session, explain what is implemented versus planned, and submit before the deadline.
+**Exit criteria:** The team completes usability testing, signs the Declaration, exports the Proposal PDF and edited <=2m video, re-seeds demo data if needed, and submits before 30 November 2026, 23:59 WIB.
 
 ---
 
@@ -329,29 +328,29 @@ Remember check again to make sure theres a shared contract before doing the exec
 
 ## 4. Current Focus
 
-- **Current focus:** **M4 — Quality & Integration**, following completion and verification of the **Pre-M4 Scoped M6 + M9 Prototype Showcase** on `main`, ahead of **M5 — Release / Demo**.
-- **Completed scope (26 Nov 2026):** Live multi-user realtime avatars (`Adam`/`Alex`/`Amelia`/`Bob`), 64px proximity cues, persisted `room_messages` studio chat + 5s avatar speech bubbles, full task CRUD, editable project overview + trigger-backed `activity_logs`, resource link CRUD, and 4th Team Whiteboard workstation (`UI-08b`), all backed by Supabase Postgres/RLS/Realtime. Deferred: **M7** (multi-map & layout editor), **M8** (Lecturer role `UI-08`), **M10** (self-signup, avatar picker, admin `U-03`), WebRTC audio/video, Storage binary uploads, and Lecturer deliverables grading (`UI-09`).
-- **Dependencies:** M3 + Scoped M6/M9 `main` baseline, `npm run test:unit`, `npm run test:rls`, `npm run test:e2e`, and Supabase `zftymjkcrdkhtshazzmw`.
-- **Expected result:** Verified, secret-free, demo-rehearsed prototype package ready for M5 deployment and STACK 2026 semifinal submission.
-- **Verification:** `npm run typecheck`, `npm run test:unit` (`17/17`), `npm run test:rls` (`4/4` actors, 13 tables), `npm run build` (`98` modules), and `npm run test:e2e` (`22/22`).
-- **Blockers:** None.
+- **Current focus:** **M5 Team Semifinal Submission Completion** (Code, CI, Vercel production deploy at `https://learnnexus-nine.vercel.app`, engineering report, proposal draft, `9` screenshots, and `2` raw `1080p` videos complete).
+- **Completed scope (26 Nov 2026):** M4 quality audit (`26/26` E2E, `17/17` unit, `4/4` RLS across 13 tables), lazy Phaser loading + Rollup `vendor-phaser`/`vendor-supabase`/`vendor-react` bundle splitting (`99` modules), Apache 2.0 `LICENSE` + LimeZu attribution (`assets/LICENSE.txt`), GitHub Actions CI, Vercel deploy + smoke test, `docs/REPORT.md`, `docs/PROPOSAL_SEMIFINAL.md`, `docs/USABILITY_TEST_SHEET.md`, and `docs/TEAM_SUBMISSION_CHECKLIST.md`. Deferred to Track 2: **M7** (multi-map & layout editor), **M8** (Lecturer role `UI-08`), **M10** (self-signup, avatar picker, admin `U-03`), WebRTC audio/video, Storage binary uploads, and Lecturer deliverables grading (`UI-09`).
+- **Dependencies:** Team execution of `docs/TEAM_SUBMISSION_CHECKLIST.md` and `docs/USABILITY_TEST_SHEET.md` against `https://learnnexus-nine.vercel.app` and `zftymjkcrdkhtshazzmw`.
+- **Expected result:** Signed Declaration of Originality (`https://s.id/DeclarationOfOriginalitySTACK2026`), real peer usability data in `PROPOSAL_SEMIFINAL.md` Section 6, `<= 10`-page A4 PDF export, edited `<= 2:00` `1080p` English video, and verified submission before **30 Nov 2026, 23:59 WIB**.
+- **Verification:** `npm run typecheck`, `npm run test:unit` (`17/17`), `npm run test:rls` (`4/4` actors, 13 tables), `npm run build` (`99` modules), `npm run test:e2e` (`26/26`), and live production smoke test PASS.
+- **Blockers:** Manual team submission items remain (`docs/TEAM_SUBMISSION_CHECKLIST.md`).
 
 ## 5. Next Actions
 
-1. Execute **M4** quality & security audit (secrets scan, bundle chunking review, full desktop/laptop demo rehearsal, all `F-001`–`F-009` + Scoped M6/M9 checks).
-2. Confirm **M5** hosting target (`Vercel`) with environment variables (`VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`), capture verified screenshots/video (<2m), and finalize STACK 2026 semifinal proposal before 30 Nov 2026, 23:59 WIB.
-3. Post-semifinal: execute remaining Track 2 milestones (`M7` Multi-Map, `M8` Lecturer `UI-08`, full `M9` Storage/Timeline/Deliverables `UI-09`, `M10` Production Ops).
+1. Follow `docs/TEAM_SUBMISSION_CHECKLIST.md`: collect signatures on `https://s.id/DeclarationOfOriginalitySTACK2026`, run 5–10 classmate usability tests using `docs/USABILITY_TEST_SHEET.md` and update `docs/PROPOSAL_SEMIFINAL.md` Section 6, confirm teammate roles, and export the A4 Proposal PDF (`<= 10` content pages + appendix).
+2. Assemble the final `<= 2:00` `1080p` English semifinal video combining `recordings/take-a-single-user-core-crud-1080p.mp4` and `recordings/take-b-multi-user-splitscreen-1080p.mp4` with team camera intro/voiceover and subtitles, then submit both deliverables before **30 Nov 2026, 23:59 WIB**.
+3. If selected for Final Day (19 Dec 2026) / post-semifinal: execute Track 2 milestones (`M8` Lecturer `UI-08`, `M7` Multi-Zone Campus Portals, `M9` Deliverables `UI-09` + Storage, and `M10` Production Ops).
 
 ## 6. Risks and Blockers
 
 | Item | Impact | Owner/next action | Status |
 |---|---|---|---|
 | Canvas visual sharpness | Blurry canvas weakens prototype presentation | Enforced ADR-012 (`pixelArt: true`, `antialias: false`, `NEAREST`, DPR & integer zoom) | Resolved & Tested |
-| Deadline is 30 Nov | Feature creep could prevent a coherent demo | Protect P0 (`M0`–`M5`); gate any pre-M5 M6a spike strictly behind green P0 tests | Active |
-| Realtime multiplayer scope | Synchronous networking could derail timeline if unbounded | Keep async Postgres as source of truth; scope `M6a` to Supabase Presence/Broadcast + `postgres_changes` only | Mitigated (ADR-013) |
-| Multi-map & layout complexity | Hand-building many maps + editor takes multi-week effort | Defer `M7` multi-zone campus & layout editor to Track 2 after semifinal freeze | Planned |
-| Unapproved engine swap | Migrating to PixiJS would waste critical days | Retain Phaser 3; focus on config and assets | Resolved (ADR-002) |
-| Proposal alignment | Proposal must reflect implemented direction accurately | Align proposal draft with verified build in M5 | Planned |
+| Deadline is 30 Nov | Late usability testing or video assembly could rush final PDF | Follow `docs/TEAM_SUBMISSION_CHECKLIST.md`; run 5–10 peer tests immediately | Active |
+| Realtime multiplayer scope | Synchronous networking could derail timeline if unbounded | Scoped `M6a` live presence/broadcast/chat verified without blocking Postgres persistence | Resolved (ADR-013) |
+| Multi-map & layout complexity | Hand-building many maps + editor takes multi-week effort | Deferred `M7` multi-zone campus & layout editor to Track 2 / Final Day | Planned |
+| Unapproved engine swap | Migrating to PixiJS would waste critical days | Retain Phaser 3; lazy-split via `vendor-phaser` chunk | Resolved (ADR-002) |
+| Proposal alignment | Proposal must match implemented build and contain only real student test data | Drafted `PROPOSAL_SEMIFINAL.md` strictly to verified behavior; backfill Section 6 only with real peer results | In Progress (Team) |
 
 ## 7. Change History
 
@@ -364,3 +363,4 @@ Remember check again to make sure theres a shared contract before doing the exec
 | 26 Nov 2026 | Completed M3: added `onAuthStateChange` + session-expiry guards, per-task unsaved/retry/revert resilience, panel `Refresh` & `Seeded Demo Data` badges, `workspace_layouts` metadata, `tests/rls/verify-rls.mjs` (4-actor RLS pass), `tests/unit/m3-guards.test.ts` (`11/11` pass), and `tests/e2e/m3-persistence-and-resilience.spec.ts` (`18/18` E2E pass), plus M3 `HANDOFF.md`. |
 | 26 Nov 2026 | Expanded roadmap into Track 1 (Semifinal Delivery `M0`–`M5`) and Track 2 (Full-Scale Platform `M6`–`M10`: Multi-User Realtime, Multi-Map/Configurable Layouts, Lecturer Studio `UI-08`, Full Project CRUD/Storage/Deliverables `UI-09`, Production Ops `U-03`) while preserving template prompt and M0–M3 verified records. |
 | 26 Nov 2026 | Completed Pre-M4 Scoped M6 + M9 Prototype Showcase: pushed migration `20261126000002_m6_m9_collab_pm` to `zftymjkcrdkhtshazzmw`, shipped `realtimeService.ts`, multi-user Phaser avatars/proximity/bubbles/`whiteboard` (`UI-08b`), `StudioCollaborationBar`, Project Overview brief editor + trigger-backed `activity_logs`, full Task CRUD, Resource link CRUD, and `WhiteboardPanel`; verified `17/17` unit tests, `4/4` RLS actors across 13 tables, and `22/22` Playwright E2E specs on `main`, synced `HANDOFF.md`, and transitioned to M4 Quality & Integration. |
+| 26 Nov 2026 | Completed M4 Quality Freeze & M5 Code/Deploy/Evidence Readiness: added Rollup vendor chunking + lazy `PhaserHost`, Apache 2.0 `LICENSE` (+ `assets/LICENSE.txt` exclusion), `vercel.json`, GitHub Actions CI, `m4-quality-audit.spec.ts` (`26/26` E2E passing), `9` screenshots (`docs/evidence/screenshots/`), `2` raw `1080p` recordings (`Take A` `62.87s`, `Take B` `75.73s`), onboarding `README.md`, `REPORT.md`, `PROPOSAL_SEMIFINAL.md`, `USABILITY_TEST_SHEET.md`, `TEAM_SUBMISSION_CHECKLIST.md`, and live Vercel deployment `https://learnnexus-nine.vercel.app` verified cleanly. |

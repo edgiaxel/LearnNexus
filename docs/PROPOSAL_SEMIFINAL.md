@@ -6,7 +6,7 @@
 **Challenge Case:** Case 1: Smarter Campus and Learning  
 **Team:** SibukTA  
 **Team Members:** Edgi Axel (Team Lead), Jonathan Lukas Wijaya, Deffa Kiane, Khaerul Husnaen  
-**Live Prototype:** `[LIVE_VERCEL_URL — UPDATED AFTER DEPLOY]`  
+**Live Prototype:** [https://learnnexus-nine.vercel.app](https://learnnexus-nine.vercel.app)  
 **Source Repository:** [https://github.com/edgiaxel/LearnNexus](https://github.com/edgiaxel/LearnNexus)  
 **Submission Date:** November 2026  
 
@@ -84,7 +84,13 @@ LearnNexus pairs a warm, WCAG AA-accessible React application shell (**Cozy Digi
 | Shot | Screen / Flow | Screenshot Path |
 |---|---|---|
 | `01` | Entry Gateway (`UI-01`): Demo Mode profiles & Student Sign In | `docs/evidence/screenshots/01-entry-gateway.png` |
-| `02`–`08` | Academic Spaces, 2D Cozy Studio, Project Overview, Sprint Tasks CRUD, Resource Library, Team Whiteboard (`UI-08b`), and Studio Chat / Unassigned Empty State | `[SCREENSHOT_02_TO_08_FILENAMES — UPDATED AFTER QA CAPTURE]` |
+| `02` | Academic Spaces (`UI-02`): Enrolled courses (`IF-4031`, `IF-3210`) | `docs/evidence/screenshots/02-academic-spaces.png` |
+| `03` | 2D Cozy Studio (`UI-03/04`): Sharp ADR-012 room & `[E]` prompt | `docs/evidence/screenshots/03-studio-pixel-canvas.png` |
+| `04` | Project Overview (`UI-05`): Editable brief, roster & activity | `docs/evidence/screenshots/04-workstation-overview.png` |
+| `05` | Sprint Tasks (`UI-06`): Sprint progress bar & full Postgres CRUD | `docs/evidence/screenshots/05-workstation-tasks-crud.png` |
+| `06` | Resource Library (`UI-07`): Filters & safe HTTP(S) validation | `docs/evidence/screenshots/06-workstation-resources.png` |
+| `07` | Team Whiteboard (`UI-08b`): Shared `480x260` sketch pad & sticky notes | `docs/evidence/screenshots/07-workstation-whiteboard.png` |
+| `08` | Unassigned Guest Boundary (`UI-02`): Honest empty state (`Rani`) | `docs/evidence/screenshots/08-unassigned-guest-empty.png` |
 | `09` | Multi-User Realtime Split Screen (`Nadia` + `Bima` live avatars, proximity ring, chat bubbles & synced workspace) | `docs/evidence/screenshots/09-multiuser-realtime-split.png` |
 
 ---
@@ -121,7 +127,7 @@ flowchart TB
 - **2D Engine:** Phaser `3.88.2` lazy-loaded (`React.lazy` + `<Suspense>`) and isolated into `vendor-phaser` alongside `vendor-react` and `vendor-supabase` via Rollup `manualChunks` (`vite.config.ts`). Enforces `pixelArt: true`, `antialias: false`, `roundPixels: true`, `FilterMode.NEAREST`, and integer camera zoom (`2`/`3`).
 - **Backend & Security:** Supabase Auth, `@supabase/supabase-js` v2, 13-table PostgreSQL with RLS, `SECURITY DEFINER` membership helpers, column-level write grants, URL regex constraint (`url ~* '^https?://'`), and trigger-backed `activity_logs`.
 - **Hosting & CI:** Vercel (`vercel.json` SPA rewrites + security headers) and GitHub Actions (`.github/workflows/ci.yml` running `typecheck`, `test:unit`, `build`).
-- **Bundle Metrics:** `[M4_BUNDLE_METRICS — UPDATED AFTER BUILD]`
+- **Bundle Metrics:** Initial JS+CSS load is `663.15 kB` raw (`174.59 kB` gzip: `index` `158.67 kB`, `vendor-react` `223.19 kB`, `vendor-supabase` `230.52 kB`, CSS `50.77 kB`); lazy-loaded studio chunks (`vendor-phaser` `1,478.65 kB` + `PhaserHost` `33.08 kB`, `347.75 kB` gzip combined) download only after entering `workspace`.
 
 ### 4.3 Relational Data Model (`13` Public Tables)
 
@@ -141,8 +147,8 @@ flowchart TB
 | **M2-M2.5** | Entry (`UI-01`), Spaces (`UI-02`), 2D studio (`UI-03/04`), live Supabase panels (`UI-05`–`07`), WCAG AA | **Completed** | `14/14` E2E specs + real Supabase Auth/Postgres verified |
 | **M3** | Session-expiry guards, `Unsaved change`/`Retry save`/`Revert`, 4-actor RLS, unit suite | **Completed** | `18/18` E2E specs, `11/11` unit tests, `4/4` RLS actors |
 | **Scoped M6 + M9** | Multi-user Realtime avatars, proximity rings, room chat bubbles, full Task/Brief/Resource CRUD, `activity_logs`, Whiteboard (`UI-08b`) | **Completed** | `22/22` E2E specs, `17/17` unit tests, `4/4` RLS actors across `13` tables |
-| **M4** | Lazy Phaser & vendor chunking, Vercel config, CI, M4 QA audit, screenshots & 1080p takes | **In Progress / Finalizing** | `[M4_FINAL_VERIFICATION — UPDATED AFTER E2E]` |
-| **M5** | Live Vercel smoke test, peer usability testing (`5-10` students), Semifinal PDF & <=2m video | **In Progress (Due 30 Nov)** | Tracked via `docs/TEAM_SUBMISSION_CHECKLIST.md` |
+| **M4** | Lazy Phaser & vendor chunking, Vercel config, CI, M4 QA audit, screenshots & 1080p takes | **Completed** | `typecheck` PASS, `17/17` unit tests, `4/4` live RLS actors (`13` tables), `26/26` E2E specs, `99`-module bundle split |
+| **M5** | Live Vercel deployment & smoke test, peer usability testing (`5-10` students), Semifinal PDF & <=2m video | **Deployed / Video & Peer Test Pending (Due 30 Nov)** | Live URL [https://learnnexus-nine.vercel.app](https://learnnexus-nine.vercel.app) verified; `Take A` (`62.87s`) + `Take B` (`75.73s`) `1080p` captures ready |
 
 ### 5.2 Teammate Contributions
 
@@ -167,7 +173,7 @@ Consistent with `docs/STACK_2026.md` Final Phase guidelines, SibukTA retains thr
 
 ### 6.1 Engineering Verification & Primary Student Usability Testing
 
-- **Automated Verification:** LearnNexus is validated end-to-end by strict TypeScript (`tsc --noEmit`), Node native unit guards (`npm run test:unit`), live 4-actor 13-table database RLS enforcement (`npm run test:rls`), and Chromium Playwright suites covering multi-context Realtime sync and persistence across reloads (`[M4_FINAL_VERIFICATION — UPDATED AFTER E2E]`).
+- **Automated Verification:** LearnNexus is validated end-to-end by strict TypeScript (`tsc --noEmit`), Node native unit guards (`npm run test:unit`), live 4-actor 13-table database RLS enforcement (`npm run test:rls`), and Chromium Playwright suites covering multi-context Realtime sync and persistence across reloads (`typecheck` PASS, `17/17` unit tests across 8 suites, `4/4` live RLS actors across 13 tables, `26/26` Playwright E2E specs passing in `2.9m`, `99`-module Vite production build with zero exposed secrets, and live Vercel production smoke verification at [https://learnnexus-nine.vercel.app](https://learnnexus-nine.vercel.app)).
 - **Primary Student Usability Study:**
   `[PENDING REAL STUDENT USABILITY DATA — COLLECT WITH docs/USABILITY_TEST_SHEET.md]`
 

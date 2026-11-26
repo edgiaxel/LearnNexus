@@ -17,7 +17,7 @@ Complete every checklist item below in order before uploading the final STACK 20
 
 ## 2. Live Peer Usability Testing (`5-10` Students) & Proposal Backfill
 
-- [ ] Verify the live deployment URL (`[LIVE_VERCEL_URL — UPDATED AFTER DEPLOY]`) is reachable and seeded cleanly (`supabase/seed.sql`).
+- [x] Verify the live deployment URL ([https://learnnexus-nine.vercel.app](https://learnnexus-nine.vercel.app)) is reachable (`HTTP 200`, `Supabase connected`, multi-user Realtime & persistence smoke-tested) and seeded cleanly (`supabase/seed.sql`).
 - [ ] Run the 5-minute protocol in [`docs/USABILITY_TEST_SHEET.md`](./USABILITY_TEST_SHEET.md) with **5 to 10 university students** (obtaining verbal consent, recording real pass/fail, timing, Likert ratings, and friction notes).
 - [ ] Compute factual totals/averages and paste the filled summary into [`docs/PROPOSAL_SEMIFINAL.md`](./PROPOSAL_SEMIFINAL.md) Section 6, removing the `[PENDING REAL STUDENT USABILITY DATA — COLLECT WITH docs/USABILITY_TEST_SHEET.md]` placeholder.
 - [ ] Verify zero fabricated scores, quotes, or sample sizes exist anywhere in the proposal.
@@ -27,12 +27,11 @@ Complete every checklist item below in order before uploading the final STACK 20
 ## 3. Team Metadata, Roles & Phase 3 Metric Backfill
 
 - [ ] Confirm and replace `[CONFIRM EXACT TEAM ROLE]` and `[CONFIRM CONTRIBUTION DETAILS]` for **Jonathan Lukas Wijaya**, **Deffa Kiane**, and **Khaerul Husnaen** in [`README.md`](../README.md) and [`docs/PROPOSAL_SEMIFINAL.md`](./PROPOSAL_SEMIFINAL.md).
-- [ ] Verify Orchestrator Phase 3 backfill has replaced all remaining markers across `README.md`, `docs/REPORT.md`, `docs/PROPOSAL_SEMIFINAL.md`, and `docs/USABILITY_TEST_SHEET.md`:
-  - `[LIVE_VERCEL_URL — UPDATED AFTER DEPLOY]`
-  - `[M4_BUNDLE_METRICS — UPDATED AFTER BUILD]`
-  - `[M4_FINAL_VERIFICATION — UPDATED AFTER E2E]`
-  - `[M4_BUGFIX_LOG]`
-  - `[SCREENSHOT_02_TO_08_FILENAMES — UPDATED AFTER QA CAPTURE]`
+- [x] Verify Orchestrator Phase 3 backfill has replaced all remaining markers across `README.md`, `docs/REPORT.md`, `docs/PROPOSAL_SEMIFINAL.md`, and `docs/USABILITY_TEST_SHEET.md`:
+  - Live deployment URL: `https://learnnexus-nine.vercel.app`
+  - Build bundle metrics: `99` modules (`index-D2WuUhG2.js` `158.67 kB`, `vendor-react` `223.19 kB`, `vendor-supabase` `230.52 kB`, lazy `PhaserHost` `33.08 kB` + `vendor-phaser` `1,478.65 kB`)
+  - Final M4 verification: `typecheck` PASS, `17/17` unit, `4/4` RLS (`13` tables), `26/26` E2E (`2.9m`), live Vercel smoke PASS
+  - Bug-fix log & screenshot gallery (`01-entry-gateway.png` .. `09-multiuser-realtime-split.png`) backfilled
 - [ ] Confirm `docs/PROPOSAL_SEMIFINAL.md` and `README.md` include the **Material AI Assistance Disclosure** (Google Antigravity / Gemini coding models during development + explicit statement of **zero runtime AI features** in LearnNexus).
 - [ ] Confirm LimeZu attribution uses **only** `https://limezu.itch.io/moderninteriors` alongside `assets/LICENSE.txt` (zero signed itch.io download tokens anywhere).
 
@@ -71,14 +70,14 @@ Complete every checklist item below in order before uploading the final STACK 20
 
 - [ ] Share `.env` values (`VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`) privately with all 4 teammates (Slack/WhatsApp DM/password manager), and **never** commit `.env` or paste keys into GitHub, PDFs, or slides.
 - [ ] Confirm zero `service_role` keys exist in client code, `vercel.json`, Git history, or screenshots.
-- [ ] Confirm Vercel production deployment environment variables (`VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`) are set and live build passes cleanly.
+- [x] Confirm Vercel production deployment environment variables (`VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`) are set and live build passes cleanly.
 - [ ] Re-run `supabase/seed.sql` before the judging window to guarantee clean starter rows (`Nadia`, `Bima`, `Rani`, 2 classes, 8 tasks, 6 resources, 2 starter whiteboard notes, 1 welcome chat message).
 
 ---
 
 ## 7. Final Smoke Test & Submission Receipt Archive
 
-- [ ] Open `[LIVE_VERCEL_URL — UPDATED AFTER DEPLOY]` in a fresh incognito Chromium window and complete the full smoke test:
+- [ ] Open [https://learnnexus-nine.vercel.app](https://learnnexus-nine.vercel.app) in a fresh incognito Chromium window for your own manual rehearsal and confirm:
   - Header reads `Supabase connected`
   - Demo login (`Nadia`) -> `IF-4031` -> 2D studio walks cleanly -> `[E]` opens drawer -> Task mutation persists across page reload -> Studio Chat & Whiteboard work -> `Rani` shows empty-state guard
 - [ ] Confirm GitHub repository `https://github.com/edgiaxel/LearnNexus` is accessible and `main` CI badge is green.
