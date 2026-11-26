@@ -1747,7 +1747,15 @@
       "tileX": 14.3,
       "tileY": 1.4,
       "collidable": false,
-      "layer": "wall_decor"
+      "layer": "wall_decor",
+      "interaction": {
+        "objectId": "whiteboard-board",
+        "label": "Team Whiteboard",
+        "category": "Collaboration",
+        "radiusTiles": 2.3,
+        "summary": "Collaborative team whiteboard for sketches and sticky notes.",
+        "notes": "Shared persisted sketch pad and sticky notes."
+      }
     },
     {
       "id": "lights_lounge",

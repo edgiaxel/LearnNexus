@@ -1,28 +1,40 @@
 import { useEffect, useRef } from 'react';
-import type { WorkstationId } from '../types/contracts';
+import type { CharacterSpriteKey, WorkstationId } from '../types/contracts';
 import { eventBridge } from './bridge/eventBridge';
 import { createGame } from './createGame';
+
+export interface LocalAvatarIdentity {
+  userId: string;
+  displayName: string;
+  spriteKey: CharacterSpriteKey;
+}
 
 export interface PhaserHostProps {
   className?: string;
   activeWorkstation?: WorkstationId | null;
+  localIdentity?: LocalAvatarIdentity;
   onReady?: () => void;
 }
 
 export function PhaserHost({
   className,
   activeWorkstation,
+  localIdentity,
   onReady,
 }: PhaserHostProps) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const onReadyRef = useRef(onReady);
   onReadyRef.current = onReady;
+  const localIdentityRef = useRef(localIdentity);
+  localIdentityRef.current = localIdentity;
+  const sceneReadyRef = useRef(false);
 
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
 
     let disposed = false;
+    sceneReadyRef.current = false;
     // Remove any leftover canvas from a prior React StrictMode mount pass.
     container.replaceChildren();
 
@@ -30,6 +42,10 @@ export function PhaserHost({
 
     const handleReady = () => {
       if (!disposed) {
+        sceneReadyRef.current = true;
+        if (localIdentityRef.current) {
+          eventBridge.emit('avatar:local-identity', localIdentityRef.current);
+        }
         onReadyRef.current?.();
       }
     };
@@ -63,6 +79,7 @@ export function PhaserHost({
 
     return () => {
       disposed = true;
+      sceneReadyRef.current = false;
       unsubPanelClosed();
       observer?.disconnect();
       game.events.off('campus:ready', handleReady);
@@ -71,6 +88,26 @@ export function PhaserHost({
       container.replaceChildren();
     };
   }, []);
+
+  const identityUserId = localIdentity?.userId;
+  const identityDisplayName = localIdentity?.displayName;
+  const identitySpriteKey = localIdentity?.spriteKey;
+
+  useEffect(() => {
+    if (
+      !sceneReadyRef.current ||
+      identityUserId === undefined ||
+      identityDisplayName === undefined ||
+      identitySpriteKey === undefined
+    ) {
+      return;
+    }
+    eventBridge.emit('avatar:local-identity', {
+      userId: identityUserId,
+      displayName: identityDisplayName,
+      spriteKey: identitySpriteKey,
+    });
+  }, [identityUserId, identityDisplayName, identitySpriteKey]);
 
   return (
     <div
