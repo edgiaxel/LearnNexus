@@ -27,6 +27,7 @@ const TELEPORT_TARGETS: Record<WorkstationId, { x: number; y: number }> = {
   overview: { x: 2.8, y: 6.5 },
   tasks: { x: 11.25, y: 9.1 },
   resources: { x: 19.5, y: 4.9 },
+  whiteboard: { x: 14.4, y: 4.0 },
 };
 
 interface MapObjectSpec {
@@ -540,6 +541,11 @@ export class CampusScene extends Phaser.Scene {
         canvasWidth: this.game.canvas.width,
         canvasHeight: this.game.canvas.height,
         dpr: window.devicePixelRatio || 1,
+        localSpriteKey: 'adam',
+        remotePlayerCount: 0,
+        remotePlayerIds: [],
+        nearbyPeerIds: [],
+        activeChatBubbleCount: 0,
       }),
       teleportToWorkstation: (workstationId: WorkstationId) => {
         if (!this.ready || this.cleanedUp) {

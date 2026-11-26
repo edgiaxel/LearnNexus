@@ -71,7 +71,7 @@ export interface WorkspaceDrawerState {
 
 export interface WorkstationMeta {
   id: WorkstationId;
-  screenId: 'UI-05' | 'UI-06' | 'UI-07';
+  screenId: 'UI-05' | 'UI-06' | 'UI-07' | 'UI-08b';
   title: string;
   promptLabel: string;
 }
@@ -94,5 +94,11 @@ export const WORKSTATION_META: Record<WorkstationId, WorkstationMeta> = {
     screenId: 'UI-07',
     title: 'Resource Library',
     promptLabel: 'Open Resource Library',
+  },
+  whiteboard: {
+    id: 'whiteboard',
+    screenId: 'UI-08b',
+    title: 'Team Whiteboard',
+    promptLabel: 'Open Team Whiteboard',
   },
 };

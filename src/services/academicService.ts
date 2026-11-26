@@ -2,13 +2,24 @@ import type { SupabaseClient } from '@supabase/supabase-js';
 import { supabase } from '../lib/supabase';
 import type {
   AcademicSpace,
+  ActivityLogItem,
   ProjectOverview,
+  ProjectUpdateInput,
   ResourceCategory,
+  ResourceCreateInput,
   ResourceItem,
+  RoomMessage,
   SprintTask,
+  TaskCreateInput,
   TaskStatus,
+  TaskUpdateInput,
   TeamMemberSummary,
   TeamWorkspace,
+  WhiteboardNote,
+  WhiteboardNoteColor,
+  WhiteboardNoteCreateInput,
+  WhiteboardStroke,
+  WhiteboardStrokeCreateInput,
   WorkspaceLayoutConfig,
 } from '../types/contracts';
 import type {
@@ -780,6 +791,119 @@ export class SupabaseAcademicRepository implements AcademicRepository {
         ),
       };
     }
+  }
+
+  private async pendingContractResult<T>(): Promise<RepositoryResult<T>> {
+    return {
+      ok: false,
+      error: createAppError(
+        'unknown',
+        'Repository method pending M6/M9 implementation.',
+        false,
+      ),
+    };
+  }
+
+  getTeamMembers(_teamId: string): Promise<RepositoryResult<TeamMemberSummary[]>> {
+    return this.pendingContractResult();
+  }
+
+  updateProjectOverview(
+    _projectId: string,
+    _input: ProjectUpdateInput,
+  ): Promise<RepositoryResult<ProjectOverview>> {
+    return this.pendingContractResult();
+  }
+
+  createTask(_input: TaskCreateInput): Promise<RepositoryResult<SprintTask>> {
+    return this.pendingContractResult();
+  }
+
+  updateTask(
+    _taskId: string,
+    _input: TaskUpdateInput,
+  ): Promise<RepositoryResult<SprintTask>> {
+    return this.pendingContractResult();
+  }
+
+  deleteTask(_taskId: string): Promise<RepositoryResult<void>> {
+    return this.pendingContractResult();
+  }
+
+  createResource(
+    _input: ResourceCreateInput,
+  ): Promise<RepositoryResult<ResourceItem>> {
+    return this.pendingContractResult();
+  }
+
+  deleteResource(_resourceId: string): Promise<RepositoryResult<void>> {
+    return this.pendingContractResult();
+  }
+
+  getProjectActivity(
+    _projectId: string,
+    _limit?: number,
+  ): Promise<RepositoryResult<ActivityLogItem[]>> {
+    return this.pendingContractResult();
+  }
+
+  getRoomMessages(
+    _teamId: string,
+    _limit?: number,
+  ): Promise<RepositoryResult<RoomMessage[]>> {
+    return this.pendingContractResult();
+  }
+
+  sendRoomMessage(
+    _teamId: string,
+    _displayName: string,
+    _body: string,
+  ): Promise<RepositoryResult<RoomMessage>> {
+    return this.pendingContractResult();
+  }
+
+  getWhiteboardNotes(
+    _projectId: string,
+  ): Promise<RepositoryResult<WhiteboardNote[]>> {
+    return this.pendingContractResult();
+  }
+
+  createWhiteboardNote(
+    _input: WhiteboardNoteCreateInput,
+  ): Promise<RepositoryResult<WhiteboardNote>> {
+    return this.pendingContractResult();
+  }
+
+  updateWhiteboardNote(
+    _noteId: string,
+    _content: string,
+    _color: WhiteboardNoteColor,
+  ): Promise<RepositoryResult<WhiteboardNote>> {
+    return this.pendingContractResult();
+  }
+
+  deleteWhiteboardNote(_noteId: string): Promise<RepositoryResult<void>> {
+    return this.pendingContractResult();
+  }
+
+  getWhiteboardStrokes(
+    _projectId: string,
+  ): Promise<RepositoryResult<WhiteboardStroke[]>> {
+    return this.pendingContractResult();
+  }
+
+  createWhiteboardStroke(
+    _input: WhiteboardStrokeCreateInput,
+  ): Promise<RepositoryResult<WhiteboardStroke>> {
+    return this.pendingContractResult();
+  }
+
+  deleteWhiteboardStroke(_strokeId: string): Promise<RepositoryResult<void>> {
+    return this.pendingContractResult();
+  }
+
+  clearWhiteboardStrokes(_projectId: string): Promise<RepositoryResult<void>> {
+    return this.pendingContractResult();
   }
 }
 

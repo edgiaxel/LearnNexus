@@ -1,11 +1,11 @@
 /**
- * Shared domain, UI state, and Phaser-React event bridge contracts.
- * Locked on main in M0. Feature worktrees must import without modifying.
+ * Shared domain, UI state, realtime collaboration, and Phaser-React event bridge contracts.
+ * Locked on main. Feature worktrees must import without modifying.
  */
 
 export type AppRoute = 'entry' | 'spaces' | 'workspace';
 
-export type WorkstationId = 'overview' | 'tasks' | 'resources';
+export type WorkstationId = 'overview' | 'tasks' | 'resources' | 'whiteboard';
 
 export type TaskStatus = 'todo' | 'in_progress' | 'done';
 
@@ -14,6 +14,30 @@ export type ResourceCategory = 'docs' | 'design' | 'tools' | 'general';
 export type StudentRole = 'student' | 'team_lead' | 'guest_demo';
 
 export type DemoProfileKey = 'team_lead' | 'member' | 'guest_empty';
+
+export type CharacterSpriteKey = 'adam' | 'alex' | 'amelia' | 'bob';
+
+export type AvatarFacing = 'right' | 'up' | 'left' | 'down';
+
+export type RealtimeConnectionStatus =
+  | 'connecting'
+  | 'connected'
+  | 'disconnected';
+
+export type RealtimeSyncScope =
+  | 'project'
+  | 'tasks'
+  | 'resources'
+  | 'whiteboard'
+  | 'chat';
+
+export type WhiteboardNoteColor = 'yellow' | 'sage' | 'lavender' | 'peach';
+
+export type WhiteboardPenColor = '#30343B' | '#4A6B46' | '#7C4520' | '#8E2F29';
+
+export type WhiteboardStrokeWidth = 2 | 4;
+
+export type ActivityEntityType = 'project' | 'task' | 'resource' | 'whiteboard';
 
 export interface DemoProfileDescriptor {
   key: DemoProfileKey;
@@ -103,6 +127,7 @@ export interface SprintTask {
   title: string;
   description: string | null;
   status: TaskStatus;
+  assigneeId?: string | null;
   assigneeName: string | null;
   dueAt: string | null;
   updatedAt: string;
@@ -123,6 +148,132 @@ export interface WorkspaceLayoutConfig {
   teamId: string;
   layoutKey: string;
   configJson: Record<string, unknown>;
+}
+
+export interface RemotePlayerPresence {
+  userId: string;
+  displayName: string;
+  role: StudentRole;
+  spriteKey: CharacterSpriteKey;
+  x: number;
+  y: number;
+  facing: AvatarFacing;
+  moving: boolean;
+  joinedAt: string;
+}
+
+export interface AvatarMovePacket {
+  userId: string;
+  displayName: string;
+  spriteKey: CharacterSpriteKey;
+  x: number;
+  y: number;
+  facing: AvatarFacing;
+  moving: boolean;
+}
+
+export interface AvatarChatBubblePayload {
+  userId: string;
+  displayName: string;
+  text: string;
+  createdAt: string;
+}
+
+export interface RoomMessage {
+  id: string;
+  teamId: string;
+  userId: string;
+  displayName: string;
+  body: string;
+  createdAt: string;
+}
+
+export interface WhiteboardNote {
+  id: string;
+  projectId: string;
+  authorId: string | null;
+  authorName: string;
+  content: string;
+  color: WhiteboardNoteColor;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface WhiteboardStrokePoint {
+  x: number;
+  y: number;
+}
+
+export interface WhiteboardStroke {
+  id: string;
+  projectId: string;
+  authorId: string | null;
+  authorName: string;
+  color: WhiteboardPenColor;
+  width: WhiteboardStrokeWidth;
+  points: WhiteboardStrokePoint[];
+  createdAt: string;
+}
+
+export interface ActivityLogItem {
+  id: string;
+  projectId: string;
+  actorId: string | null;
+  actorName: string;
+  action: string;
+  entityType: ActivityEntityType;
+  summary: string;
+  createdAt: string;
+}
+
+export interface ProjectUpdateInput {
+  title: string;
+  description: string;
+  objectives: string[];
+}
+
+export interface TaskCreateInput {
+  projectId: string;
+  title: string;
+  description: string | null;
+  status: TaskStatus;
+  assigneeId: string | null;
+  assigneeName: string | null;
+  dueAt: string | null;
+}
+
+export interface TaskUpdateInput {
+  title?: string;
+  description?: string | null;
+  status?: TaskStatus;
+  assigneeId?: string | null;
+  assigneeName?: string | null;
+  dueAt?: string | null;
+}
+
+export interface ResourceCreateInput {
+  projectId: string;
+  title: string;
+  description: string | null;
+  url: string;
+  category: ResourceCategory;
+}
+
+export interface WhiteboardNoteCreateInput {
+  projectId: string;
+  authorId: string;
+  authorName: string;
+  content: string;
+  color: WhiteboardNoteColor;
+}
+
+export interface WhiteboardStrokeCreateInput {
+  projectId: string;
+  authorId: string;
+  authorName: string;
+  color: WhiteboardPenColor;
+  width: WhiteboardStrokeWidth;
+  points: WhiteboardStrokePoint[];
 }
 
 export type AppErrorCode =
@@ -159,6 +310,31 @@ export interface BridgeEvents {
   'workstation:interact': WorkstationInteractPayload;
   'panel:closed': {
     workstationId: WorkstationId;
+  };
+  'avatar:local-identity': {
+    userId: string;
+    displayName: string;
+    spriteKey: CharacterSpriteKey;
+  };
+  'avatar:local-move': {
+    x: number;
+    y: number;
+    facing: AvatarFacing;
+    moving: boolean;
+  };
+  'avatar:remote-sync': {
+    players: RemotePlayerPresence[];
+  };
+  'avatar:remote-move': AvatarMovePacket;
+  'avatar:remote-leave': {
+    userId: string;
+  };
+  'avatar:chat-bubble': AvatarChatBubblePayload;
+  'avatar:proximity-peers': {
+    peerIds: string[];
+  };
+  'ui:input-focus': {
+    focused: boolean;
   };
 }
 

@@ -1,6 +1,10 @@
-import type { WorkstationId } from './contracts';
+import type {
+  AvatarFacing,
+  CharacterSpriteKey,
+  WorkstationId,
+} from './contracts';
 
-export type AvatarDirection = 'right' | 'up' | 'left' | 'down';
+export type AvatarDirection = AvatarFacing;
 
 export interface LearnNexusGameState {
   ready: boolean;
@@ -19,6 +23,11 @@ export interface LearnNexusGameState {
   canvasWidth: number;
   canvasHeight: number;
   dpr: number;
+  localSpriteKey: CharacterSpriteKey;
+  remotePlayerCount: number;
+  remotePlayerIds: string[];
+  nearbyPeerIds: string[];
+  activeChatBubbleCount: number;
 }
 
 export interface LearnNexusGameApi {

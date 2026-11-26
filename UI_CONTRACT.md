@@ -60,16 +60,19 @@ The single application shell (`App.tsx`) coordinates the linear student flow wit
 ```text
 1. entry      -> EntryGateway (UI-01: Student sign-in or labeled Demo Profile)
 2. spaces     -> AcademicSpacesSelector (UI-02: Enrolled courses & team assignment)
-3. workspace  -> Studio Shell (UI-03/04: Top context bar + PhaserHost canvas)
-                   └── Contextual Right Drawer (440px desktop, focus-trapped, Esc closes)
-                         ├── overview  -> ProjectOverviewPanel (UI-05)
-                         ├── tasks     -> TasksSprintBoardPanel (UI-06)
-                         └── resources -> ResourceLibraryPanel (UI-07)
+3. workspace  -> Studio Shell (UI-03/04: Top context bar + PhaserHost canvas + StudioCollaborationBar in <main>)
+                   └── Contextual Right Drawer (440px desktop; 540px for whiteboard; focus-trapped, Esc closes)
+                         ├── overview   -> ProjectOverviewPanel (UI-05: Editable brief + online roster + Recent Activity)
+                         ├── tasks      -> TasksSprintBoardPanel (UI-06: Full CRUD + sprint progress + M3 retry/revert)
+                         ├── resources  -> ResourceLibraryPanel (UI-07: Add/delete safe links)
+                         └── whiteboard -> WhiteboardPanel (UI-08b: Sketch pad + pastel sticky notes)
 ```
 
 ### Shell & Focus Rules
-- Top bar owns: Brand mark, Context breadcrumbs (`Course / Team`), primary route indicator, Leave Space button (`workspace` -> `spaces`), and active student badge.
+- Top bar (`<header>`) owns ONLY: Brand mark, Context breadcrumbs (`Course / Team`), Supabase health status badge (`header [role="status"]`), active student badge, Leave Studio button, and Sign Out button. Never render collaboration or chat status badges inside `<header>`.
+- `StudioCollaborationBar` mounts inside `<main>` (workspace header/canvas footer region), never as a second navbar.
 - Opening a drawer pauses Phaser keyboard movement while keeping the canvas mounted and visible.
+- Focusing an HTML input outside a drawer (such as Studio Chat) emits `ui:input-focus` (`focused: true`) to suspend Phaser global arrow-key capture without stealing focus, restoring capture on blur (`focused: false`).
 - Closing a drawer (`Escape` or `Close`) emits `panel:closed` and immediately restores canvas focus.
 
 ---
@@ -81,9 +84,13 @@ Future `src/types/` modules must conform to these canonical shapes:
 ```ts
 export type AppRoute = 'entry' | 'spaces' | 'workspace';
 
-export type WorkstationId = 'overview' | 'tasks' | 'resources';
+export type WorkstationId = 'overview' | 'tasks' | 'resources' | 'whiteboard';
 
 export type TaskStatus = 'todo' | 'in_progress' | 'done';
+
+export type CharacterSpriteKey = 'adam' | 'alex' | 'amelia' | 'bob';
+
+export type RealtimeConnectionStatus = 'connecting' | 'connected' | 'disconnected';
 
 export interface StudentProfile {
   id: string;
@@ -191,15 +198,24 @@ Feature worktrees must NOT modify these shared files:
 | `feature/m3-panel-resilience` | `src/components/workstation/**`, `src/components/entry/**`, `src/components/campus/**` | Unsaved per-task write states, inline retry/revert, panel refresh, demo badge, session-expiry notices, `src/components/workstation/HANDOFF.md` |
 | `feature/m3-persistence-e2e` | `tests/e2e/**`, `tests/unit/**` | M3 cross-session & failure-injection Playwright suite, unit tests, `tests/e2e/HANDOFF.md` |
 
-### M2 / M2.5 / M3 Additional Contract Rules
-- **Repository & Auth Contracts:** `src/types/database.ts` locks `AuthRepository` (including `AuthStateChangeEvent` and `onAuthStateChange`) and `AcademicRepository`; `src/types/components.ts` locks all view component prop contracts (`EntryGatewayProps`, `AcademicSpacesSelectorProps`, `WorkstationPanelProps`, `ProjectOverviewPanelProps`, `TasksSprintBoardPanelProps`, `ResourceLibraryPanelProps`).
-- **Per-Lane Handoff Path:** Worktrees must write their handoff report inside their owned folder (`src/services/HANDOFF.md`, `src/components/workstation/HANDOFF.md`, `tests/e2e/HANDOFF.md`) rather than editing root `HANDOFF.md`.
+### Non-Overlapping Worktree Lanes (Pre-M4 Scoped M6 + M9)
+| Worktree Branch | Exclusive Folder Ownership | Owns |
+|---|---|---|
+| `feature/m6-m9-data-realtime` | `supabase/**`, `src/services/**`, `tests/rls/**` | Migration `20261126000002_m6_m9_collab_pm.sql`, seed updates, CRUD methods in `academicService.ts`, `realtimeUtils.ts`, `realtimeService.ts`, expanded 4-actor `verify-rls.mjs`, `src/services/HANDOFF.md` |
+| `feature/m6-phaser-multiplayer` | `src/game/**` | 4th workstation `whiteboard` on `chalkboard_sprint`, 4-character `NEAREST` spritesheets, throttled move broadcast, interpolated remote avatars + crisp nametags, 4-tile sage proximity rings, 5s chat bubbles, `ui:input-focus` guard, `PhaserHost.tsx`, `src/game/HANDOFF.md` |
+| `feature/m9-project-management` | `src/components/workstation/**` | Full task CRUD + sprint progress bar, editable project brief + online pills + `Recent Activity`, resource add/delete, `WhiteboardPanel.tsx` sketch pad + sticky notes, `src/components/workstation/HANDOFF.md` |
+| `feature/m6-studio-chat-ui` | `src/components/realtime/**` | `StudioCollaborationBar.tsx` (sync pill, `Online (N)` roster, `Nearby` peer cue, collapsible persisted Studio Chat with unread badge), `src/components/realtime/HANDOFF.md` |
+
+### M2 / M2.5 / M3 / M6+M9 Additional Contract Rules
+- **Repository & Auth Contracts:** `src/types/database.ts` locks `AuthRepository`, `AcademicRepository` (including M9 CRUD, chat, whiteboard, and activity methods), and `StudioRealtimeRepository`; `src/types/components.ts` locks all view component prop contracts (`EntryGatewayProps`, `AcademicSpacesSelectorProps`, `WorkstationPanelProps`, `ProjectOverviewPanelProps`, `TasksSprintBoardPanelProps`, `ResourceLibraryPanelProps`, `WhiteboardPanelProps`, `StudioCollaborationBarProps`).
+- **Per-Lane Handoff Path:** Worktrees must write their handoff report inside their owned folder (`src/services/HANDOFF.md`, `src/game/HANDOFF.md`, `src/components/workstation/HANDOFF.md`, `src/components/realtime/HANDOFF.md`) rather than editing root `HANDOFF.md`.
 - **M2.5 MOTION 1 Skeleton Rule:** Loading states must use static `#EEF1E8` placeholder blocks with explicit status text and `aria-busy="true"`; endless CSS pulse/bounce loops (`animate-pulse`) are prohibited.
 - **Locked `data-testid` Contract:**
   - Entry (`UI-01`): `entry-gateway`, `entry-session-notice`, `demo-profile-<key>`, `demo-enter-btn`, `email-input`, `password-input`, `toggle-password-btn`, `credentials-submit-btn`, `entry-error-banner`
   - Academic Spaces (`UI-02`): `academic-spaces-directory`, `space-card-<code>`, `enter-studio-btn`, `spaces-empty-state`, `spaces-error-banner`, `spaces-retry-btn`, `switch-profile-btn`
-  - Workstation Drawer & Panels (`UI-05`–`UI-07`): `workstation-drawer`, `close-drawer-btn`, `return-to-studio-btn`, `panel-refresh-btn`, `demo-data-badge`, `project-overview-panel`, `project-title`, `project-objectives-list`, `team-roster-list`, `tasks-sprint-panel`, `task-filter-<all|todo|in_progress|done>`, `task-item-<id>`, `task-status-select-<id>`, `task-unsaved-badge-<id>`, `task-retry-btn-<id>`, `task-revert-btn-<id>`, `tasks-save-indicator`, `resource-library-panel`, `resource-filter-<all|docs|design|tools|general>`, `resource-item-<id>`, `resource-open-link-<id>`
-  - App Shell (`App.tsx`): `leave-studio-btn`, `sign-out-btn`, `header-user-badge`, `header-breadcrumbs`, `workstation-prompt`, `workspace-layout-meta`, `mobile-workstation-btn-<overview|tasks|resources>`
+  - Workstation Drawer & Panels (`UI-05`–`UI-08b`): `workstation-drawer`, `close-drawer-btn`, `return-to-studio-btn`, `panel-refresh-btn`, `demo-data-badge`, `project-overview-panel`, `project-title`, `project-objectives-list`, `team-roster-list`, `overview-edit-btn`, `overview-title-input`, `overview-description-input`, `overview-objective-input-<index>`, `overview-add-objective-btn`, `overview-save-btn`, `overview-cancel-btn`, `project-activity-list`, `tasks-sprint-panel`, `sprint-progress-summary`, `task-filter-<all|todo|in_progress|done>`, `task-new-toggle-btn`, `task-create-form`, `task-title-input`, `task-description-input`, `task-assignee-select`, `task-due-input`, `task-create-submit-btn`, `task-item-<id>`, `task-status-select-<id>`, `task-unsaved-badge-<id>`, `task-retry-btn-<id>`, `task-revert-btn-<id>`, `task-edit-btn-<id>`, `task-edit-save-btn-<id>`, `task-delete-btn-<id>`, `task-delete-confirm-btn-<id>`, `tasks-save-indicator`, `resource-library-panel`, `resource-filter-<all|docs|design|tools|general>`, `resource-new-toggle-btn`, `resource-create-form`, `resource-title-input`, `resource-url-input`, `resource-category-select`, `resource-description-input`, `resource-create-submit-btn`, `resource-item-<id>`, `resource-open-link-<id>`, `resource-delete-btn-<id>`, `resource-delete-confirm-btn-<id>`, `whiteboard-panel`, `whiteboard-canvas`, `whiteboard-color-<hex>`, `whiteboard-width-<2|4>`, `whiteboard-undo-btn`, `whiteboard-clear-btn`, `whiteboard-clear-confirm-btn`, `whiteboard-note-input`, `whiteboard-note-color-<yellow|sage|lavender|peach>`, `whiteboard-note-submit-btn`, `whiteboard-note-item-<id>`, `whiteboard-note-delete-btn-<id>`, `whiteboard-note-delete-confirm-btn-<id>`
+  - Studio Collaboration (`M6`): `realtime-status-badge`, `online-teammates-btn`, `online-teammates-list`, `nearby-teammates-badge`, `studio-chat-toggle`, `studio-chat-unread-badge`, `studio-chat-panel`, `studio-chat-list`, `studio-chat-input`, `studio-chat-send-btn`
+  - App Shell (`App.tsx`): `leave-studio-btn`, `sign-out-btn`, `header-user-badge`, `header-breadcrumbs`, `workstation-prompt`, `workspace-layout-meta`, `mobile-workstation-btn-<overview|tasks|resources|whiteboard>`
 
 ### Subagent Compliance Rules
 1. Import shared types and routes from `src/types/contracts.ts`, `src/types/database.ts`, `src/types/components.ts`, and `src/app/routerContract.ts`.
