@@ -206,6 +206,13 @@ Feature worktrees must NOT modify these shared files:
 | `feature/m9-project-management` | `src/components/workstation/**` | Full task CRUD + sprint progress bar, editable project brief + online pills + `Recent Activity`, resource add/delete, `WhiteboardPanel.tsx` sketch pad + sticky notes, `src/components/workstation/HANDOFF.md` |
 | `feature/m6-studio-chat-ui` | `src/components/realtime/**` | `StudioCollaborationBar.tsx` (sync pill, `Online (N)` roster, `Nearby` peer cue, collapsible persisted Studio Chat with unread badge), `src/components/realtime/HANDOFF.md` |
 
+### Non-Overlapping Worktree Lanes (M4 Quality Freeze + M5 Release Pack)
+Additional central files locked on `main` for M4/M5: `.github/**`, `vercel.json`, `LICENSE`, `.gitignore`.
+| Worktree Branch | Exclusive File/Folder Ownership | Owns |
+|---|---|---|
+| `feature/m4-m5-qa-evidence` | `tests/e2e/m4-quality-audit.spec.ts`, `scripts/capture-evidence.mjs`, `scripts/record-demo.mjs`, `docs/evidence/screenshots/**`, `tests/e2e/HANDOFF.md` | M4 quality & lazy-chunk E2E audit (including two-way live chat between Nadia & Bima, keyboard/focus, responsive viewports, safe resource links, client bundle secret scan), Playwright screenshot capture script (`01`–`09`), raw `1080p` demo recording script (`Take A` + `Take B`) |
+| `feature/m5-docs-proposal-pack` | `README.md`, `docs/REPORT.md`, `docs/PROPOSAL_SEMIFINAL.md`, `docs/USABILITY_TEST_SHEET.md`, `docs/TEAM_SUBMISSION_CHECKLIST.md`, `docs/HANDOFF.md` | Updated README with teammate setup/PR tutorial, demo/reset runbook, Material AI disclosure, LimeZu public credit & `assets/LICENSE.txt`, Vercel guide; engineering `REPORT.md`; `PROPOSAL_SEMIFINAL.md`; `USABILITY_TEST_SHEET.md`; `TEAM_SUBMISSION_CHECKLIST.md` |
+
 ### M2 / M2.5 / M3 / M6+M9 Additional Contract Rules
 - **Repository & Auth Contracts:** `src/types/database.ts` locks `AuthRepository`, `AcademicRepository` (including M9 CRUD, chat, whiteboard, and activity methods), and `StudioRealtimeRepository`; `src/types/components.ts` locks all view component prop contracts (`EntryGatewayProps`, `AcademicSpacesSelectorProps`, `WorkstationPanelProps`, `ProjectOverviewPanelProps`, `TasksSprintBoardPanelProps`, `ResourceLibraryPanelProps`, `WhiteboardPanelProps`, `StudioCollaborationBarProps`).
 - **Per-Lane Handoff Path:** Worktrees must write their handoff report inside their owned folder (`src/services/HANDOFF.md`, `src/game/HANDOFF.md`, `src/components/workstation/HANDOFF.md`, `src/components/realtime/HANDOFF.md`) rather than editing root `HANDOFF.md`.

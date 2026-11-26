@@ -15,6 +15,12 @@ playwright-report/
 test-results/
 blob-report/
 
+# Raw demo media (lightweight screenshots live in docs/evidence/screenshots/)
+recordings/
+
+# Local Vercel project link
+.vercel
+
 # Supabase local temp
 supabase/.temp/
 

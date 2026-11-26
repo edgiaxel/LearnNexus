@@ -1,9 +1,21 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import {
+  Suspense,
+  lazy,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import { AcademicSpacesSelector } from '../components/campus/AcademicSpacesSelector';
 import { EntryGateway } from '../components/entry/EntryGateway';
 import { StudioCollaborationBar } from '../components/realtime/StudioCollaborationBar';
 import { WorkstationPanel } from '../components/workstation/WorkstationPanel';
-import { PhaserHost, type LocalAvatarIdentity } from '../game/PhaserHost';
+import type { LocalAvatarIdentity } from '../game/PhaserHost';
+
+const LazyPhaserHost = lazy(() =>
+  import('../game/PhaserHost').then((mod) => ({ default: mod.PhaserHost })),
+);
 import { eventBridge } from '../game/bridge/eventBridge';
 import { checkSupabaseHealth } from '../lib/supabase';
 import { academicService } from '../services/academicService';
@@ -918,12 +930,30 @@ export function App() {
                 className="relative w-full overflow-hidden rounded-[10px] border border-[var(--color-border-subtle)] bg-[var(--color-bg-warm)]"
                 style={{ height: 'min(68vh, 640px)', minHeight: '420px' }}
               >
-                <PhaserHost
-                  className="h-full w-full"
-                  activeWorkstation={activeWorkstation}
-                  localIdentity={localIdentity}
-                  onReady={handlePhaserReady}
-                />
+                <Suspense
+                  fallback={
+                    <div
+                      role="status"
+                      aria-busy="true"
+                      className="flex h-full w-full flex-col items-center justify-center gap-3 bg-[#EEF1E8] p-6 text-center"
+                    >
+                      <div
+                        aria-hidden="true"
+                        className="h-24 w-40 rounded-[10px] border border-[var(--color-border-subtle)] bg-[var(--color-surface-primary)]"
+                      />
+                      <p className="m-0 text-[13px] font-medium text-[var(--color-text-secondary)]">
+                        Loading 2D studio canvas...
+                      </p>
+                    </div>
+                  }
+                >
+                  <LazyPhaserHost
+                    className="h-full w-full"
+                    activeWorkstation={activeWorkstation}
+                    localIdentity={localIdentity}
+                    onReady={handlePhaserReady}
+                  />
+                </Suspense>
 
                 {nearbyWorkstation && !activeWorkstation && (
                   <div className="pointer-events-none absolute inset-x-0 bottom-4 flex justify-center px-3">
