@@ -460,3 +460,47 @@ set
   team_id = excluded.team_id,
   layout_key = excluded.layout_key,
   config_json = excluded.config_json;
+
+-- 11. Seed starter whiteboard notes (M9)
+insert into public.whiteboard_notes (id, project_id, author_id, author_name, content, color)
+values
+  (
+    '88888888-8888-4888-8888-888888888801',
+    '44444444-4444-4444-8444-444444444401',
+    '11111111-1111-4111-8111-111111111101',
+    'Nadia Pratama (Demo)',
+    'Sprint Goal: verify live studio sync, task CRUD persistence, and whiteboard collaboration before the demo walkthrough.',
+    'yellow'
+  ),
+  (
+    '88888888-8888-4888-8888-888888888802',
+    '44444444-4444-4444-8444-444444444401',
+    '11111111-1111-4111-8111-111111111102',
+    'Bima Santoso (Demo)',
+    'Reminder: check that cross-team writes remain blocked in Postgres RLS after updating task and resource forms.',
+    'sage'
+  )
+on conflict (id) do update
+set
+  project_id = excluded.project_id,
+  author_id = excluded.author_id,
+  author_name = excluded.author_name,
+  content = excluded.content,
+  color = excluded.color;
+
+-- 12. Seed starter room welcome message (M6)
+insert into public.room_messages (id, team_id, user_id, display_name, body)
+values
+  (
+    '99999999-9999-4999-8999-899999999901',
+    '33333333-3333-4333-8333-333333333301',
+    '11111111-1111-4111-8111-111111111101',
+    'Nadia Pratama (Demo)',
+    'Welcome to Team SibukTA Studio. Share updates here while working on sprint tasks and whiteboard notes.'
+  )
+on conflict (id) do update
+set
+  team_id = excluded.team_id,
+  user_id = excluded.user_id,
+  display_name = excluded.display_name,
+  body = excluded.body;
