@@ -4,6 +4,7 @@ import type { WorkstationPanelProps } from '../../types/components';
 import { ProjectOverviewPanel } from './ProjectOverviewPanel';
 import { ResourceLibraryPanel } from './ResourceLibraryPanel';
 import { TasksSprintBoardPanel } from './TasksSprintBoardPanel';
+import { WhiteboardPanel } from './WhiteboardPanel';
 
 const FOCUSABLE_SELECTOR =
   'button:not([disabled]), a[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
@@ -12,7 +13,11 @@ export function WorkstationPanel({
   workstationId,
   workspace,
   repository,
+  currentUser,
+  onlineUserIds,
+  syncRevision,
   isDemoSession,
+  onDataMutated,
   onSessionExpired,
   onClose,
 }: WorkstationPanelProps) {
@@ -66,6 +71,9 @@ export function WorkstationPanel({
     };
   }, []);
 
+  const drawerWidthClass =
+    workstationId === 'whiteboard' ? 'max-w-[540px]' : 'max-w-[440px]';
+
   return (
     <>
       <button
@@ -84,7 +92,7 @@ export function WorkstationPanel({
         aria-labelledby="workstation-drawer-title"
         data-testid="workstation-drawer"
         data-workstation-id={workstationId}
-        className="fixed top-0 right-0 z-50 flex h-full w-full max-w-[440px] flex-col border-l border-[var(--color-border-subtle)] bg-[var(--color-surface-primary)]"
+        className={`fixed top-0 right-0 z-50 flex h-full w-full ${drawerWidthClass} flex-col border-l border-[var(--color-border-subtle)] bg-[var(--color-surface-primary)]`}
         style={{ boxShadow: 'var(--shadow-drawer)' }}
       >
         <div className="flex items-start justify-between gap-3 border-b border-[var(--color-border-subtle)] px-6 py-5">
@@ -123,7 +131,10 @@ export function WorkstationPanel({
               teamId={workspace.teamId}
               workspace={workspace}
               repository={repository}
+              onlineUserIds={onlineUserIds}
+              syncRevision={syncRevision}
               isDemoSession={isDemoSession}
+              onDataMutated={onDataMutated}
               onSessionExpired={onSessionExpired}
             />
           )}
@@ -132,7 +143,9 @@ export function WorkstationPanel({
               projectId={workspace.projectId}
               workspace={workspace}
               repository={repository}
+              syncRevision={syncRevision}
               isDemoSession={isDemoSession}
+              onDataMutated={onDataMutated}
               onSessionExpired={onSessionExpired}
             />
           )}
@@ -141,7 +154,21 @@ export function WorkstationPanel({
               projectId={workspace.projectId}
               workspace={workspace}
               repository={repository}
+              syncRevision={syncRevision}
               isDemoSession={isDemoSession}
+              onDataMutated={onDataMutated}
+              onSessionExpired={onSessionExpired}
+            />
+          )}
+          {workstationId === 'whiteboard' && (
+            <WhiteboardPanel
+              projectId={workspace.projectId}
+              workspace={workspace}
+              repository={repository}
+              currentUser={currentUser}
+              syncRevision={syncRevision}
+              isDemoSession={isDemoSession}
+              onDataMutated={onDataMutated}
               onSessionExpired={onSessionExpired}
             />
           )}
