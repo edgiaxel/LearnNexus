@@ -67,3 +67,33 @@ export function getTwoLetterInitials(displayName: string): string {
 
   return `${tokens[0][0]}${tokens[1][0]}`.toUpperCase();
 }
+
+export function toDateInputValue(isoValue: string | null | undefined): string {
+  if (!isoValue) return '';
+  const trimmed = isoValue.trim();
+  if (!trimmed) return '';
+  if (/^\d{4}-\d{2}-\d{2}$/.test(trimmed)) {
+    return trimmed;
+  }
+  const parsed = new Date(trimmed);
+  if (Number.isNaN(parsed.getTime())) {
+    return '';
+  }
+  const year = String(parsed.getFullYear());
+  const month = String(parsed.getMonth() + 1).padStart(2, '0');
+  const day = String(parsed.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+}
+
+export function dateInputToIso(dateValue: string): string | null {
+  const trimmed = dateValue.trim();
+  if (!trimmed) return null;
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(trimmed)) {
+    return null;
+  }
+  const parsed = new Date(`${trimmed}T12:00:00.000Z`);
+  if (Number.isNaN(parsed.getTime())) {
+    return null;
+  }
+  return parsed.toISOString();
+}
