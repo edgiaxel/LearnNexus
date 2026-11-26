@@ -1,21 +1,31 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { AcademicSpacesSelector } from '../components/campus/AcademicSpacesSelector';
 import { EntryGateway } from '../components/entry/EntryGateway';
+import { StudioCollaborationBar } from '../components/realtime/StudioCollaborationBar';
 import { WorkstationPanel } from '../components/workstation/WorkstationPanel';
-import { PhaserHost } from '../game/PhaserHost';
+import { PhaserHost, type LocalAvatarIdentity } from '../game/PhaserHost';
 import { eventBridge } from '../game/bridge/eventBridge';
 import { checkSupabaseHealth } from '../lib/supabase';
 import { academicService } from '../services/academicService';
 import { authService } from '../services/authService';
+import {
+  getCharacterSpriteKey,
+  realtimeService,
+} from '../services/realtimeService';
 import type {
   AcademicSpace,
   AppRoute,
   AsyncState,
+  RealtimeConnectionStatus,
+  RealtimeSyncScope,
+  RemotePlayerPresence,
+  RoomMessage,
   StudentProfile,
   TeamWorkspace,
   WorkspaceLayoutConfig,
   WorkstationId,
 } from '../types/contracts';
+import type { StudioRealtimeConnection } from '../types/database';
 import { canTransitionRoute, WORKSTATION_META } from './routerContract';
 
 const SESSION_EXPIRED_NOTICE =
@@ -31,13 +41,22 @@ const WORKSTATION_LEGEND: ReadonlyArray<{ id: WorkstationId; hint: string }> = [
   { id: 'overview', hint: 'West study pod' },
   { id: 'tasks', hint: 'Center meeting table' },
   { id: 'resources', hint: 'North bookcase' },
+  { id: 'whiteboard', hint: 'North chalkboard' },
 ];
 
 const WORKSTATION_IDS: readonly WorkstationId[] = [
   'overview',
   'tasks',
   'resources',
+  'whiteboard',
 ];
+
+const INITIAL_SYNC_REVISIONS: Record<WorkstationId, number> = {
+  overview: 0,
+  tasks: 0,
+  resources: 0,
+  whiteboard: 0,
+};
 
 function readSelectedClassId(): string | null {
   try {
@@ -81,10 +100,133 @@ export function App() {
     label: 'Checking Supabase connection...',
   });
 
+  const [realtimeStatus, setRealtimeStatus] =
+    useState<RealtimeConnectionStatus>('disconnected');
+  const [remotePlayers, setRemotePlayers] = useState<RemotePlayerPresence[]>(
+    [],
+  );
+  const [nearbyPeerIds, setNearbyPeerIds] = useState<string[]>([]);
+  const [roomMessages, setRoomMessages] = useState<RoomMessage[]>([]);
+  const [chatLoading, setChatLoading] = useState(false);
+  const [chatError, setChatError] = useState<string | null>(null);
+  const [chatOpen, setChatOpen] = useState(false);
+  const [unreadChatCount, setUnreadChatCount] = useState(0);
+  const [sendingMessage, setSendingMessage] = useState(false);
+  const [sendError, setSendError] = useState<string | null>(null);
+  const [syncRevisionByWorkstation, setSyncRevisionByWorkstation] = useState<
+    Record<WorkstationId, number>
+  >(INITIAL_SYNC_REVISIONS);
+
   const canvasWrapperRef = useRef<HTMLDivElement | null>(null);
   const profileRef = useRef<StudentProfile | null>(null);
   profileRef.current = profile;
   const intentionalSignOutRef = useRef(false);
+  const realtimeConnRef = useRef<StudioRealtimeConnection | null>(null);
+  const chatOpenRef = useRef(chatOpen);
+  chatOpenRef.current = chatOpen;
+  const remotePlayersRef = useRef<RemotePlayerPresence[]>(remotePlayers);
+  remotePlayersRef.current = remotePlayers;
+  const recentBubbleAtRef = useRef<Map<string, number>>(new Map());
+  const messagesSeqRef = useRef(0);
+
+  const localSpriteKey = useMemo(
+    () => (profile ? getCharacterSpriteKey(profile.id, profile.role) : 'adam'),
+    [profile],
+  );
+
+  const localIdentity = useMemo<LocalAvatarIdentity | undefined>(() => {
+    if (!profile) return undefined;
+    return {
+      userId: profile.id,
+      displayName: profile.displayName,
+      spriteKey: localSpriteKey,
+    };
+  }, [profile, localSpriteKey]);
+
+  const onlineUserIds = useMemo(() => {
+    const ids = new Set<string>();
+    if (profile?.id) {
+      ids.add(profile.id);
+    }
+    for (const player of remotePlayers) {
+      ids.add(player.userId);
+    }
+    return Array.from(ids);
+  }, [profile?.id, remotePlayers]);
+
+  const bumpSyncScope = useCallback((scope: RealtimeSyncScope) => {
+    setSyncRevisionByWorkstation((prev) => {
+      if (scope === 'project') {
+        return { ...prev, overview: prev.overview + 1 };
+      }
+      if (scope === 'tasks') {
+        return {
+          ...prev,
+          tasks: prev.tasks + 1,
+          overview: prev.overview + 1,
+        };
+      }
+      if (scope === 'resources') {
+        return {
+          ...prev,
+          resources: prev.resources + 1,
+          overview: prev.overview + 1,
+        };
+      }
+      if (scope === 'whiteboard') {
+        return {
+          ...prev,
+          whiteboard: prev.whiteboard + 1,
+          overview: prev.overview + 1,
+        };
+      }
+      return prev;
+    });
+  }, []);
+
+  const appendRoomMessage = useCallback((incoming: RoomMessage) => {
+    setRoomMessages((prev) => {
+      if (prev.some((item) => item.id === incoming.id)) {
+        return prev;
+      }
+      return [...prev, incoming];
+    });
+  }, []);
+
+  const emitChatBubbleDeduped = useCallback(
+    (payload: {
+      userId: string;
+      displayName: string;
+      text: string;
+      createdAt: string;
+    }) => {
+      const key = `${payload.userId}:${payload.text.trim()}`;
+      const now = Date.now();
+      const lastAt = recentBubbleAtRef.current.get(key) ?? 0;
+      if (now - lastAt < 1500) {
+        return;
+      }
+      recentBubbleAtRef.current.set(key, now);
+      eventBridge.emit('avatar:chat-bubble', payload);
+    },
+    [],
+  );
+
+  const resetCollaborationState = useCallback(() => {
+    setRealtimeStatus('disconnected');
+    setRemotePlayers([]);
+    setNearbyPeerIds([]);
+    setRoomMessages([]);
+    setChatLoading(false);
+    setChatError(null);
+    setChatOpen(false);
+    setUnreadChatCount(0);
+    setSendingMessage(false);
+    setSendError(null);
+    setSyncRevisionByWorkstation(INITIAL_SYNC_REVISIONS);
+    recentBubbleAtRef.current.clear();
+    eventBridge.emit('ui:input-focus', { focused: false });
+  }, []);
 
   const runHealthCheck = useCallback(async () => {
     setSupabaseState({
@@ -158,6 +300,27 @@ export function App() {
     };
   }, []);
 
+  const handleSessionExpired = useCallback(async () => {
+    intentionalSignOutRef.current = true;
+    try {
+      await authService.signOut();
+    } finally {
+      writeSelectedClassId(null);
+      setActiveWorkstation(null);
+      setNearbyWorkstation(null);
+      setActiveWorkspace(null);
+      setWorkspaceLayout(null);
+      resetCollaborationState();
+      setProfile(null);
+      setSessionNotice(SESSION_EXPIRED_NOTICE);
+      setRoute('entry');
+      intentionalSignOutRef.current = false;
+    }
+  }, [resetCollaborationState]);
+
+  const handleSessionExpiredRef = useRef(handleSessionExpired);
+  handleSessionExpiredRef.current = handleSessionExpired;
+
   useEffect(() => {
     const unsubscribe = authService.onAuthStateChange((event, hasSession) => {
       if (
@@ -171,6 +334,7 @@ export function App() {
         setNearbyWorkstation(null);
         setActiveWorkspace(null);
         setWorkspaceLayout(null);
+        resetCollaborationState();
         setProfile(null);
         setSessionNotice(SESSION_EXPIRED_NOTICE);
         setRoute('entry');
@@ -180,7 +344,7 @@ export function App() {
     return () => {
       unsubscribe();
     };
-  }, []);
+  }, [resetCollaborationState]);
 
   useEffect(() => {
     const teamId = activeWorkspace?.teamId;
@@ -207,11 +371,133 @@ export function App() {
     };
   }, [activeWorkspace?.teamId]);
 
+  const loadRoomMessages = useCallback(async (teamId: string) => {
+    const seq = ++messagesSeqRef.current;
+    setChatLoading(true);
+    setChatError(null);
+
+    try {
+      const result = await academicService.getRoomMessages(teamId, 50);
+      if (seq !== messagesSeqRef.current) return;
+
+      if (!result.ok) {
+        if (result.error.code === 'auth') {
+          void handleSessionExpiredRef.current();
+          return;
+        }
+        setChatError(result.error.message);
+        setChatLoading(false);
+        return;
+      }
+
+      setRoomMessages(result.data);
+      setChatLoading(false);
+    } catch (err) {
+      if (seq !== messagesSeqRef.current) return;
+      setChatError(
+        err instanceof Error
+          ? err.message
+          : 'Unable to load studio chat right now.',
+      );
+      setChatLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (route !== 'workspace' || !activeWorkspace || !profile) {
+      return;
+    }
+
+    void loadRoomMessages(activeWorkspace.teamId);
+
+    const conn = realtimeService.connectStudioRoom({
+      teamId: activeWorkspace.teamId,
+      projectId: activeWorkspace.projectId,
+      profile,
+      spriteKey: localSpriteKey,
+      callbacks: {
+        onConnectionStatusChange: (status) => {
+          setRealtimeStatus(status);
+        },
+        onPresenceSync: (players) => {
+          setRemotePlayers(players);
+          eventBridge.emit('avatar:remote-sync', { players });
+        },
+        onRemoteMove: (packet) => {
+          eventBridge.emit('avatar:remote-move', packet);
+        },
+        onRemoteLeave: (userId) => {
+          setRemotePlayers((prev) =>
+            prev.filter((item) => item.userId !== userId),
+          );
+          eventBridge.emit('avatar:remote-leave', { userId });
+        },
+        onChatMessage: (payload) => {
+          emitChatBubbleDeduped(payload);
+        },
+        onRoomMessage: (message) => {
+          appendRoomMessage(message);
+          if (message.userId !== profile.id) {
+            if (!chatOpenRef.current) {
+              setUnreadChatCount((count) => count + 1);
+            }
+            emitChatBubbleDeduped({
+              userId: message.userId,
+              displayName: message.displayName,
+              text: message.body,
+              createdAt: message.createdAt,
+            });
+          }
+        },
+        onDataChanged: (scope) => {
+          if (scope === 'chat') {
+            void loadRoomMessages(activeWorkspace.teamId);
+            return;
+          }
+          bumpSyncScope(scope);
+        },
+      },
+    });
+
+    realtimeConnRef.current = conn;
+
+    const unsubLocalMove = eventBridge.on('avatar:local-move', (payload) => {
+      conn.broadcastMove(payload);
+    });
+    const unsubProximityPeers = eventBridge.on(
+      'avatar:proximity-peers',
+      ({ peerIds }) => {
+        setNearbyPeerIds(peerIds);
+      },
+    );
+
+    return () => {
+      messagesSeqRef.current += 1;
+      unsubLocalMove();
+      unsubProximityPeers();
+      realtimeConnRef.current = null;
+      void conn.disconnect();
+      resetCollaborationState();
+    };
+  }, [
+    route,
+    activeWorkspace,
+    profile,
+    localSpriteKey,
+    loadRoomMessages,
+    appendRoomMessage,
+    emitChatBubbleDeduped,
+    bumpSyncScope,
+    resetCollaborationState,
+  ]);
+
   useEffect(() => {
     const unsubProximity = eventBridge.on('workstation:proximity', (payload) => {
       setNearbyWorkstation(payload.workstationId);
     });
     const unsubInteract = eventBridge.on('workstation:interact', (payload) => {
+      setChatOpen(false);
+      eventBridge.emit('ui:input-focus', { focused: false });
       setActiveWorkstation(payload.workstationId);
     });
 
@@ -229,6 +515,17 @@ export function App() {
       container?.focus({ preventScroll: true });
     });
   }, []);
+
+  const handlePhaserReady = useCallback(() => {
+    if (localIdentity) {
+      eventBridge.emit('avatar:local-identity', localIdentity);
+    }
+    if (remotePlayersRef.current.length > 0) {
+      eventBridge.emit('avatar:remote-sync', {
+        players: remotePlayersRef.current,
+      });
+    }
+  }, [localIdentity]);
 
   const closeDrawer = useCallback(() => {
     setActiveWorkstation((current) => {
@@ -248,13 +545,14 @@ export function App() {
       setWorkspaceLayout(null);
       setNearbyWorkstation(null);
       setActiveWorkstation(null);
+      resetCollaborationState();
       if (canTransitionRoute(route, 'spaces')) {
         setRoute('spaces');
       } else {
         setRoute('spaces');
       }
     },
-    [route],
+    [route, resetCollaborationState],
   );
 
   const handleSelectSpace = useCallback(
@@ -264,13 +562,14 @@ export function App() {
       setWorkspaceLayout(null);
       setNearbyWorkstation(null);
       setActiveWorkstation(null);
+      resetCollaborationState();
       if (canTransitionRoute(route, 'workspace')) {
         setRoute('workspace');
       } else {
         setRoute('workspace');
       }
     },
-    [route],
+    [route, resetCollaborationState],
   );
 
   const handleLeaveStudio = useCallback(() => {
@@ -280,8 +579,9 @@ export function App() {
     setNearbyWorkstation(null);
     setActiveWorkspace(null);
     setWorkspaceLayout(null);
+    resetCollaborationState();
     setRoute('spaces');
-  }, [route]);
+  }, [route, resetCollaborationState]);
 
   const handleSignOut = useCallback(async () => {
     if (signingOut) return;
@@ -294,6 +594,7 @@ export function App() {
       setNearbyWorkstation(null);
       setActiveWorkspace(null);
       setWorkspaceLayout(null);
+      resetCollaborationState();
       setProfile(null);
       setSessionNotice(null);
       setRoute('entry');
@@ -301,24 +602,86 @@ export function App() {
       intentionalSignOutRef.current = false;
       setSigningOut(false);
     }
-  }, [signingOut]);
+  }, [signingOut, resetCollaborationState]);
 
-  const handleSessionExpired = useCallback(async () => {
-    intentionalSignOutRef.current = true;
-    try {
-      await authService.signOut();
-    } finally {
-      writeSelectedClassId(null);
-      setActiveWorkstation(null);
-      setNearbyWorkstation(null);
-      setActiveWorkspace(null);
-      setWorkspaceLayout(null);
-      setProfile(null);
-      setSessionNotice(SESSION_EXPIRED_NOTICE);
-      setRoute('entry');
-      intentionalSignOutRef.current = false;
-    }
+  const handleToggleChat = useCallback(() => {
+    setChatOpen((prev) => {
+      const next = !prev;
+      if (next) {
+        setUnreadChatCount(0);
+      } else {
+        eventBridge.emit('ui:input-focus', { focused: false });
+      }
+      return next;
+    });
   }, []);
+
+  const handleCloseChat = useCallback(() => {
+    setChatOpen(false);
+    eventBridge.emit('ui:input-focus', { focused: false });
+  }, []);
+
+  const handleSendChatMessage = useCallback(
+    async (body: string): Promise<boolean> => {
+      if (!activeWorkspace || !profile || sendingMessage) {
+        return false;
+      }
+
+      setSendingMessage(true);
+      setSendError(null);
+
+      try {
+        const result = await academicService.sendRoomMessage(
+          activeWorkspace.teamId,
+          profile.displayName,
+          body,
+        );
+        if (!result.ok) {
+          if (result.error.code === 'auth') {
+            void handleSessionExpiredRef.current();
+            return false;
+          }
+          setSendError(result.error.message);
+          return false;
+        }
+
+        appendRoomMessage(result.data);
+        const bubblePayload = {
+          userId: profile.id,
+          displayName: profile.displayName,
+          text: result.data.body,
+          createdAt: result.data.createdAt,
+        };
+        emitChatBubbleDeduped(bubblePayload);
+        realtimeConnRef.current?.broadcastChat(bubblePayload);
+        return true;
+      } catch (err) {
+        setSendError(
+          err instanceof Error
+            ? err.message
+            : 'Unable to send studio message right now.',
+        );
+        return false;
+      } finally {
+        setSendingMessage(false);
+      }
+    },
+    [
+      activeWorkspace,
+      profile,
+      sendingMessage,
+      appendRoomMessage,
+      emitChatBubbleDeduped,
+    ],
+  );
+
+  const handleDataMutated = useCallback(
+    (scope: RealtimeSyncScope) => {
+      realtimeConnRef.current?.broadcastDataSync(scope);
+      bumpSyncScope(scope);
+    },
+    [bumpSyncScope],
+  );
 
   const openWorkstation = useCallback((workstationId: WorkstationId) => {
     eventBridge.emit('workstation:interact', {
@@ -507,7 +870,7 @@ export function App() {
             onSwitchProfile={() => void handleSignOut()}
             onSessionExpired={() => void handleSessionExpired()}
           />
-        ) : route === 'workspace' && activeWorkspace ? (
+        ) : route === 'workspace' && activeWorkspace && profile ? (
           <>
             <div className="flex flex-wrap items-baseline justify-between gap-2">
               <div className="flex flex-col gap-0.5">
@@ -524,6 +887,28 @@ export function App() {
               </p>
             </div>
 
+            <StudioCollaborationBar
+              currentUser={profile}
+              localSpriteKey={localSpriteKey}
+              connectionStatus={realtimeStatus}
+              remotePlayers={remotePlayers}
+              nearbyPeerIds={nearbyPeerIds}
+              messages={roomMessages}
+              chatOpen={chatOpen}
+              unreadCount={unreadChatCount}
+              chatLoading={chatLoading}
+              chatError={chatError}
+              sendingMessage={sendingMessage}
+              sendError={sendError}
+              onToggleChat={handleToggleChat}
+              onCloseChat={handleCloseChat}
+              onSendMessage={handleSendChatMessage}
+              onRetryMessages={() => void loadRoomMessages(activeWorkspace.teamId)}
+              onInputFocusChange={(focused) => {
+                eventBridge.emit('ui:input-focus', { focused });
+              }}
+            />
+
             <section
               aria-label="Campus studio viewport"
               className="surface-card relative flex flex-col overflow-hidden p-2 sm:p-3"
@@ -536,6 +921,8 @@ export function App() {
                 <PhaserHost
                   className="h-full w-full"
                   activeWorkstation={activeWorkstation}
+                  localIdentity={localIdentity}
+                  onReady={handlePhaserReady}
                 />
 
                 {nearbyWorkstation && !activeWorkstation && (
@@ -557,12 +944,12 @@ export function App() {
                   Compact viewport: open a workstation panel directly below, or
                   use a desktop browser for full keyboard walking.
                 </p>
-                <div className="flex flex-wrap gap-2">
+                <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
                   {WORKSTATION_IDS.map((id) => (
                     <button
                       key={id}
                       type="button"
-                      className="btn-secondary flex-1"
+                      className="btn-secondary w-full"
                       data-testid={`mobile-workstation-btn-${id}`}
                       onClick={() => openWorkstation(id)}
                     >
@@ -612,7 +999,11 @@ export function App() {
           workstationId={activeWorkstation}
           workspace={activeWorkspace}
           repository={academicService}
+          currentUser={profile ?? undefined}
+          onlineUserIds={onlineUserIds}
+          syncRevision={syncRevisionByWorkstation[activeWorkstation]}
           isDemoSession={profile?.isDemo ?? false}
+          onDataMutated={handleDataMutated}
           onSessionExpired={() => void handleSessionExpired()}
           onClose={closeDrawer}
         />

@@ -419,10 +419,11 @@ When selecting and implementing 2D pixel-art assets for LearnNexus:
 | **UI-01** | Entry Gateway | Establish student session / demo entry | App launch | Sign In / Continue as Demo | Implemented |
 | **UI-02** | Academic Spaces Directory | Display student's assigned classes | Successful entry | Select Academic Space | Implemented |
 | **UI-03** | Campus / Classroom Space | Navigable 2D academic environment | Space selection | Move to Team Workspace | Implemented |
-| **UI-04** | Team Workspace Studio | Collaborative team studio with workstations | Navigate into studio | Interact with Workstation (`E`) | Implemented |
-| **UI-05** | Project Overview Panel | View project vision, objectives & status | Overview Workstation | Read / Review Project Info | Implemented |
-| **UI-06** | Tasks Sprint Board Panel | View & update team tasks and sprints | Tasks Workstation | View / Update Task Status | Implemented |
-| **UI-07** | Resource Library Panel | Access reference links and project assets | Resources Workstation | Open Verified Resource Link | Implemented |
+| **UI-04** | Team Workspace Studio | Collaborative team studio with live peers, chat & workstations | Navigate into studio | Move, chat & open Workstation (`E`) | Implemented |
+| **UI-05** | Project Overview Panel | Edit project brief/objectives, live studio roster & activity feed | Overview Workstation | View / Edit Project Brief & Activity | Implemented |
+| **UI-06** | Tasks Sprint Board Panel | Create, edit, assign, track & delete sprint tasks | Tasks Workstation | Create / Edit / Update Tasks | Implemented |
+| **UI-07** | Resource Library Panel | Add, filter, inspect & delete verified HTTPS resources | Resources Workstation | Add / Open / Delete Safe Links | Implemented |
+| **UI-08b** | Team Whiteboard Panel | Shared 480x260 HTML5 sketch canvas & persisted sticky notes | Whiteboard Workstation (`chalkboard_sprint`) | Draw Strokes & Post Sticky Notes | Implemented |
 | **UI-08** | Lecturer Management | Organize classes, teams, and materials | Lecturer entry | Manage Academic Spaces | Future / P1 |
 | **UI-09** | Deliverables & Review | Project submission and feedback | Deliverables Station | Submit Deliverable | Future / P2 |
 | **UI-10** | Campus Main Hall | Campus entry, information board, auditorium | Campus entry | View Announcements / Auditorium | Future / P1 |
@@ -646,6 +647,7 @@ When selecting and implementing 2D pixel-art assets for LearnNexus:
 | **M2 Core Workflow** | Student entry, academic spaces, 2D studio scene, workstation panels | Cozy Digital Campus | Supabase PostgreSQL | Completed & Verified |
 | **M2.5 Design Alignment** | Cozy Digital Campus: pastel tokens, pixel-art specs, HTML panels | Cozy Digital Campus approved | Supabase PostgreSQL | Completed & Verified |
 | **M3 Persistence** | Real PostgreSQL reads/writes, cross-session persistence, failure recovery | Cozy Digital Campus | Supabase PostgreSQL | Completed & Verified |
+| **Scoped M6 + M9 Showcase** | Multi-user Realtime avatars, proximity cues, room chat bubbles, full Task/Brief/Resource CRUD, activity log & Team Whiteboard (`UI-08b`) | Cozy Digital Campus | Supabase PostgreSQL + Realtime | Completed & Verified |
 
 ---
 
@@ -672,13 +674,14 @@ When selecting and implementing 2D pixel-art assets for LearnNexus:
 
 | Design Screen | Related PRD Features | Implementation Status |
 |---|---|---|
-| **UI-01 Entry Gateway** | `F-001` (Student Entry and Session) | Planned |
-| **UI-02 Academic Spaces** | `F-002` (Assigned Space Selection) | Planned |
-| **UI-03 Class Environment** | `F-003` (2D Spatial Navigation), `F-004` | Planned |
-| **UI-04 Team Workspace Studio** | `F-003`, `F-004`, `F-005` | Planned |
-| **UI-05 Project Overview Panel** | `F-005`, `F-006`, `F-009` | Planned |
-| **UI-06 Tasks Sprint Board** | `F-005`, `F-007`, `F-009` | Planned |
-| **UI-07 Resource Library Panel** | `F-005`, `F-008`, `F-009` | Planned |
+| **UI-01 Entry Gateway** | `F-001` (Student Entry and Session) | Implemented |
+| **UI-02 Academic Spaces** | `F-002` (Assigned Space Selection) | Implemented |
+| **UI-03 Class Environment** | `F-003` (2D Spatial Navigation), `F-004` | Implemented |
+| **UI-04 Team Workspace Studio** | `F-003`, `F-004`, `F-005`, `F-011` (Scoped M6) | Implemented |
+| **UI-05 Project Overview Panel** | `F-005`, `F-006`, `F-009` | Implemented |
+| **UI-06 Tasks Sprint Board** | `F-005`, `F-007`, `F-009` | Implemented |
+| **UI-07 Resource Library Panel** | `F-005`, `F-008`, `F-009` | Implemented |
+| **UI-08b Team Whiteboard Panel** | `PRD 2.3` (Collaborative Whiteboard & Sticky Notes) | Implemented |
 | **UI-08 Lecturer Management** | `F-010` (Lecturer Setup) | Future / P1 |
 | **UI-09 Deliverables** | `F-012` (Submissions) | Future / P2 |
 | **UI-10 Campus Main Hall** | `F-003`, `F-004` (Campus Gateway) | Future / P1 |

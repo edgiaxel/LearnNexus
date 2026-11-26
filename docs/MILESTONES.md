@@ -1,5 +1,5 @@
-> **Current milestone:** Pre-M4 Scoped M6 + M9 Prototype Showcase (Next: M4 Quality & Integration)  
-> **Overall status:** Track 1 M0–M3 verified on `main`; approved pre-M4 **Scoped M6 (Realtime Presence & Text Chat Bubbles) + M9 (Task/Project/Resource CRUD & Whiteboard)** slice in progress before M4 freeze  
+> **Current milestone:** M4 — Quality & Integration (Pre-M4 Scoped M6 + M9 Prototype Showcase Complete)  
+> **Overall status:** Track 1 M0–M3 + approved Pre-M4 **Scoped M6 (Realtime Presence, Avatars & Text Chat Bubbles) + M9 (Task/Project/Resource CRUD & Team Whiteboard)** merged and verified on `main`; next: **M4 Quality & Integration Freeze** before **M5 Release / Demo**  
 > **Semifinal deadline:** 30 November 2026, 23:59 WIB  
 > **Last updated:** 26 November 2026  
 > **Repository:** [edgiaxel/LearnNexus](https://github.com/edgiaxel/LearnNexus)
@@ -44,8 +44,8 @@ Remember check again to make sure theres a shared contract before doing the exec
 
 - **Full-scale vision:** A browser-based, multiplayer persistent virtual campus for collaborative university project-based learning — combining multi-zone configurable 2D campus maps, real-time multi-user presence, lecturer course/team/assignment management, and full project workspace tools (task CRUD, uploads, deliverables, timeline, whiteboard, activity log).
 - **Semifinal prototype goal (Track 1, M0–M5):** Demonstrate the verified P0 vertical slice before 30 November 2026: student entry, assigned academic space selection, crisp 2D pixel-art studio navigation, interactive workstation panels, and durable Supabase Postgres persistence across sessions (with an optional scoped M6a real-time multi-user presence slice if approved before M5).
-- **Current verified state (M0–M3):** Complete & tested on `main` — Supabase Auth + 3 demo accounts (`onAuthStateChange` + expiry guard), Academic Spaces selector, single static 2D pixel-art studio (`campusStudioMap.json`, ADR-012 sharp Phaser 3 rendering), read-only Project Overview & Resource Library, status-only Tasks Sprint Board with per-task unsaved/retry/revert resilience, `workspace_layouts` metadata display, `4/4` live RLS actors (`npm run test:rls`), `11/11` unit tests (`npm run test:unit`), and `18/18` Playwright E2E specs (`npm run test:e2e`).
-- **Gap to full-scale product:** M0–M3 delivers ~100% of the P0 Semifinal Core (`F-001`–`F-009`), representing roughly **30–35%** of the full-scale platform vision. Multi-user realtime collaboration (`M6`), multi-map/configurable campus (`M7`), lecturer studio & class management (`M8`), full project CRUD/uploads/deliverables (`M9`), and production auth/admin ops (`M10`) are **Planned** (not yet implemented).
+- **Current verified state (M0–M3 + Scoped M6 & M9):** Complete & tested on `main` — Supabase Auth + 3 demo accounts (`onAuthStateChange` + expiry guard), Academic Spaces selector, sharp 2D pixel-art studio (`campusStudioMap.json`, ADR-012) with live multi-user Supabase Realtime avatars (`Adam`/`Alex`/`Amelia`/`Bob`), 64px proximity cues, persisted `room_messages` chat + floating 5s speech bubbles, full Project Overview brief editing + trigger-backed `Recent Activity`, full Task CRUD + per-task unsaved/retry/revert resilience, Resource Library safe HTTP(S) add/delete, 4th Team Whiteboard (`UI-08b`) sketch canvas + sticky notes, `4/4` live RLS actors across 13 tables (`npm run test:rls`), `17/17` unit tests (`npm run test:unit`), and `22/22` Playwright E2E specs (`npm run test:e2e`).
+- **Gap to full-scale product:** P0 Semifinal Core (`F-001`–`F-009`) plus Scoped M6/M9 collaborative showcase are verified on `main`. Multi-map/configurable campus (`M7`), Lecturer studio & class management (`M8` / `UI-08`), Supabase Storage binary uploads, Lecturer deliverables review (`UI-09`), WebRTC proximity audio/video, and production auth/admin ops (`M10`) remain **Planned** for post-semifinal delivery.
 - **Links:** `PRD.md` / `DESIGN.md` / `ARCHITECTURE.md` / `ABSTRACT.md` / GitHub repository.
 
 ## 2. Milestone Overview
@@ -59,17 +59,17 @@ Remember check again to make sure theres a shared contract before doing the exec
 | M2 | Core Workflow & Cozy Academic Space | Student navigates distinct 2D pixel-art studio and accesses live Supabase workstation panels | Completed | Distinct 2D pixel-art environment (`Interiors_free` / `Characters_free`); avatar controller; live Supabase panels; `14/14` E2E verified | GH-03, GH-04 |
 | M2.5 | Design & Rendering Alignment | Cozy Digital Campus (pastel tokens, master design system, sharp canvas rendering rules) | Completed | `DESIGN.md` approved, tokens locked, `ENERGY 1 / RHYTHM 2 / MOTION 1` & sharp ADR-012 pixel-art config verified across desktop/mobile | — |
 | M3 | Persistent Student Workspace | Project, tasks and resources load from durable Supabase Postgres; task status updates persist | Completed | Clean-context cross-user persistence (`Nadia -> Bima -> Nadia`), 4-actor RLS matrix, `11/11` unit tests, save/fetch failure recovery, and `18/18` E2E verified | GH-05 |
-| M4 | Quality & Integration | Integrated P0 demo is stable, sharp, and verified (optional pre-M5 promotion of M6a realtime presence if approved) | Planned | Critical student journey passes; no blocking errors; access rules & secrets audited; rendering verified sharp | GH-06 |
+| M4 | Quality & Integration | Integrated P0 + Scoped M6/M9 demo is stable, sharp, and verified | Next / In Progress | Critical student journey + multi-user/CRUD showcase passes; no blocking errors; access rules & secrets audited; rendering verified sharp | GH-06 |
 | M5 | Release / Demo | Shareable demo, evidence and submission materials are ready | Planned | Deployment smoke-tested; proposal/video evidence complete before 30 Nov 2026, 23:59 WIB | GH-07 |
 
 ### Track 2 — Full-Scale LearnNexus Platform Roadmap (Post-Semifinal / Full Vision)
 
 | ID | Milestone | Outcome | Status | Exit criteria | Feature IDs |
 |---|---|---|---|---|---|
-| M6 | Multi-User Real-Time Collaboration | Multiple users see each other move in real time inside a studio, with live occupancy and synced task-board updates | Planned | 2+ browser sessions render live remote avatars (`Adam`/`Alex`/`Amelia`/`Bob`), smooth interpolation, occupancy badge, and live task sync via Supabase Realtime without blocking async persistence | F-011, FR-014 |
+| M6 | Multi-User Real-Time Collaboration | Multiple users see each other move in real time inside a studio, with live occupancy, room chat bubbles, and synced updates | Scoped Showcase Verified (`VS-09`/`VS-10`); WebRTC Audio Deferred | 2+ browser sessions render live remote avatars (`Adam`/`Alex`/`Amelia`/`Bob`), smooth interpolation, proximity cues, room chat bubbles, and live Postgres sync via Supabase Realtime without blocking async persistence | F-011, FR-014 |
 | M7 | Multi-Map Virtual Campus & Configurable Layouts | Navigable multi-zone campus (Main Hall, Classrooms, Library, Student Commons, multi-pod Team Studios) driven by configurable `workspace_layouts` | Planned | Portal/doorway transitions work across >=3 campus zones + team pods; layouts load dynamically from `workspace_layouts.config_json` with preset/config editing | UI-10, UI-11, UI-12 |
 | M8 | Lecturer Studio & Academic Space Management | Lecturers create/manage classes, teams, student rosters, course materials, announcements, and assigned tasks | Planned | Lecturer role (`UI-08`) + RLS write policies verified; lecturer assigns students/tasks and publishes course materials visible to students in real time | F-010, FR-013, FR-015, UI-08 |
-| M9 | Full Project Management, Uploads & Deliverables | Full task/project/resource CRUD, Supabase Storage file uploads, deliverable submission/review, timeline, activity history, and collaborative whiteboard | Planned | Students create/edit/delete tasks, edit briefs, upload files to Storage, submit deliverables (`UI-09`), and view activity history; lecturers review submissions | F-006–F-008 (CRUD), F-012, UI-09 |
+| M9 | Full Project Management, Uploads & Deliverables | Full task/project/resource CRUD, Supabase Storage file uploads, deliverable submission/review, timeline, activity history, and collaborative whiteboard | Scoped Showcase Verified (`VS-15` link CRUD + `VS-17` activity & whiteboard); Storage/`UI-09` Deferred | Students create/edit/delete tasks, edit briefs, add/delete links, track trigger-backed activity, and collaborate on shared whiteboard (`UI-08b`); Storage uploads, timeline view & lecturer review (`UI-09`) deferred to Phase 4 | F-006–F-008 (CRUD), F-012, UI-09 |
 | M10 | Production Auth, Campus Operations & Hardening | Self-service onboarding, avatar customization, Platform Admin (`U-03`), institutional SSO/LMS readiness, and production observability | Planned | Self-signup/recovery, avatar picker, admin oversight, responsive polish, and production monitoring verified | U-03, P2 Ops |
 
 ## 3. Milestone Details
@@ -223,21 +223,21 @@ Remember check again to make sure theres a shared contract before doing the exec
 **Target window:** Post-M3 optional spike (`M6a`) or Post-Semifinal Phase 1  
 **Outcome:** Multiple teammates inhabit the same 2D studio simultaneously with live avatar movement, room occupancy awareness, and real-time task synchronization while preserving async-first Postgres persistence (ADR-007, ADR-013).
 
-- [ ] **M6a — Realtime Presence & Avatar Sync (Demo-Ready Slice):**
-  - [ ] Subscribe to a studio-scoped Supabase Realtime channel (`room:<team_id>`) using Presence (who is online, display name, role, sprite key) and Broadcast (throttled `x`, `y`, `direction`, `anim` packets at ~10–15 Hz).
-  - [ ] Render remote players in `CampusScene.ts` using existing `public/assets/characters/` spritesheets (`Adam`, `Alex`, `Amelia`, `Bob`) with smooth client-side interpolation and crisp nametags.
-  - [ ] Add live room occupancy indicator in the studio HUD (`N online` + teammate list) and clean leave/disconnect cleanup.
-  - [ ] Subscribe to Supabase Realtime `postgres_changes` on `public.tasks` (filtered by `project_id`) so status updates made by one teammate appear live in another teammate's open drawer.
-  - [ ] Verify with 2-context Playwright E2E test (`Nadia` + `Bima` in the same studio see each other move and see live task status updates).
-- [ ] **M6b — Proximity Social Collaboration:**
-  - [ ] Proximity bubble detection between nearby avatars with subtle Cozy visual ring.
-  - [ ] Scoped room/proximity text chat panel (persisted or ephemeral) with unread indicator.
-  - [ ] Evaluate optional WebRTC proximity audio/video only as a later P2 increment (not required for M6 completion).
+- [x] **M6a — Realtime Presence & Avatar Sync (Demo-Ready Slice):**
+  - [x] Subscribe to a studio-scoped Supabase Realtime channel (`studio:${team_id}`) using Presence (who is online, display name, role, sprite key) and Broadcast (throttled `x`, `y`, `direction`, `anim` packets at ~12 Hz).
+  - [x] Render remote players in `CampusScene.ts` using existing `public/assets/characters/` spritesheets (`Adam`, `Alex`, `Amelia`, `Bob`) with smooth client-side interpolation and crisp nametags.
+  - [x] Add live room occupancy indicator in the studio HUD (`N online` + teammate list) and clean leave/disconnect cleanup.
+  - [x] Subscribe to Supabase Realtime `postgres_changes` (and `workspace:sync` broadcast fallback) across tasks, project brief, resources, room chat, whiteboard, and activity so mutations appear live in other open clients.
+  - [x] Verify with 2-context Playwright E2E test (`Nadia` + `Bima` in the same studio see each other move and see live task updates).
+- [x] **M6b — Proximity Social Collaboration (Text Showcase Complete; WebRTC Deferred):**
+  - [x] Proximity bubble detection between nearby avatars with subtle Cozy 64px sage visual ring (`avatar:proximity-peers`).
+  - [x] Scoped studio text chat panel persisted in `room_messages` with floating 5s avatar speech bubbles (`avatar:chat-bubble`).
+  - [ ] Evaluate optional WebRTC proximity audio/video only as a later P2 increment (deferred out of semifinal scope).
 
 | Slice ID | Vertical slice | Feature IDs | GitHub issues | Status | Demo outcome |
 |---|---|---|---|---|---|
-| VS-09 | Live Multi-User Avatars + Occupancy + Synced Tasks (`M6a`) | F-011, FR-014 | — | Planned | Two browser windows show live moving teammates and instant task-status sync |
-| VS-10 | Proximity Interaction & Room Chat (`M6b`) | F-011 | — | Planned | Teammates standing near each other can exchange scoped room messages |
+| VS-09 | Live Multi-User Avatars + Occupancy + Synced Tasks (`M6a`) | F-011, FR-014 | — | Completed | Two browser windows show live moving teammates and instant task-status sync |
+| VS-10 | Proximity Interaction & Room Chat (`M6b`) | F-011 | — | Completed | Teammates standing near each other show proximity cues and exchange persisted studio chat + avatar speech bubbles |
 
 **Exit criteria:** Two concurrent sessions share the same studio smoothly with zero duplicate canvases, graceful offline fallback (async Postgres still works if Realtime drops), and passing 2-context Playwright E2E tests.
 
@@ -290,23 +290,24 @@ Remember check again to make sure theres a shared contract before doing the exec
 **Target window:** Post-Semifinal Phase 4  
 **Outcome:** Upgrade workstation panels from read-mostly P0 views into a complete collaborative project workspace with full CRUD, file storage, submissions, and history.
 
-- [ ] **Full Project & Task CRUD (`F-006`, `F-007`):**
-  - [ ] Students can create new tasks, edit title/description/assignee/due date/priority, change status, and delete/archive tasks (replacing M2's column-scoped `status`-only grant with full team-member RLS policies).
-  - [ ] Team Leaders / authorized members can edit project overview summary, objectives, and milestone targets.
+- [x] **Full Project & Task CRUD (`F-006`, `F-007`):**
+  - [x] Students can create new tasks, edit title/description/assignee/due date/status, change status, and delete tasks via team-member RLS policies (`20261126000002_m6_m9_collab_pm.sql`).
+  - [x] Team members can edit project overview title, description summary, and objectives inline with `"In studio"` roster indicators.
 - [ ] **Resource Management & Supabase Storage Uploads (`F-008`, ADR-008):**
-  - [ ] Add/edit/remove resource links and upload files (PDF, slides, images, docs) to team-scoped **Supabase Storage** buckets with size/MIME validation and RLS policies.
+  - [x] Add/remove verified `http(s)` resource links persisted in Postgres.
+  - [ ] Upload binary files (PDF, slides, images, docs) to team-scoped **Supabase Storage** buckets with size/MIME validation and RLS policies (deferred).
 - [ ] **Deliverables & Submission Workflow (`F-012`, `UI-09`):**
-  - [ ] Build Deliverables workstation & submission panel (`UI-09`) supporting draft/submitted/reviewed states, attached links/files, submission timestamps, and lecturer feedback/rubric notes.
+  - [ ] Build Deliverables workstation & submission panel (`UI-09`) supporting draft/submitted/reviewed states and lecturer feedback (deferred).
 - [ ] **Collaborative Workspace Extensions (PRD 2.3):**
-  - [ ] **Team Activity History:** Audit feed recording task updates, resource additions, layout changes, and submissions.
-  - [ ] **Project Timeline:** Milestone/due-date timeline view derived from Postgres tasks and deliverables.
-  - [ ] **Collaborative Canvas / Whiteboard Workstation:** Shared team sticky-notes/diagram board persisted in Postgres (with Realtime sync from M6).
+  - [x] **Team Activity History:** Trigger-backed `activity_logs` audit feed recording task mutations, brief updates, and resource additions.
+  - [ ] **Project Timeline:** Milestone/due-date timeline view derived from Postgres tasks and deliverables (deferred).
+  - [x] **Collaborative Canvas / Whiteboard Workstation (`UI-08b`):** Shared team sticky-notes and HTML5 sketch canvas persisted in Postgres (`whiteboard_notes`, `whiteboard_strokes`) with Realtime sync.
 
 | Slice ID | Vertical slice | Feature IDs | GitHub issues | Status | Demo outcome |
 |---|---|---|---|---|---|
-| VS-15 | Full Task/Project/Resource CRUD + Storage Uploads | F-006, F-007, F-008 | — | Planned | Student creates a task, edits brief, and uploads a file that persists across reload |
+| VS-15 | Full Task/Project/Resource Link CRUD (Storage Deferred) | F-006, F-007, F-008 | — | Partially Completed | Student creates/edits/deletes tasks, edits brief, and manages safe resource links across sessions; Storage upload deferred |
 | VS-16 | Deliverables Submission & Lecturer Review (`UI-09`) | F-012, UI-09 | — | Planned | Team submits a deliverable; lecturer reviews and posts feedback |
-| VS-17 | Timeline, Activity Feed & Collaborative Whiteboard | PRD 2.3 | — | Planned | Team tracks history, views timeline, and sketches on a persistent whiteboard |
+| VS-17 | Activity Feed & Collaborative Whiteboard (Timeline Deferred) | PRD 2.3 | — | Partially Completed | Team tracks trigger-backed activity history and sketches/posts sticky notes on persistent Team Whiteboard (`UI-08b`); timeline deferred |
 
 **Exit criteria:** Full CRUD, Storage upload/download, submission/review loop, and activity history persist in Supabase Postgres/Storage with E2E and RLS coverage.
 
@@ -328,19 +329,18 @@ Remember check again to make sure theres a shared contract before doing the exec
 
 ## 4. Current Focus
 
-- **Current focus:** **Pre-M4 Scoped M6 + M9 Prototype Showcase** (`feature/m6-m9-*`), followed immediately by **M4 — Quality & Integration** and **M5 — Release / Demo**.
-- **Scope decision (26 Nov 2026):** Promote core multi-user realtime collaboration (live avatars, proximity cues, studio text chat + avatar bubbles, live Postgres sync) and practical project management (full task CRUD, editable project overview + activity log, resource link CRUD, and Team Whiteboard workstation) ahead of M4. Defer **M7** (multi-map & layout editor), **M8** (Lecturer role `UI-08`), **M10** (self-signup, avatar picker, admin `U-03`), WebRTC voice/video, Storage binary uploads, and Lecturer deliverable grading (`UI-09`).
-- **Dependencies:** M3 `main` baseline, `npm run test:unit`, `npm run test:rls`, `npm run test:e2e`, and Supabase `zftymjkcrdkhtshazzmw`.
-- **Expected result:** Demonstrable multi-user realtime studio + full project management & whiteboard prototype backed by real Postgres/RLS/Realtime before M4 freeze.
-- **Verification:** `npm run typecheck`, `npm run test:unit`, `npm run test:rls`, `npm run build`, and `npm run test:e2e`.
+- **Current focus:** **M4 — Quality & Integration**, following completion and verification of the **Pre-M4 Scoped M6 + M9 Prototype Showcase** on `main`, ahead of **M5 — Release / Demo**.
+- **Completed scope (26 Nov 2026):** Live multi-user realtime avatars (`Adam`/`Alex`/`Amelia`/`Bob`), 64px proximity cues, persisted `room_messages` studio chat + 5s avatar speech bubbles, full task CRUD, editable project overview + trigger-backed `activity_logs`, resource link CRUD, and 4th Team Whiteboard workstation (`UI-08b`), all backed by Supabase Postgres/RLS/Realtime. Deferred: **M7** (multi-map & layout editor), **M8** (Lecturer role `UI-08`), **M10** (self-signup, avatar picker, admin `U-03`), WebRTC audio/video, Storage binary uploads, and Lecturer deliverables grading (`UI-09`).
+- **Dependencies:** M3 + Scoped M6/M9 `main` baseline, `npm run test:unit`, `npm run test:rls`, `npm run test:e2e`, and Supabase `zftymjkcrdkhtshazzmw`.
+- **Expected result:** Verified, secret-free, demo-rehearsed prototype package ready for M5 deployment and STACK 2026 semifinal submission.
+- **Verification:** `npm run typecheck`, `npm run test:unit` (`17/17`), `npm run test:rls` (`4/4` actors, 13 tables), `npm run build` (`98` modules), and `npm run test:e2e` (`22/22`).
 - **Blockers:** None.
 
 ## 5. Next Actions
 
-1. Complete the **Pre-M4 Scoped M6 + M9 Prototype Showcase** across 4 isolated parallel worktrees, merge to `main`, push DB migration `20261126000002_m6_m9_collab_pm`, and verify multi-context E2E + 4-actor RLS.
-2. Execute **M4** quality & security audit (secrets scan, bundle chunking review, full desktop/laptop demo rehearsal, all `F-001`–`F-009` + M6/M9 checks).
-3. Confirm **M5** hosting target (`Vercel`) with environment variables (`VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`), capture verified screenshots/video (<2m), and finalize STACK 2026 semifinal proposal before 30 Nov 2026, 23:59 WIB.
-4. Post-semifinal: execute remaining Track 2 milestones (`M7` Multi-Map, `M8` Lecturer `UI-08`, full `M9` Storage/Deliverables `UI-09`, `M10` Production Ops).
+1. Execute **M4** quality & security audit (secrets scan, bundle chunking review, full desktop/laptop demo rehearsal, all `F-001`–`F-009` + Scoped M6/M9 checks).
+2. Confirm **M5** hosting target (`Vercel`) with environment variables (`VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`), capture verified screenshots/video (<2m), and finalize STACK 2026 semifinal proposal before 30 Nov 2026, 23:59 WIB.
+3. Post-semifinal: execute remaining Track 2 milestones (`M7` Multi-Map, `M8` Lecturer `UI-08`, full `M9` Storage/Timeline/Deliverables `UI-09`, `M10` Production Ops).
 
 ## 6. Risks and Blockers
 
@@ -363,3 +363,4 @@ Remember check again to make sure theres a shared contract before doing the exec
 | 26 Nov 2026 | Completed M2 & M2.5: locked M2/M2.5 contracts (`components.ts`, `AuthRepository`, `DEMO_PROFILE_DESCRIPTORS`), delivered schema/RLS/seed/services + `EntryGateway` + `AcademicSpacesSelector` + `WorkstationPanel` (`ProjectOverviewPanel`, `TasksSprintBoardPanel`, `ResourceLibraryPanel`) across 3 isolated worktrees, pushed migration & seed to `zftymjkcrdkhtshazzmw`, wired `App.tsx`, verified `14/14` Playwright E2E specs, and wrote M2/M2.5 `HANDOFF.md`. |
 | 26 Nov 2026 | Completed M3: added `onAuthStateChange` + session-expiry guards, per-task unsaved/retry/revert resilience, panel `Refresh` & `Seeded Demo Data` badges, `workspace_layouts` metadata, `tests/rls/verify-rls.mjs` (4-actor RLS pass), `tests/unit/m3-guards.test.ts` (`11/11` pass), and `tests/e2e/m3-persistence-and-resilience.spec.ts` (`18/18` E2E pass), plus M3 `HANDOFF.md`. |
 | 26 Nov 2026 | Expanded roadmap into Track 1 (Semifinal Delivery `M0`–`M5`) and Track 2 (Full-Scale Platform `M6`–`M10`: Multi-User Realtime, Multi-Map/Configurable Layouts, Lecturer Studio `UI-08`, Full Project CRUD/Storage/Deliverables `UI-09`, Production Ops `U-03`) while preserving template prompt and M0–M3 verified records. |
+| 26 Nov 2026 | Completed Pre-M4 Scoped M6 + M9 Prototype Showcase: pushed migration `20261126000002_m6_m9_collab_pm` to `zftymjkcrdkhtshazzmw`, shipped `realtimeService.ts`, multi-user Phaser avatars/proximity/bubbles/`whiteboard` (`UI-08b`), `StudioCollaborationBar`, Project Overview brief editor + trigger-backed `activity_logs`, full Task CRUD, Resource link CRUD, and `WhiteboardPanel`; verified `17/17` unit tests, `4/4` RLS actors across 13 tables, and `22/22` Playwright E2E specs on `main`, synced `HANDOFF.md`, and transitioned to M4 Quality & Integration. |

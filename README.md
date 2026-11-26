@@ -6,7 +6,7 @@ LearnNexus is a browser-based virtual campus platform developed by **SibukTA** f
 
 The platform combines a welcoming, pastel-colored productivity application with a navigable 2D pixel-art virtual campus. Rather than functioning as a generic meeting tool or Gather Town clone, LearnNexus connects academic course contexts (syllabus, announcements, learning materials) directly to persistent team workspaces where student groups manage their project overviews, task sprint boards, and resource libraries across sessions.
 
-> **Project status:** M0–M3 complete & verified (`18/18` Playwright E2E, `11/11` unit, `4/4` live RLS actors passing) — Cozy Entry Gateway, Academic Spaces, live Supabase Auth/RLS/Postgres cross-session persistence, failure-recovery UX, and sharp Config A Phaser 3 studio integrated; next: **M4 Quality & Integration Freeze**. Track tasks on the [LearnNexus Kanban](https://github.com/users/edgiaxel/projects/5).
+> **Project status:** M0–M3 + Scoped M6 & M9 complete & verified (`22/22` Playwright E2E, `17/17` unit, `4/4` live RLS actors across 13 tables passing) — Cozy Entry Gateway, Academic Spaces, multi-user Supabase Realtime avatars/chat bubbles, sharp Config A Phaser 3 studio with 4 interactive workstations (Overview, Sprint Tasks CRUD, Resource Links CRUD, Team Whiteboard), and durable Supabase Auth/RLS/Postgres persistence integrated; next: **M4 Quality & Integration Freeze**. Track tasks on the [LearnNexus Kanban](https://github.com/users/edgiaxel/projects/5).
 
 ## Team
 
@@ -26,9 +26,9 @@ The semifinal demonstrator prioritizes one coherent, persistent student journey:
 3. **Academic Space:** Navigate to an assigned course space (e.g. `Software Engineering Studio`).
 4. **Course Context:** View course announcements and learning materials.
 5. **Team Workspace:** Enter the assigned team studio pod (`Team SibukTA`).
-6. **Contextual Workstation:** Approach an interactive workstation and trigger interaction (`[E]`).
-7. **Productivity Panels:** Open contextual React drawer panels (Project Overview, Tasks, Resources).
-8. **Make Changes:** Update sprint task status or project records.
+6. **Contextual Workstation:** Approach an interactive workstation (Project Overview, Tasks Board, Resource Shelf, or Team Whiteboard) and trigger interaction (`[E]`).
+7. **Productivity Panels & Live Studio Collaboration:** Open contextual React drawer panels, chat with teammates in real time (`room_messages` + floating avatar bubbles), sketch/post sticky notes on the shared whiteboard, and manage tasks, project brief, and verified resource links.
+8. **Make Changes:** Create, edit, assign, update, or delete tasks, brief details, resource links, and whiteboard notes.
 9. **Durable Persistence:** Changes are written durably to Supabase Postgres.
 10. **Leave and Return:** Leave the space and return later to find all project information retained.
 
@@ -101,6 +101,8 @@ M1 verified prerequisites & scripts:
 
    ```bash
    npm run typecheck  # Strict TypeScript verification
+   npm run test:unit  # Node native unit guard tests
+   npm run test:rls   # Live 4-actor Supabase RLS verification
    npm run test:e2e   # Playwright end-to-end browser tests
    npm run build      # Production build
    ```
